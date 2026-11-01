@@ -235,7 +235,13 @@ button {
   border-radius: 12px;
   font: 400 15px "Open Sans", system-ui, sans-serif;
   text-align: center;
+  /* Autofocus stays; hide the blinking caret until the field has text. */
+  caret-color: transparent;
   transition: border-color .2s ease-in-out;
+}
+
+#search.has-value {
+  caret-color: var(--color-fg-1);
 }
 
 #search::placeholder {
