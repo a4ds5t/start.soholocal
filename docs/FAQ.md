@@ -12,12 +12,13 @@ No. The page keeps your choices in your browser. There is no sign-in and no serv
 
 ## What leaves the page?
 
-Only what you switch on, or add yourself:
+Only what you switch on, or add yourself — and, on the live site, cookieless page metrics:
 
 - Weather sends your IP address to ipapi.co, or the city you chose to Open-Meteo.
 - Extra weather places send their name to Open-Meteo.
 - The IP details button, and nothing else, asks ipapi.co for your address.
 - A custom AI shortcut loads its icon from its own site (`/favicon.ico`) when the page opens, so that site sees your visit.
+- [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/) collects cookieless, aggregate page views only.
 
 Searches go straight to the search engine you chose. The AI links open the AI service you click.
 
@@ -31,13 +32,13 @@ On a phone a slider is hard to grab. The button steps through a few colours in t
 
 ## How do I turn the wallpaper off?
 
-Press the round button at the bottom right until it shows **No background**. You can also switch the wallpaper off in the settings, or leave a single wallpaper switched off in Data beheren, under Background.
+Press the round button at the bottom right until it shows **No background**. You can also switch the wallpaper off in the settings, or leave a single wallpaper switched off in Manage data, under Background.
 
 ---
 
 ## Which wallpapers are there, and how do I add one?
 
-There are three: the misty forest that the page started with, pink dunes and mountains in the haze. Each press of the round button at the bottom right goes to the next one that is switched on, and turns off again after the last. Switch one off in Data beheren, under Background.
+There are three: the misty forest that the page started with, pink dunes and mountains in the haze. Each press of the round button at the bottom right goes to the next one that is switched on, and turns off again after the last. Switch one off in Manage data, under Background.
 
 To add a photo, put three sizes (800, 1280 and 2000 pixels wide) and a small thumbnail in `assets`, and add an entry to the `wallpapers` list in `script.js`.
 
