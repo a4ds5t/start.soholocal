@@ -14,9 +14,9 @@ This needs an internet connection, but nothing else.
 
 ## Option 2: install a copy on your computer
 
-Use this if you want the page to work offline, or if you want to change it yourself. You do not need admin rights or extra software.
+Use this if you want to change the page yourself, or to run a local copy. You do not need admin rights. The page uses a root base URL (`<base href="/">`), so opening `index.html` with a `file://` double-click will not load the CSS, scripts or wallpapers. Serve the folder with a local web server instead (or use Wrangler, as in Option 3).
 
-**Step 1: download the files.** Go to the [releases page](https://github.com/a4ds5t/Minimal-StartPage/releases/latest) and click **Source code (zip)** under the latest release. That is the tested, stable version. (The green **Code** button on the main page also has a **Download ZIP**, which gives the newest version, but that one may not be released yet.)
+**Step 1: download the files.** Go to the [releases page](https://github.com/a4ds5t/start.soholocal/releases/latest) and click **Source code (zip)** under the latest release. That is the tested, stable version. (The green **Code** button on the main page also has a **Download ZIP**, which gives the newest version, but that one may not be released yet.)
 
 **Step 2: unzip the file.**
 - **Windows:** right-click the downloaded ZIP and choose **Extract All…**.
@@ -24,9 +24,17 @@ Use this if you want the page to work offline, or if you want to change it yours
 
 Move the folder somewhere you will keep it, for example your Documents folder. Keep everything inside it together: the `assets` folder must stay next to `index.html`.
 
-**Step 3: check that it works.** Open the folder and double-click `index.html`. The page opens in your browser. You should see the wallpaper, the clock and a quote.
+**Step 3: serve the folder and check that it works.** From inside the folder, start a local server, for example:
 
-**Step 4: copy the address.** Drag `index.html` from the folder onto your browser's address bar and let go. The address starts with `file:///` and is filled in for you. Select all of it and copy it.
+```bash
+npx --yes serve -l 8080
+```
+
+Or, with Node 22+ and the repo's Wrangler setup: `npm install`, then `npm run dev` (serves the Worker locally; the app is at `/app`).
+
+Open the address the server prints. With a plain static server from the folder root that is usually `http://localhost:8080/` (which serves `index.html`). With Wrangler (`npm run dev`) the app is at `http://localhost:8787/app` by default. You should see the wallpaper and the clock. The quote is off by default; switch it on in the settings if you want it.
+
+**Step 4: copy the address.** Select the address from the browser's address bar and copy it. It should start with `http://localhost` (or another local host name), not `file:///`.
 
 **Step 5: set it as your homepage.** Paste the address into your browser's homepage setting:
 - **Chrome or Edge:** open Settings, search for "homepage", turn on the home button, and choose to enter a custom web address.
@@ -41,7 +49,7 @@ Download the ZIP again and replace the old folder with the new one. Your choices
 
 ### Troubleshooting
 
-- **No wallpaper, or a page without styling:** the `assets` folder or the other files are missing or were moved. Unzip the ZIP again, keeping all files together.
+- **No wallpaper, or a page without styling:** you opened `index.html` as a `file://` URL, or the `assets` folder (or other files) is missing or was moved. Serve the folder over `http://` as in step 3, keeping all files together.
 - **The homepage shows an error:** the address is probably wrong. Repeat step 4 and paste the new address.
 - **You still see an old version:** refresh the page. The online version can take a few minutes to show new changes.
 
@@ -50,7 +58,7 @@ Download the ZIP again and replace the old folder with the new one. Your choices
 If you already work with Git, clone the repository:
 
 ```bash
-git clone https://github.com/a4ds5t/Minimal-StartPage.git
+git clone https://github.com/a4ds5t/start.soholocal.git
 ```
 
-Open `index.html` in the folder, or use the `file:///` address from Option 2 as your homepage. To get the latest changes later, run `git pull` inside the folder.
+Then `npm install` and `npm run dev` (Wrangler). The app is at `/app`. To get the latest changes later, run `git pull` inside the folder.

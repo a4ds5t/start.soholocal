@@ -6,7 +6,7 @@ The one place for how the page is built, why it is built that way, what is still
 
 - Plain HTML, CSS and JavaScript, with no browser bundle build step. Production runs on a [Cloudflare Worker](https://start.soholocal.nl) (landing on `/` and `/nl`, app on `/app`). Deploy with Wrangler; repo docs and tooling stay in git only (see `.assetsignore`). The site used to be hosted on GitHub Pages.
 - `script.js` holds the logic and the translations. `quotes.js` holds the quote pool.
-- Tests: `tests/smoke.js` runs 17 checks in Chromium (Playwright), with all outside services mocked. Run them from the `tests` folder with `npm test`.
+- Tests: `tests/smoke.js` runs 38 checks in Chromium (Playwright), with all outside services mocked. Run them from the `tests` folder with `npm test`.
 - Screenshots: `tests/screenshots.js` takes the pictures in `docs/images` from the page, so they show the current version.
 
 ## How a change is made
@@ -15,8 +15,6 @@ The one place for how the page is built, why it is built that way, what is still
 - Every change to the app bumps the version: the last number goes up. Documentation-only changes do not bump it.
 - A release is made on GitHub with a whole version as tag (`v1.5`). `APP_VERSION` in `script.js` must already match that tag; bump it in the pull requests that ship the release. Deploy with Wrangler (or the API); the deploy timestamp comes from `build-info.js` at build time. Retake screenshots with `tests/screenshots.js` when the UI changes warrant it.
 - After a release: write the file in `docs/changelog/`, for example `v1.5.md`, and add a row to its index.
-
-## Decisions
 
 ## Links and lists
 
@@ -34,9 +32,9 @@ The one place for how the page is built, why it is built that way, what is still
 - A first-visit hint points to the gear and the ? key. It shows only while nothing is stored yet, and goes for good on the first click, the first ? or when settings open.
 - The IP address is a button in the basic settings (IP details), not a setting: it is looked up only on request or when the weather needs it.
 - Page presets: Minimal and Standard, chosen in the settings. They switch display options only; the IP address is never changed by a preset. Weather is part of the presets only as a switch-off: no preset turns it on, since weather sends the IP address.
-- Personal is shown when the choices match neither preset. It is a state, not a choice, so it cannot be clicked.
-- Advanced is a button under the presets; its link goes back to the basic settings.
-- The resets sit at the bottom of Advanced, under one heading. Both reset buttons have a red frame; Manage data sits beside them without one, because it does not destroy anything.
+- Advanced is shown when the choices match neither preset. It is a state, not a choice, so it cannot be clicked.
+- Advanced settings is a button under the presets; its link goes back to the basic settings.
+- The resets sit at the bottom of Advanced settings, under one heading. Both reset buttons have a red frame; Manage data sits beside them without one, because it does not destroy anything.
 - Export and import have their own Backup tab, the last one in Manage data, with a short explanation.
 - The version and the date of the last change sit at the bottom right of the basic settings.
 - The version line links to the changelog on GitHub, so what changed and why is one click away.
@@ -45,7 +43,7 @@ The one place for how the page is built, why it is built that way, what is still
 
 - The background button is a cycle, not an on/off switch: none, then each wallpaper that is switched on. The first press from the default photo goes to none, so the plain page is always one press away.
 - The colour is a button on every screen, with the same steps as the phone. The slider is hidden everywhere, so one control does one thing.
-- Wallpapers are a list in Data beheren, with a switch each. The photo and the three new ones are on by default; a switch turns one off for good.
+- Wallpapers are a list in Manage data, with a switch each. The three wallpapers are on by default; a switch turns one off for good.
 - Action buttons with a verb are a darker grey when they can be used, and a lighter, dimmed grey when they cannot. Arrows, pencils and crosses keep their look. Red is used only for the resets.
 - The colour in the counters is kept soft: green while there is room, blue with "full" at the limit.
 - Dialogs open with the panel focused, not a button, so nothing looks selected.
@@ -69,10 +67,12 @@ The one place for how the page is built, why it is built that way, what is still
 - `APP_VERSION` in `script.js` is the source of truth; bump it in pull requests. The build timestamp in the version tag comes from `build-info.js` when Wrangler deploys. The page does not ask GitHub for the version at runtime, so nothing extra leaves the page.
 - Documentation-only changes do not change the app version.
 
-## Not decided
+## Accessibility
 
-- TypeScript: deferred until the split of script.js is done. The middle step without a build is JSDoc types with `// @ts-check`, checked in CI.
-- Uploading a visitor's own photo: see docs/Wallpapers.md.
+- Keyboard: every control in the settings, Manage data and Help can be reached and used with the keyboard alone, in a sensible order, and Escape closes each window.
+- Screen readers: the labels, the states (full, greyed out, reset) and the new messages are announced, checked with a screen reader on at least one desktop and one phone.
+- Colour contrast: the grey text, the dimmed buttons and the blue and green limit states, and the red reset frame, checked against the WCAG AA minimum in light and dark mode.
+- Focus: the focus ring is visible on every control in both themes.
 
 ## Open items
 
@@ -80,19 +80,12 @@ What is still to be built. The finished work is in [Built](Built.md); the reason
 
 ## Wallpapers
 
-- Check the four wallpapers against the text colours in light and dark mode, and decide on the photo credits.
-- Uploading a visitor's own photo: not decided. See [docs/Wallpapers.md](docs/Wallpapers.md).
+- Check the three wallpapers against the text colours in light and dark mode.
+- Uploading a visitor's own photo: not decided. See [Wallpapers.md](Wallpapers.md).
 
 ## More permanent links
 
-Candidates and the open question: [docs/Permanent-links.md](docs/Permanent-links.md).
-
-## Accessibility
-
-- Keyboard: every control in the settings, Manage data and Help can be reached and used with the keyboard alone, in a sensible order, and Escape closes each window.
-- Screen readers: the labels, the states (full, greyed out, reset) and the new messages are announced, checked with a screen reader on at least one desktop and one phone.
-- Colour contrast: the grey text, the dimmed buttons and the blue and green limit states, and the red reset frame, checked against the WCAG AA minimum in light and dark mode.
-- Focus: the focus ring is visible on every control in both themes.
+Candidates and the open question: [Permanent-links.md](Permanent-links.md).
 
 ## Help
 
@@ -105,7 +98,7 @@ Candidates and the open question: [docs/Permanent-links.md](docs/Permanent-links
 - Then split the logic (search, weather, links, AI shortcuts, settings) into separate modules. The shared state and the load order in `script.js` make this the risky part, so do it only with the tests in place.
 - Not decided: whether a build step or plain ES modules is the right fit for a page without a build.
 - Move the static data (the time zone list, the AI catalog, the page presets) out of `script.js` into its own file, next to `quotes.js`.
-- Not decided: TypeScript. A middle step without a build is JSDoc types with `// @ts-check`, checked in CI with `tsc --checkJs`. Decide after the split.
+- TypeScript: deferred until the split of `script.js` is done. A middle step without a build is JSDoc types with `// @ts-check`, checked in CI with `tsc --checkJs`. Decide after the split.
 
 ## Translations
 

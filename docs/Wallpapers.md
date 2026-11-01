@@ -1,8 +1,8 @@
 # Wallpapers
 
-## Curated set (open)
+## Curated set
 
-Five wallpapers chosen by hand, checked against the text colours in light and dark mode. The images are still to be supplied. Until then the current photo stays in use.
+Three wallpapers ship in `assets/` and are listed in `script.js`: misty forest (Dave Hoefler), pink dunes (John Fowler) and mountain haze (Paul Earle). All three are on by default; each can be switched off under **Manage data → Background**. Photo credits are in the README.
 
 ## Uploading a visitor's own photo (not decided)
 

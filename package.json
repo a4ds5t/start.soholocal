@@ -15,5 +15,9 @@
   },
   "engines": {
     "node": ">=22.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/a4ds5t/start.soholocal.git"
   }
 }

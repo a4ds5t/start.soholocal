@@ -6,7 +6,7 @@ The marketing landing page (`homepage.html`) uses `assets/quickstart-search.png`
 
 ## Backgrounds
 
-The page has three kinds of background: a picture, or no picture with a soft colour. The round button bottom right goes through the pictures you switched on under Manage data, and the button bottom left changes the colour behind them. Pick the pictures you like and leave the rest off; the page never shows a picture you did not choose.
+The page has two kinds of background: a picture, or no picture with a soft colour. The round button bottom right goes through the pictures you switched on under Manage data, and the button bottom left changes the colour behind them. Pick the pictures you like and leave the rest off; the page never shows a picture you did not choose.
 
 <table>
   <tr>
@@ -37,7 +37,7 @@ The page has three kinds of background: a picture, or no picture with a soft col
 
 ## Basic settings
 
-The first view: the three pages (Minimal, Standard and Personal), the Advanced link, Manage data and IP details. The reset options are not here; they sit at the bottom of Advanced.
+The first view: the three pages (Minimal, Standard and Advanced), the Advanced settings link, Manage data and IP details. The reset options are not here; they sit at the bottom of Advanced settings.
 
 ![Basic settings](images/settings-basic.png)
 

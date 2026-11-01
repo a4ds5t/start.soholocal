@@ -1,8 +1,7 @@
 <h1 align="center">Minimal-StartPage</h1>
 
 <p align="center">
-  A minimal start page with search, a clock, optional weather, links and a light, dark or system theme.
-  Everything beyond the search is switched on in the settings.
+  Minimal browser start page with search, clock, and your links — plus a simple landing page.
 </p>
 
 <p align="center">
@@ -46,11 +45,9 @@ The page is meant to stay quiet. Behind the search is a picture of misty trees, 
 
 Everything is optional. The settings start with a choice of page:
 
-**Minimal** shows only the search and the clock, plus the colour button at the bottom left. **Standard** adds the date.
+**Minimal** shows only the search and the clock, plus the colour button at the bottom left. **Standard** is the default: it adds the date, the Wikipedia button, the colour button at the bottom left and the wallpaper button at the bottom right. The AI shortcuts, time zones and the rest are there to discover in the settings.
 
-**Standard** is the default. It adds the Wikipedia button, the colour button at the bottom left and the wallpaper button at the bottom right. The AI shortcuts, time zones and the rest are there to discover in the settings.
-
-Each option can still be changed on its own. When your choices match neither page, the page shows **Personal**. A page never switches weather or your IP address on, since they send data.
+Each option can still be changed on its own. When your choices match neither page, the page shows **Advanced**. A page never switches weather or your IP address on, since they send data.
 
 - **Search.** Type a query and press Enter, or click the magnifier. It opens in the same tab; under **Advanced** you can choose a new tab instead. The icon on the left shows the search engine (separated from the field by a thin vertical rail, not a bordered chip); click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered.
 
@@ -64,13 +61,13 @@ Each option can still be changed on its own. When your choices match neither pag
 
 - **Links.** The globe at the top left opens a Links window. It shows the permanent links as icons (Wikipedia, Google, Reuters, Apple, Microsoft, GitHub, Facebook, Instagram, X and Reddit) and your own links below, each with an optional description. **Edit links** takes you to where you add, order and edit them; you can keep up to 15. Hover the globe to see your own links. With **Own links** off, the globe is a plain Wikipedia link in your browser's language.
 
-- **AI shortcuts.** Shortcuts below the search bar. In **Manage data** you tick the AI services you want: Claude, ChatGPT, Grok, Duck.ai, Lumo, Kagi and Meta AI. Up to five in total, your own shortcuts included, in any order, or none at all. Each shortcut shows its service icon, and the links open in a new tab by default (change this under Advanced).
+- **AI shortcuts.** Shortcuts below the search bar. In **Manage data** you tick the AI services you want: Claude, ChatGPT, Grok, Duck.ai, Lumo, Kagi, Meta AI and Gemini. Up to five in total, your own shortcuts included, in any order, or none at all. Each shortcut shows its service icon, and the links open in a new tab by default (change this under Advanced).
 
 - **Weather.** Optional, off by default. Up to five extra places can be added, shown as chips in the forecast window. Typing a city suggests matches, so you can pick the right one. Hover over the temperature for a short preview of the next six hours; click it for the full forecast, with the next seven days and a link to Windy.
 
 - **IP details.** A button in the settings shows the last IP address you asked for, with the city, provider and more. It is checked only when you press the check button, or when the weather uses your IP location.
 
-- **Background.** The round button at the bottom right steps through the backgrounds: none, then each wallpaper you have switched on, and back again. The button at the bottom left changes the background colour in steps. In Data beheren, the Background tab shows the wallpapers and lets you switch each one on or off. Under **Show** in Advanced, **Background colour button** hides or shows the colour button at the bottom left; with it hidden the background stays neutral. The background adapts to light and dark mode.
+- **Background.** The round button at the bottom right steps through the backgrounds: none, then each wallpaper you have switched on, and back again. The button at the bottom left changes the background colour in steps. In **Manage data**, the Background tab shows the wallpapers and lets you switch each one on or off. Under **Show** in Advanced, **Background colour button** hides or shows the colour button at the bottom left; with it hidden the background stays neutral. The background adapts to light and dark mode.
 
 - **Settings and help.** Open the settings with the gear at the top right, or press `?`. The basic view has the pages and the privacy note. **Advanced** opens the rest, grouped into Weather, Show, Time format, Date, Search, AI shortcuts, Background and Language. Under **Language** in the Advanced settings you can choose the page language; **Automatic** follows your browser. The **Help** button opens a guide to every feature. Press `Esc` to close.
 
@@ -86,7 +83,7 @@ There are three ways to use it, from easiest to most control. You do not need to
 
 1. **Use the online version.** Open [the start page](https://start.soholocal.nl/app), bookmark it and set it as your homepage. On a phone, in Safari, tap Share and then Add to Home Screen.
 
-2. **Install a copy on your computer.** The page then works offline; only searches and the AI links need an internet connection. Download the files, unzip them, open `index.html` and set it as your homepage. Step-by-step instructions for Windows and macOS are in [Installation.md](Installation.md).
+2. **Install a copy on your computer.** Download the files, unzip them and serve the folder with a local web server (or use Wrangler), then set that address as your homepage. The page itself needs no account; searches, weather, IP details and the AI links still need an internet connection. Step-by-step instructions for Windows and macOS are in [Installation.md](Installation.md).
 
 3. **Use Git.** If you already work with Git, clone the repository and pull new changes whenever you like. Details are in [Installation.md](Installation.md).
 
@@ -96,7 +93,7 @@ There are three ways to use it, from easiest to most control. You do not need to
 
 Searches go straight to the search engine you chose. The page keeps your choices in your browser only, not on a server.
 
-Nothing leaves the page unless you switch on one of these, or add your own AI shortcut:
+Nothing leaves the page unless you switch on one of these, or add your own AI shortcut — except [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/), which collects cookieless, aggregate page views on the live site:
 
 - **Weather** sends your IP address to [ipapi.co](https://ipapi.co) to find your city, or the city you choose to [Open-Meteo](https://open-meteo.com) to find its coordinates. The forecast itself comes from Open-Meteo. Only while weather is on.
 
@@ -132,6 +129,7 @@ Short notes, one topic each:
 - [docs/Permanent-links.md](docs/Permanent-links.md): the permanent links and the candidates.
 - [docs/Built.md](docs/Built.md): what the page does now.
 - [docs/Development.md](docs/Development.md): how it is built, the decisions and why, what is still open, and how a release is made.
+- [docs/version-tag.md](docs/version-tag.md): the clickable version tag and build-time timestamp.
 - [docs/changelog/README.md](docs/changelog/README.md): what changed in each version.
 - [Installation.md](Installation.md): how to install a copy.
 
