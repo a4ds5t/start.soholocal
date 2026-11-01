@@ -5,6 +5,15 @@ const CHANGELOG_URL = 'https://github.com/a4ds5t/start.soholocal/blob/main/docs/
 const APP_BUILD_ISO = typeof BUILD_TIMESTAMP_ISO !== 'undefined' ? BUILD_TIMESTAMP_ISO : null
 const searchForm = document.getElementById('searchform')
 const searchBox = document.getElementById('search')
+// Focus the search field on open so a browser start page is ready to type.
+// HTML autofocus covers the first paint; this covers scripted loads and bfcache restore.
+const focusSearchOnOpen = () => {
+  if (!searchBox) return
+  if (document.querySelector('.settings:not([hidden]), #quickstart:not([hidden])')) return
+  try { searchBox.focus({ preventScroll: true }) } catch { searchBox.focus() }
+}
+focusSearchOnOpen()
+window.addEventListener('pageshow', focusSearchOnOpen)
 const engineButton = document.getElementById('engine')
 const clockTime = document.getElementById('time')
 const clockDate = document.getElementById('date')
