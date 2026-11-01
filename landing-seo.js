@@ -12,7 +12,7 @@ export const LANDING_LOCALES = {
     canonical: `${SITE_ORIGIN}/`,
     title: "Free minimal start page — search, clock, privacy | Minimal-StartPage",
     description:
-      "Free, noncommercial minimal start page with search, a clock, and optional weather and links. Privacy-first: no account, no tracking. Open in your browser.",
+      "Free, noncommercial minimal start page with search, a clock, and optional weather and links. Privacy-first: no account, cookieless page metrics only. Open in your browser.",
     h1: "A free start page that stays out of your way.",
   },
   nl: {
@@ -20,7 +20,7 @@ export const LANDING_LOCALES = {
     canonical: `${SITE_ORIGIN}/nl`,
     title: "Gratis minimale startpagina — zoeken, klok, privacy | Minimal-StartPage",
     description:
-      "Gratis, niet-commerciële minimale startpagina met zoeken, een klok en optioneel weer en links. Privacy eerst: geen account, geen tracking. Open in je browser.",
+      "Gratis, niet-commerciële minimale startpagina met zoeken, een klok en optioneel weer en links. Privacy eerst: geen account, alleen cookieloze paginametrics. Open in je browser.",
     h1: "Een gratis startpagina die je met rust laat.",
   },
 };

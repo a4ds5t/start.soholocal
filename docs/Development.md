@@ -57,6 +57,12 @@ The one place for how the page is built, why it is built that way, what is still
 - The questions people ask go to docs/FAQ.md, which the README links to.
 - Screenshots are taken from the page by tests/screenshots.js, so they show the current version and options.
 
+## Web Analytics
+
+- [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/) (cookieless beacon) is enabled on the live site for aggregate page views on the landing (`/` and `/nl`) and the app (`/app`).
+- The beacon snippet is in `homepage.html` and `index.html` before `</body>`, with the site token configured in the HTML (same token as the other soholocal.nl sites).
+- After deploy, metrics appear under **Analytics → Web Analytics** in the Cloudflare dashboard for `start.soholocal.nl`. No cookies or visitor accounts are used.
+
 ## Versions and releases
 
 - The app shows the release number (1.4, 1.5 …). Between releases, a change gets a third number (1.4.1, 1.4.2 …), set by hand in script.js.

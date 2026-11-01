@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Free minimal start page — search, clock, privacy | Minimal-StartPage</title>
-  <meta name="description" content="Free, noncommercial minimal start page with search, a clock, and optional weather and links. Privacy-first: no account, no tracking. Open in your browser.">
+  <meta name="description" content="Free, noncommercial minimal start page with search, a clock, and optional weather and links. Privacy-first: no account, cookieless page metrics only. Open in your browser.">
   <meta name="theme-color" content="#f5f3ee">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -13,13 +13,13 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Minimal Start Page">
   <meta property="og:title" content="Free minimal start page — search, clock, privacy | Minimal-StartPage">
-  <meta property="og:description" content="Free, noncommercial minimal start page with search, a clock, and optional weather and links. Privacy-first: no account, no tracking. Open in your browser.">
+  <meta property="og:description" content="Free, noncommercial minimal start page with search, a clock, and optional weather and links. Privacy-first: no account, cookieless page metrics only. Open in your browser.">
   <meta property="og:url" content="https://start.soholocal.nl/">
   <meta property="og:image" content="https://start.soholocal.nl/assets/screenshot_light.webp">
   <meta property="og:image:alt" content="Minimal Start Page in light theme with search bar and soft wallpaper.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Free minimal start page — search, clock, privacy | Minimal-StartPage">
-  <meta name="twitter:description" content="Free, noncommercial minimal start page with search, a clock, and optional weather and links. Privacy-first: no account, no tracking. Open in your browser.">
+  <meta name="twitter:description" content="Free, noncommercial minimal start page with search, a clock, and optional weather and links. Privacy-first: no account, cookieless page metrics only. Open in your browser.">
   <meta name="twitter:image" content="https://start.soholocal.nl/assets/screenshot_light.webp">
   <meta name="twitter:creator" content="@a4ds5t">
   <style>
@@ -296,7 +296,7 @@
   <main>
     <div class="hero">
       <div class="wrap">
-        <p class="eyebrow"><i></i><span data-i18n="eyebrow">No account, no tracking, no build step</span></p>
+        <p class="eyebrow"><i></i><span data-i18n="eyebrow">No account, cookieless metrics, no build step</span></p>
         <h1 data-i18n="h1">A free start page that stays out of your way.</h1>
         <p class="lead" data-i18n="lead">Search, a clock, and optional weather, links and AI shortcuts. Everything beyond the search is switched on by you, and nothing leaves the page unless you ask it to.</p>
         <div class="cta">
@@ -388,7 +388,7 @@
           <p class="intro flush" data-i18n="privacy_p">Your choices live in your browser. Weather sends your IP address to ipapi.co, or the city you choose to Open-Meteo, only while weather is on. Extra places send their name to Open-Meteo. Custom AI shortcuts load their icon from their own site. Nothing else leaves the page.</p>
           <ul class="pill-list">
             <li data-i18n="pill1">No account</li>
-            <li data-i18n="pill2">No analytics</li>
+            <li data-i18n="pill2">Cookieless page metrics only</li>
             <li data-i18n="pill3">Data stays local</li>
           </ul>
           <p class="links" data-i18n-html="links_html"><a href="https://github.com/a4ds5t/Minimal-StartPage/blob/main/docs/Screenshots.md">More screenshots</a> · <a href="https://github.com/a4ds5t/Minimal-StartPage/blob/main/docs/FAQ.md">Questions and answers</a></p>
@@ -450,9 +450,9 @@
     const text = {
       en: {
         title: "Free minimal start page — search, clock, privacy | Minimal-StartPage",
-        description: "Free, noncommercial minimal start page with search, a clock, and optional weather and links. Privacy-first: no account, no tracking. Open in your browser.",
+        description: "Free, noncommercial minimal start page with search, a clock, and optional weather and links. Privacy-first: no account, cookieless page metrics only. Open in your browser.",
         install: "Install", screenshots: "Screenshots", open: "Open it", auto: "Auto", lang: "Language",
-        eyebrow: "No account, no tracking, no build step",
+        eyebrow: "No account, cookieless metrics, no build step",
         h1: "A free start page that stays out of your way.",
         lead: "Search, a clock, and optional weather, links and AI shortcuts. Everything beyond the search is switched on by you, and nothing leaves the page unless you ask it to.",
         cta_open: "Open the start page", cta_install: "Install a copy",
@@ -475,8 +475,8 @@
         f5_h: "Six languages", f5_p: "English, Dutch, German, French, Spanish and Chinese. It follows your browser.",
         f6_h: "Backup in one file", f6_p: "Export your settings and data to a file, and import it on another device.",
         privacy_kicker: "Privacy", privacy_h2: "Private by design.",
-        privacy_p: "Your choices live in your browser. Weather sends your IP address to ipapi.co, or the city you choose to Open-Meteo, only while weather is on. Extra places send their name to Open-Meteo. Custom AI shortcuts load their icon from their own site. Nothing else leaves the page.",
-        pill1: "No account", pill2: "No analytics", pill3: "Data stays local",
+        privacy_p: "Your choices live in your browser. Weather sends your IP address to ipapi.co, or the city you choose to Open-Meteo, only while weather is on. Extra places send their name to Open-Meteo. Custom AI shortcuts load their icon from their own site. Cloudflare Web Analytics collects cookieless, aggregate page views only. Nothing else leaves the page.",
+        pill1: "No account", pill2: "Cookieless page metrics only", pill3: "Data stays local",
         links_html: '<a href="https://github.com/a4ds5t/Minimal-StartPage/blob/main/docs/Screenshots.md">More screenshots</a> · <a href="https://github.com/a4ds5t/Minimal-StartPage/blob/main/docs/FAQ.md">Questions and answers</a>',
         privacy_alt: "The Manage data panel, with links, time zones, AI shortcuts and weather places",
         wall_kicker: "Wallpapers", wall_h2: "Wallpapers, or none at all.",
@@ -492,9 +492,9 @@
       },
       nl: {
         title: "Gratis minimale startpagina — zoeken, klok, privacy | Minimal-StartPage",
-        description: "Gratis, niet-commerciële minimale startpagina met zoeken, een klok en optioneel weer en links. Privacy eerst: geen account, geen tracking. Open in je browser.",
+        description: "Gratis, niet-commerciële minimale startpagina met zoeken, een klok en optioneel weer en links. Privacy eerst: geen account, alleen cookieloze paginametrics. Open in je browser.",
         install: "Installeren", screenshots: "Screenshots", open: "Openen", auto: "Automatisch", lang: "Taal",
-        eyebrow: "Geen account, geen tracking, geen buildstap",
+        eyebrow: "Geen account, cookieloze metrics, geen buildstap",
         h1: "Een gratis startpagina die je met rust laat.",
         lead: "Zoeken, een klok, en optioneel weer, links en AI-snelkoppelingen. Alles naast het zoeken zet jij zelf aan, en niets verlaat de pagina tenzij jij dat vraagt.",
         cta_open: "Open de startpagina", cta_install: "Installeer een eigen kopie",
@@ -517,8 +517,8 @@
         f5_h: "Zes talen", f5_p: "Engels, Nederlands, Duits, Frans, Spaans en Chinees. Het volgt je browser.",
         f6_h: "Backup in één bestand", f6_p: "Exporteer je instellingen en gegevens naar een bestand, en importeer dat op een ander apparaat.",
         privacy_kicker: "Privacy", privacy_h2: "Privé door ontwerp.",
-        privacy_p: "Je keuzes blijven in je browser. Weer stuurt je IP-adres naar ipapi.co, of de plaats die je kiest naar Open-Meteo, alleen als het weer aanstaat. Extra plaatsen sturen hun naam naar Open-Meteo. Eigen AI-snelkoppelingen laden hun icoon van hun eigen site. Verder verlaat niets de pagina.",
-        pill1: "Geen account", pill2: "Geen analytics", pill3: "Gegevens blijven lokaal",
+        privacy_p: "Je keuzes blijven in je browser. Weer stuurt je IP-adres naar ipapi.co, of de plaats die je kiest naar Open-Meteo, alleen als het weer aanstaat. Extra plaatsen sturen hun naam naar Open-Meteo. Eigen AI-snelkoppelingen laden hun icoon van hun eigen site. Cloudflare Web Analytics verzamelt alleen cookieloze, geaggregeerde paginaweergaven. Verder verlaat niets de pagina.",
+        pill1: "Geen account", pill2: "Alleen cookieloze paginametrics", pill3: "Gegevens blijven lokaal",
         links_html: '<a href="https://github.com/a4ds5t/Minimal-StartPage/blob/main/docs/Screenshots.md">Meer screenshots</a> · <a href="https://github.com/a4ds5t/Minimal-StartPage/blob/main/docs/FAQ.md">Vragen en antwoorden</a>',
         privacy_alt: "Het paneel Data beheren, met links, tijdzones, AI-snelkoppelingen en weerplaatsen",
         wall_kicker: "Achtergronden", wall_h2: "Achtergronden, of helemaal geen.",
@@ -771,5 +771,6 @@
     // Any click on the open image or backdrop closes it; Escape does too.
     zoom.addEventListener('click', () => zoom.close())
   </script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "30072d129e8b4c34b5f7b14ea5df2666"}'></script>
 </body>
 </html>
