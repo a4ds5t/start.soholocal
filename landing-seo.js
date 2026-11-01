@@ -86,7 +86,10 @@ export function applyLandingSeo(html, locale) {
     /<meta name="twitter:description" content="[^"]*">/,
     `<meta name="twitter:description" content="${description}">`,
   );
-  out = out.replace(/<h1 data-i18n="h1">[\s\S]*?<\/h1>/, `<h1 data-i18n="h1">${h1}</h1>`);
+  out = out.replace(
+    /<h1 id="headline" data-i18n="h1">[\s\S]*?<\/h1>/,
+    `<h1 id="headline" data-i18n="h1">${h1}</h1>`,
+  );
 
   return out;
 }

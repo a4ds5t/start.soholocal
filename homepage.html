@@ -297,7 +297,44 @@
     <div class="hero">
       <div class="wrap">
         <p class="eyebrow"><i></i><span data-i18n="eyebrow">No account, cookieless metrics, no build step</span></p>
-        <h1 data-i18n="h1">A free start page that stays out of your way.</h1>
+        <h1 id="headline" data-i18n="h1">A free start page that stays out of your way.</h1>
+        <script>
+          /* Set #headline during HTML parse so LCP is not delayed by the bottom i18n script. */
+          (function () {
+            var headlines = {
+              en: "A free start page that stays out of your way.",
+              nl: "Een gratis startpagina die je met rust laat.",
+              de: "Eine Startseite, die dich in Ruhe lässt.",
+              fr: "Une page d’accueil qui vous laisse tranquille.",
+              es: "Una página de inicio que te deja en paz.",
+              zh: "一个不打扰你的起始页。"
+            };
+            var langs = ["nl", "en", "de", "fr", "es", "zh"];
+            var lang = "en";
+            try {
+              var saved = localStorage.getItem("lang");
+              if (langs.indexOf(saved) !== -1) {
+                lang = saved;
+              } else {
+                var path = (location.pathname || "/").replace(/\/$/, "") || "/";
+                if (path === "/nl") {
+                  lang = "nl";
+                } else {
+                  var query = new URLSearchParams(location.search).get("lang");
+                  if (langs.indexOf(query) !== -1) lang = query;
+                  else {
+                    var browser = (navigator.language || "en").slice(0, 2).toLowerCase();
+                    if (langs.indexOf(browser) !== -1) lang = browser;
+                  }
+                }
+              }
+            } catch (e) {}
+            var el = document.getElementById("headline");
+            if (!el || !headlines[lang]) return;
+            if (el.textContent !== headlines[lang]) el.textContent = headlines[lang];
+            document.documentElement.lang = lang;
+          })();
+        </script>
         <p class="lead" data-i18n="lead">Search, a clock, and optional weather, links and AI shortcuts. Everything beyond the search is switched on by you, and nothing leaves the page unless you ask it to.</p>
         <div class="cta">
           <a class="btn primary" href="/app"><span data-i18n="cta_open">Open the start page</span>
@@ -310,11 +347,11 @@
         <div class="stage">
           <div class="shots">
             <figure>
-              <a class="zoom" href="assets/screenshot_light.webp"><img src="assets/screenshot_light.webp" width="800" height="500" data-i18n-alt="light_alt" alt="The start page in the light theme, with the clock and the search bar in the middle"></a>
+              <a class="zoom" href="assets/screenshot_light.webp"><img src="assets/screenshot_light.webp" width="800" height="500" fetchpriority="low" decoding="async" data-i18n-alt="light_alt" alt="The start page in the light theme, with the clock and the search bar in the middle"></a>
               <figcaption data-i18n="light_cap">Light</figcaption>
             </figure>
             <figure>
-              <a class="zoom" href="assets/screenshot_dark.webp"><img src="assets/screenshot_dark.webp" width="800" height="500" data-i18n-alt="dark_alt" alt="The start page in the dark theme"></a>
+              <a class="zoom" href="assets/screenshot_dark.webp"><img src="assets/screenshot_dark.webp" width="800" height="500" fetchpriority="low" decoding="async" data-i18n-alt="dark_alt" alt="The start page in the dark theme"></a>
               <figcaption data-i18n="dark_cap">Dark</figcaption>
             </figure>
           </div>
@@ -342,7 +379,7 @@
           <h2 data-i18n="search_h2">Pick your search engine right in the bar.</h2>
           <p class="intro flush" data-i18n="search_p">Each click on the icon moves to the next engine: DuckDuckGo, Kagi, Brave or Google. Your choice is remembered. Under Manage data you can also add up to five AI shortcuts, or your own address.</p>
         </div>
-        <div class="frame"><img src="assets/quickstart-search.png" width="480" height="106" data-i18n-alt="search_alt" alt="The search bar with the engine icon on the left"></div>
+        <div class="frame"><img src="assets/quickstart-search.png" width="480" height="106" loading="lazy" decoding="async" data-i18n-alt="search_alt" alt="The search bar with the engine icon on the left"></div>
       </div>
     </section>
 
@@ -393,7 +430,7 @@
           </ul>
           <p class="links" data-i18n-html="links_html"><a href="https://github.com/a4ds5t/start.soholocal/blob/main/docs/Screenshots.md">More screenshots</a> · <a href="https://github.com/a4ds5t/start.soholocal/blob/main/docs/FAQ.md">Questions and answers</a></p>
         </div>
-        <div class="frame"><img src="assets/manage-data.png" width="640" height="420" data-i18n-alt="privacy_alt" alt="The Manage data panel, with links, time zones, AI shortcuts and weather places"></div>
+        <div class="frame"><img src="assets/manage-data.png" width="640" height="420" loading="lazy" decoding="async" data-i18n-alt="privacy_alt" alt="The Manage data panel, with links, time zones, AI shortcuts and weather places"></div>
       </div>
     </section>
 
@@ -403,10 +440,10 @@
         <h2 data-i18n="wall_h2">Wallpapers, or none at all.</h2>
         <p class="intro" data-i18n="wall_p">A misty forest, pink dunes, mountain haze, or a plain page with a soft colour. Switch the ones you want on in Manage data.</p>
         <div class="backgrounds">
-          <figure><a class="zoom" href="assets/screenshot_light.webp"><img src="assets/screenshot_light.webp" width="170" height="100" data-i18n-alt="cap_forest" alt="Misty forest"></a><figcaption data-i18n="cap_forest">Misty forest</figcaption></figure>
-          <figure><a class="zoom" href="assets/screenshot_dunes.webp"><img src="assets/screenshot_dunes.webp" width="170" height="100" data-i18n-alt="cap_dunes" alt="Pink dunes"></a><figcaption data-i18n="cap_dunes">Pink dunes</figcaption></figure>
-          <figure><a class="zoom" href="assets/screenshot_mountains.webp"><img src="assets/screenshot_mountains.webp" width="170" height="100" data-i18n-alt="cap_mountains" alt="Mountain haze"></a><figcaption data-i18n="cap_mountains">Mountain haze</figcaption></figure>
-          <figure><a class="zoom" href="assets/screenshot_tint_blue.webp"><img src="assets/screenshot_tint_blue.webp" width="170" height="100" data-i18n-alt="cap_blue" alt="No image, blue tint"></a><figcaption data-i18n="cap_blue">No image, blue tint</figcaption></figure>
+          <figure><a class="zoom" href="assets/screenshot_light.webp"><img src="assets/screenshot_light.webp" width="170" height="100" loading="lazy" decoding="async" data-i18n-alt="cap_forest" alt="Misty forest"></a><figcaption data-i18n="cap_forest">Misty forest</figcaption></figure>
+          <figure><a class="zoom" href="assets/screenshot_dunes.webp"><img src="assets/screenshot_dunes.webp" width="170" height="100" loading="lazy" decoding="async" data-i18n-alt="cap_dunes" alt="Pink dunes"></a><figcaption data-i18n="cap_dunes">Pink dunes</figcaption></figure>
+          <figure><a class="zoom" href="assets/screenshot_mountains.webp"><img src="assets/screenshot_mountains.webp" width="170" height="100" loading="lazy" decoding="async" data-i18n-alt="cap_mountains" alt="Mountain haze"></a><figcaption data-i18n="cap_mountains">Mountain haze</figcaption></figure>
+          <figure><a class="zoom" href="assets/screenshot_tint_blue.webp"><img src="assets/screenshot_tint_blue.webp" width="170" height="100" loading="lazy" decoding="async" data-i18n-alt="cap_blue" alt="No image, blue tint"></a><figcaption data-i18n="cap_blue">No image, blue tint</figcaption></figure>
         </div>
       </div>
     </section>
@@ -744,9 +781,18 @@
       twitterTitle.content = t.title
       twitterDescription.content = t.description
       langSelect.setAttribute('aria-label', t.lang)
-      document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t[el.dataset.i18n] })
-      document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t[el.dataset.i18nHtml] })
-      document.querySelectorAll('[data-i18n-alt]').forEach(el => { el.alt = t[el.dataset.i18nAlt] })
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const next = t[el.dataset.i18n]
+        if (next != null && el.textContent !== next) el.textContent = next
+      })
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const next = t[el.dataset.i18nHtml]
+        if (next != null && el.innerHTML !== next) el.innerHTML = next
+      })
+      document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+        const next = t[el.dataset.i18nAlt]
+        if (next != null && el.alt !== next) el.alt = next
+      })
       langSelect.value = LANGS.includes(savedLang()) ? savedLang() : 'auto'
     }
 
