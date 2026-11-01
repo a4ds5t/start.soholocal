@@ -1,6 +1,6 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4.
-const APP_VERSION = '1.5.10'
+const APP_VERSION = '1.5.11'
 const CHANGELOG_URL = 'https://github.com/a4ds5t/start.soholocal/blob/main/docs/changelog/README.md'
 const APP_BUILD_ISO = typeof BUILD_TIMESTAMP_ISO !== 'undefined' ? BUILD_TIMESTAMP_ISO : null
 const searchForm = document.getElementById('searchform')
@@ -12,8 +12,17 @@ const focusSearchOnOpen = () => {
   if (document.querySelector('.settings:not([hidden]), #quickstart:not([hidden])')) return
   try { searchBox.focus({ preventScroll: true }) } catch { searchBox.focus() }
 }
+const syncSearchCaret = () => {
+  if (!searchBox) return
+  searchBox.classList.toggle('has-value', searchBox.value.length > 0)
+}
 focusSearchOnOpen()
-window.addEventListener('pageshow', focusSearchOnOpen)
+syncSearchCaret()
+searchBox?.addEventListener('input', syncSearchCaret)
+window.addEventListener('pageshow', () => {
+  focusSearchOnOpen()
+  syncSearchCaret()
+})
 const engineButton = document.getElementById('engine')
 const clockTime = document.getElementById('time')
 const clockDate = document.getElementById('date')
