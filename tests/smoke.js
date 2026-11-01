@@ -88,6 +88,7 @@ const emptyForecast = {
   await page.reload();
   await page.waitForSelector('#search');
   check(await page.isVisible('#search'), 'search box is shown');
+  check(await page.evaluate(() => document.activeElement && document.activeElement.id === 'search'), 'search box is focused on load');
   check(errors.length === 0, 'no errors on load');
 
   console.log('Search');
