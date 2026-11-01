@@ -26,7 +26,7 @@ test("applyLandingSeo sets NL primary meta and hreflang", () => {
   assert.match(html, /<link rel="canonical" href="https:\/\/start\.soholocal\.nl\/nl">/);
   assert.match(html, /hreflang="nl"/);
   assert.match(html, /hreflang="x-default"/);
-  assert.match(html, /<h1 data-i18n="h1">Een gratis startpagina die je met rust laat\.<\/h1>/);
+  assert.match(html, /<h1 id="headline" data-i18n="h1">Een gratis startpagina die je met rust laat\.<\/h1>/);
   assert.match(
     html,
     /<meta property="og:description" content="[^"]*niet-commerci[^"]*">/,
