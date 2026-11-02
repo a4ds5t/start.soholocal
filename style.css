@@ -2308,7 +2308,11 @@ html:not([data-theme="light"]) .manage-panel-light {
   opacity: .5;
 }
 
-/* Permanent links as a row of icons at the top of the links window. */
+/* Permanent canned icons removed — Links is own-only. */
+.link-icons[hidden] {
+  display: none;
+}
+
 .link-icons {
   display: flex;
   gap: 8px;
