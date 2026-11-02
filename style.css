@@ -1591,7 +1591,11 @@ img.ai-icon {
 #link-url,
 #link-desc,
 #ai-name,
-#ai-url {
+#ai-url,
+#engine-name,
+#engine-url {
+  box-sizing: border-box;
+  width: 100%;
   min-width: 0;
   height: 36px;
   padding: 0 10px;
@@ -2076,9 +2080,16 @@ html[data-quote-off] #quote {
 }
 
 .manage-panel-light .link-form input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 36px;
+  height: 36px;
+  padding: 0 10px;
   background: color-mix(in srgb, var(--color-bg) 55%, var(--color-field));
   color: var(--color-fg-1);
-  border-color: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font: inherit;
 }
 
 .manage-show {
@@ -2640,13 +2651,48 @@ html[data-quote-off] #quote {
   display: none;
 }
 
-/* Advanced: a wider window. The options sit in four groups, two per row, so each group keeps its own column. */
-
 .settings-panel.is-wide {
   width: min(100%, var(--panel-lg));
 }
 
-.advanced {
+/* Option B: Show first (full width), then Weather | Clock & date. */
+.advanced.advanced-show-first {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.adv-show-first {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--color-bg) 35%, var(--color-field));
+}
+
+.adv-show-first > .location-title {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--color-fg-2);
+}
+
+.adv-show-masters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+
+.adv-show-hint {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: var(--color-fg-2);
+}
+
+.adv-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px 40px;
@@ -2656,18 +2702,40 @@ html[data-quote-off] #quote {
 .adv-group {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 8px;
   min-width: 0;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--color-border);
 }
 
 .adv-group > .location-title {
-  margin-bottom: 4px;
+  margin: 0 0 2px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--color-fg-2);
 }
 
 .adv-group > .location-title:not(:first-child) {
   margin-top: 14px;
+}
+
+.adv-group .master-toggle {
+  margin: 2px 0;
+}
+
+.setting-select {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.setting-select .lang-select {
+  margin-left: 0;
+  min-width: 0;
+  flex: 1 1 auto;
+  max-width: 220px;
+  height: 36px;
 }
 
 /* Advanced / Manage / IP inherit .ghost-button; keep text-decoration reset if ever used as links. */
@@ -2926,14 +2994,18 @@ button.action:disabled {
 /* Phones: the advanced settings use two columns for the short checkbox groups, and a select group takes the full width.
    The help stays in one column. */
 @media (max-width: 600px) {
-  .advanced {
-    grid-template-columns: 1fr 1fr;
-    gap: 4px 16px;
+  .advanced.advanced-show-first {
+    gap: 12px;
+  }
+
+  .adv-body {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .adv-group:has(select),
   .adv-group:has(#city-form) {
-    grid-column: 1 / -1;
+    grid-column: auto;
   }
 
   /* The place field takes the row; Save stays beside it. */

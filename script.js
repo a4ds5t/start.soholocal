@@ -797,8 +797,8 @@ const wallpaperText = {
   zh: { wallpaperToggle: '壁纸', wallpaperButton: '壁纸按钮' }
 }
 const tintText = {
-  en: { tintToggle: 'Background colour button' },
-  nl: { tintToggle: 'Achtergrondkleur-knop' },
+  en: { tintToggle: 'Background colour button', tintShort: 'Colour' },
+  nl: { tintToggle: 'Achtergrondkleur-knop', tintShort: 'Kleur' },
   de: { tintToggle: 'Hintergrundfarbe-Knopf' },
   fr: { tintToggle: 'Bouton couleur du fond' },
   es: { tintToggle: 'Botón de color del fondo' },
@@ -821,12 +821,12 @@ const pageText = {
   zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetCustom: '个性化' }
 }
 const topbarText = {
-  en: { colorMode: 'Color mode', themeAuto: 'System theme', themeDark: 'Dark theme', themeLight: 'Light theme', themeMenuAuto: 'System', themeMenuDark: 'Dark', themeMenuLight: 'Light', langLabel: 'Language', searchLabel: 'Search the web', searchFormTitle: 'Type a search and press Enter', engineLabel: 'Search engine: {name}. Click to change.', enginePickLabel: '{name}. Click: Search ↔ AI. Hold to pick. Shortcut: Ctrl+Shift+A.', searchSubmit: 'Search', timeClick: 'Click to cycle through 24-hour, 12-hour and full time', askAiCaption: 'Ask AI', overlaySearch: 'Search', overlayAi: 'AI', overlayEmpty: 'Nothing enabled yet.', manageShowLabel: 'Show on page', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Social row', lblAskaiMaster: 'Ask AI row', lblLinksMaster: 'Links button', tabSearch: 'Search', tabSocial: 'Social', enginesNote: 'Turn engines on or off, and add your own below. Always keep at least one on.', engineAdd: 'Add search engine', engineEdit: 'Edit search engine', engineUrlLbl: 'Search URL template', engineUrlHint: 'Paste a homepage or a results URL. Look up fills the query template (…?q=).', engineSuggest: 'Look up', engineInvalid: 'Enter a name and an https search URL ending with the query (for example …?q=).', engineExists: 'That name is already in the list.', engineGuessed: 'Guessed template — check that searching works.', engineLimit: 'You can add up to {n} custom engines.', socialNote: 'Jump-only icons under the search bar. Turn the Social row off for Minimal.', aiOverlayNote: 'AI platforms for the search overlay (type + Enter). Turn “AI in overlay” off for Minimal.', aiShortcutsHead: 'Ask AI row shortcuts', socialAria: 'Social' },
-  nl: { colorMode: 'Kleurmodus', themeAuto: 'Systeemthema', themeDark: 'Donker thema', themeLight: 'Licht thema', themeMenuAuto: 'Systeem', themeMenuDark: 'Donker', themeMenuLight: 'Licht', langLabel: 'Taal', searchLabel: 'Zoek op het web', searchFormTitle: 'Typ een zoekopdracht en druk op Enter', engineLabel: 'Zoekmachine: {name}. Klik om te wisselen.', enginePickLabel: '{name}. Klik: Zoeken ↔ AI. Ingedrukt houden om te kiezen. Sneltoets: Ctrl+Shift+A.', searchSubmit: 'Zoeken', timeClick: 'Klik om te wisselen tussen 24 uur, 12 uur en volledige tijd', askAiCaption: 'Vraag AI', overlaySearch: 'Zoeken', overlayAi: 'AI', overlayEmpty: 'Nog niets ingeschakeld.', manageShowLabel: 'Tonen op de pagina', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Sociale rij', lblAskaiMaster: 'Vraag AI-rij', lblLinksMaster: 'Links-knop', tabSearch: 'Zoeken', tabSocial: 'Sociaal', enginesNote: 'Zet zoekmachines aan of uit en voeg hieronder je eigen toe. Houd altijd minstens één aan.', engineAdd: 'Zoekmachine toevoegen', engineEdit: 'Zoekmachine bewerken', engineUrlLbl: 'Zoek-URL-sjabloon', engineUrlHint: 'Plak een homepage of resultaten-URL. Opzoeken vult het query-sjabloon (…?q=).', engineSuggest: 'Opzoeken', engineInvalid: 'Vul een naam en een https-zoek-URL in die eindigt op de query (bijvoorbeeld …?q=).', engineExists: 'Die naam staat al in de lijst.', engineGuessed: 'Geschat sjabloon — controleer of zoeken werkt.', engineLimit: 'Je kunt tot {n} eigen zoekmachines toevoegen.', socialNote: 'Alleen spring-iconen onder de zoekbalk. Zet de sociale rij uit voor Minimaal.', aiOverlayNote: 'AI-platformen voor de zoek-overlay (typen + Enter). Zet “AI in overlay” uit voor Minimaal.', aiShortcutsHead: 'Vraag AI-rij snelkoppelingen', socialAria: 'Sociaal' },
-  de: { colorMode: 'Farbmodus', themeAuto: 'Systemdesign', themeDark: 'Dunkles Design', themeLight: 'Helles Design', themeMenuAuto: 'System', themeMenuDark: 'Dunkel', themeMenuLight: 'Hell', langLabel: 'Sprache', searchLabel: 'Im Web suchen', searchFormTitle: 'Suchbegriff eingeben und Enter drücken', engineLabel: 'Suchmaschine: {name}. Klicken zum Wechseln.', enginePickLabel: '{name}. Klick: Suche ↔ KI. Halten zum Wählen. Tastatur: Strg+Umschalt+A.', searchSubmit: 'Suchen', timeClick: 'Klicken, um zwischen 24-Stunden-, 12-Stunden- und Vollzeit zu wechseln', askAiCaption: 'KI fragen', overlaySearch: 'Suche', overlayAi: 'KI', overlayEmpty: 'Noch nichts aktiviert.', manageShowLabel: 'Auf der Seite zeigen', lblAiOverlay: 'KI im Overlay', lblSocialRow: 'Social-Zeile', lblAskaiMaster: 'KI-fragen-Zeile', lblLinksMaster: 'Links-Schaltfläche', tabSearch: 'Suche', tabSocial: 'Social', enginesNote: 'Suchmaschinen an/aus und eigene unten hinzufügen. Mindestens eine bleibt an.', engineAdd: 'Suchmaschine hinzufügen', engineEdit: 'Suchmaschine bearbeiten', engineUrlLbl: 'Such-URL-Vorlage', engineUrlHint: 'Homepage oder Ergebnis-URL einfügen. Nachschlagen füllt die Query-Vorlage (…?q=).', engineSuggest: 'Nachschlagen', engineInvalid: 'Name und https-Such-URL mit Query-Ende eingeben (z. B. …?q=).', engineExists: 'Dieser Name ist schon in der Liste.', engineGuessed: 'Geschätzte Vorlage — Suche prüfen.', engineLimit: 'Bis zu {n} eigene Suchmaschinen.', socialNote: 'Nur Sprung-Icons unter der Suchleiste. Social-Zeile für Minimal aus.', aiOverlayNote: 'KI-Plattformen für das Such-Overlay (tippen + Enter). „KI im Overlay“ für Minimal aus.', aiShortcutsHead: 'KI-fragen-Zeilen-Verknüpfungen', socialAria: 'Social' },
-  fr: { colorMode: 'Mode couleur', themeAuto: 'Thème système', themeDark: 'Thème sombre', themeLight: 'Thème clair', themeMenuAuto: 'Système', themeMenuDark: 'Sombre', themeMenuLight: 'Clair', langLabel: 'Langue', searchLabel: 'Rechercher sur le web', searchFormTitle: 'Saisissez une recherche et appuyez sur Entrée', engineLabel: 'Moteur de recherche : {name}. Cliquez pour changer.', enginePickLabel: '{name}. Clic : Recherche ↔ IA. Maintenir pour choisir. Raccourci : Ctrl+Maj+A.', searchSubmit: 'Rechercher', timeClick: 'Cliquez pour alterner entre 24 h, 12 h et l’heure complète', askAiCaption: 'Demander à l’IA', overlaySearch: 'Recherche', overlayAi: 'IA', overlayEmpty: 'Rien n’est activé.', manageShowLabel: 'Afficher sur la page', lblAiOverlay: 'IA dans l’overlay', lblSocialRow: 'Rangée sociale', lblAskaiMaster: 'Rangée Demander à l’IA', lblLinksMaster: 'Bouton Liens', tabSearch: 'Recherche', tabSocial: 'Social', enginesNote: 'Activez/désactivez les moteurs et ajoutez les vôtres. Gardez-en au moins un.', engineAdd: 'Ajouter un moteur', engineEdit: 'Modifier le moteur', engineUrlLbl: 'Modèle d’URL de recherche', engineUrlHint: 'Collez une page d’accueil ou une URL de résultats. Rechercher remplit le modèle (…?q=).', engineSuggest: 'Rechercher', engineInvalid: 'Indiquez un nom et une URL https se terminant par la requête (ex. …?q=).', engineExists: 'Ce nom est déjà dans la liste.', engineGuessed: 'Modèle estimé — vérifiez la recherche.', engineLimit: 'Jusqu’à {n} moteurs personnalisés.', socialNote: 'Icônes de saut sous la barre. Désactivez la rangée sociale pour Minimal.', aiOverlayNote: 'Plateformes IA pour l’overlay (saisir + Entrée). Désactivez « IA dans l’overlay » pour Minimal.', aiShortcutsHead: 'Raccourcis de la rangée Demander à l’IA', socialAria: 'Social' },
-  es: { colorMode: 'Modo de color', themeAuto: 'Tema del sistema', themeDark: 'Tema oscuro', themeLight: 'Tema claro', themeMenuAuto: 'Sistema', themeMenuDark: 'Oscuro', themeMenuLight: 'Claro', langLabel: 'Idioma', searchLabel: 'Buscar en la web', searchFormTitle: 'Escribe una búsqueda y pulsa Intro', engineLabel: 'Buscador: {name}. Haz clic para cambiar.', enginePickLabel: '{name}. Clic: Buscar ↔ IA. Mantén para elegir. Atajo: Ctrl+Mayús+A.', searchSubmit: 'Buscar', timeClick: 'Haz clic para alternar entre 24 horas, 12 horas y hora completa', askAiCaption: 'Preguntar a la IA', overlaySearch: 'Buscar', overlayAi: 'IA', overlayEmpty: 'Nada activado aún.', manageShowLabel: 'Mostrar en la página', lblAiOverlay: 'IA en el overlay', lblSocialRow: 'Fila social', lblAskaiMaster: 'Fila Preguntar a la IA', lblLinksMaster: 'Botón Enlaces', tabSearch: 'Buscar', tabSocial: 'Social', enginesNote: 'Activa o desactiva buscadores y añade los tuyos. Mantén al menos uno.', engineAdd: 'Añadir buscador', engineEdit: 'Editar buscador', engineUrlLbl: 'Plantilla de URL de búsqueda', engineUrlHint: 'Pega una portada o una URL de resultados. Buscar completa la plantilla (…?q=).', engineSuggest: 'Buscar', engineInvalid: 'Pon un nombre y una URL https que termine en la consulta (p. ej. …?q=).', engineExists: 'Ese nombre ya está en la lista.', engineGuessed: 'Plantilla estimada — comprueba la búsqueda.', engineLimit: 'Hasta {n} buscadores propios.', socialNote: 'Iconos de salto bajo la barra. Desactiva la fila social para Mínimo.', aiOverlayNote: 'Plataformas de IA para el overlay (escribir + Intro). Desactiva «IA en el overlay» para Mínimo.', aiShortcutsHead: 'Accesos de la fila Preguntar a la IA', socialAria: 'Social' },
-  zh: { colorMode: '颜色模式', themeAuto: '跟随系统', themeDark: '深色主题', themeLight: '浅色主题', themeMenuAuto: '系统', themeMenuDark: '深色', themeMenuLight: '浅色', langLabel: '语言', searchLabel: '搜索网页', searchFormTitle: '输入搜索内容并按 Enter', engineLabel: '搜索引擎：{name}。点击切换。', enginePickLabel: '{name}。单击：搜索 ↔ AI。长按选择。快捷键：Ctrl+Shift+A。', searchSubmit: '搜索', timeClick: '点击可在 24 小时制、12 小时制和完整时间之间切换', askAiCaption: '询问 AI', overlaySearch: '搜索', overlayAi: 'AI', overlayEmpty: '尚未启用任何项。', manageShowLabel: '在页面显示', lblAiOverlay: '叠加层中的 AI', lblSocialRow: '社交行', lblAskaiMaster: '询问 AI 行', lblLinksMaster: '链接按钮', tabSearch: '搜索', tabSocial: '社交', enginesNote: '可开关搜索引擎，并在下方添加自己的。请至少保留一个。', engineAdd: '添加搜索引擎', engineEdit: '编辑搜索引擎', engineUrlLbl: '搜索 URL 模板', engineUrlHint: '粘贴主页或结果页 URL。查找会填充查询模板（…?q=）。', engineSuggest: '查找', engineInvalid: '请输入名称和以查询结尾的 https 搜索 URL（例如 …?q=）。', engineExists: '该名称已在列表中。', engineGuessed: '已猜测模板 — 请确认搜索可用。', engineLimit: '最多可添加 {n} 个自定义搜索引擎。', socialNote: '搜索栏下方仅跳转图标。极简模式请关闭社交行。', aiOverlayNote: '用于搜索叠加层的 AI 平台（输入 + Enter）。极简模式请关闭“叠加层中的 AI”。', aiShortcutsHead: '询问 AI 行快捷方式', socialAria: '社交' },
+  en: { colorMode: 'Color mode', themeAuto: 'System theme', themeDark: 'Dark theme', themeLight: 'Light theme', themeMenuAuto: 'System', themeMenuDark: 'Dark', themeMenuLight: 'Light', langLabel: 'Language', searchLabel: 'Search the web', searchFormTitle: 'Type a search and press Enter', engineLabel: 'Search engine: {name}. Click to change.', enginePickLabel: '{name}. Click: Search ↔ AI. Hold to pick. Shortcut: Ctrl+Shift+A.', searchSubmit: 'Search', timeClick: 'Click to cycle through 24-hour, 12-hour and full time', askAiCaption: 'Ask AI', overlaySearch: 'Search', overlayAi: 'AI', overlayEmpty: 'Nothing enabled yet.', manageShowLabel: 'Show on page', clockDateSec: 'Clock & date', clockLbl: 'Clock', advShowHint: 'Social and Ask AI rows are mutually exclusive — choose one under Manage data.', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Social row', lblAskaiMaster: 'Ask AI row', lblLinksMaster: 'Links button', tabSearch: 'Search', tabSocial: 'Social', enginesNote: 'Turn engines on or off, and add your own below. Always keep at least one on.', engineAdd: 'Add search engine', engineEdit: 'Edit search engine', engineUrlLbl: 'Search URL template', engineUrlHint: 'Paste a homepage or a results URL. Look up fills the query template (…?q=).', engineSuggest: 'Look up', engineInvalid: 'Enter a name and an https search URL ending with the query (for example …?q=).', engineExists: 'That name is already in the list.', engineGuessed: 'Guessed template — check that searching works.', engineLimit: 'You can add up to {n} custom engines.', socialNote: 'Jump-only icons under the search bar. Not shown together with the Ask AI row. Off for Minimal.', aiOverlayNote: 'AI platforms for the search overlay (type + Enter). Turn “AI in overlay” off for Minimal.', aiShortcutsHead: 'Ask AI row shortcuts', socialAria: 'Social' },
+  nl: { colorMode: 'Kleurmodus', themeAuto: 'Systeemthema', themeDark: 'Donker thema', themeLight: 'Licht thema', themeMenuAuto: 'Systeem', themeMenuDark: 'Donker', themeMenuLight: 'Licht', langLabel: 'Taal', searchLabel: 'Zoek op het web', searchFormTitle: 'Typ een zoekopdracht en druk op Enter', engineLabel: 'Zoekmachine: {name}. Klik om te wisselen.', enginePickLabel: '{name}. Klik: Zoeken ↔ AI. Ingedrukt houden om te kiezen. Sneltoets: Ctrl+Shift+A.', searchSubmit: 'Zoeken', timeClick: 'Klik om te wisselen tussen 24 uur, 12 uur en volledige tijd', askAiCaption: 'Vraag AI', overlaySearch: 'Zoeken', overlayAi: 'AI', overlayEmpty: 'Nog niets ingeschakeld.', manageShowLabel: 'Tonen op de pagina', clockDateSec: 'Klok & datum', clockLbl: 'Klok', advShowHint: 'Sociale rij en Vraag AI-rij gaan niet samen — kies er één onder Data beheren.', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Sociale rij', lblAskaiMaster: 'Vraag AI-rij', lblLinksMaster: 'Links-knop', tabSearch: 'Zoeken', tabSocial: 'Sociaal', enginesNote: 'Zet zoekmachines aan of uit en voeg hieronder je eigen toe. Houd altijd minstens één aan.', engineAdd: 'Zoekmachine toevoegen', engineEdit: 'Zoekmachine bewerken', engineUrlLbl: 'Zoek-URL-sjabloon', engineUrlHint: 'Plak een homepage of resultaten-URL. Opzoeken vult het query-sjabloon (…?q=).', engineSuggest: 'Opzoeken', engineInvalid: 'Vul een naam en een https-zoek-URL in die eindigt op de query (bijvoorbeeld …?q=).', engineExists: 'Die naam staat al in de lijst.', engineGuessed: 'Geschat sjabloon — controleer of zoeken werkt.', engineLimit: 'Je kunt tot {n} eigen zoekmachines toevoegen.', socialNote: 'Alleen spring-iconen onder de zoekbalk. Niet tegelijk met de Vraag AI-rij. Uit voor Minimaal.', aiOverlayNote: 'AI-platformen voor de zoek-overlay (typen + Enter). Zet “AI in overlay” uit voor Minimaal.', aiShortcutsHead: 'Vraag AI-rij snelkoppelingen', socialAria: 'Sociaal' },
+  de: { colorMode: 'Farbmodus', themeAuto: 'Systemdesign', themeDark: 'Dunkles Design', themeLight: 'Helles Design', themeMenuAuto: 'System', themeMenuDark: 'Dunkel', themeMenuLight: 'Hell', langLabel: 'Sprache', searchLabel: 'Im Web suchen', searchFormTitle: 'Suchbegriff eingeben und Enter drücken', engineLabel: 'Suchmaschine: {name}. Klicken zum Wechseln.', enginePickLabel: '{name}. Klick: Suche ↔ KI. Halten zum Wählen. Tastatur: Strg+Umschalt+A.', searchSubmit: 'Suchen', timeClick: 'Klicken, um zwischen 24-Stunden-, 12-Stunden- und Vollzeit zu wechseln', askAiCaption: 'KI fragen', overlaySearch: 'Suche', overlayAi: 'KI', overlayEmpty: 'Noch nichts aktiviert.', manageShowLabel: 'Auf der Seite zeigen', clockDateSec: 'Uhr & Datum', clockLbl: 'Uhr', advShowHint: 'Social-Zeile und KI-fragen-Zeile schließen sich aus — unter Daten verwalten wählen.', lblAiOverlay: 'KI im Overlay', lblSocialRow: 'Social-Zeile', lblAskaiMaster: 'KI-fragen-Zeile', lblLinksMaster: 'Links-Schaltfläche', tabSearch: 'Suche', tabSocial: 'Social', enginesNote: 'Suchmaschinen an/aus und eigene unten hinzufügen. Mindestens eine bleibt an.', engineAdd: 'Suchmaschine hinzufügen', engineEdit: 'Suchmaschine bearbeiten', engineUrlLbl: 'Such-URL-Vorlage', engineUrlHint: 'Homepage oder Ergebnis-URL einfügen. Nachschlagen füllt die Query-Vorlage (…?q=).', engineSuggest: 'Nachschlagen', engineInvalid: 'Name und https-Such-URL mit Query-Ende eingeben (z. B. …?q=).', engineExists: 'Dieser Name ist schon in der Liste.', engineGuessed: 'Geschätzte Vorlage — Suche prüfen.', engineLimit: 'Bis zu {n} eigene Suchmaschinen.', socialNote: 'Nur Sprung-Icons unter der Suchleiste. Social-Zeile für Minimal aus.', aiOverlayNote: 'KI-Plattformen für das Such-Overlay (tippen + Enter). „KI im Overlay“ für Minimal aus.', aiShortcutsHead: 'KI-fragen-Zeilen-Verknüpfungen', socialAria: 'Social' },
+  fr: { colorMode: 'Mode couleur', themeAuto: 'Thème système', themeDark: 'Thème sombre', themeLight: 'Thème clair', themeMenuAuto: 'Système', themeMenuDark: 'Sombre', themeMenuLight: 'Clair', langLabel: 'Langue', searchLabel: 'Rechercher sur le web', searchFormTitle: 'Saisissez une recherche et appuyez sur Entrée', engineLabel: 'Moteur de recherche : {name}. Cliquez pour changer.', enginePickLabel: '{name}. Clic : Recherche ↔ IA. Maintenir pour choisir. Raccourci : Ctrl+Maj+A.', searchSubmit: 'Rechercher', timeClick: 'Cliquez pour alterner entre 24 h, 12 h et l’heure complète', askAiCaption: 'Demander à l’IA', overlaySearch: 'Recherche', overlayAi: 'IA', overlayEmpty: 'Rien n’est activé.', manageShowLabel: 'Afficher sur la page', clockDateSec: 'Horloge et date', clockLbl: 'Horloge', advShowHint: 'Rangée sociale et rangée Demander à l’IA sont exclusives — choisissez sous Gérer les données.', lblAiOverlay: 'IA dans l’overlay', lblSocialRow: 'Rangée sociale', lblAskaiMaster: 'Rangée Demander à l’IA', lblLinksMaster: 'Bouton Liens', tabSearch: 'Recherche', tabSocial: 'Social', enginesNote: 'Activez/désactivez les moteurs et ajoutez les vôtres. Gardez-en au moins un.', engineAdd: 'Ajouter un moteur', engineEdit: 'Modifier le moteur', engineUrlLbl: 'Modèle d’URL de recherche', engineUrlHint: 'Collez une page d’accueil ou une URL de résultats. Rechercher remplit le modèle (…?q=).', engineSuggest: 'Rechercher', engineInvalid: 'Indiquez un nom et une URL https se terminant par la requête (ex. …?q=).', engineExists: 'Ce nom est déjà dans la liste.', engineGuessed: 'Modèle estimé — vérifiez la recherche.', engineLimit: 'Jusqu’à {n} moteurs personnalisés.', socialNote: 'Icônes de saut sous la barre. Désactivez la rangée sociale pour Minimal.', aiOverlayNote: 'Plateformes IA pour l’overlay (saisir + Entrée). Désactivez « IA dans l’overlay » pour Minimal.', aiShortcutsHead: 'Raccourcis de la rangée Demander à l’IA', socialAria: 'Social' },
+  es: { colorMode: 'Modo de color', themeAuto: 'Tema del sistema', themeDark: 'Tema oscuro', themeLight: 'Tema claro', themeMenuAuto: 'Sistema', themeMenuDark: 'Oscuro', themeMenuLight: 'Claro', langLabel: 'Idioma', searchLabel: 'Buscar en la web', searchFormTitle: 'Escribe una búsqueda y pulsa Intro', engineLabel: 'Buscador: {name}. Haz clic para cambiar.', enginePickLabel: '{name}. Clic: Buscar ↔ IA. Mantén para elegir. Atajo: Ctrl+Mayús+A.', searchSubmit: 'Buscar', timeClick: 'Haz clic para alternar entre 24 horas, 12 horas y hora completa', askAiCaption: 'Preguntar a la IA', overlaySearch: 'Buscar', overlayAi: 'IA', overlayEmpty: 'Nada activado aún.', manageShowLabel: 'Mostrar en la página', clockDateSec: 'Reloj y fecha', clockLbl: 'Reloj', advShowHint: 'La fila social y la de Preguntar a la IA son excluyentes — elige una en Gestionar datos.', lblAiOverlay: 'IA en el overlay', lblSocialRow: 'Fila social', lblAskaiMaster: 'Fila Preguntar a la IA', lblLinksMaster: 'Botón Enlaces', tabSearch: 'Buscar', tabSocial: 'Social', enginesNote: 'Activa o desactiva buscadores y añade los tuyos. Mantén al menos uno.', engineAdd: 'Añadir buscador', engineEdit: 'Editar buscador', engineUrlLbl: 'Plantilla de URL de búsqueda', engineUrlHint: 'Pega una portada o una URL de resultados. Buscar completa la plantilla (…?q=).', engineSuggest: 'Buscar', engineInvalid: 'Pon un nombre y una URL https que termine en la consulta (p. ej. …?q=).', engineExists: 'Ese nombre ya está en la lista.', engineGuessed: 'Plantilla estimada — comprueba la búsqueda.', engineLimit: 'Hasta {n} buscadores propios.', socialNote: 'Iconos de salto bajo la barra. Desactiva la fila social para Mínimo.', aiOverlayNote: 'Plataformas de IA para el overlay (escribir + Intro). Desactiva «IA en el overlay» para Mínimo.', aiShortcutsHead: 'Accesos de la fila Preguntar a la IA', socialAria: 'Social' },
+  zh: { colorMode: '颜色模式', themeAuto: '跟随系统', themeDark: '深色主题', themeLight: '浅色主题', themeMenuAuto: '系统', themeMenuDark: '深色', themeMenuLight: '浅色', langLabel: '语言', searchLabel: '搜索网页', searchFormTitle: '输入搜索内容并按 Enter', engineLabel: '搜索引擎：{name}。点击切换。', enginePickLabel: '{name}。单击：搜索 ↔ AI。长按选择。快捷键：Ctrl+Shift+A。', searchSubmit: '搜索', timeClick: '点击可在 24 小时制、12 小时制和完整时间之间切换', askAiCaption: '询问 AI', overlaySearch: '搜索', overlayAi: 'AI', overlayEmpty: '尚未启用任何项。', manageShowLabel: '在页面显示', clockDateSec: '时钟与日期', clockLbl: '时钟', advShowHint: '社交行与询问 AI 行互斥 — 请在“管理数据”中二选一。', lblAiOverlay: '叠加层中的 AI', lblSocialRow: '社交行', lblAskaiMaster: '询问 AI 行', lblLinksMaster: '链接按钮', tabSearch: '搜索', tabSocial: '社交', enginesNote: '可开关搜索引擎，并在下方添加自己的。请至少保留一个。', engineAdd: '添加搜索引擎', engineEdit: '编辑搜索引擎', engineUrlLbl: '搜索 URL 模板', engineUrlHint: '粘贴主页或结果页 URL。查找会填充查询模板（…?q=）。', engineSuggest: '查找', engineInvalid: '请输入名称和以查询结尾的 https 搜索 URL（例如 …?q=）。', engineExists: '该名称已在列表中。', engineGuessed: '已猜测模板 — 请确认搜索可用。', engineLimit: '最多可添加 {n} 个自定义搜索引擎。', socialNote: '搜索栏下方仅跳转图标。极简模式请关闭社交行。', aiOverlayNote: '用于搜索叠加层的 AI 平台（输入 + Enter）。极简模式请关闭“叠加层中的 AI”。', aiShortcutsHead: '询问 AI 行快捷方式', socialAria: '社交' },
 }
 const advancedText = {
   en: { advTitle: 'Advanced settings', advancedOpen: 'Advanced', advancedClosed: '← Back to basic settings' },
@@ -1388,7 +1388,7 @@ const applySettingsText = () => {
   document.getElementById('lbl-location').textContent = t.location
   document.getElementById('help-open').textContent = helpCopy.title
   document.getElementById('sec-weather').textContent = t.secWeather
-  document.getElementById('sec-look').textContent = t.secLook
+  document.getElementById('sec-look').textContent = t.manageShowLabel || t.secLook
   document.getElementById('lbl-loc-ip').textContent = t.locIp
   document.getElementById('lbl-loc-city').textContent = t.locCity
   document.getElementById('ip-window-title').textContent = t.ipWindowTitle
@@ -1410,15 +1410,20 @@ const applySettingsText = () => {
   document.getElementById('lbl-quote').textContent = t.quote
   document.getElementById('lbl-zones').textContent = t.zonesToggle
   document.getElementById('lbl-wallpaper').textContent = t.wallpaperToggle
-  document.getElementById('sec-bg').textContent = t.secBackground
   document.querySelector('.presets').setAttribute('aria-label', t.secPage)
   document.getElementById('lbl-preset-minimal').textContent = t.presetMinimal
   document.getElementById('lbl-preset-standard').textContent = t.presetStandard
   document.getElementById('lbl-preset-custom').textContent = t.presetCustom
   document.getElementById('sec-ai').textContent = t.aiSec
-  document.getElementById('lbl-askai').textContent = t.aiOn
-  document.getElementById('sec-time').textContent = t.timeSec
-  document.getElementById('sec-date').textContent = t.dateSec
+  document.getElementById('lbl-askai').textContent = t.lblAskaiMaster || t.aiOn
+  document.getElementById('sec-time').textContent = t.clockDateSec || 'Clock & date'
+  const lblClock = document.getElementById('lbl-clock')
+  if (lblClock) lblClock.textContent = t.clockLbl || 'Clock'
+  const advShowHint = document.getElementById('adv-show-hint')
+  if (advShowHint) {
+    advShowHint.textContent = t.advShowHint
+      || 'Social and Ask AI rows are mutually exclusive — choose one under Manage data.'
+  }
   document.getElementById('lbl-date-on').textContent = t.dateOnLbl
   document.getElementById('lbl-date-style').textContent = t.dateShow
   document.getElementById('lbl-date-order').textContent = t.dateOrderLbl
@@ -1444,7 +1449,7 @@ const applySettingsText = () => {
   document.getElementById('ai-form-title').textContent = t.aiAddTitle
   document.getElementById('lbl-ai-name').textContent = t.aiName
   document.getElementById('lbl-ai-url').textContent = t.aiUrl
-  document.getElementById('lbl-tint').textContent = t.tintToggle
+  document.getElementById('lbl-tint').textContent = t.tintShort || t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
   document.getElementById('advanced-toggle').textContent = advancedToggle.getAttribute('aria-expanded') === 'true' ? t.advancedClosed : t.advancedOpen
@@ -1772,20 +1777,44 @@ const aiOverlayField = document.getElementById('set-ai-overlay')
 const socialRowField = document.getElementById('set-social-row')
 aiOverlayMasterOn = readFlag('aiOverlay', false)
 socialRowMasterOn = readFlag('socialRow', false)
+// Social row and Ask AI row share the slot under the bar — never both.
+if (askaiOn && socialRowMasterOn) {
+  socialRowMasterOn = false
+  try { localStorage.setItem('socialRow', 'off') } catch {}
+}
 aiOverlayField.checked = aiOverlayMasterOn
 socialRowField.checked = socialRowMasterOn
 askaiMaster.checked = askaiOn
-settingsFields.askai.addEventListener('change', () => {
-  askaiOn = settingsFields.askai.checked
+
+const syncUnderBarMasters = () => {
   askaiMaster.checked = askaiOn
-  writeKey('askai', askaiOn ? 'on' : 'off')
+  settingsFields.askai.checked = askaiOn
+  socialRowField.checked = socialRowMasterOn
   renderAskAi()
+  renderSocialRow()
   keepPersonal()
   settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
+}
+
+const setAskAiRowOn = (on, { peer = false } = {}) => {
+  askaiOn = !!on
+  writeKey('askai', askaiOn ? 'on' : 'off')
+  if (askaiOn && socialRowMasterOn && !peer) setSocialRowOn(false, { peer: true })
+  syncUnderBarMasters()
+}
+
+const setSocialRowOn = (on, { peer = false } = {}) => {
+  socialRowMasterOn = !!on
+  writeKey('socialRow', socialRowMasterOn ? 'on' : 'off')
+  if (socialRowMasterOn && askaiOn && !peer) setAskAiRowOn(false, { peer: true })
+  syncUnderBarMasters()
+}
+
+settingsFields.askai.addEventListener('change', () => {
+  setAskAiRowOn(settingsFields.askai.checked)
 })
 askaiMaster.addEventListener('change', () => {
-  settingsFields.askai.checked = askaiMaster.checked
-  settingsFields.askai.dispatchEvent(new Event('change'))
+  setAskAiRowOn(askaiMaster.checked)
 })
 
 // Pages: presets for how much is on the page. They only switch the display options; weather and the
@@ -2913,11 +2942,7 @@ aiOverlayField.addEventListener('change', () => {
   settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
 })
 socialRowField.addEventListener('change', () => {
-  socialRowMasterOn = socialRowField.checked
-  writeKey('socialRow', socialRowMasterOn ? 'on' : 'off')
-  renderSocialRow()
-  keepPersonal()
-  settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
+  setSocialRowOn(socialRowField.checked)
 })
 linksMaster.checked = settingsFields.links.checked
 linksMaster.addEventListener('change', () => {
