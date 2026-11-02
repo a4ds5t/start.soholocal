@@ -380,6 +380,37 @@
     </div>
   </div>
 
+  <div class="settings" id="quickstart" hidden>
+    <div class="settings-panel quickstart-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="quickstart-title">
+      <div class="settings-head">
+        <h2 id="quickstart-title">Quick start</h2>
+        <button type="button" id="quickstart-close" class="settings-close" aria-label="Close">×</button>
+      </div>
+      <h3 class="quick-head" id="quickstart-engine-head">Change search engine</h3>
+      <div class="quick-shot">
+        <div class="quick-shot-img">
+          <img src="assets/quickstart-search.png" width="480" height="106" alt="">
+          <svg class="quick-arrow" viewBox="0 0 480 106" aria-hidden="true">
+            <line x1="130" y1="12" x2="54" y2="52"/>
+            <path d="M62.9 50.4 L54 52 L55.6 43.1"/>
+            <rect x="92" y="-18" width="78" height="22" rx="11" class="quick-tag"/>
+            <text x="131" y="-3" text-anchor="middle" id="quickstart-click"></text>
+          </svg>
+        </div>
+      </div>
+      <p class="quick-text" id="quickstart-engine-text"></p>
+      <h3 class="quick-head" id="quickstart-more-head">More from your page</h3>
+      <div class="quick-cards">
+        <div class="quick-card"><b id="quickstart-ai-head"></b><span id="quickstart-ai-text"></span></div>
+        <div class="quick-card"><b id="quickstart-page-head"></b><span id="quickstart-page-text"></span></div>
+      </div>
+      <div class="quick-foot">
+        <span class="quick-note" id="quickstart-note"></span>
+        <button type="button" id="quickstart-done" class="ghost-button">OK</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Legacy manage host kept empty/hidden for script compatibility; shell owns content. -->
   <div class="settings" id="manage" hidden aria-hidden="true"></div>
 
