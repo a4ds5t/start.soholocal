@@ -105,8 +105,8 @@
       <nav class="social-row" id="social-row" aria-label="Social" hidden>
         <ul id="social-list"></ul>
       </nav>
-      <nav class="links" id="ask-ai" aria-label="Shortcuts">
-        <p class="caption" id="ask-ai-caption">Ask AI</p>
+      <nav class="links ask-ai-row" id="ask-ai" aria-label="AI shortcuts" hidden>
+        <p class="caption sr-only" id="ask-ai-caption">Ask AI</p>
         <ul id="ask-ai-list"></ul>
       </nav>
       <button id="quote" class="quote" type="button" title="Show another quote"><span id="quote-text">Show another quote</span><span id="quote-by"></span></button>
@@ -141,9 +141,9 @@
         <label class="setting"><input type="radio" name="preset" id="preset-custom" value="custom"> <span id="lbl-preset-custom">Personal</span></label>
       </div>
       <div class="settings-actions">
-        <button type="button" id="advanced-toggle" aria-expanded="false" aria-controls="advanced">Advanced</button>
-        <button type="button" id="manage-open">Manage</button>
-        <button type="button" id="ip-open">IP details</button>
+        <button type="button" id="advanced-toggle" class="ghost-button" aria-expanded="false" aria-controls="advanced">Advanced</button>
+        <button type="button" id="manage-open" class="ghost-button">Manage</button>
+        <button type="button" id="ip-open" class="ghost-button">IP details</button>
       </div>
       <p class="quick-row"><a href="#" id="quickstart-open" class="quick-link"></a></p>
       <div class="advanced" id="advanced" hidden>
