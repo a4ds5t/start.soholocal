@@ -1440,9 +1440,9 @@ const applySettingsText = () => {
   document.getElementById('ai-name').setAttribute('aria-label', t.aiName)
   document.getElementById('ai-url').setAttribute('aria-label', t.aiUrl)
   const navGeneral = document.getElementById('nav-general')
-  if (navGeneral) navGeneral.textContent = t.navGeneral || t.title
+  if (navGeneral) navGeneral.textContent = t.navGeneral || 'General'
   const navAdvanced = document.getElementById('nav-advanced')
-  if (navAdvanced) navAdvanced.textContent = t.advancedOpen || t.advTitle || 'Advanced'
+  if (navAdvanced) navAdvanced.textContent = t.advancedOpen || 'Advanced'
   document.getElementById('ai-save').textContent = t.aiSave
   document.getElementById('ai-pick-label').textContent = t.aiPick
   document.getElementById('ai-cancel').textContent = t.aiCancel
