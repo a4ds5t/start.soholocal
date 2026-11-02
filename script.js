@@ -32,12 +32,118 @@ const topThemeMenu = document.getElementById('top-theme-menu')
 const topThemeItems = topThemeMenu ? [...topThemeMenu.querySelectorAll('[data-theme-value]')] : []
 
 
-const engines = [
+const BUILTIN_ENGINES = [
   { name: 'Kagi', url: 'https://kagi.com/search?q=', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M14.498 18.392h-5.14c-1.39 0-1.632-1.508-1.39-2.11.12-.302.423-.724.664-1.026a6.81 6.81 0 003.326.845 6.945 6.945 0 006.954-6.935c0-2.05-.907-3.86-2.298-5.186l.181-.181c.363-.362.907-.603 1.451-.543l.847.06V0h-1.451c-1.693 0-3.084 1.025-3.689 2.472a6.83 6.83 0 00-1.934-.301 6.945 6.945 0 00-6.954 6.935c0 1.507.484 2.954 1.33 4.1a1.84 1.84 0 01-.423.302l-.181.18c-1.391 1.327-2.056 3.015-1.693 4.945.181 1.025 1.088 2.11 1.995 2.714.605.422 1.39.603 2.177.603l5.804-.242c.665 0 1.27.302 1.633.905L16.432 24 20 22.794l-.605-1.327a5.425 5.425 0 00-4.897-3.075zm-2.48-12.543c1.814 0 3.326 1.508 3.326 3.317 0 1.809-1.512 3.316-3.325 3.316-1.814 0-3.326-1.507-3.326-3.316 0-1.87 1.451-3.317 3.325-3.317z"></path></svg>` },
   { name: 'Brave', url: 'https://search.brave.com/search?q=', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M17.544 2.375c.017-.005 1.844-.5 2.712.361.872.872 1.588 1.642 1.588 1.642l-.565 1.38v-.003.006-.003L22 7.8c-.014.05-2.112 7.983-2.357 8.954-.488 1.924-.819 2.663-2.202 3.638a212.634 212.634 0 01-4.305 2.917c-.41.252-.92.691-1.383.691-.463 0-.974-.439-1.383-.691a213.099 213.099 0 01-4.306-2.917c-1.383-.975-1.72-1.714-2.2-3.632-.246-.977-2.35-8.904-2.364-8.96l.722-2.045-.566-1.383s.722-.764 1.594-1.63c.866-.872 2.712-.36 2.712-.36L8.066 0h7.373l2.105 2.375zm-5.797 12.557c-.138 0-1.04.318-1.762.691l-.457.234c-.487.253-.823.428-.956.506-.168.108-.066.306.09.414.15.103 2.195 1.684 2.394 1.865l.09.078c.186.168.432.391.607.391.174 0 .415-.223.607-.391l.084-.078c.2-.169 2.244-1.756 2.394-1.865.15-.108.258-.3.09-.408-.133-.084-.475-.253-.956-.506h-.006l-.457-.24c-.722-.373-1.623-.691-1.762-.691zm.006-11.276c-.35.02-.694.092-1.023.211l-.378.126c-.493.169-.969.331-1.21.331-.312 0-2.554-.428-2.584-.433 0 0-2.706 3.26-2.706 3.957 0 .577.228.805.504 1.07l.174.175 2.033 2.152.06.067c.204.204.5.498.29.998l-.043.102c-.228.535-.511 1.203-.15 1.876.384.716 1.046 1.19 1.467 1.118.42-.084 1.419-.601 1.78-.841.367-.229 1.52-1.19 1.521-1.551 0-.307-.829-.812-1.238-1.053l-.18-.12-.199-.12c-.367-.229-1.035-.644-1.047-.825-.018-.228-.017-.294.283-.853l.21-.379c.289-.487.602-1.029.536-1.426-.085-.433-.777-.685-1.36-.901l-.21-.078-.613-.229c-.583-.222-1.232-.463-1.34-.511-.145-.073-.11-.132.335-.174l.223-.025c.553-.06 1.582-.168 2.08-.03l.32.09c.564.145 1.25.337 1.316.445l.03.048c.067.09.109.145.037.53l-.121.607c-.15.806-.391 2.069-.421 2.351l-.012.115c-.042.312-.066.529.301.613.438.119.884.206 1.335.259.216 0 .824-.144 1.24-.24l.095-.025c.367-.078.343-.289.3-.602l-.011-.12c-.03-.282-.27-1.54-.42-2.345l-.122-.614c-.072-.384-.024-.439.036-.529l.03-.048c.067-.108.753-.294 1.318-.444l.318-.091c.5-.138 1.528-.03 2.081.03l.216.018c.451.048.493.108.343.18-.11.049-.758.29-1.341.512-.273.108-.547.21-.823.307-.583.216-1.275.468-1.36.907-.066.391.247.939.535 1.42l.21.379c.301.56.308.625.284.854-.012.18-.68.595-1.053.824l-.192.126-.181.108c-.41.247-1.238.758-1.238 1.059 0 .367 1.16 1.316 1.521 1.55.367.235 1.36.758 1.78.836.421.078 1.082-.396 1.467-1.112.36-.673.078-1.335-.15-1.876l-.042-.102c-.21-.5.084-.794.289-1.004l.065-.06 2.02-2.147.181-.181c.271-.265.505-.493.505-1.07 0-.698-2.706-3.957-2.706-3.957-.03.006-2.275.44-2.586.44l.007-.007c-.252 0-.722-.156-1.215-.337l-.379-.12c-.612-.21-1.02-.21-1.022-.21z"></path></svg>` },
   { name: 'Google', url: 'https://www.google.com/search?q=', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M23 12.245c0-.905-.075-1.565-.236-2.25h-10.54v4.083h6.186c-.124 1.014-.797 2.542-2.294 3.569l-.021.136 3.332 2.53.23.022C21.779 18.417 23 15.593 23 12.245z"></path><path d="M12.225 23c3.03 0 5.574-.978 7.433-2.665l-3.542-2.688c-.948.648-2.22 1.1-3.891 1.1a6.745 6.745 0 01-6.386-4.572l-.132.011-3.465 2.628-.045.124C4.043 20.531 7.835 23 12.225 23z"></path><path d="M5.84 14.175A6.65 6.65 0 015.463 12c0-.758.138-1.491.361-2.175l-.006-.147-3.508-2.67-.115.054A10.831 10.831 0 001 12c0 1.772.436 3.447 1.197 4.938l3.642-2.763z"></path><path d="M12.225 5.253c2.108 0 3.529.892 4.34 1.638l3.167-3.031C17.787 2.088 15.255 1 12.225 1 7.834 1 4.043 3.469 2.197 7.062l3.63 2.763a6.77 6.77 0 016.398-4.572z"></path></svg>` },
   { name: 'DuckDuckGo', url: 'https://duckduckgo.com/?q=', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 .984C18.083.984 23.016 5.916 23.016 12S18.084 23.016 12 23.016.984 18.084.984 12C.984 5.917 5.916.984 12 .984zm0 .938C6.434 1.922 1.922 6.434 1.922 12c0 4.437 2.867 8.205 6.85 9.55-.237-.82-.776-2.753-1.6-6.052-1.184-4.741-2.064-8.606 2.379-9.813.047-.011.064-.064.03-.093-.514-.467-1.382-.548-2.233-.38a.06.06 0 0 1-.07-.058c0-.011 0-.023.011-.035.205-.286.572-.507.822-.64a1.843 1.843 0 0 0-.607-.335c-.059-.022-.059-.12-.006-.144.006-.006.012-.012.024-.012 1.749-.233 3.586.292 4.49 1.448.011.011.023.017.035.023 2.968.635 3.509 4.837 3.328 5.998a9.607 9.607 0 0 0 2.346-.576c.746-.286 1.008-.222 1.101-.053.1.193-.018.513-.28.81-.496.567-1.393 1.01-2.974 1.137-.546.044-1.029.024-1.445.006-.789-.035-1.339-.059-1.633.39-.192.298-.041.998 1.487 1.22 1.09.157 2.078.047 2.798-.034.643-.07 1.073-.118 1.172.069.21.402-.996 1.207-3.066 1.224-.158 0-.315-.006-.467-.011-1.283-.065-2.227-.414-2.816-.735a.094.094 0 0 1-.035-.017c-.105-.059-.31.045-.188.267.07.134.444.478 1.004.776-.058.466.087 1.184.338 2l.088-.016c.041-.009.087-.019.134-.025.507-.082.775.012.926.175.717-.536 1.913-1.294 2.03-1.154.583.694.66 2.332.53 2.99-.004.012-.017.024-.04.035-.274.117-1.783-.296-1.783-.511-.059-1.075-.26-1.173-.493-1.225h-.156c.006.006.012.018.018.03l.052.12c.093.257.24 1.063.13 1.26-.112.199-.835.297-1.284.303-.443.006-.543-.158-.637-.408-.07-.204-.103-.675-.103-.95a.857.857 0 0 1 .012-.216c-.134.058-.333.193-.397.281-.017.262-.017.682.123 1.149.07.221-1.518 1.164-1.74.99-.227-.181-.634-1.952-.459-2.67-.187.017-.338.075-.42.191-.367.508.093 2.933.582 3.248.257.169 1.54-.553 2.176-1.095.105.145.305.158.553.158.326-.012.782-.06 1.103-.158.192.45.423.972.613 1.388 4.47-1.032 7.803-5.037 7.803-9.82 0-5.566-4.512-10.078-10.078-10.078zm1.791 5.646c-.42 0-.678.146-.795.332-.023.047.047.094.094.07.14-.075.357-.161.701-.156.328.006.516.09.67.159l.023.01c.041.017.088-.03.059-.065-.134-.18-.332-.35-.752-.35zm-5.078.198a1.24 1.24 0 0 0-.522.082c-.454.169-.67.526-.67.76 0 .051.112.057.141.011.081-.123.21-.31.617-.478.408-.17.73-.146.951-.094.047.012.083-.041.041-.07a.989.989 0 0 0-.558-.211zm5.434 1.423a.651.651 0 0 0-.655.647.652.652 0 0 0 1.307 0 .646.646 0 0 0-.652-.647zm.283.262h.008a.17.17 0 0 1 .17.17c0 .093-.077.17-.17.17a.17.17 0 0 1-.17-.17c0-.09.072-.165.162-.17zm-5.358.076a.752.752 0 0 0-.758.758c0 .42.338.758.758.758s.758-.337.758-.758a.756.756 0 0 0-.758-.758zm.328.303h.01c.112 0 .2.089.2.2 0 .11-.088.197-.2.197a.195.195 0 0 1-.197-.198c0-.107.082-.194.187-.199z"/></svg>` }
 ]
+const CUSTOM_ENGINE_LIMIT = 12
+const faviconHtml = (domain) => {
+  const host = String(domain || '').replace(/^www\./, '')
+  if (!host) return ''
+  return `<img class="favicon-img" src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=32" width="16" height="16" alt="" loading="lazy">`
+}
+const titleFromHost = (host) => {
+  const base = String(host || '').replace(/^www\./, '').split('.')[0] || 'Search'
+  return base.charAt(0).toUpperCase() + base.slice(1)
+}
+// Known query templates when the visitor only pastes a homepage.
+const KNOWN_SEARCH_TEMPLATES = {
+  'bing.com': 'https://www.bing.com/search?q=',
+  'yahoo.com': 'https://search.yahoo.com/search?p=',
+  'search.yahoo.com': 'https://search.yahoo.com/search?p=',
+  'ecosia.org': 'https://www.ecosia.org/search?q=',
+  'startpage.com': 'https://www.startpage.com/sp/search?query=',
+  'qwant.com': 'https://www.qwant.com/?q=',
+  'yandex.com': 'https://yandex.com/search/?text=',
+  'yandex.ru': 'https://yandex.ru/search/?text=',
+  'you.com': 'https://you.com/search?q=',
+  'perplexity.ai': 'https://www.perplexity.ai/search?q=',
+  'wikipedia.org': 'https://wikipedia.org/w/index.php?search=',
+  'en.wikipedia.org': 'https://en.wikipedia.org/w/index.php?search=',
+  'nl.wikipedia.org': 'https://nl.wikipedia.org/w/index.php?search=',
+  'github.com': 'https://github.com/search?q=',
+  'reddit.com': 'https://www.reddit.com/search/?q=',
+  'scholar.google.com': 'https://scholar.google.com/scholar?q=',
+  'wolframalpha.com': 'https://www.wolframalpha.com/input?i=',
+  'archive.org': 'https://archive.org/search?query=',
+  'searx.be': 'https://searx.be/search?q=',
+}
+const isTemplateUrl = (value) => {
+  try {
+    const url = new URL(value)
+    return url.protocol === 'https:' || url.protocol === 'http:'
+  } catch {
+    try {
+      const url = new URL(`${value}x`)
+      return url.protocol === 'https:' || url.protocol === 'http:'
+    } catch {
+      return false
+    }
+  }
+}
+const inferSearchTemplate = (raw) => {
+  let input = String(raw || '').trim()
+  if (!input) return null
+  if (!/^[a-z][a-z0-9+.-]*:\/\//i.test(input)) input = `https://${input}`
+  let url
+  try { url = new URL(input) } catch { return null }
+  if (url.protocol !== 'https:' && url.protocol !== 'http:') return null
+  const host = url.hostname.replace(/^www\./, '')
+  const known = KNOWN_SEARCH_TEMPLATES[url.hostname] || KNOWN_SEARCH_TEMPLATES[host] || KNOWN_SEARCH_TEMPLATES[`www.${host}`]
+  const queryKeys = ['q', 'query', 'p', 'text', 'search', 's', 'wd', 'keyword', 'k', 'i']
+  for (const key of queryKeys) {
+    if (!url.searchParams.has(key)) continue
+    const href = url.href.replace(/#.*$/, '')
+    const re = new RegExp(`([?&]${key}=)[^&]*`, 'i')
+    if (!re.test(href)) continue
+    const template = href.replace(re, `$1`)
+    return { url: template, name: titleFromHost(host), domain: host, guessed: false }
+  }
+  if (known) return { url: known, name: titleFromHost(host), domain: host, guessed: false }
+  if (/search|find|query|zoek/i.test(url.pathname)) {
+    const path = url.pathname.endsWith('/') ? url.pathname.slice(0, -1) : url.pathname
+    return { url: `${url.origin}${path}?q=`, name: titleFromHost(host), domain: host, guessed: true }
+  }
+  return { url: `${url.origin}/search?q=`, name: titleFromHost(host), domain: host, guessed: true }
+}
+
+let customEngines = []
+try {
+  const saved = JSON.parse(localStorage.getItem('customEngines') || 'null')
+  if (Array.isArray(saved)) {
+    customEngines = saved.filter((item) => item && typeof item.name === 'string' && typeof item.url === 'string' && isTemplateUrl(item.url)).slice(0, CUSTOM_ENGINE_LIMIT)
+  }
+} catch {}
+
+let engines = []
+const rebuildEngines = () => {
+  engines = [
+    ...BUILTIN_ENGINES.map((item) => ({ ...item, custom: false })),
+    ...customEngines.map((item) => ({
+      ...item,
+      custom: true,
+      icon: faviconHtml(item.domain || (() => { try { return new URL(item.url).hostname } catch { return '' } })()),
+    })),
+  ]
+}
+rebuildEngines()
+
+const persistCustomEngines = () => {
+  try {
+    localStorage.setItem('customEngines', JSON.stringify(customEngines.map(({ id, name, url, domain }) => ({ id, name, url, domain }))))
+  } catch {}
+  rebuildEngines()
+  engines.forEach((item) => {
+    if (typeof engineEnabled[item.name] !== 'boolean') engineEnabled[item.name] = true
+  })
+  Object.keys(engineEnabled).forEach((name) => {
+    if (!engines.some((item) => item.name === name)) delete engineEnabled[name]
+  })
+  persistEngineEnabled()
+  if (typeof renderManageCatalogs === 'function') renderManageCatalogs()
+}
 
 // Active destination for Enter: a search engine or an AI platform (query URL).
 // Optie 1: click toggles Search ↔ AI; long-press opens the pick overlay. Social stays under the bar.
@@ -715,12 +821,12 @@ const pageText = {
   zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetCustom: '个性化' }
 }
 const topbarText = {
-  en: { colorMode: 'Color mode', themeAuto: 'System theme', themeDark: 'Dark theme', themeLight: 'Light theme', themeMenuAuto: 'System', themeMenuDark: 'Dark', themeMenuLight: 'Light', langLabel: 'Language', searchLabel: 'Search the web', searchFormTitle: 'Type a search and press Enter', engineLabel: 'Search engine: {name}. Click to change.', enginePickLabel: '{name}. Click: Search ↔ AI. Hold to pick. Shortcut: Ctrl+Shift+A.', searchSubmit: 'Search', timeClick: 'Click to cycle through 24-hour, 12-hour and full time', askAiCaption: 'Ask AI', overlaySearch: 'Search', overlayAi: 'AI', overlayEmpty: 'Nothing enabled yet.', manageShowLabel: 'Show on page', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Social row', lblAskaiMaster: 'ASK AI row', lblLinksMaster: 'Links button', tabSearch: 'Search', tabSocial: 'Social', enginesNote: 'Always keep at least one search engine on.', socialNote: 'Jump-only icons under the search bar. Turn the Social row off for Minimal.', aiOverlayNote: 'AI platforms for the search overlay (type + Enter). Turn “AI in overlay” off for Minimal.', aiShortcutsHead: 'ASK AI row shortcuts', socialAria: 'Social' },
-  nl: { colorMode: 'Kleurmodus', themeAuto: 'Systeemthema', themeDark: 'Donker thema', themeLight: 'Licht thema', themeMenuAuto: 'Systeem', themeMenuDark: 'Donker', themeMenuLight: 'Licht', langLabel: 'Taal', searchLabel: 'Zoek op het web', searchFormTitle: 'Typ een zoekopdracht en druk op Enter', engineLabel: 'Zoekmachine: {name}. Klik om te wisselen.', enginePickLabel: '{name}. Klik: Zoeken ↔ AI. Ingedrukt houden om te kiezen. Sneltoets: Ctrl+Shift+A.', searchSubmit: 'Zoeken', timeClick: 'Klik om te wisselen tussen 24 uur, 12 uur en volledige tijd', askAiCaption: 'Vraag AI', overlaySearch: 'Zoeken', overlayAi: 'AI', overlayEmpty: 'Nog niets ingeschakeld.', manageShowLabel: 'Tonen op de pagina', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Sociale rij', lblAskaiMaster: 'Vraag AI-rij', lblLinksMaster: 'Links-knop', tabSearch: 'Zoeken', tabSocial: 'Sociaal', enginesNote: 'Houd altijd minstens één zoekmachine aan.', socialNote: 'Alleen spring-iconen onder de zoekbalk. Zet de sociale rij uit voor Minimaal.', aiOverlayNote: 'AI-platformen voor de zoek-overlay (typen + Enter). Zet “AI in overlay” uit voor Minimaal.', aiShortcutsHead: 'Vraag AI-rij snelkoppelingen', socialAria: 'Sociaal' },
-  de: { colorMode: 'Farbmodus', themeAuto: 'Systemdesign', themeDark: 'Dunkles Design', themeLight: 'Helles Design', themeMenuAuto: 'System', themeMenuDark: 'Dunkel', themeMenuLight: 'Hell', langLabel: 'Sprache', searchLabel: 'Im Web suchen', searchFormTitle: 'Suchbegriff eingeben und Enter drücken', engineLabel: 'Suchmaschine: {name}. Klicken zum Wechseln.', enginePickLabel: '{name}. Klick: Suche ↔ KI. Halten zum Wählen. Tastatur: Strg+Umschalt+A.', searchSubmit: 'Suchen', timeClick: 'Klicken, um zwischen 24-Stunden-, 12-Stunden- und Vollzeit zu wechseln', askAiCaption: 'KI fragen', overlaySearch: 'Suche', overlayAi: 'KI', overlayEmpty: 'Noch nichts aktiviert.', manageShowLabel: 'Auf der Seite zeigen', lblAiOverlay: 'KI im Overlay', lblSocialRow: 'Social-Zeile', lblAskaiMaster: 'KI-fragen-Zeile', lblLinksMaster: 'Links-Schaltfläche', tabSearch: 'Suche', tabSocial: 'Social', enginesNote: 'Mindestens eine Suchmaschine bleibt an.', socialNote: 'Nur Sprung-Icons unter der Suchleiste. Social-Zeile für Minimal aus.', aiOverlayNote: 'KI-Plattformen für das Such-Overlay (tippen + Enter). „KI im Overlay“ für Minimal aus.', aiShortcutsHead: 'KI-fragen-Zeilen-Verknüpfungen', socialAria: 'Social' },
-  fr: { colorMode: 'Mode couleur', themeAuto: 'Thème système', themeDark: 'Thème sombre', themeLight: 'Thème clair', themeMenuAuto: 'Système', themeMenuDark: 'Sombre', themeMenuLight: 'Clair', langLabel: 'Langue', searchLabel: 'Rechercher sur le web', searchFormTitle: 'Saisissez une recherche et appuyez sur Entrée', engineLabel: 'Moteur de recherche : {name}. Cliquez pour changer.', enginePickLabel: '{name}. Clic : Recherche ↔ IA. Maintenir pour choisir. Raccourci : Ctrl+Maj+A.', searchSubmit: 'Rechercher', timeClick: 'Cliquez pour alterner entre 24 h, 12 h et l’heure complète', askAiCaption: 'Demander à l’IA', overlaySearch: 'Recherche', overlayAi: 'IA', overlayEmpty: 'Rien n’est activé.', manageShowLabel: 'Afficher sur la page', lblAiOverlay: 'IA dans l’overlay', lblSocialRow: 'Rangée sociale', lblAskaiMaster: 'Rangée Demander à l’IA', lblLinksMaster: 'Bouton Liens', tabSearch: 'Recherche', tabSocial: 'Social', enginesNote: 'Gardez au moins un moteur de recherche.', socialNote: 'Icônes de saut sous la barre. Désactivez la rangée sociale pour Minimal.', aiOverlayNote: 'Plateformes IA pour l’overlay (saisir + Entrée). Désactivez « IA dans l’overlay » pour Minimal.', aiShortcutsHead: 'Raccourcis de la rangée Demander à l’IA', socialAria: 'Social' },
-  es: { colorMode: 'Modo de color', themeAuto: 'Tema del sistema', themeDark: 'Tema oscuro', themeLight: 'Tema claro', themeMenuAuto: 'Sistema', themeMenuDark: 'Oscuro', themeMenuLight: 'Claro', langLabel: 'Idioma', searchLabel: 'Buscar en la web', searchFormTitle: 'Escribe una búsqueda y pulsa Intro', engineLabel: 'Buscador: {name}. Haz clic para cambiar.', enginePickLabel: '{name}. Clic: Buscar ↔ IA. Mantén para elegir. Atajo: Ctrl+Mayús+A.', searchSubmit: 'Buscar', timeClick: 'Haz clic para alternar entre 24 horas, 12 horas y hora completa', askAiCaption: 'Preguntar a la IA', overlaySearch: 'Buscar', overlayAi: 'IA', overlayEmpty: 'Nada activado aún.', manageShowLabel: 'Mostrar en la página', lblAiOverlay: 'IA en el overlay', lblSocialRow: 'Fila social', lblAskaiMaster: 'Fila Preguntar a la IA', lblLinksMaster: 'Botón Enlaces', tabSearch: 'Buscar', tabSocial: 'Social', enginesNote: 'Mantén al menos un buscador activo.', socialNote: 'Iconos de salto bajo la barra. Desactiva la fila social para Mínimo.', aiOverlayNote: 'Plataformas de IA para el overlay (escribir + Intro). Desactiva «IA en el overlay» para Mínimo.', aiShortcutsHead: 'Accesos de la fila Preguntar a la IA', socialAria: 'Social' },
-  zh: { colorMode: '颜色模式', themeAuto: '跟随系统', themeDark: '深色主题', themeLight: '浅色主题', themeMenuAuto: '系统', themeMenuDark: '深色', themeMenuLight: '浅色', langLabel: '语言', searchLabel: '搜索网页', searchFormTitle: '输入搜索内容并按 Enter', engineLabel: '搜索引擎：{name}。点击切换。', enginePickLabel: '{name}。单击：搜索 ↔ AI。长按选择。快捷键：Ctrl+Shift+A。', searchSubmit: '搜索', timeClick: '点击可在 24 小时制、12 小时制和完整时间之间切换', askAiCaption: '询问 AI', overlaySearch: '搜索', overlayAi: 'AI', overlayEmpty: '尚未启用任何项。', manageShowLabel: '在页面显示', lblAiOverlay: '叠加层中的 AI', lblSocialRow: '社交行', lblAskaiMaster: '询问 AI 行', lblLinksMaster: '链接按钮', tabSearch: '搜索', tabSocial: '社交', enginesNote: '请至少保留一个搜索引擎。', socialNote: '搜索栏下方仅跳转图标。极简模式请关闭社交行。', aiOverlayNote: '用于搜索叠加层的 AI 平台（输入 + Enter）。极简模式请关闭“叠加层中的 AI”。', aiShortcutsHead: '询问 AI 行快捷方式', socialAria: '社交' },
+  en: { colorMode: 'Color mode', themeAuto: 'System theme', themeDark: 'Dark theme', themeLight: 'Light theme', themeMenuAuto: 'System', themeMenuDark: 'Dark', themeMenuLight: 'Light', langLabel: 'Language', searchLabel: 'Search the web', searchFormTitle: 'Type a search and press Enter', engineLabel: 'Search engine: {name}. Click to change.', enginePickLabel: '{name}. Click: Search ↔ AI. Hold to pick. Shortcut: Ctrl+Shift+A.', searchSubmit: 'Search', timeClick: 'Click to cycle through 24-hour, 12-hour and full time', askAiCaption: 'Ask AI', overlaySearch: 'Search', overlayAi: 'AI', overlayEmpty: 'Nothing enabled yet.', manageShowLabel: 'Show on page', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Social row', lblAskaiMaster: 'ASK AI row', lblLinksMaster: 'Links button', tabSearch: 'Search', tabSocial: 'Social', enginesNote: 'Turn engines on or off, and add your own below. Always keep at least one on.', engineAdd: 'Add search engine', engineEdit: 'Edit search engine', engineUrlLbl: 'Search URL template', engineUrlHint: 'Paste a homepage or a results URL. Look up fills the query template (…?q=).', engineSuggest: 'Look up', engineInvalid: 'Enter a name and an https search URL ending with the query (for example …?q=).', engineExists: 'That name is already in the list.', engineGuessed: 'Guessed template — check that searching works.', engineLimit: 'You can add up to {n} custom engines.', socialNote: 'Jump-only icons under the search bar. Turn the Social row off for Minimal.', aiOverlayNote: 'AI platforms for the search overlay (type + Enter). Turn “AI in overlay” off for Minimal.', aiShortcutsHead: 'ASK AI row shortcuts', socialAria: 'Social' },
+  nl: { colorMode: 'Kleurmodus', themeAuto: 'Systeemthema', themeDark: 'Donker thema', themeLight: 'Licht thema', themeMenuAuto: 'Systeem', themeMenuDark: 'Donker', themeMenuLight: 'Licht', langLabel: 'Taal', searchLabel: 'Zoek op het web', searchFormTitle: 'Typ een zoekopdracht en druk op Enter', engineLabel: 'Zoekmachine: {name}. Klik om te wisselen.', enginePickLabel: '{name}. Klik: Zoeken ↔ AI. Ingedrukt houden om te kiezen. Sneltoets: Ctrl+Shift+A.', searchSubmit: 'Zoeken', timeClick: 'Klik om te wisselen tussen 24 uur, 12 uur en volledige tijd', askAiCaption: 'Vraag AI', overlaySearch: 'Zoeken', overlayAi: 'AI', overlayEmpty: 'Nog niets ingeschakeld.', manageShowLabel: 'Tonen op de pagina', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Sociale rij', lblAskaiMaster: 'Vraag AI-rij', lblLinksMaster: 'Links-knop', tabSearch: 'Zoeken', tabSocial: 'Sociaal', enginesNote: 'Zet zoekmachines aan of uit en voeg hieronder je eigen toe. Houd altijd minstens één aan.', engineAdd: 'Zoekmachine toevoegen', engineEdit: 'Zoekmachine bewerken', engineUrlLbl: 'Zoek-URL-sjabloon', engineUrlHint: 'Plak een homepage of resultaten-URL. Opzoeken vult het query-sjabloon (…?q=).', engineSuggest: 'Opzoeken', engineInvalid: 'Vul een naam en een https-zoek-URL in die eindigt op de query (bijvoorbeeld …?q=).', engineExists: 'Die naam staat al in de lijst.', engineGuessed: 'Geschat sjabloon — controleer of zoeken werkt.', engineLimit: 'Je kunt tot {n} eigen zoekmachines toevoegen.', socialNote: 'Alleen spring-iconen onder de zoekbalk. Zet de sociale rij uit voor Minimaal.', aiOverlayNote: 'AI-platformen voor de zoek-overlay (typen + Enter). Zet “AI in overlay” uit voor Minimaal.', aiShortcutsHead: 'Vraag AI-rij snelkoppelingen', socialAria: 'Sociaal' },
+  de: { colorMode: 'Farbmodus', themeAuto: 'Systemdesign', themeDark: 'Dunkles Design', themeLight: 'Helles Design', themeMenuAuto: 'System', themeMenuDark: 'Dunkel', themeMenuLight: 'Hell', langLabel: 'Sprache', searchLabel: 'Im Web suchen', searchFormTitle: 'Suchbegriff eingeben und Enter drücken', engineLabel: 'Suchmaschine: {name}. Klicken zum Wechseln.', enginePickLabel: '{name}. Klick: Suche ↔ KI. Halten zum Wählen. Tastatur: Strg+Umschalt+A.', searchSubmit: 'Suchen', timeClick: 'Klicken, um zwischen 24-Stunden-, 12-Stunden- und Vollzeit zu wechseln', askAiCaption: 'KI fragen', overlaySearch: 'Suche', overlayAi: 'KI', overlayEmpty: 'Noch nichts aktiviert.', manageShowLabel: 'Auf der Seite zeigen', lblAiOverlay: 'KI im Overlay', lblSocialRow: 'Social-Zeile', lblAskaiMaster: 'KI-fragen-Zeile', lblLinksMaster: 'Links-Schaltfläche', tabSearch: 'Suche', tabSocial: 'Social', enginesNote: 'Suchmaschinen an/aus und eigene unten hinzufügen. Mindestens eine bleibt an.', engineAdd: 'Suchmaschine hinzufügen', engineEdit: 'Suchmaschine bearbeiten', engineUrlLbl: 'Such-URL-Vorlage', engineUrlHint: 'Homepage oder Ergebnis-URL einfügen. Nachschlagen füllt die Query-Vorlage (…?q=).', engineSuggest: 'Nachschlagen', engineInvalid: 'Name und https-Such-URL mit Query-Ende eingeben (z. B. …?q=).', engineExists: 'Dieser Name ist schon in der Liste.', engineGuessed: 'Geschätzte Vorlage — Suche prüfen.', engineLimit: 'Bis zu {n} eigene Suchmaschinen.', socialNote: 'Nur Sprung-Icons unter der Suchleiste. Social-Zeile für Minimal aus.', aiOverlayNote: 'KI-Plattformen für das Such-Overlay (tippen + Enter). „KI im Overlay“ für Minimal aus.', aiShortcutsHead: 'KI-fragen-Zeilen-Verknüpfungen', socialAria: 'Social' },
+  fr: { colorMode: 'Mode couleur', themeAuto: 'Thème système', themeDark: 'Thème sombre', themeLight: 'Thème clair', themeMenuAuto: 'Système', themeMenuDark: 'Sombre', themeMenuLight: 'Clair', langLabel: 'Langue', searchLabel: 'Rechercher sur le web', searchFormTitle: 'Saisissez une recherche et appuyez sur Entrée', engineLabel: 'Moteur de recherche : {name}. Cliquez pour changer.', enginePickLabel: '{name}. Clic : Recherche ↔ IA. Maintenir pour choisir. Raccourci : Ctrl+Maj+A.', searchSubmit: 'Rechercher', timeClick: 'Cliquez pour alterner entre 24 h, 12 h et l’heure complète', askAiCaption: 'Demander à l’IA', overlaySearch: 'Recherche', overlayAi: 'IA', overlayEmpty: 'Rien n’est activé.', manageShowLabel: 'Afficher sur la page', lblAiOverlay: 'IA dans l’overlay', lblSocialRow: 'Rangée sociale', lblAskaiMaster: 'Rangée Demander à l’IA', lblLinksMaster: 'Bouton Liens', tabSearch: 'Recherche', tabSocial: 'Social', enginesNote: 'Activez/désactivez les moteurs et ajoutez les vôtres. Gardez-en au moins un.', engineAdd: 'Ajouter un moteur', engineEdit: 'Modifier le moteur', engineUrlLbl: 'Modèle d’URL de recherche', engineUrlHint: 'Collez une page d’accueil ou une URL de résultats. Rechercher remplit le modèle (…?q=).', engineSuggest: 'Rechercher', engineInvalid: 'Indiquez un nom et une URL https se terminant par la requête (ex. …?q=).', engineExists: 'Ce nom est déjà dans la liste.', engineGuessed: 'Modèle estimé — vérifiez la recherche.', engineLimit: 'Jusqu’à {n} moteurs personnalisés.', socialNote: 'Icônes de saut sous la barre. Désactivez la rangée sociale pour Minimal.', aiOverlayNote: 'Plateformes IA pour l’overlay (saisir + Entrée). Désactivez « IA dans l’overlay » pour Minimal.', aiShortcutsHead: 'Raccourcis de la rangée Demander à l’IA', socialAria: 'Social' },
+  es: { colorMode: 'Modo de color', themeAuto: 'Tema del sistema', themeDark: 'Tema oscuro', themeLight: 'Tema claro', themeMenuAuto: 'Sistema', themeMenuDark: 'Oscuro', themeMenuLight: 'Claro', langLabel: 'Idioma', searchLabel: 'Buscar en la web', searchFormTitle: 'Escribe una búsqueda y pulsa Intro', engineLabel: 'Buscador: {name}. Haz clic para cambiar.', enginePickLabel: '{name}. Clic: Buscar ↔ IA. Mantén para elegir. Atajo: Ctrl+Mayús+A.', searchSubmit: 'Buscar', timeClick: 'Haz clic para alternar entre 24 horas, 12 horas y hora completa', askAiCaption: 'Preguntar a la IA', overlaySearch: 'Buscar', overlayAi: 'IA', overlayEmpty: 'Nada activado aún.', manageShowLabel: 'Mostrar en la página', lblAiOverlay: 'IA en el overlay', lblSocialRow: 'Fila social', lblAskaiMaster: 'Fila Preguntar a la IA', lblLinksMaster: 'Botón Enlaces', tabSearch: 'Buscar', tabSocial: 'Social', enginesNote: 'Activa o desactiva buscadores y añade los tuyos. Mantén al menos uno.', engineAdd: 'Añadir buscador', engineEdit: 'Editar buscador', engineUrlLbl: 'Plantilla de URL de búsqueda', engineUrlHint: 'Pega una portada o una URL de resultados. Buscar completa la plantilla (…?q=).', engineSuggest: 'Buscar', engineInvalid: 'Pon un nombre y una URL https que termine en la consulta (p. ej. …?q=).', engineExists: 'Ese nombre ya está en la lista.', engineGuessed: 'Plantilla estimada — comprueba la búsqueda.', engineLimit: 'Hasta {n} buscadores propios.', socialNote: 'Iconos de salto bajo la barra. Desactiva la fila social para Mínimo.', aiOverlayNote: 'Plataformas de IA para el overlay (escribir + Intro). Desactiva «IA en el overlay» para Mínimo.', aiShortcutsHead: 'Accesos de la fila Preguntar a la IA', socialAria: 'Social' },
+  zh: { colorMode: '颜色模式', themeAuto: '跟随系统', themeDark: '深色主题', themeLight: '浅色主题', themeMenuAuto: '系统', themeMenuDark: '深色', themeMenuLight: '浅色', langLabel: '语言', searchLabel: '搜索网页', searchFormTitle: '输入搜索内容并按 Enter', engineLabel: '搜索引擎：{name}。点击切换。', enginePickLabel: '{name}。单击：搜索 ↔ AI。长按选择。快捷键：Ctrl+Shift+A。', searchSubmit: '搜索', timeClick: '点击可在 24 小时制、12 小时制和完整时间之间切换', askAiCaption: '询问 AI', overlaySearch: '搜索', overlayAi: 'AI', overlayEmpty: '尚未启用任何项。', manageShowLabel: '在页面显示', lblAiOverlay: '叠加层中的 AI', lblSocialRow: '社交行', lblAskaiMaster: '询问 AI 行', lblLinksMaster: '链接按钮', tabSearch: '搜索', tabSocial: '社交', enginesNote: '可开关搜索引擎，并在下方添加自己的。请至少保留一个。', engineAdd: '添加搜索引擎', engineEdit: '编辑搜索引擎', engineUrlLbl: '搜索 URL 模板', engineUrlHint: '粘贴主页或结果页 URL。查找会填充查询模板（…?q=）。', engineSuggest: '查找', engineInvalid: '请输入名称和以查询结尾的 https 搜索 URL（例如 …?q=）。', engineExists: '该名称已在列表中。', engineGuessed: '已猜测模板 — 请确认搜索可用。', engineLimit: '最多可添加 {n} 个自定义搜索引擎。', socialNote: '搜索栏下方仅跳转图标。极简模式请关闭社交行。', aiOverlayNote: '用于搜索叠加层的 AI 平台（输入 + Enter）。极简模式请关闭“叠加层中的 AI”。', aiShortcutsHead: '询问 AI 行快捷方式', socialAria: '社交' },
 }
 const advancedText = {
   en: { advTitle: 'Advanced settings', advancedOpen: 'Advanced', advancedClosed: '← Back to basic settings' },
@@ -1366,6 +1472,20 @@ const applySettingsText = () => {
   document.getElementById('tab-search').textContent = t.tabSearch
   document.getElementById('tab-social').textContent = t.tabSocial
   document.getElementById('tab-links').textContent = t.tabLinks
+  const engineFormTitleEl = document.getElementById('engine-form-title')
+  if (engineFormTitleEl && !editingEngineId) engineFormTitleEl.textContent = t.engineAdd || 'Add search engine'
+  const lblEngineName = document.getElementById('lbl-engine-name')
+  if (lblEngineName) lblEngineName.textContent = t.lblName
+  const lblEngineUrl = document.getElementById('lbl-engine-url')
+  if (lblEngineUrl) lblEngineUrl.textContent = t.engineUrlLbl || 'Search URL template'
+  const engineUrlHint = document.getElementById('engine-url-hint')
+  if (engineUrlHint) engineUrlHint.textContent = t.engineUrlHint || ''
+  const engineSuggestBtn = document.getElementById('engine-suggest')
+  if (engineSuggestBtn) engineSuggestBtn.textContent = t.engineSuggest || 'Look up'
+  const engineSaveBtn = document.getElementById('engine-save')
+  if (engineSaveBtn && !editingEngineId) engineSaveBtn.textContent = t.linkSave || 'Save'
+  const engineCancelBtn = document.getElementById('engine-cancel')
+  if (engineCancelBtn) engineCancelBtn.textContent = t.linkCancel || 'Cancel'
   if (typeof syncOverlayTabs === 'function') syncOverlayTabs()
   if (typeof renderManageCatalogs === 'function') renderManageCatalogs()
   if (typeof renderSocialRow === 'function') renderSocialRow()
@@ -1770,7 +1890,7 @@ const clearKeys = (keys) => {
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
 }
-const personalKeys = ['links', 'askAiList', 'city', 'zones', 'location', 'weatherPlaces', 'personalState']
+const personalKeys = ['links', 'askAiList', 'city', 'zones', 'location', 'weatherPlaces', 'personalState', 'customEngines', 'engineEnabled']
 const storedLang = () => {
   try { return localStorage.getItem('lang') || 'auto' } catch { return 'auto' }
 }
@@ -1842,8 +1962,8 @@ settingsFields.resetData.addEventListener('click', () => {
 
 // Export and import: one JSON file with the settings and the personal data. Caches are left out.
 // The file is for the user to keep (for example in iCloud Drive) and open on another device.
-const EXPORT_SETTINGS = ['wallpaperEnabled', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'dateNotation', 'showDate', 'preset', 'personalState']
-const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
+const EXPORT_SETTINGS = ['wallpaperEnabled', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'dateNotation', 'showDate', 'preset', 'personalState', 'engineEnabled', 'aiOverlay', 'socialRow', 'activeDest', 'lastEngineName', 'lastAiKey']
+const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces', 'customEngines']
 // The export is a real link with a download name, so every browser treats the click as the user's download.
 // Export: the file is made in the click and saved through a fresh download link, which is the pattern Safari
 // on both iPhone and Mac handles as a normal download. The address is released after a while.
@@ -2182,9 +2302,8 @@ setInterval(() => {
 // Custom links are added by the visitor, up to 15. The whole links button can be switched off in settings.
 const linksButton = document.getElementById('links-button')
 const linksButtonIcon = linksButton.innerHTML
-// Own links off: the button is a plain Wikipedia link with its logo, and the label says so.
 const labelLinksButton = () => {
-  const label = linksOwn ? t.linksButton : 'Wikipedia'
+  const label = t.linksButton || 'Links'
   linksButton.setAttribute('aria-label', label)
   linksButton.title = label
 }
@@ -2230,10 +2349,31 @@ let editing = null
 
 const saveLinks = () => writeKey('links', JSON.stringify(links))
 
+const faviconEl = (url) => {
+  const host = hostOf(url)
+  if (!host) return null
+  const img = document.createElement('img')
+  img.className = 'favicon-img'
+  img.width = 16
+  img.height = 16
+  img.alt = ''
+  img.loading = 'lazy'
+  img.src = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=32`
+  img.onerror = () => {
+    img.src = `https://icons.duckduckgo.com/ip3/${host}.ico`
+    img.onerror = null
+  }
+  return img
+}
+
 // A link as a row in the preview or the window. Link text is set with textContent, never as HTML.
 const linkAnchor = (link, withDescription) => {
   const anchor = Object.assign(document.createElement('a'), { href: link.url, target: '_blank', rel: 'noopener', className: 'link-main' })
-  anchor.append(el('span', 'link-title', link.title))
+  const head = el('span', 'link-title-row')
+  const icon = faviconEl(link.url)
+  if (icon) head.append(icon)
+  head.append(el('span', 'link-title', link.title))
+  anchor.append(head)
   const detail = [hostOf(link.url), withDescription ? link.description : ''].filter(Boolean).join(' · ')
   if (detail) anchor.append(el('small', '', detail))
   return anchor
@@ -2286,7 +2426,9 @@ const renderLinks = () => {
   linksList.replaceChildren(...(rows.length ? rows : [el('p', 'zones-empty', t.linksEmpty)]))
   const ownRows = links.map((link) => {
     const row = Object.assign(document.createElement('a'), { href: link.url, target: '_blank', rel: 'noopener', className: 'own-link' })
-    row.append(link.title)
+    const icon = faviconEl(link.url)
+    if (icon) row.append(icon)
+    row.append(document.createTextNode(link.title))
     if (link.description) row.append(el('span', 'own-desc', link.description))
     return row
   })
@@ -2531,11 +2673,19 @@ const renderSocialRow = () => {
   }))
 }
 
-const catalogRow = ({ name, iconHtml, on, onToggle, onUp, onDown, canUp, canDown, canToggleOff = true }) => {
+const catalogRow = ({ name, iconHtml, on, onToggle, onUp, onDown, canUp, canDown, canToggleOff = true, onRemove, onEdit }) => {
   const row = document.createElement('li')
   if (iconHtml) {
     const icon = el('span', 'catalog-icon')
     icon.innerHTML = iconHtml
+    const img = icon.querySelector('img.favicon-img')
+    if (img) {
+      img.onerror = () => {
+        const host = (img.src.match(/domain=([^&]+)/) || [])[1]
+        if (host) img.src = `https://icons.duckduckgo.com/ip3/${decodeURIComponent(host)}.ico`
+        img.onerror = null
+      }
+    }
     row.append(icon)
   }
   row.append(el('span', 'catalog-name', name))
@@ -2547,6 +2697,8 @@ const catalogRow = ({ name, iconHtml, on, onToggle, onUp, onDown, canUp, canDown
     )
     row.append(move)
   }
+  if (onEdit) row.append(aiButton(t.linkEditBtn || 'Edit', '✎', onEdit, false))
+  if (onRemove) row.append(aiButton(t.linkRemove || 'Remove', '×', onRemove, false))
   const toggle = Object.assign(document.createElement('input'), {
     type: 'checkbox',
     className: 'catalog-toggle',
@@ -2565,6 +2717,17 @@ const renderManageCatalogs = () => {
     iconHtml: item.icon,
     on: engineEnabled[item.name] !== false,
     canToggleOff: enabledEngines().length > 1 || engineEnabled[item.name] === false,
+    onEdit: item.custom ? () => startEngineEdit(item) : undefined,
+    onRemove: item.custom ? () => {
+      if (enabledEngines().length <= 1 && engineEnabled[item.name] !== false) return
+      customEngines = customEngines.filter((entry) => entry.id !== item.id && entry.name !== item.name)
+      if (activeDest.kind === 'engine' && activeDest.name === item.name) {
+        activeDest = { kind: 'engine', name: 'DuckDuckGo' }
+        persistDest()
+      }
+      persistCustomEngines()
+      resetEngineForm()
+    } : undefined,
     onToggle: (checked, toggle) => {
       if (!checked && enabledEngines().length <= 1) {
         toggle.checked = true
@@ -2631,6 +2794,115 @@ const renderManageCatalogs = () => {
     })
   }).filter(Boolean))
 }
+
+// Custom search engines: add / edit with Look up for query URL templates.
+const engineForm = document.getElementById('engine-form')
+const engineName = document.getElementById('engine-name')
+const engineUrl = document.getElementById('engine-url')
+const engineMsg = document.getElementById('engine-msg')
+const engineCancel = document.getElementById('engine-cancel')
+const engineSave = document.getElementById('engine-save')
+const engineSuggest = document.getElementById('engine-suggest')
+const engineFormTitle = document.getElementById('engine-form-title')
+let editingEngineId = null
+
+const resetEngineForm = () => {
+  editingEngineId = null
+  if (!engineForm) return
+  engineForm.reset()
+  if (engineFormTitle) engineFormTitle.textContent = t.engineAdd || 'Add search engine'
+  if (engineSave) engineSave.textContent = t.linkSave || 'Save'
+  if (engineCancel) engineCancel.hidden = true
+  if (engineMsg) engineMsg.textContent = ''
+}
+
+const startEngineEdit = (item) => {
+  editingEngineId = item.id || item.name
+  engineName.value = item.name
+  engineUrl.value = item.url
+  engineFormTitle.textContent = t.engineEdit || 'Edit search engine'
+  engineSave.textContent = t.linkSave || 'Save'
+  engineCancel.hidden = false
+  engineMsg.textContent = ''
+  engineName.focus()
+}
+
+const applyEngineLookup = () => {
+  const found = inferSearchTemplate(engineUrl.value || engineName.value)
+  if (!found) {
+    engineMsg.textContent = t.engineInvalid || 'Enter a valid site or search URL.'
+    return null
+  }
+  engineUrl.value = found.url
+  if (!engineName.value.trim()) engineName.value = found.name
+  engineMsg.textContent = found.guessed
+    ? (t.engineGuessed || 'Guessed template — check that searching works.')
+    : ''
+  return found
+}
+
+if (engineSuggest) {
+  engineSuggest.addEventListener('click', () => applyEngineLookup())
+}
+if (engineCancel) engineCancel.addEventListener('click', resetEngineForm)
+if (engineUrl) {
+  engineUrl.addEventListener('blur', () => {
+    if (!engineUrl.value.trim()) return
+    if (!/[?&](q|query|p|text|search|s)=/i.test(engineUrl.value)) applyEngineLookup()
+  })
+}
+if (engineForm) {
+  engineForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const looked = applyEngineLookup() || inferSearchTemplate(engineUrl.value)
+    const name = engineName.value.trim()
+    const url = (looked?.url || engineUrl.value.trim())
+    if (!name || !isTemplateUrl(url)) {
+      engineMsg.textContent = t.engineInvalid || 'Enter a name and an https search URL ending with the query (for example …?q=).'
+      return
+    }
+    const clash = engines.some((item) => item.name.toLowerCase() === name.toLowerCase()
+      && (!editingEngineId || (item.id || item.name) !== editingEngineId))
+    if (clash) {
+      engineMsg.textContent = t.engineExists || 'That name is already in the list.'
+      return
+    }
+    let domain = looked?.domain || ''
+    try { domain = domain || new URL(url).hostname.replace(/^www\./, '') } catch {}
+    if (editingEngineId) {
+      const idx = customEngines.findIndex((item) => (item.id || item.name) === editingEngineId)
+      if (idx < 0) {
+        engineMsg.textContent = t.engineInvalid || 'Could not edit that engine.'
+        return
+      }
+      const prevName = customEngines[idx].name
+      customEngines[idx] = { ...customEngines[idx], name, url, domain }
+      if (prevName !== name) {
+        engineEnabled[name] = engineEnabled[prevName] !== false
+        delete engineEnabled[prevName]
+        if (activeDest.kind === 'engine' && activeDest.name === prevName) {
+          activeDest = { kind: 'engine', name }
+          persistDest()
+        }
+      }
+    } else {
+      if (customEngines.length >= CUSTOM_ENGINE_LIMIT) {
+        engineMsg.textContent = (t.engineLimit || 'You can add up to {n} custom engines.').replace('{n}', String(CUSTOM_ENGINE_LIMIT))
+        return
+      }
+      customEngines = [...customEngines, {
+        id: `custom-${Date.now().toString(36)}`,
+        name,
+        url,
+        domain,
+      }]
+      engineEnabled[name] = true
+    }
+    persistCustomEngines()
+    resetEngineForm()
+  })
+}
+resetEngineForm()
 
 aiOverlayField.addEventListener('change', () => {
   aiOverlayMasterOn = aiOverlayField.checked

@@ -302,8 +302,22 @@
         <button type="button" role="tab" class="manage-tab-button" data-tab="backup" id="tab-backup" aria-controls="section-backup">Backup</button>
       </div>
       <section class="manage-section" data-tab="search" id="section-search" role="tabpanel" aria-labelledby="tab-search" tabindex="0" hidden>
-        <p class="manage-note" id="engines-note">Always keep at least one search engine on.</p>
+        <p class="manage-note" id="engines-note">Turn engines on or off, and add your own below. Always keep at least one on.</p>
         <ul class="catalog-list" id="engines-list"></ul>
+        <form class="link-form" id="engine-form">
+          <p class="link-form-title" id="engine-form-title">Add search engine</p>
+          <label for="engine-name" id="lbl-engine-name">Name</label>
+          <input type="text" id="engine-name" autocomplete="off">
+          <label for="engine-url" id="lbl-engine-url">Search URL template</label>
+          <input type="text" id="engine-url" inputmode="url" autocomplete="off" placeholder="https://example.com/search?q=">
+          <p class="manage-note" id="engine-url-hint">Paste a homepage or a results URL. Look up fills the query template (…?q=).</p>
+          <div class="link-form-actions">
+            <button type="button" id="engine-suggest" class="ghost-button">Look up</button>
+            <button type="submit" id="engine-save" class="ghost-button action">Save</button>
+            <button type="button" id="engine-cancel" class="ghost-button" hidden>Cancel</button>
+          </div>
+          <p class="city-msg" id="engine-msg" role="status"></p>
+        </form>
       </section>
       <section class="manage-section" data-tab="social" id="section-social" role="tabpanel" aria-labelledby="tab-social" tabindex="0" hidden>
         <p class="manage-note" id="social-note">Jump-only icons under the search bar. Turn the Social row off for Minimal.</p>

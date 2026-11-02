@@ -1933,9 +1933,23 @@ html[data-quote-off] #quote {
   color: var(--color-fg-1);
 }
 
+.link-main .link-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .link-main small {
   font-size: 11px;
   color: var(--color-fg-2);
+  margin-left: 24px;
+}
+
+.own-link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
 }
 
 .links-preview .link-main {
@@ -1954,37 +1968,43 @@ html[data-quote-off] #quote {
   margin-top: 16px;
 }
 
-/* Manage data: lighter panel + Show on page masters (Minimal can turn extras off). */
+/* Manage data: same theme tokens as Advanced (follows light/dark). */
 .manage-panel-light {
   width: min(100%, var(--panel-lg));
-  background: #fbfbfc;
-  color: #1b2330;
-  border-color: #e4e7ec;
-  box-shadow: 0 16px 48px rgba(15, 23, 42, .16);
+  background: var(--color-field);
+  color: var(--color-fg-1);
+  border-color: var(--color-border);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, .18);
 }
 
 .manage-panel-light .manage-note,
 .manage-panel-light .manage-show-label,
 .manage-panel-light .manage-tab-button,
 .manage-panel-light .location-title {
-  color: #667085;
+  color: var(--color-fg-2);
 }
 
 .manage-panel-light .manage-tab-button[aria-selected="true"],
 .manage-panel-light .settings-head h2,
 .manage-panel-light .catalog-list .catalog-name {
-  color: #1b2330;
+  color: var(--color-fg-1);
 }
 
 .manage-panel-light .manage-tabs,
 .manage-panel-light .manage-show {
-  border-color: #e4e7ec;
+  border-color: var(--color-border);
 }
 
-html[data-theme="dark"] .manage-panel-light,
-html:not([data-theme="light"]) .manage-panel-light {
-  /* Keep Manage data readable/light even on a dark page, per locked UX. */
-  color-scheme: light;
+.manage-panel-light .link-form label,
+.manage-panel-light .link-form-title,
+.manage-panel-light .city-msg {
+  color: var(--color-fg-2);
+}
+
+.manage-panel-light .link-form input {
+  background: color-mix(in srgb, var(--color-bg) 55%, var(--color-field));
+  color: var(--color-fg-1);
+  border-color: var(--color-border);
 }
 
 .manage-show {
@@ -1992,7 +2012,7 @@ html:not([data-theme="light"]) .manage-panel-light {
   padding: 12px 14px;
   border: 1px solid var(--color-border);
   border-radius: 12px;
-  background: #fff;
+  background: color-mix(in srgb, var(--color-bg) 35%, var(--color-field));
 }
 
 .manage-show-label {
@@ -2015,7 +2035,7 @@ html:not([data-theme="light"]) .manage-panel-light {
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  color: #344054;
+  color: var(--color-fg-1);
   cursor: pointer;
 }
 
@@ -2024,7 +2044,7 @@ html:not([data-theme="light"]) .manage-panel-light {
   height: 20px;
   appearance: none;
   border-radius: 999px;
-  background: #d0d5dd;
+  background: color-mix(in srgb, var(--color-border) 70%, var(--color-fg-2));
   position: relative;
   cursor: pointer;
   transition: background .15s ease;
@@ -2038,13 +2058,13 @@ html:not([data-theme="light"]) .manage-panel-light {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+  background: var(--color-field);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .25);
   transition: transform .15s ease;
 }
 
 .master-toggle input:checked {
-  background: #344054;
+  background: var(--color-fg-1);
 }
 
 .master-toggle input:checked::after {
@@ -2070,7 +2090,7 @@ html:not([data-theme="light"]) .manage-panel-light {
 }
 
 .catalog-list li:hover {
-  background: #f2f4f7;
+  background: color-mix(in srgb, var(--color-border) 55%, transparent);
 }
 
 .catalog-list .catalog-name {
@@ -2081,15 +2101,18 @@ html:not([data-theme="light"]) .manage-panel-light {
 .catalog-list .catalog-icon {
   width: 18px;
   height: 18px;
-  color: #667085;
+  color: var(--color-fg-2);
   display: grid;
   place-items: center;
 }
 
-.catalog-list .catalog-icon svg {
+.catalog-list .catalog-icon svg,
+.catalog-list .catalog-icon .favicon-img,
+.favicon-img {
   width: 16px;
   height: 16px;
   display: block;
+  border-radius: 3px;
 }
 
 .catalog-list .catalog-toggle {
@@ -2097,7 +2120,7 @@ html:not([data-theme="light"]) .manage-panel-light {
   height: 20px;
   appearance: none;
   border-radius: 999px;
-  background: #d0d5dd;
+  background: color-mix(in srgb, var(--color-border) 70%, var(--color-fg-2));
   position: relative;
   cursor: pointer;
   flex: 0 0 auto;
@@ -2111,13 +2134,13 @@ html:not([data-theme="light"]) .manage-panel-light {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+  background: var(--color-field);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .25);
   transition: transform .15s ease;
 }
 
 .catalog-list .catalog-toggle:checked {
-  background: #344054;
+  background: var(--color-fg-1);
 }
 
 .catalog-list .catalog-toggle:checked::after {
@@ -2133,18 +2156,31 @@ html:not([data-theme="light"]) .manage-panel-light {
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  color: #667085;
-  border: 1px solid #e4e7ec;
-  background: #fff;
+  color: var(--color-fg-2);
+  border: 1px solid var(--color-border);
+  background: var(--color-field);
 }
 
 .catalog-list .catalog-move button:hover:not(:disabled),
 .catalog-list .catalog-move button:focus-visible:not(:disabled) {
-  color: #1b2330;
+  color: var(--color-fg-1);
 }
 
 .catalog-list .catalog-move button:disabled {
   opacity: .35;
+}
+
+.link-row .favicon-img,
+.own-link .favicon-img,
+.links-preview .favicon-img {
+  flex: 0 0 auto;
+  margin-right: 8px;
+  opacity: .9;
+}
+
+#engine .favicon-img {
+  width: 16px;
+  height: 16px;
 }
 
 /* The tabs of the manage panel; the active one is underlined. */
@@ -2901,7 +2937,10 @@ button.action:disabled {
 }
 
 .own-link {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
   padding: 8px 0;
   border-bottom: 1px solid var(--color-border);
   color: var(--color-fg-1);
