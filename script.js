@@ -2376,11 +2376,10 @@ linksButton.addEventListener('click', () => {
   openLinks()
 })
 
-// The links button can be switched off in settings; the window closes with it.
+// Show on page: Links master only shows/hides the globe. Manage data stays open.
 settingsFields.links.addEventListener('change', () => {
   linksOn = settingsFields.links.checked
   writeKey('linksOn', linksOn ? 'on' : 'off')
-  if (!linksOn && manageTab === 'links' && !manageWindow.hidden) closeManage()
   if (!linksOn && !linksWindow.hidden) closeLinks()
   renderLinks()
 })
