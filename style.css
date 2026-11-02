@@ -2,6 +2,8 @@
 :root {
   --panel-md: 640px;
   --panel-lg: 820px;
+  --shell-w: min(92vw, 920px);
+  --shell-h: min(84vh, 720px);
 }
 
 @font-face {
@@ -1461,6 +1463,102 @@ img.ai-icon {
   box-shadow: 0 10px 40px rgba(0, 0, 0, .12);
 }
 
+/* Settings shell A: fixed size; Manage + Advanced live inside. */
+.settings-panel.settings-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: var(--shell-w);
+  height: var(--shell-h);
+  max-height: var(--shell-h);
+  overflow: hidden;
+  padding: 0;
+}
+
+.settings-shell > .settings-head {
+  flex: none;
+  margin: 0;
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--color-border);
+  gap: 10px;
+}
+
+.settings-shell > .settings-head h2 {
+  margin-right: auto;
+}
+
+.settings-nav-toggle {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--color-fg-2);
+}
+
+.settings-nav-toggle:hover,
+.settings-nav-toggle:focus-visible {
+  color: var(--color-fg-1);
+  background: color-mix(in srgb, var(--color-bg) 45%, var(--color-field));
+}
+
+.settings-shell-body {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.settings-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 10px;
+  overflow: auto;
+  border-right: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 28%, var(--color-field));
+}
+
+.settings-nav-btn {
+  display: block;
+  width: 100%;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-fg-2);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.settings-nav-btn:hover,
+.settings-nav-btn:focus-visible {
+  color: var(--color-fg-1);
+  background: color-mix(in srgb, var(--color-bg) 40%, transparent);
+}
+
+.settings-nav-btn[aria-selected="true"] {
+  color: var(--color-fg-1);
+  background: color-mix(in srgb, var(--color-bg) 55%, var(--color-field));
+  font-weight: 600;
+}
+
+.settings-content {
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: 16px 20px 20px;
+}
+
+.settings-pane[hidden] {
+  display: none;
+}
+
+.settings-pane .app-version {
+  margin-top: 24px;
+}
+
 .settings-head {
   display: flex;
   align-items: center;
@@ -2046,40 +2144,28 @@ html[data-quote-off] #quote {
   margin: 0;
 }
 
-/* Manage data: same theme tokens as Advanced (follows light/dark). */
-.manage-panel-light {
-  width: min(100%, var(--panel-lg));
-  background: var(--color-field);
-  color: var(--color-fg-1);
-  border-color: var(--color-border);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, .18);
-}
-
-.manage-panel-light .manage-note,
-.manage-panel-light .manage-show-label,
-.manage-panel-light .manage-tab-button,
-.manage-panel-light .location-title {
+/* Settings shell / former Manage: theme tokens (follows light/dark). */
+.settings-shell .manage-note,
+.settings-shell .manage-show-label,
+.settings-shell .location-title {
   color: var(--color-fg-2);
 }
 
-.manage-panel-light .manage-tab-button[aria-selected="true"],
-.manage-panel-light .settings-head h2,
-.manage-panel-light .catalog-list .catalog-name {
+.settings-shell .catalog-list .catalog-name {
   color: var(--color-fg-1);
 }
 
-.manage-panel-light .manage-tabs,
-.manage-panel-light .manage-show {
+.settings-shell .manage-show {
   border-color: var(--color-border);
 }
 
-.manage-panel-light .link-form label,
-.manage-panel-light .link-form-title,
-.manage-panel-light .city-msg {
+.settings-shell .link-form label,
+.settings-shell .link-form-title,
+.settings-shell .city-msg {
   color: var(--color-fg-2);
 }
 
-.manage-panel-light .link-form input {
+.settings-shell .link-form input {
   box-sizing: border-box;
   width: 100%;
   min-height: 36px;
@@ -2661,6 +2747,11 @@ html[data-quote-off] #quote {
   flex-direction: column;
   gap: 16px;
   align-items: stretch;
+  margin-top: 0;
+}
+
+#section-advanced .advanced {
+  margin-top: 0;
 }
 
 .adv-show-first {
@@ -2991,9 +3082,80 @@ button.action:disabled {
   text-align: left;
 }
 
-/* Phones: the advanced settings use two columns for the short checkbox groups, and a select group takes the full width.
-   The help stays in one column. */
-@media (max-width: 600px) {
+/* Phones / narrow: shell keeps fixed size; sidebar becomes bottom tabs (+ hamburger More). */
+@media (max-width: 640px) {
+  .settings-panel.settings-shell {
+    width: min(100vw - 16px, 560px);
+    height: min(90vh, 720px);
+    max-height: min(90vh, 720px);
+  }
+
+  .settings-shell > .settings-head {
+    padding: 14px 14px 10px;
+  }
+
+  .settings-nav-toggle {
+    display: inline-grid;
+    place-items: center;
+  }
+
+  .settings-shell-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+
+  .settings-nav {
+    order: 2;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 4px;
+    padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px));
+    overflow-x: auto;
+    border-right: 0;
+    border-top: 1px solid var(--color-border);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .settings-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .settings-nav-btn {
+    flex: 0 0 auto;
+    padding: 8px 12px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* Hamburger opens full nav as overlay list when needed. */
+  .settings-nav.is-open {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+    z-index: 2;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    max-height: 55%;
+    overflow: auto;
+    padding: 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-field);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .28);
+  }
+
+  .settings-nav.is-open .settings-nav-btn {
+    text-align: left;
+  }
+
+  .settings-content {
+    order: 1;
+    padding: 14px 14px 16px;
+  }
+
   .advanced.advanced-show-first {
     gap: 12px;
   }
@@ -3008,7 +3170,6 @@ button.action:disabled {
     grid-column: auto;
   }
 
-  /* The place field takes the row; Save stays beside it. */
   .city-row {
     width: 100%;
   }
@@ -3037,7 +3198,7 @@ button.action:disabled {
     width: 100%;
   }
 
-  .settings-panel {
+  .settings-panel:not(.settings-shell) {
     max-height: 90vh;
   }
 

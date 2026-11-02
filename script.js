@@ -1349,9 +1349,6 @@ document.getElementById('place-form').addEventListener('submit', async (e) => {
     placeMsg.textContent = t.unavailable
   }
 })
-const manageOpenButton = document.getElementById('manage-open')
-manageOpenButton.addEventListener('click', () => openManage(manageTab))
-
 // Settings and help: a floating panel, opened with ? and closed with Escape.
 const openedFrom = { el: null }
 let settingsVersionTag
@@ -1364,8 +1361,9 @@ const versionTagStrings = () => ({
 })
 
 const applySettingsText = () => {
-  document.getElementById('settings-title').textContent = document.getElementById('advanced').hidden ? t.title : t.advTitle
-  document.getElementById('settings-hint').textContent = t.hint
+  document.getElementById('settings-title').textContent = t.title
+  const settingsHintEl = document.getElementById('settings-hint')
+  if (settingsHintEl) settingsHintEl.textContent = t.hint
   const versionMount = document.getElementById('app-version-root')
   if (versionMount) {
     if (!settingsVersionTag) {
@@ -1441,8 +1439,10 @@ const applySettingsText = () => {
   document.getElementById('lbl-ai-newtab').textContent = t.aiNewTab
   document.getElementById('ai-name').setAttribute('aria-label', t.aiName)
   document.getElementById('ai-url').setAttribute('aria-label', t.aiUrl)
-  document.getElementById('manage-open').textContent = t.manageOpen
-  document.getElementById('manage-title').textContent = t.manageOpen
+  const navGeneral = document.getElementById('nav-general')
+  if (navGeneral) navGeneral.textContent = t.navGeneral || t.title
+  const navAdvanced = document.getElementById('nav-advanced')
+  if (navAdvanced) navAdvanced.textContent = t.advancedOpen || t.advTitle || 'Advanced'
   document.getElementById('ai-save').textContent = t.aiSave
   document.getElementById('ai-pick-label').textContent = t.aiPick
   document.getElementById('ai-cancel').textContent = t.aiCancel
@@ -1452,7 +1452,6 @@ const applySettingsText = () => {
   document.getElementById('lbl-tint').textContent = t.tintShort || t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
-  document.getElementById('advanced-toggle').textContent = advancedToggle.getAttribute('aria-expanded') === 'true' ? t.advancedClosed : t.advancedOpen
   tintCycle.setAttribute('aria-label', t.tintCycle)
   document.getElementById('quote').title = t.quoteAnother
   tintCycle.title = t.tintCycle
@@ -1463,8 +1462,8 @@ const applySettingsText = () => {
   document.getElementById('lbl-links-own').textContent = t.linksOwn
   document.getElementById('zone-label').textContent = t.zonesAdd
   document.getElementById('zone-add-btn').textContent = t.zoneAddBtn
-  document.getElementById('manage-close').setAttribute('aria-label', t.close)
-  document.getElementById('manage-show-label').textContent = t.manageShowLabel
+  const manageShowLabel = document.getElementById('manage-show-label')
+  if (manageShowLabel) manageShowLabel.textContent = t.manageShowLabel
   document.getElementById('lbl-ai-overlay').textContent = t.lblAiOverlay
   document.getElementById('lbl-social-row').textContent = t.lblSocialRow
   document.getElementById('lbl-askai-master').textContent = t.lblAskaiMaster
@@ -1573,7 +1572,7 @@ const applySettingsText = () => {
   settingsFields.resetData.textContent = t.resetData
   document.getElementById('sec-reset').textContent = t.resetSec
   document.getElementById('reset-intro').textContent = t.resetIntro
-  document.getElementById('reset-backup').textContent = t.manageOpen
+  document.getElementById('reset-backup').textContent = t.tabBackup
   document.getElementById('settings-close').setAttribute('aria-label', t.close)
   document.getElementById('forecast-close').setAttribute('aria-label', t.close)
   settingsButton.setAttribute('aria-label', t.open)
@@ -1612,38 +1611,25 @@ const syncSettings = () => {
   settingsFields.cityMessage.textContent = ''
 }
 
-// Advanced options: the page presets and the disclaimer are the basic view; the rest opens from a link.
-const advancedToggle = document.getElementById('advanced-toggle')
 const advancedBlock = document.getElementById('advanced')
-const basicPages = [document.querySelector('.presets')]
-const setAdvanced = (open) => {
-  advancedBlock.hidden = !open
-  basicPages.forEach((el) => { el.hidden = open })
-  advancedBlock.closest('.settings-panel').classList.toggle('is-wide', open)
-  advancedToggle.setAttribute('aria-expanded', String(open))
-  advancedToggle.textContent = open ? t.advancedClosed : t.advancedOpen
-  document.getElementById('settings-title').textContent = open ? t.advTitle : t.title
-  // Data beheren and IP details live in the basic view only; one place is enough.
-  manageOpenButton.hidden = open
-  ipOpen.hidden = open
-}
-advancedToggle.addEventListener('click', () => setAdvanced(advancedBlock.hidden))
 
-const openSettings = () => {
+const openSettings = (pane = 'general') => {
   openedFrom.el = document.activeElement
-  setAdvanced(false)
   syncSettings()
   settings.hidden = false
+  showSettingsPane(pane)
   settings.querySelector('.settings-panel').focus()
 }
 
 const closeSettings = () => {
   settings.hidden = true
-  setAdvanced(false)
+  settingsNav?.classList.remove('is-open')
+  const navToggle = document.getElementById('settings-nav-toggle')
+  if (navToggle) navToggle.setAttribute('aria-expanded', 'false')
   if (openedFrom.el && openedFrom.el.focus) openedFrom.el.focus()
 }
 
-settingsButton.addEventListener('click', openSettings)
+settingsButton.addEventListener('click', () => openSettings('general'))
 
 // Help: the same guide as the README, opened from the settings window. Escape closes it.
 const helpWindow = document.getElementById('help')
@@ -1686,11 +1672,11 @@ document.getElementById('settings-close').addEventListener('click', closeSetting
 settings.addEventListener('click', (e) => { if (e.target === settings) closeSettings() })
 
 document.addEventListener('keydown', (e) => {
-  const open = [importWindow, helpWindow, ipWindow, linksWindow, zonesWindow, forecastDialog, manageWindow, settings].find((d) => !d.hidden) || null
+  const open = [importWindow, helpWindow, ipWindow, linksWindow, zonesWindow, forecastDialog, settings].find((d) => !d.hidden) || null
   if (!open) {
     if (e.key === '?' && !isTyping(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault()
-      openSettings()
+      openSettings('general')
     }
     return
   }
@@ -1701,8 +1687,6 @@ document.addEventListener('keydown', (e) => {
     else if (open === zonesWindow) closeZones()
     else if (open === importWindow) closeImport()
     else if (open === forecastDialog) closeForecast()
-    else if (open === manageWindow) closeManage()
-    else if (!advancedBlock.hidden) setAdvanced(false)
     else closeSettings()
     return
   }
@@ -1743,7 +1727,7 @@ settingsFields.zones.addEventListener('change', () => {
   zonesOn = settingsFields.zones.checked
   writeKey('timeZones', zonesOn ? 'on' : 'off')
   applyZonesVisibility()
-  if (!zonesOn && manageTab === 'zones' && !manageWindow.hidden) closeManage()
+  if (!zonesOn && manageTab === 'zones' && !settings.hidden) showSettingsPane('general')
   if (!zonesOn && !zonesWindow.hidden) closeZones()
 })
 
@@ -1981,7 +1965,7 @@ settingsFields.resetSettings.addEventListener('click', () => {
   clearKeys(['personalState', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'wallpaperEnabled', 'hue', 'weather', 'location', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'dateNotation', 'showDate', 'preset'])
   location.reload()
 })
-document.getElementById('reset-backup').addEventListener('click', () => manageOpenButton.click())
+document.getElementById('reset-backup').addEventListener('click', () => showSettingsPane('backup'))
 
 settingsFields.resetData.addEventListener('click', () => {
   if (!confirm(t.resetDataConfirm)) return
@@ -2214,53 +2198,74 @@ const utcLabel = (zone, now) => {
 const zoneName = (zone) => el('span', 'zone-name', cityOf(zone))
 const zoneTag = (zone, now) => el('span', 'zone-tag', utcLabel(zone, now))
 
-// One panel for the links, time zones, AI shortcuts and weather places. Each opens on its own tab.
-const manageWindow = document.getElementById('manage')
-const manageTabs = [...manageWindow.querySelectorAll('.manage-tab-button')]
-const manageSections = [...manageWindow.querySelectorAll('.manage-section')]
-let manageTab = 'search'
+// Settings shell A: one fixed panel with left nav (bottom tabs on small screens).
+const manageWindow = document.getElementById('manage') // legacy stub; shell lives in #settings
+const settingsNav = document.getElementById('settings-nav')
+const settingsNavButtons = [...(settingsNav?.querySelectorAll('.settings-nav-btn') || [])]
+const manageSections = [...document.querySelectorAll('#settings-content .manage-section')]
+let manageTab = 'general'
 let manageFrom = null
-const showManageTab = (tab) => {
+
+const showSettingsPane = (pane) => {
+  const tab = pane || 'general'
   manageTab = tab
-  manageTabs.forEach((button) => {
-    const on = button.dataset.tab === tab
+  settingsNavButtons.forEach((button) => {
+    const on = button.dataset.pane === tab
     button.setAttribute('aria-selected', String(on))
     button.tabIndex = on ? 0 : -1
   })
-  manageSections.forEach((section) => { section.hidden = section.dataset.tab !== tab })
-  if (tab === 'links') resetLinkForm()
-  if (tab === 'zones') renderZones()
-  if (tab === 'ai') resetAiForm()
-  if (tab === 'weather') renderPlaces()
-  if (tab === 'wallpapers') renderWallpapers()
+  manageSections.forEach((section) => {
+    const id = section.dataset.pane || section.dataset.tab
+    section.hidden = id !== tab
+  })
+  if (tab === 'links' && typeof resetLinkForm === 'function') resetLinkForm()
+  if (tab === 'zones' && typeof renderZones === 'function') renderZones()
+  if (tab === 'ai' && typeof resetAiForm === 'function') resetAiForm()
+  if (tab === 'weather' && typeof renderPlaces === 'function') renderPlaces()
+  if (tab === 'wallpapers' && typeof renderWallpapers === 'function') renderWallpapers()
+  if (tab === 'advanced') syncSettings()
+  settingsNav?.classList.remove('is-open')
+  const navToggle = document.getElementById('settings-nav-toggle')
+  if (navToggle) navToggle.setAttribute('aria-expanded', 'false')
 }
+
+const showManageTab = showSettingsPane
+
 const openManage = (tab) => {
   manageFrom = document.activeElement
-  showManageTab(tab)
-  manageWindow.hidden = false
-  manageWindow.querySelector('.settings-panel').focus()
+  if (settings.hidden) openSettings(tab || 'search')
+  else showSettingsPane(tab || 'search')
 }
+
 const closeManage = () => {
-  manageWindow.hidden = true
-  if (manageFrom && manageFrom.focus) manageFrom.focus()
+  // Shell owns manage; closing manage means leave the shell or return to General.
+  if (!settings.hidden) closeSettings()
+  else if (manageFrom && manageFrom.focus) manageFrom.focus()
 }
-manageTabs.forEach((button, index) => {
-  button.addEventListener('click', () => showManageTab(button.dataset.tab))
-  // Arrow keys move between the tabs, as the tab pattern expects; Home and End jump to the ends.
+
+settingsNavButtons.forEach((button, index) => {
+  button.addEventListener('click', () => showSettingsPane(button.dataset.pane))
   button.addEventListener('keydown', (e) => {
-    const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key]
+    const step = { ArrowDown: 1, ArrowUp: -1, ArrowRight: 1, ArrowLeft: -1 }[e.key]
     let next = null
-    if (step) next = (index + step + manageTabs.length) % manageTabs.length
+    if (step) next = (index + step + settingsNavButtons.length) % settingsNavButtons.length
     else if (e.key === 'Home') next = 0
-    else if (e.key === 'End') next = manageTabs.length - 1
+    else if (e.key === 'End') next = settingsNavButtons.length - 1
     if (next === null) return
     e.preventDefault()
-    manageTabs[next].focus()
-    showManageTab(manageTabs[next].dataset.tab)
+    settingsNavButtons[next].focus()
+    showSettingsPane(settingsNavButtons[next].dataset.pane)
   })
 })
-document.getElementById('manage-close').addEventListener('click', closeManage)
-manageWindow.addEventListener('click', (e) => { if (e.target === manageWindow) closeManage() })
+
+const settingsNavToggle = document.getElementById('settings-nav-toggle')
+if (settingsNavToggle) {
+  settingsNavToggle.addEventListener('click', () => {
+    const open = !settingsNav.classList.contains('is-open')
+    settingsNav.classList.toggle('is-open', open)
+    settingsNavToggle.setAttribute('aria-expanded', String(open))
+  })
+}
 
 const zonesWindow = document.getElementById('zones-window')
 const zonesWindowList = document.getElementById('zones-window-list')
@@ -2324,7 +2329,7 @@ applyZonesVisibility()
 // The window ticks along with the clock while it is open.
 setInterval(() => {
   renderPreview()
-  if (!manageWindow.hidden && manageTab === 'zones') renderZones()
+  if (!settings.hidden && manageTab === 'zones') renderZones()
 }, 1000)
 
 // Links. Permanent links are built in: Wikipedia, in the browser's language. They cannot be removed.
