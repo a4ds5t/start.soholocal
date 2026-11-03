@@ -156,6 +156,7 @@ const emptyForecast = {
   check(!!(await page.$('#weather-live')), 'Weather prefs has a live current slot');
   check(!(await page.$('#weather-icon-samples')), 'Weather prefs has no sample icon row');
   check(!(await page.$('#city-selected-weather')), 'City chip does not duplicate live weather');
+  check(!!(await page.$('#city-selected-name')), 'Location city chip keeps the name slot for remove/edit');
   await page.click('#nav-show');
   check(await page.isVisible('#set-ai-overlay'), 'Show on page holds masters');
   check(await page.locator('#lbl-ai-overlay').textContent() === 'AI in search field', 'AI master is labeled AI in search field');

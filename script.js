@@ -987,7 +987,7 @@ const weatherIcons = {
 }
 const weatherIcon = (key) => `<svg class="weather-icon ${key || 'cloudy'}" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${weatherIcons[key] || weatherIcons.cloudy}</svg>`
 
-// Settings → Weather: one live preview (icon + temp) for the active city — same as the page widget.
+// Settings → Weather: live chip = icon + temp + short city (e.g. ☁ 9° Woudenberg).
 const paintWeatherLive = () => {
   const live = document.getElementById('weather-live')
   if (!live) return
@@ -998,9 +998,17 @@ const paintWeatherLive = () => {
     const temperature = `${Math.round(now.temperature_2m)}°`
     const place = placeDisplayLabel(shown.place)
     live.hidden = false
-    live.innerHTML = `${weatherIcon(key)}<span>${temperature}</span>`
-    live.title = place ? `${place} · ${temperature}` : temperature
-    live.setAttribute('aria-label', place ? `${place} ${temperature}` : temperature)
+    live.innerHTML = `${weatherIcon(key)}<span class="weather-live-temp"></span>`
+    live.querySelector('.weather-live-temp').textContent = temperature
+    if (place) {
+      const placeEl = document.createElement('span')
+      placeEl.className = 'weather-live-place'
+      placeEl.textContent = place
+      live.append(placeEl)
+    }
+    const label = place ? `${temperature} ${place}` : temperature
+    live.title = label
+    live.setAttribute('aria-label', label)
   } else {
     live.hidden = true
     live.replaceChildren()
