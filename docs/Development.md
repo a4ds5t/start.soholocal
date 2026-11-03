@@ -21,7 +21,7 @@ The one place for how the page is built, why it is built that way, what is still
 - Wikipedia is a permanent link. It follows the browser language and cannot be removed.
 - Permanent links are logos where the open icon set has them. Microsoft and Reuters are shown by name.
 - Custom links: up to 15, with an optional description written by the visitor, only http and https addresses.
-- The hover list shows only the visitor's own links. The permanent ones live in the window.
+- Links panel on → own links window. Links panel off → Wikipedia button (no hover-peek).
 - The AI shortcuts are a visitor list: up to five, editable, and the row can be switched off.
 - Limits are shown only when they are reached, in the add field, as "5 of 5 · full". Below the limit nothing is shown, so the visitor is not nagged.
 
