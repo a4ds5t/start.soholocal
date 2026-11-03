@@ -1,6 +1,6 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4.
-const APP_VERSION = '1.5.15'
+const APP_VERSION = '1.5.16'
 const CHANGELOG_URL = 'https://github.com/a4ds5t/start.soholocal/blob/main/docs/changelog/README.md'
 const APP_BUILD_ISO = typeof BUILD_TIMESTAMP_ISO !== 'undefined' ? BUILD_TIMESTAMP_ISO : null
 const searchForm = document.getElementById('searchform')
@@ -571,9 +571,12 @@ const settingsFields = {
   wallpaperButton: document.getElementById('set-wallpaper-btn'),
   links: document.getElementById('set-links-master'),
   linksOwn: document.getElementById('set-links-own'),
-  askai: document.getElementById('set-askai-master'),
+  askai: null, // Ask AI row is chosen via under-bar radios
   searchNewTab: document.getElementById('set-search-newtab'),
   aiNewTab: document.getElementById('set-ai-newtab'),
+  underBarNone: document.getElementById('under-bar-none'),
+  underBarSocial: document.getElementById('under-bar-social'),
+  underBarAskai: document.getElementById('under-bar-askai'),
   clock: document.getElementById('set-clock'),
   date: document.getElementById('set-date'),
   dateStyle: document.getElementById('set-date-style'),
@@ -817,12 +820,12 @@ const bgTitleText = {
   zh: { wallBy: '摄影：', wallDunes: '粉色沙丘', wallMountains: '薄雾中的群山', wallNote: '每次点击背景按钮，会切换到下一个已开启的背景。', wallNext: '下一个背景', wallNone: '无背景', wallPhoto: '雾中的森林', wallOn: '开启', tabWallpaper: '背景' }
 }
 const pageText = {
-  en: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetCustom: 'Personal' },
-  nl: { secPage: 'Pagina', presetMinimal: 'Minimaal', presetStandard: 'Standaard', presetCustom: 'Persoonlijk' },
-  de: { secPage: 'Seite', presetMinimal: 'Minimal', presetStandard: 'Standard', presetCustom: 'Persönlich' },
-  fr: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetCustom: 'Personnalisé' },
-  es: { secPage: 'Página', presetMinimal: 'Mínimo', presetStandard: 'Estándar', presetCustom: 'Personal' },
-  zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetCustom: '个性化' }
+  en: { secPage: 'General', presetMinimal: 'Minimal', presetStandard: 'Standard', presetCustom: 'Personal' },
+  nl: { secPage: 'Algemeen', presetMinimal: 'Minimaal', presetStandard: 'Standaard', presetCustom: 'Persoonlijk' },
+  de: { secPage: 'Allgemein', presetMinimal: 'Minimal', presetStandard: 'Standard', presetCustom: 'Persönlich' },
+  fr: { secPage: 'Général', presetMinimal: 'Minimal', presetStandard: 'Standard', presetCustom: 'Personnalisé' },
+  es: { secPage: 'General', presetMinimal: 'Mínimo', presetStandard: 'Estándar', presetCustom: 'Personal' },
+  zh: { secPage: '通用', presetMinimal: '极简', presetStandard: '标准', presetCustom: '个性化' }
 }
 const topbarText = {
   en: { colorMode: 'Color mode', themeAuto: 'System theme', themeDark: 'Dark theme', themeLight: 'Light theme', themeMenuAuto: 'System', themeMenuDark: 'Dark', themeMenuLight: 'Light', langLabel: 'Language', searchLabel: 'Search the web', searchFormTitle: 'Type a search and press Enter', engineLabel: 'Search engine: {name}. Click to change.', enginePickLabel: '{name}. Click: Search ↔ AI. Hold to pick. Shortcut: Ctrl+Shift+A.', searchSubmit: 'Search', timeClick: 'Click to cycle through 24-hour, 12-hour and full time', askAiCaption: 'Ask AI', overlaySearch: 'Search', overlayAi: 'AI', overlayEmpty: 'Nothing enabled yet.', manageShowLabel: 'Show on page', clockDateSec: 'Clock & date', clockLbl: 'Clock', advShowHint: 'Social and Ask AI rows are mutually exclusive — choose one under Settings → Social / AI.', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Social row', lblAskaiMaster: 'Ask AI row', lblLinksMaster: 'Links button', tabSearch: 'Search', tabSocial: 'Social', enginesNote: 'Turn engines on or off, and add your own below. Always keep at least one on.', engineAdd: 'Add search engine', engineEdit: 'Edit search engine', engineUrlLbl: 'Search URL template', engineUrlHint: 'Paste a homepage or a results URL. Look up fills the query template (…?q=).', engineSuggest: 'Look up', engineInvalid: 'Enter a name and an https search URL ending with the query (for example …?q=).', engineExists: 'That name is already in the list.', engineGuessed: 'Guessed template — check that searching works.', engineLimit: 'You can add up to {n} custom engines.', socialNote: 'Jump-only icons under the search bar. Not shown together with the Ask AI row. Off for Minimal.', aiOverlayNote: 'AI platforms for the search overlay (type + Enter). Turn “AI in overlay” off for Minimal.', aiShortcutsHead: 'Ask AI row shortcuts', socialAria: 'Social' },
@@ -841,12 +844,12 @@ const advancedText = {
   zh: { advTitle: '高级设置', advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
 }
 const shellSegText = {
-  en: { segSettings: 'Settings', segData: 'Data', dataBack: '← Data', settingsBack: '← Settings', dataHomeHint: 'Choose a catalog. No scrolling tab bar.', settingsHomeHint: 'Choose a settings group.', dataDescSearch: 'Engines', dataDescAi: 'Overlay + shortcuts', dataDescSocial: 'Jump icons', dataDescLinks: 'List', dataDescZones: 'Cities', dataDescWeather: 'Places', dataDescWall: 'Wallpapers', dataDescBackup: 'Export / import', setDescPage: 'Minimal / Standard / Personal', setDescShow: 'Masters', setDescWeather: 'On + location', setDescClock: 'Format', setDescSearch: 'New tab', setDescAi: 'New tab', setDescLang: 'UI language' },
-  nl: { segSettings: 'Instellingen', segData: 'Data', dataBack: '← Data', settingsBack: '← Instellingen', dataHomeHint: 'Kies een catalogus. Geen scrollende tabbalk.', settingsHomeHint: 'Kies een instellingengroep.', dataDescSearch: 'Machines', dataDescAi: 'Overlay + snelkoppelingen', dataDescSocial: 'Sprongiconen', dataDescLinks: 'Lijst', dataDescZones: 'Steden', dataDescWeather: 'Plaatsen', dataDescWall: 'Achtergronden', dataDescBackup: 'Export / import', setDescPage: 'Minimaal / Standaard / Persoonlijk', setDescShow: 'Masters', setDescWeather: 'Aan + locatie', setDescClock: 'Opmaak', setDescSearch: 'Nieuw tabblad', setDescAi: 'Nieuw tabblad', setDescLang: 'Taal van de interface' },
-  de: { segSettings: 'Einstellungen', segData: 'Daten', dataBack: '← Daten', settingsBack: '← Einstellungen', dataHomeHint: 'Katalog wählen. Keine scrollende Tab-Leiste.', settingsHomeHint: 'Einstellungsgruppe wählen.', dataDescSearch: 'Maschinen', dataDescAi: 'Overlay + Verknüpfungen', dataDescSocial: 'Sprung-Icons', dataDescLinks: 'Liste', dataDescZones: 'Städte', dataDescWeather: 'Orte', dataDescWall: 'Hintergründe', dataDescBackup: 'Export / Import', setDescPage: 'Minimal / Standard / Persönlich', setDescShow: 'Schalter', setDescWeather: 'An + Standort', setDescClock: 'Format', setDescSearch: 'Neuer Tab', setDescAi: 'Neuer Tab', setDescLang: 'Oberflächensprache' },
-  fr: { segSettings: 'Réglages', segData: 'Données', dataBack: '← Données', settingsBack: '← Réglages', dataHomeHint: 'Choisissez un catalogue. Pas de barre d’onglets.', settingsHomeHint: 'Choisissez un groupe de réglages.', dataDescSearch: 'Moteurs', dataDescAi: 'Overlay + raccourcis', dataDescSocial: 'Icônes', dataDescLinks: 'Liste', dataDescZones: 'Villes', dataDescWeather: 'Lieux', dataDescWall: 'Fonds', dataDescBackup: 'Export / import', setDescPage: 'Minimal / Standard / Perso', setDescShow: 'Masters', setDescWeather: 'Activé + lieu', setDescClock: 'Format', setDescSearch: 'Nouvel onglet', setDescAi: 'Nouvel onglet', setDescLang: 'Langue de l’interface' },
-  es: { segSettings: 'Ajustes', segData: 'Datos', dataBack: '← Datos', settingsBack: '← Ajustes', dataHomeHint: 'Elige un catálogo. Sin barra de pestañas.', settingsHomeHint: 'Elige un grupo de ajustes.', dataDescSearch: 'Buscadores', dataDescAi: 'Overlay + accesos', dataDescSocial: 'Iconos', dataDescLinks: 'Lista', dataDescZones: 'Ciudades', dataDescWeather: 'Lugares', dataDescWall: 'Fondos', dataDescBackup: 'Exportar / importar', setDescPage: 'Mínimo / Estándar / Personal', setDescShow: 'Masters', setDescWeather: 'Activado + ubicación', setDescClock: 'Formato', setDescSearch: 'Nueva pestaña', setDescAi: 'Nueva pestaña', setDescLang: 'Idioma de la interfaz' },
-  zh: { segSettings: '设置', segData: '数据', dataBack: '← 数据', settingsBack: '← 设置', dataHomeHint: '选择一个目录。无横向标签栏。', settingsHomeHint: '选择一组设置。', dataDescSearch: '引擎', dataDescAi: '叠加层与快捷方式', dataDescSocial: '跳转图标', dataDescLinks: '列表', dataDescZones: '城市', dataDescWeather: '地点', dataDescWall: '壁纸', dataDescBackup: '导出 / 导入', setDescPage: '极简 / 标准 / 个性化', setDescShow: '开关', setDescWeather: '开启 + 位置', setDescClock: '格式', setDescSearch: '新标签页', setDescAi: '新标签页', setDescLang: '界面语言' },
+  en: { segSettings: 'Settings', segData: 'Data', dataBack: '← Data', settingsBack: '← Settings', dataHomeHint: 'Choose a catalog. No scrolling tab bar.', settingsHomeHint: 'Choose a settings group.', underBarTitle: 'Under the search bar', underBarHint: 'Only one row can show — Social or Ask AI, or neither.', underBarNone: 'None', openNewTabSec: 'Open in new tab', exportSec: 'Export / import', backupHint: 'Save a copy of this browser’s data, or reset it.', dataDescSearch: 'Engines', dataDescAi: 'Overlay + shortcuts', dataDescSocial: 'Jump icons', dataDescLinks: 'List', dataDescZones: 'Cities', dataDescWeather: 'Places', dataDescWall: 'Wallpapers', dataDescBackup: 'Export · import · reset', setDescPage: 'Presets · language · new tabs', setDescShow: 'What appears', setDescWeather: 'On + location', setDescClock: 'Format', setDescSearch: 'New tab', setDescAi: 'New tab', setDescLang: 'UI language' },
+  nl: { segSettings: 'Instellingen', segData: 'Data', dataBack: '← Data', settingsBack: '← Instellingen', dataHomeHint: 'Kies een catalogus. Geen scrollende tabbalk.', settingsHomeHint: 'Kies een instellingengroep.', underBarTitle: 'Onder de zoekbalk', underBarHint: 'Kies één rij — of geen. Sociale rij en Vraag AI-rij gaan niet samen.', underBarNone: 'Geen', openNewTabSec: 'Openen in nieuw tabblad', exportSec: 'Export / import', backupHint: 'Bewaar een kopie van de gegevens in deze browser, of reset ze.', dataDescSearch: 'Machines', dataDescAi: 'Overlay + snelkoppelingen', dataDescSocial: 'Sprongiconen', dataDescLinks: 'Lijst', dataDescZones: 'Steden', dataDescWeather: 'Plaatsen', dataDescWall: 'Achtergronden', dataDescBackup: 'Export · import · reset', setDescPage: 'Presets · taal · nieuwe tabbladen', setDescShow: 'Wat er verschijnt', setDescWeather: 'Aan + locatie', setDescClock: 'Opmaak', setDescSearch: 'Nieuw tabblad', setDescAi: 'Nieuw tabblad', setDescLang: 'Taal van de interface' },
+  de: { segSettings: 'Einstellungen', segData: 'Daten', dataBack: '← Daten', settingsBack: '← Einstellungen', dataHomeHint: 'Katalog wählen. Keine scrollende Tab-Leiste.', settingsHomeHint: 'Einstellungsgruppe wählen.', underBarTitle: 'Unter der Suchleiste', underBarHint: 'Nur eine Zeile — Social oder KI fragen, oder keine.', underBarNone: 'Keine', openNewTabSec: 'In neuem Tab öffnen', exportSec: 'Export / Import', backupHint: 'Speichere eine Kopie der Daten dieses Browsers, oder setze sie zurück.', dataDescSearch: 'Maschinen', dataDescAi: 'Overlay + Verknüpfungen', dataDescSocial: 'Sprung-Icons', dataDescLinks: 'Liste', dataDescZones: 'Städte', dataDescWeather: 'Orte', dataDescWall: 'Hintergründe', dataDescBackup: 'Export · Import · Reset', setDescPage: 'Voreinstellungen · Sprache · neue Tabs', setDescShow: 'Was erscheint', setDescWeather: 'An + Standort', setDescClock: 'Format', setDescSearch: 'Neuer Tab', setDescAi: 'Neuer Tab', setDescLang: 'Oberflächensprache' },
+  fr: { segSettings: 'Réglages', segData: 'Données', dataBack: '← Données', settingsBack: '← Réglages', dataHomeHint: 'Choisissez un catalogue. Pas de barre d’onglets.', settingsHomeHint: 'Choisissez un groupe de réglages.', underBarTitle: 'Sous la barre de recherche', underBarHint: 'Une seule rangée — Sociale ou Demander à l’IA, ou aucune.', underBarNone: 'Aucune', openNewTabSec: 'Ouvrir dans un nouvel onglet', exportSec: 'Export / import', backupHint: 'Enregistrez une copie des données de ce navigateur, ou réinitialisez-les.', dataDescSearch: 'Moteurs', dataDescAi: 'Overlay + raccourcis', dataDescSocial: 'Icônes', dataDescLinks: 'Liste', dataDescZones: 'Villes', dataDescWeather: 'Lieux', dataDescWall: 'Fonds', dataDescBackup: 'Export · import · reset', setDescPage: 'Préréglages · langue · nouveaux onglets', setDescShow: 'Ce qui apparaît', setDescWeather: 'Activé + lieu', setDescClock: 'Format', setDescSearch: 'Nouvel onglet', setDescAi: 'Nouvel onglet', setDescLang: 'Langue de l’interface' },
+  es: { segSettings: 'Ajustes', segData: 'Datos', dataBack: '← Datos', settingsBack: '← Ajustes', dataHomeHint: 'Elige un catálogo. Sin barra de pestañas.', settingsHomeHint: 'Elige un grupo de ajustes.', underBarTitle: 'Bajo la barra de búsqueda', underBarHint: 'Solo una fila — Social o Preguntar a la IA, o ninguna.', underBarNone: 'Ninguna', openNewTabSec: 'Abrir en pestaña nueva', exportSec: 'Exportar / importar', backupHint: 'Guarda una copia de los datos de este navegador, o restablécelos.', dataDescSearch: 'Buscadores', dataDescAi: 'Overlay + accesos', dataDescSocial: 'Iconos', dataDescLinks: 'Lista', dataDescZones: 'Ciudades', dataDescWeather: 'Lugares', dataDescWall: 'Fondos', dataDescBackup: 'Exportar · importar · restablecer', setDescPage: 'Ajustes · idioma · pestañas nuevas', setDescShow: 'Lo que aparece', setDescWeather: 'Activado + ubicación', setDescClock: 'Formato', setDescSearch: 'Nueva pestaña', setDescAi: 'Nueva pestaña', setDescLang: 'Idioma de la interfaz' },
+  zh: { segSettings: '设置', segData: '数据', dataBack: '← 数据', settingsBack: '← 设置', dataHomeHint: '选择一个目录。无横向标签栏。', settingsHomeHint: '选择一组设置。', underBarTitle: '搜索栏下方', underBarHint: '只能显示一行 — 社交或询问 AI，或都不显示。', underBarNone: '无', openNewTabSec: '在新标签页打开', exportSec: '导出 / 导入', backupHint: '保存此浏览器数据的副本，或重置。', dataDescSearch: '引擎', dataDescAi: '叠加层与快捷方式', dataDescSocial: '跳转图标', dataDescLinks: '列表', dataDescZones: '城市', dataDescWeather: '地点', dataDescWall: '壁纸', dataDescBackup: '导出 · 导入 · 重置', setDescPage: '预设 · 语言 · 新标签页', setDescShow: '显示内容', setDescWeather: '开启 + 位置', setDescClock: '格式', setDescSearch: '新标签页', setDescAi: '新标签页', setDescLang: '界面语言' },
 }
 for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], pageText[lang], topbarText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], tintCycleText[lang], quoteTitleText[lang], ipText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] }, shellSegText[lang])
 const weatherWording = {
@@ -1493,9 +1496,6 @@ const applySettingsText = () => {
     ['set-card-show', 'set-desc-show', t.manageShowLabel, t.setDescShow],
     ['set-card-weather', 'set-desc-weather', t.secWeather, t.setDescWeather],
     ['set-card-clock', 'set-desc-clock', t.clockDateSec, t.setDescClock],
-    ['set-card-search', 'set-desc-search', t.tabSearch, t.setDescSearch],
-    ['set-card-ai', 'set-desc-ai', t.aiSec, t.setDescAi],
-    ['set-card-lang', 'set-desc-lang', t.langLabel, t.setDescLang],
   ]
   for (const [titleId, descId, label, desc] of cardMap) {
     const titleEl = document.getElementById(titleId)
@@ -1508,9 +1508,6 @@ const applySettingsText = () => {
     ['nav-show', t.manageShowLabel],
     ['nav-weather-prefs', t.secWeather],
     ['nav-clock', t.clockDateSec],
-    ['nav-search-prefs', t.tabSearch],
-    ['nav-ai-prefs', t.aiSec],
-    ['nav-language', t.langLabel],
   ]
   for (const [id, label] of prefsNavLabels) {
     const elNav = document.getElementById(id)
@@ -1548,7 +1545,8 @@ const applySettingsText = () => {
   document.getElementById('lbl-loc-ip').textContent = t.locIp
   document.getElementById('lbl-loc-city').textContent = t.locCity
   document.getElementById('ip-window-title').textContent = t.ipWindowTitle
-  document.getElementById('ip-open').textContent = t.ipWindowTitle
+  const ipOpenBtn = document.getElementById('ip-open')
+  if (ipOpenBtn) ipOpenBtn.textContent = t.ipWindowTitle
   document.getElementById('ip-window-close').setAttribute('aria-label', t.close)
   document.getElementById('links-window-title').textContent = t.linksTitle
   document.getElementById('links-window-close').setAttribute('aria-label', t.close)
@@ -1570,15 +1568,25 @@ const applySettingsText = () => {
   document.getElementById('lbl-preset-minimal').textContent = t.presetMinimal
   document.getElementById('lbl-preset-standard').textContent = t.presetStandard
   document.getElementById('lbl-preset-custom').textContent = t.presetCustom
-  document.getElementById('sec-ai').textContent = t.aiSec
+  const openNewTabSec = document.getElementById('sec-open-newtab')
+  if (openNewTabSec) openNewTabSec.textContent = t.openNewTabSec || 'Open in new tab'
   document.getElementById('sec-time').textContent = t.clockDateSec || 'Clock & date'
   const lblClock = document.getElementById('lbl-clock')
   if (lblClock) lblClock.textContent = t.clockLbl || 'Clock'
-  const advShowHint = document.getElementById('adv-show-hint')
-  if (advShowHint) {
-    advShowHint.textContent = t.advShowHint
-      || 'Social and Ask AI rows are mutually exclusive — choose one under Settings → Social / AI.'
-  }
+  const underBarTitle = document.getElementById('under-bar-title')
+  if (underBarTitle) underBarTitle.textContent = t.underBarTitle || 'Under the search bar'
+  const underBarHint = document.getElementById('under-bar-hint')
+  if (underBarHint) underBarHint.textContent = t.underBarHint || 'Only one row can show — Social or Ask AI, or neither.'
+  const underBarNone = document.getElementById('lbl-under-bar-none')
+  if (underBarNone) underBarNone.textContent = t.underBarNone || 'None'
+  const underBarSocial = document.getElementById('lbl-under-bar-social')
+  if (underBarSocial) underBarSocial.textContent = t.lblSocialRow || 'Social row'
+  const underBarAskai = document.getElementById('lbl-under-bar-askai')
+  if (underBarAskai) underBarAskai.textContent = t.lblAskaiMaster || 'Ask AI row'
+  const exportSec = document.getElementById('sec-export')
+  if (exportSec) exportSec.textContent = t.exportSec || 'Export / import'
+  const backupHint = document.getElementById('backup-hint')
+  if (backupHint) backupHint.textContent = t.backupHint || 'Save a copy of this browser’s data, or reset it.'
   document.getElementById('lbl-date-on').textContent = t.dateOnLbl
   document.getElementById('lbl-date-style').textContent = t.dateShow
   document.getElementById('lbl-date-order').textContent = t.dateOrderLbl
@@ -1591,13 +1599,10 @@ const applySettingsText = () => {
   settingsFields.clock.options[0].textContent = t.time24
   settingsFields.clock.options[1].textContent = t.time12
   settingsFields.clock.options[2].textContent = t.timeFull
-  document.getElementById('sec-search').textContent = t.searchSec
   document.getElementById('lbl-search-newtab').textContent = t.searchNewTab
   document.getElementById('lbl-ai-newtab').textContent = t.aiNewTab
   document.getElementById('ai-name').setAttribute('aria-label', t.aiName)
   document.getElementById('ai-url').setAttribute('aria-label', t.aiUrl)
-  const navGeneral = document.getElementById('nav-general')
-  if (navGeneral) navGeneral.textContent = t.navGeneral || 'General'
   document.getElementById('ai-save').textContent = t.aiSave
   document.getElementById('ai-pick-label').textContent = t.aiPick
   document.getElementById('ai-cancel').textContent = t.aiCancel
@@ -1619,8 +1624,6 @@ const applySettingsText = () => {
   const manageShowLabel = document.getElementById('manage-show-label')
   if (manageShowLabel) manageShowLabel.textContent = t.manageShowLabel
   document.getElementById('lbl-ai-overlay').textContent = t.lblAiOverlay
-  document.getElementById('lbl-social-row').textContent = t.lblSocialRow
-  document.getElementById('lbl-askai-master').textContent = t.lblAskaiMaster
   document.getElementById('lbl-links-master').textContent = t.lblLinksMaster
   document.getElementById('engines-note').textContent = t.enginesNote
   document.getElementById('social-note').textContent = t.socialNote
@@ -1680,7 +1683,8 @@ const applySettingsText = () => {
   settingsFields.resetSettings.textContent = t.resetSettings
   document.getElementById('export-data').textContent = t.exportData
   document.getElementById('import-data').textContent = t.importData
-  document.getElementById('sec-lang').textContent = t.langSection
+  const secLang = document.getElementById('sec-lang')
+  if (secLang) secLang.textContent = t.langSection || t.langLabel || 'Language'
   document.getElementById('lbl-set-lang').textContent = t.langSection
   document.getElementById('set-lang-auto').textContent = t.langAuto
   document.getElementById('top-lang-auto').textContent = t.langAuto
@@ -1745,9 +1749,8 @@ const syncSettings = () => {
   settingsFields.wallpaperButton.checked = wallpaperButtonOn
   settingsFields.links.checked = linksOn
   settingsFields.linksOwn.checked = linksOwn
-  settingsFields.askai.checked = askaiOn
   if (aiOverlayField) aiOverlayField.checked = aiOverlayMasterOn
-  if (socialRowField) socialRowField.checked = socialRowMasterOn
+  syncUnderBarRadios()
   settingsFields.clock.value = clockMode
   settingsFields.dateStyle.value = dateNumeric ? 'short' : 'long'
   settingsFields.dateOrder.value = dateOrder
@@ -1935,11 +1938,10 @@ settingsFields.aiNewTab.addEventListener('change', () => {
   renderAskAi()
 })
 
-// Ask AI links below the search bar.
+// Ask AI / Social share the slot under the search bar — one radio group.
 let askaiOn = readFlag('askai', false)
 const askAi = document.getElementById('ask-ai')
 const aiOverlayField = document.getElementById('set-ai-overlay')
-const socialRowField = document.getElementById('set-social-row')
 aiOverlayMasterOn = readFlag('aiOverlay', false)
 socialRowMasterOn = readFlag('socialRow', false)
 // Social row and Ask AI row share the slot under the bar — never both.
@@ -1948,12 +1950,16 @@ if (askaiOn && socialRowMasterOn) {
   try { localStorage.setItem('socialRow', 'off') } catch {}
 }
 aiOverlayField.checked = aiOverlayMasterOn
-socialRowField.checked = socialRowMasterOn
-settingsFields.askai.checked = askaiOn
+
+const syncUnderBarRadios = () => {
+  const value = askaiOn ? 'askai' : (socialRowMasterOn ? 'social' : 'none')
+  if (settingsFields.underBarNone) settingsFields.underBarNone.checked = value === 'none'
+  if (settingsFields.underBarSocial) settingsFields.underBarSocial.checked = value === 'social'
+  if (settingsFields.underBarAskai) settingsFields.underBarAskai.checked = value === 'askai'
+}
 
 const syncUnderBarMasters = () => {
-  settingsFields.askai.checked = askaiOn
-  socialRowField.checked = socialRowMasterOn
+  syncUnderBarRadios()
   renderAskAi()
   renderSocialRow()
   keepPersonal()
@@ -1974,9 +1980,24 @@ const setSocialRowOn = (on, { peer = false } = {}) => {
   syncUnderBarMasters()
 }
 
-settingsFields.askai.addEventListener('change', () => {
-  setAskAiRowOn(settingsFields.askai.checked)
+const setUnderBarChoice = (value) => {
+  if (value === 'social') {
+    setSocialRowOn(true)
+  } else if (value === 'askai') {
+    setAskAiRowOn(true)
+  } else {
+    setAskAiRowOn(false, { peer: true })
+    setSocialRowOn(false, { peer: true })
+    syncUnderBarMasters()
+  }
+}
+
+document.querySelectorAll('input[name="under-bar"]').forEach((radio) => {
+  radio.addEventListener('change', () => {
+    if (radio.checked) setUnderBarChoice(radio.value)
+  })
 })
+syncUnderBarRadios()
 
 // Pages: presets for how much is on the page. They only switch the display options; weather and the
 // IP address are never changed by a preset, since they send data.
@@ -2011,8 +2032,11 @@ const applyPreset = (name) => {
       return
     }
     if (key === 'socialRow') {
-      socialRowField.checked = choice[key]
-      socialRowField.dispatchEvent(new Event('change'))
+      setSocialRowOn(!!choice[key], { peer: true })
+      return
+    }
+    if (key === 'askai') {
+      setAskAiRowOn(!!choice[key], { peer: true })
       return
     }
     const field = key === 'wallpaper' ? settingsFields.wallpaper : settingsFields[key === 'wallpaperButton' ? 'wallpaperButton' : key]
@@ -2020,6 +2044,7 @@ const applyPreset = (name) => {
     field.checked = choice[key]
     field.dispatchEvent(new Event('change'))
   })
+  syncUnderBarRadios()
   writeKey('preset', name)
   syncSettings()
 }
@@ -2390,7 +2415,7 @@ const manageSections = [...document.querySelectorAll('#settings-content .manage-
 const segSettingsBtn = document.getElementById('seg-settings')
 const segDataBtn = document.getElementById('seg-data')
 const dataBackBtn = document.getElementById('data-back')
-const SETTINGS_PANES = new Set(['page', 'show', 'weather-prefs', 'clock', 'search-prefs', 'ai-prefs', 'language', 'settings-home'])
+const SETTINGS_PANES = new Set(['page', 'show', 'weather-prefs', 'clock', 'settings-home'])
 const DATA_PANES = new Set(['search', 'ai', 'social', 'links', 'zones', 'weather', 'wallpapers', 'backup', 'data-home'])
 let manageTab = 'page'
 let settingsWorld = 'settings'
@@ -3191,9 +3216,6 @@ aiOverlayField.addEventListener('change', () => {
   syncOverlayTabs()
   keepPersonal()
   settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
-})
-socialRowField.addEventListener('change', () => {
-  setSocialRowOn(socialRowField.checked)
 })
 const catalogKeyForUrl = (url) => aiCatalog.find((service) => normalizeUrl(service.url) === normalizeUrl(url))?.key || ''
 const normalizeAskAiItem = (item) => {

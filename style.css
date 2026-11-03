@@ -1669,14 +1669,80 @@ img.ai-icon {
   min-height: 0;
 }
 
+.settings-side {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-right: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 28%, var(--color-field));
+}
+
 .settings-nav {
   display: flex;
   flex-direction: column;
   gap: 2px;
   padding: 12px 10px;
   overflow: auto;
-  border-right: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-bg) 28%, var(--color-field));
+  flex: 1 1 auto;
+  min-height: 0;
+  border-right: 0;
+  background: transparent;
+}
+
+.settings-nav-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex: none;
+  padding: 10px;
+  border-top: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 18%, var(--color-field));
+}
+
+.settings-nav-foot .ghost-button {
+  padding: 5px 9px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.settings-nav-foot .app-version,
+.settings-shell .settings-nav-foot .app-version {
+  margin: 0;
+  padding: 0;
+}
+
+.under-bar-group {
+  grid-column: 1 / -1;
+  margin: 2px 0;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-field);
+}
+
+.under-bar-title {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-fg-1);
+}
+
+.under-bar-hint {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--color-fg-2);
+  line-height: 1.35;
+}
+
+.under-bar-radios {
+  display: grid;
+  gap: 8px;
+}
+
+.under-bar-radios .setting {
+  margin: 0;
+  font-size: 13px;
 }
 
 .settings-nav-btn {
@@ -3480,11 +3546,27 @@ button.action:disabled {
   .settings-shell-body,
   .settings-shell[data-world="data"] .settings-shell-body {
     grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  .settings-side {
+    border-right: 0;
+    background: transparent;
+    grid-row: 2;
+  }
+
+  .settings-content {
+    grid-row: 1;
   }
 
   /* Mobile: home list / drill-in — hide desktop sidebars for Settings and Data. */
   .settings-shell .settings-nav {
     display: none !important;
+  }
+
+  .settings-nav-foot {
+    border-top: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-bg) 28%, var(--color-field));
   }
 
   .settings-content {
