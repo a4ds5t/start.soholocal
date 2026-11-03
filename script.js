@@ -1668,7 +1668,8 @@ const applySettingsText = () => {
   settingsFields.resetData.textContent = t.resetData
   document.getElementById('sec-reset').textContent = t.resetSec
   document.getElementById('reset-intro').textContent = t.resetIntro
-  document.getElementById('reset-backup').textContent = t.tabBackup
+  const resetBackup = document.getElementById('reset-backup')
+  if (resetBackup) resetBackup.textContent = t.tabBackup
   document.getElementById('settings-close').setAttribute('aria-label', t.close)
   document.getElementById('forecast-close').setAttribute('aria-label', t.close)
   settingsButton.setAttribute('aria-label', t.open)
@@ -1705,13 +1706,13 @@ const syncSettings = () => {
   settingsFields.cityMessage.textContent = ''
 }
 
-const advancedBlock = document.getElementById('advanced')
+const settingsContent = document.getElementById('settings-content')
 
 const openSettings = (pane = 'general') => {
   openedFrom.el = document.activeElement
   syncSettings()
   settings.hidden = false
-  // Advanced folded into General.
+  // Legacy Advanced deep-link opens General (page + language).
   showSettingsPane(pane === 'advanced' ? 'general' : pane)
   settings.querySelector('.settings-panel').focus()
 }
@@ -1952,8 +1953,9 @@ const applyPreset = (name) => {
   syncSettings()
 }
 settingsFields.preset.forEach((radio) => radio.addEventListener('change', () => applyPreset(radio.value)))
-// Changing an option in the advanced view can make a preset match or stop matching, so the page radio follows it.
-advancedBlock.addEventListener('change', () => {
+// Changing a master/option on any Settings pane can make a preset match or stop matching.
+settingsContent?.addEventListener('change', (event) => {
+  if (!(event.target instanceof HTMLInputElement || event.target instanceof HTMLSelectElement)) return
   keepPersonal()
   settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
 })
@@ -2070,7 +2072,7 @@ settingsFields.resetSettings.addEventListener('click', () => {
   clearKeys(['personalState', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'wallpaperEnabled', 'hue', 'weather', 'location', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'dateNotation', 'showDate', 'preset'])
   location.reload()
 })
-document.getElementById('reset-backup').addEventListener('click', () => showSettingsPane('backup'))
+document.getElementById('reset-backup')?.addEventListener('click', () => showSettingsPane('backup'))
 
 settingsFields.resetData.addEventListener('click', () => {
   if (!confirm(t.resetDataConfirm)) return

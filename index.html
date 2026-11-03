@@ -159,102 +159,20 @@
               <label class="setting"><input type="radio" name="preset" id="preset-standard" value="standard"> <span id="lbl-preset-standard">Standard</span></label>
               <label class="setting"><input type="radio" name="preset" id="preset-custom" value="custom"> <span id="lbl-preset-custom">Personal</span></label>
             </div>
-            <div class="advanced advanced-show-first" id="advanced">
-              <section class="adv-show-first manage-show" id="adv-show">
-                <p class="manage-show-label location-title" id="manage-show-label">Show on page</p>
-                <div class="manage-masters adv-show-masters" id="manage-show">
-                  <label class="master-toggle"><input type="checkbox" id="set-ai-overlay"> <span id="lbl-ai-overlay">AI in overlay</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-social-row"> <span id="lbl-social-row">Social row</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-askai-master"> <span id="lbl-askai-master">Ask AI row</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-links-master"> <span id="lbl-links-master">Links button</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-links-own"> <span id="lbl-links-own">Own links</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-quote"> <span id="lbl-quote">Quote</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-zones"> <span id="lbl-zones">Time zones</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-tint"> <span id="lbl-tint">Colour</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-wallpaper"> <span id="lbl-wallpaper">Wallpaper</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-wallpaper-btn"> <span id="lbl-wallpaper-btn">Wallpaper button</span></label>
-                </div>
-                <p class="manage-note adv-show-hint" id="adv-show-hint">Social and Ask AI rows are mutually exclusive — choose one under Settings → Social / AI.</p>
-              </section>
-              <div class="adv-body">
-                <section class="adv-group">
-                  <p class="location-title" id="sec-weather">Weather</p>
-                  <label class="master-toggle"><input type="checkbox" id="set-weather"> <span id="lbl-weather">On</span></label>
-                  <div class="weather-sub" id="weather-sub">
-                    <p class="location-title" id="lbl-location">Location</p>
-                    <label class="setting"><input type="radio" name="location" id="loc-ip" value="ip"> <span id="lbl-loc-ip">My place via IP address</span></label>
-                    <p class="privacy" id="privacy"></p>
-                    <label class="setting"><input type="radio" name="location" id="loc-city" value="city"> <span id="lbl-loc-city">A city I choose</span></label>
-                    <form class="city-form" id="city-form">
-                      <label for="city-input" id="lbl-city">Or enter a city</label>
-                      <div class="city-row">
-                        <input type="text" id="city-input" list="city-options" autocomplete="off">
-                        <datalist id="city-options"></datalist>
-                        <button type="submit" id="city-save" class="ghost-button">Save</button>
-                      </div>
-                      <button type="button" id="city-clear" class="ghost-button" hidden>Use my IP address instead</button>
-                      <p class="city-msg" id="city-msg" role="status"></p>
-                    </form>
-                  </div>
-                </section>
-                <section class="adv-group">
-                  <p class="location-title" id="sec-time">Clock &amp; date</p>
-                  <label class="setting setting-select"><span id="lbl-clock">Clock</span>
-                    <select id="set-clock" class="lang-select">
-                      <option value="24">24 hours</option>
-                      <option value="12">12 hours (AM/PM)</option>
-                      <option value="full">Full, with seconds</option>
-                    </select>
-                  </label>
-                  <label class="master-toggle"><input type="checkbox" id="set-date"> <span id="lbl-date-on">Show the date</span></label>
-                  <label class="setting setting-select"><span id="lbl-date-style">Show</span>
-                    <select id="set-date-style" class="lang-select">
-                      <option value="long">Long</option>
-                      <option value="short">Short</option>
-                    </select>
-                  </label>
-                  <label class="setting setting-select"><span id="lbl-date-order">Order</span>
-                    <select id="set-date-order" class="lang-select">
-                      <option value="auto">Automatic</option>
-                      <option value="dmy">Day-month-year</option>
-                      <option value="mdy">Month-day-year</option>
-                      <option value="ymd">Year-month-day</option>
-                    </select>
-                  </label>
-                </section>
-                <section class="adv-group">
-                  <p class="location-title" id="sec-search">Search</p>
-                  <label class="master-toggle"><input type="checkbox" id="set-search-newtab"> <span id="lbl-search-newtab">Open search in a new tab</span></label>
-                </section>
-                <section class="adv-group">
-                  <p class="location-title" id="sec-ai">AI shortcuts</p>
-                  <label class="master-toggle"><input type="checkbox" id="set-ai-newtab"> <span id="lbl-ai-newtab">Open AI links in a new tab</span></label>
-                </section>
-                <section class="adv-group">
-                  <p class="location-title" id="sec-lang">Language</p>
-                  <label class="setting setting-select"><span id="lbl-set-lang">Language</span>
-                    <select id="set-lang" class="lang-select">
-                      <option value="auto" id="set-lang-auto">Automatic</option>
-                      <option value="nl">Nederlands</option>
-                      <option value="en">English</option>
-                      <option value="de">Deutsch</option>
-                      <option value="fr">Français</option>
-                      <option value="es">Español</option>
-                      <option value="zh">中文</option>
-                    </select>
-                  </label>
-                </section>
-                <section class="adv-group reset-group">
-                  <p class="location-title" id="sec-reset">Reset</p>
-                  <p class="reset-intro" id="reset-intro"></p>
-                  <div class="reset-boxes">
-                    <button type="button" id="reset-settings" class="ghost-button danger-button">Reset settings</button>
-                    <button type="button" id="reset-data" class="ghost-button danger-button">Delete my data</button>
-                    <button type="button" id="reset-backup" class="ghost-button">Backup</button>
-                  </div>
-                </section>
-              </div>
-            </div>
+            <section class="pane-block">
+              <p class="location-title" id="sec-lang">Language</p>
+              <label class="setting setting-select"><span id="lbl-set-lang">Language</span>
+                <select id="set-lang" class="lang-select">
+                  <option value="auto" id="set-lang-auto">Automatic</option>
+                  <option value="nl">Nederlands</option>
+                  <option value="en">English</option>
+                  <option value="de">Deutsch</option>
+                  <option value="fr">Français</option>
+                  <option value="es">Español</option>
+                  <option value="zh">中文</option>
+                </select>
+              </label>
+            </section>
             <div class="settings-actions">
               <button type="button" id="ip-open" class="ghost-button">IP details</button>
             </div>
@@ -262,6 +180,10 @@
           </section>
 
           <section class="settings-pane manage-section" data-pane="search" data-tab="search" id="section-search" role="tabpanel" aria-labelledby="tab-search" hidden>
+            <section class="pane-block">
+              <p class="location-title" id="sec-search">Search</p>
+              <label class="master-toggle"><input type="checkbox" id="set-search-newtab"> <span id="lbl-search-newtab">Open search in a new tab</span></label>
+            </section>
             <p class="manage-note" id="engines-note">Turn engines on or off, and add your own below. Always keep at least one on.</p>
             <ul class="catalog-list" id="engines-list"></ul>
             <form class="link-form" id="engine-form">
@@ -281,6 +203,15 @@
           </section>
 
           <section class="settings-pane manage-section" data-pane="ai" data-tab="ai" id="section-ai" role="tabpanel" aria-labelledby="tab-ai" hidden>
+            <section class="pane-block pane-masters">
+              <p class="location-title" id="sec-ai">AI</p>
+              <div class="manage-masters">
+                <label class="master-toggle"><input type="checkbox" id="set-ai-overlay"> <span id="lbl-ai-overlay">AI in overlay</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-askai-master"> <span id="lbl-askai-master">Ask AI row</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-ai-newtab"> <span id="lbl-ai-newtab">Open AI links in a new tab</span></label>
+              </div>
+              <p class="manage-note adv-show-hint" id="adv-show-hint">Social and Ask AI rows are mutually exclusive — choose one under Settings → Social / AI.</p>
+            </section>
             <p class="manage-note" id="ai-overlay-note">AI platforms for the search overlay (type + Enter). Turn “AI in overlay” off for Minimal.</p>
             <ul class="catalog-list" id="ai-overlay-list"></ul>
             <p class="location-title" id="ai-shortcuts-head">ASK AI row shortcuts</p>
@@ -302,11 +233,22 @@
           </section>
 
           <section class="settings-pane manage-section" data-pane="social" data-tab="social" id="section-social" role="tabpanel" aria-labelledby="tab-social" hidden>
+            <section class="pane-block pane-masters">
+              <div class="manage-masters">
+                <label class="master-toggle"><input type="checkbox" id="set-social-row"> <span id="lbl-social-row">Social row</span></label>
+              </div>
+            </section>
             <p class="manage-note" id="social-note">Jump-only icons under the search bar. Turn the Social row off for Minimal.</p>
             <ul class="catalog-list" id="social-manage-list"></ul>
           </section>
 
           <section class="settings-pane manage-section" data-pane="links" data-tab="links" id="section-links" role="tabpanel" aria-labelledby="tab-links" hidden>
+            <section class="pane-block pane-masters">
+              <div class="manage-masters">
+                <label class="master-toggle"><input type="checkbox" id="set-links-master"> <span id="lbl-links-master">Links button</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-links-own"> <span id="lbl-links-own">Own links</span></label>
+              </div>
+            </section>
             <div class="links-list" id="links-list"></div>
             <form class="link-form" id="link-form">
               <p class="link-form-title" id="link-form-title">Add link</p>
@@ -325,6 +267,36 @@
           </section>
 
           <section class="settings-pane manage-section" data-pane="zones" data-tab="zones" id="section-zones" role="tabpanel" aria-labelledby="tab-zones" hidden>
+            <section class="pane-block pane-masters">
+              <div class="manage-masters">
+                <label class="master-toggle"><input type="checkbox" id="set-zones"> <span id="lbl-zones">Time zones</span></label>
+              </div>
+            </section>
+            <section class="pane-block">
+              <p class="location-title" id="sec-time">Clock &amp; date</p>
+              <label class="setting setting-select"><span id="lbl-clock">Clock</span>
+                <select id="set-clock" class="lang-select">
+                  <option value="24">24 hours</option>
+                  <option value="12">12 hours (AM/PM)</option>
+                  <option value="full">Full, with seconds</option>
+                </select>
+              </label>
+              <label class="master-toggle"><input type="checkbox" id="set-date"> <span id="lbl-date-on">Show the date</span></label>
+              <label class="setting setting-select"><span id="lbl-date-style">Show</span>
+                <select id="set-date-style" class="lang-select">
+                  <option value="long">Long</option>
+                  <option value="short">Short</option>
+                </select>
+              </label>
+              <label class="setting setting-select"><span id="lbl-date-order">Order</span>
+                <select id="set-date-order" class="lang-select">
+                  <option value="auto">Automatic</option>
+                  <option value="dmy">Day-month-year</option>
+                  <option value="mdy">Month-day-year</option>
+                  <option value="ymd">Year-month-day</option>
+                </select>
+              </label>
+            </section>
             <p class="zones-local" id="zones-local"></p>
             <div id="zones-list"></div>
             <form class="city-form" id="zone-form">
@@ -339,6 +311,26 @@
           </section>
 
           <section class="settings-pane manage-section" data-pane="weather" data-tab="weather" id="section-weather" role="tabpanel" aria-labelledby="tab-weather" hidden>
+            <section class="pane-block">
+              <p class="location-title" id="sec-weather">Weather</p>
+              <label class="master-toggle"><input type="checkbox" id="set-weather"> <span id="lbl-weather">On</span></label>
+              <div class="weather-sub" id="weather-sub">
+                <p class="location-title" id="lbl-location">Location</p>
+                <label class="setting"><input type="radio" name="location" id="loc-ip" value="ip"> <span id="lbl-loc-ip">My place via IP address</span></label>
+                <p class="privacy" id="privacy"></p>
+                <label class="setting"><input type="radio" name="location" id="loc-city" value="city"> <span id="lbl-loc-city">A city I choose</span></label>
+                <form class="city-form" id="city-form">
+                  <label for="city-input" id="lbl-city">Or enter a city</label>
+                  <div class="city-row">
+                    <input type="text" id="city-input" list="city-options" autocomplete="off">
+                    <datalist id="city-options"></datalist>
+                    <button type="submit" id="city-save" class="ghost-button">Save</button>
+                  </div>
+                  <button type="button" id="city-clear" class="ghost-button" hidden>Use my IP address instead</button>
+                  <p class="city-msg" id="city-msg" role="status"></p>
+                </form>
+              </div>
+            </section>
             <p class="manage-note" id="weather-own"></p>
             <ul class="place-list" id="place-list"></ul>
             <form class="city-form" id="place-form">
@@ -353,6 +345,14 @@
           </section>
 
           <section class="settings-pane manage-section" data-pane="wallpapers" data-tab="wallpapers" id="section-wallpapers" role="tabpanel" aria-labelledby="tab-wallpapers" hidden>
+            <section class="pane-block pane-masters">
+              <div class="manage-masters">
+                <label class="master-toggle"><input type="checkbox" id="set-quote"> <span id="lbl-quote">Quote</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-tint"> <span id="lbl-tint">Colour</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-wallpaper"> <span id="lbl-wallpaper">Wallpaper</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-wallpaper-btn"> <span id="lbl-wallpaper-btn">Wallpaper button</span></label>
+              </div>
+            </section>
             <p class="manage-note" id="wallpaper-note"></p>
             <div id="wallpaper-list"></div>
           </section>
@@ -364,6 +364,14 @@
               <button type="button" id="import-data" class="ghost-button">Import data</button>
               <input type="file" id="import-file" accept="application/json,.json" hidden>
             </div>
+            <section class="pane-block reset-group">
+              <p class="location-title" id="sec-reset">Reset</p>
+              <p class="reset-intro" id="reset-intro"></p>
+              <div class="reset-boxes">
+                <button type="button" id="reset-settings" class="ghost-button danger-button">Reset settings</button>
+                <button type="button" id="reset-data" class="ghost-button danger-button">Delete my data</button>
+              </div>
+            </section>
           </section>
         </div>
       </div>

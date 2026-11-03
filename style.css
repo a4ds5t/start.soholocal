@@ -2256,6 +2256,25 @@ html[data-quote-off] #quote {
   font: inherit;
 }
 
+.pane-block {
+  margin: 0 0 16px;
+}
+
+.pane-block .location-title {
+  margin: 0 0 10px;
+}
+
+.pane-block .master-toggle + .setting-select,
+.pane-block .setting-select + .master-toggle,
+.pane-block .setting-select + .setting-select,
+.pane-block .master-toggle + .master-toggle {
+  margin-top: 10px;
+}
+
+.pane-masters .manage-masters {
+  margin-top: 0;
+}
+
 .manage-show {
   margin: 0 0 16px;
   padding: 12px 14px;
