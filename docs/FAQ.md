@@ -88,9 +88,9 @@ In the Advanced settings, **Export data** saves your choices, links, AI shortcut
 
 ---
 
-## Why are there only five AI shortcuts?
+## Why are there only five Ask AI row icons?
 
-The bar under the search stays short on purpose. In Manage data you tick the services you want, up to five, and your own shortcuts count toward the same five. When the five are full, the rest greys out until you untick one.
+The bar under the search stays short on purpose. Under **Data → AI**, each platform can turn on **Ask AI row**; at most five can be on at once. The same catalog also has **In search** for the overlay — that list is not capped at five. When the Ask AI row is full, further Ask AI toggles stay off until you free a slot.
 
 ---
 
