@@ -1,6 +1,6 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4.
-const APP_VERSION = '1.5.11'
+const APP_VERSION = '1.5.12'
 const CHANGELOG_URL = 'https://github.com/a4ds5t/start.soholocal/blob/main/docs/changelog/README.md'
 const APP_BUILD_ISO = typeof BUILD_TIMESTAMP_ISO !== 'undefined' ? BUILD_TIMESTAMP_ISO : null
 const searchForm = document.getElementById('searchform')
@@ -32,32 +32,392 @@ const topThemeMenu = document.getElementById('top-theme-menu')
 const topThemeItems = topThemeMenu ? [...topThemeMenu.querySelectorAll('[data-theme-value]')] : []
 
 
-const engines = [
+const BUILTIN_ENGINES = [
   { name: 'Kagi', url: 'https://kagi.com/search?q=', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M14.498 18.392h-5.14c-1.39 0-1.632-1.508-1.39-2.11.12-.302.423-.724.664-1.026a6.81 6.81 0 003.326.845 6.945 6.945 0 006.954-6.935c0-2.05-.907-3.86-2.298-5.186l.181-.181c.363-.362.907-.603 1.451-.543l.847.06V0h-1.451c-1.693 0-3.084 1.025-3.689 2.472a6.83 6.83 0 00-1.934-.301 6.945 6.945 0 00-6.954 6.935c0 1.507.484 2.954 1.33 4.1a1.84 1.84 0 01-.423.302l-.181.18c-1.391 1.327-2.056 3.015-1.693 4.945.181 1.025 1.088 2.11 1.995 2.714.605.422 1.39.603 2.177.603l5.804-.242c.665 0 1.27.302 1.633.905L16.432 24 20 22.794l-.605-1.327a5.425 5.425 0 00-4.897-3.075zm-2.48-12.543c1.814 0 3.326 1.508 3.326 3.317 0 1.809-1.512 3.316-3.325 3.316-1.814 0-3.326-1.507-3.326-3.316 0-1.87 1.451-3.317 3.325-3.317z"></path></svg>` },
   { name: 'Brave', url: 'https://search.brave.com/search?q=', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M17.544 2.375c.017-.005 1.844-.5 2.712.361.872.872 1.588 1.642 1.588 1.642l-.565 1.38v-.003.006-.003L22 7.8c-.014.05-2.112 7.983-2.357 8.954-.488 1.924-.819 2.663-2.202 3.638a212.634 212.634 0 01-4.305 2.917c-.41.252-.92.691-1.383.691-.463 0-.974-.439-1.383-.691a213.099 213.099 0 01-4.306-2.917c-1.383-.975-1.72-1.714-2.2-3.632-.246-.977-2.35-8.904-2.364-8.96l.722-2.045-.566-1.383s.722-.764 1.594-1.63c.866-.872 2.712-.36 2.712-.36L8.066 0h7.373l2.105 2.375zm-5.797 12.557c-.138 0-1.04.318-1.762.691l-.457.234c-.487.253-.823.428-.956.506-.168.108-.066.306.09.414.15.103 2.195 1.684 2.394 1.865l.09.078c.186.168.432.391.607.391.174 0 .415-.223.607-.391l.084-.078c.2-.169 2.244-1.756 2.394-1.865.15-.108.258-.3.09-.408-.133-.084-.475-.253-.956-.506h-.006l-.457-.24c-.722-.373-1.623-.691-1.762-.691zm.006-11.276c-.35.02-.694.092-1.023.211l-.378.126c-.493.169-.969.331-1.21.331-.312 0-2.554-.428-2.584-.433 0 0-2.706 3.26-2.706 3.957 0 .577.228.805.504 1.07l.174.175 2.033 2.152.06.067c.204.204.5.498.29.998l-.043.102c-.228.535-.511 1.203-.15 1.876.384.716 1.046 1.19 1.467 1.118.42-.084 1.419-.601 1.78-.841.367-.229 1.52-1.19 1.521-1.551 0-.307-.829-.812-1.238-1.053l-.18-.12-.199-.12c-.367-.229-1.035-.644-1.047-.825-.018-.228-.017-.294.283-.853l.21-.379c.289-.487.602-1.029.536-1.426-.085-.433-.777-.685-1.36-.901l-.21-.078-.613-.229c-.583-.222-1.232-.463-1.34-.511-.145-.073-.11-.132.335-.174l.223-.025c.553-.06 1.582-.168 2.08-.03l.32.09c.564.145 1.25.337 1.316.445l.03.048c.067.09.109.145.037.53l-.121.607c-.15.806-.391 2.069-.421 2.351l-.012.115c-.042.312-.066.529.301.613.438.119.884.206 1.335.259.216 0 .824-.144 1.24-.24l.095-.025c.367-.078.343-.289.3-.602l-.011-.12c-.03-.282-.27-1.54-.42-2.345l-.122-.614c-.072-.384-.024-.439.036-.529l.03-.048c.067-.108.753-.294 1.318-.444l.318-.091c.5-.138 1.528-.03 2.081.03l.216.018c.451.048.493.108.343.18-.11.049-.758.29-1.341.512-.273.108-.547.21-.823.307-.583.216-1.275.468-1.36.907-.066.391.247.939.535 1.42l.21.379c.301.56.308.625.284.854-.012.18-.68.595-1.053.824l-.192.126-.181.108c-.41.247-1.238.758-1.238 1.059 0 .367 1.16 1.316 1.521 1.55.367.235 1.36.758 1.78.836.421.078 1.082-.396 1.467-1.112.36-.673.078-1.335-.15-1.876l-.042-.102c-.21-.5.084-.794.289-1.004l.065-.06 2.02-2.147.181-.181c.271-.265.505-.493.505-1.07 0-.698-2.706-3.957-2.706-3.957-.03.006-2.275.44-2.586.44l.007-.007c-.252 0-.722-.156-1.215-.337l-.379-.12c-.612-.21-1.02-.21-1.022-.21z"></path></svg>` },
   { name: 'Google', url: 'https://www.google.com/search?q=', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M23 12.245c0-.905-.075-1.565-.236-2.25h-10.54v4.083h6.186c-.124 1.014-.797 2.542-2.294 3.569l-.021.136 3.332 2.53.23.022C21.779 18.417 23 15.593 23 12.245z"></path><path d="M12.225 23c3.03 0 5.574-.978 7.433-2.665l-3.542-2.688c-.948.648-2.22 1.1-3.891 1.1a6.745 6.745 0 01-6.386-4.572l-.132.011-3.465 2.628-.045.124C4.043 20.531 7.835 23 12.225 23z"></path><path d="M5.84 14.175A6.65 6.65 0 015.463 12c0-.758.138-1.491.361-2.175l-.006-.147-3.508-2.67-.115.054A10.831 10.831 0 001 12c0 1.772.436 3.447 1.197 4.938l3.642-2.763z"></path><path d="M12.225 5.253c2.108 0 3.529.892 4.34 1.638l3.167-3.031C17.787 2.088 15.255 1 12.225 1 7.834 1 4.043 3.469 2.197 7.062l3.63 2.763a6.77 6.77 0 016.398-4.572z"></path></svg>` },
   { name: 'DuckDuckGo', url: 'https://duckduckgo.com/?q=', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 .984C18.083.984 23.016 5.916 23.016 12S18.084 23.016 12 23.016.984 18.084.984 12C.984 5.917 5.916.984 12 .984zm0 .938C6.434 1.922 1.922 6.434 1.922 12c0 4.437 2.867 8.205 6.85 9.55-.237-.82-.776-2.753-1.6-6.052-1.184-4.741-2.064-8.606 2.379-9.813.047-.011.064-.064.03-.093-.514-.467-1.382-.548-2.233-.38a.06.06 0 0 1-.07-.058c0-.011 0-.023.011-.035.205-.286.572-.507.822-.64a1.843 1.843 0 0 0-.607-.335c-.059-.022-.059-.12-.006-.144.006-.006.012-.012.024-.012 1.749-.233 3.586.292 4.49 1.448.011.011.023.017.035.023 2.968.635 3.509 4.837 3.328 5.998a9.607 9.607 0 0 0 2.346-.576c.746-.286 1.008-.222 1.101-.053.1.193-.018.513-.28.81-.496.567-1.393 1.01-2.974 1.137-.546.044-1.029.024-1.445.006-.789-.035-1.339-.059-1.633.39-.192.298-.041.998 1.487 1.22 1.09.157 2.078.047 2.798-.034.643-.07 1.073-.118 1.172.069.21.402-.996 1.207-3.066 1.224-.158 0-.315-.006-.467-.011-1.283-.065-2.227-.414-2.816-.735a.094.094 0 0 1-.035-.017c-.105-.059-.31.045-.188.267.07.134.444.478 1.004.776-.058.466.087 1.184.338 2l.088-.016c.041-.009.087-.019.134-.025.507-.082.775.012.926.175.717-.536 1.913-1.294 2.03-1.154.583.694.66 2.332.53 2.99-.004.012-.017.024-.04.035-.274.117-1.783-.296-1.783-.511-.059-1.075-.26-1.173-.493-1.225h-.156c.006.006.012.018.018.03l.052.12c.093.257.24 1.063.13 1.26-.112.199-.835.297-1.284.303-.443.006-.543-.158-.637-.408-.07-.204-.103-.675-.103-.95a.857.857 0 0 1 .012-.216c-.134.058-.333.193-.397.281-.017.262-.017.682.123 1.149.07.221-1.518 1.164-1.74.99-.227-.181-.634-1.952-.459-2.67-.187.017-.338.075-.42.191-.367.508.093 2.933.582 3.248.257.169 1.54-.553 2.176-1.095.105.145.305.158.553.158.326-.012.782-.06 1.103-.158.192.45.423.972.613 1.388 4.47-1.032 7.803-5.037 7.803-9.82 0-5.566-4.512-10.078-10.078-10.078zm1.791 5.646c-.42 0-.678.146-.795.332-.023.047.047.094.094.07.14-.075.357-.161.701-.156.328.006.516.09.67.159l.023.01c.041.017.088-.03.059-.065-.134-.18-.332-.35-.752-.35zm-5.078.198a1.24 1.24 0 0 0-.522.082c-.454.169-.67.526-.67.76 0 .051.112.057.141.011.081-.123.21-.31.617-.478.408-.17.73-.146.951-.094.047.012.083-.041.041-.07a.989.989 0 0 0-.558-.211zm5.434 1.423a.651.651 0 0 0-.655.647.652.652 0 0 0 1.307 0 .646.646 0 0 0-.652-.647zm.283.262h.008a.17.17 0 0 1 .17.17c0 .093-.077.17-.17.17a.17.17 0 0 1-.17-.17c0-.09.072-.165.162-.17zm-5.358.076a.752.752 0 0 0-.758.758c0 .42.338.758.758.758s.758-.337.758-.758a.756.756 0 0 0-.758-.758zm.328.303h.01c.112 0 .2.089.2.2 0 .11-.088.197-.2.197a.195.195 0 0 1-.197-.198c0-.107.082-.194.187-.199z"/></svg>` }
 ]
+const CUSTOM_ENGINE_LIMIT = 12
+const faviconHtml = (domain) => {
+  const host = String(domain || '').replace(/^www\./, '')
+  if (!host) return ''
+  return `<img class="favicon-img" src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=32" width="16" height="16" alt="" loading="lazy">`
+}
+const titleFromHost = (host) => {
+  const base = String(host || '').replace(/^www\./, '').split('.')[0] || 'Search'
+  return base.charAt(0).toUpperCase() + base.slice(1)
+}
+// Known query templates when the visitor only pastes a homepage.
+const KNOWN_SEARCH_TEMPLATES = {
+  'bing.com': 'https://www.bing.com/search?q=',
+  'yahoo.com': 'https://search.yahoo.com/search?p=',
+  'search.yahoo.com': 'https://search.yahoo.com/search?p=',
+  'ecosia.org': 'https://www.ecosia.org/search?q=',
+  'startpage.com': 'https://www.startpage.com/sp/search?query=',
+  'qwant.com': 'https://www.qwant.com/?q=',
+  'yandex.com': 'https://yandex.com/search/?text=',
+  'yandex.ru': 'https://yandex.ru/search/?text=',
+  'you.com': 'https://you.com/search?q=',
+  'perplexity.ai': 'https://www.perplexity.ai/search?q=',
+  'wikipedia.org': 'https://wikipedia.org/w/index.php?search=',
+  'en.wikipedia.org': 'https://en.wikipedia.org/w/index.php?search=',
+  'nl.wikipedia.org': 'https://nl.wikipedia.org/w/index.php?search=',
+  'github.com': 'https://github.com/search?q=',
+  'reddit.com': 'https://www.reddit.com/search/?q=',
+  'scholar.google.com': 'https://scholar.google.com/scholar?q=',
+  'wolframalpha.com': 'https://www.wolframalpha.com/input?i=',
+  'archive.org': 'https://archive.org/search?query=',
+  'searx.be': 'https://searx.be/search?q=',
+}
+const isTemplateUrl = (value) => {
+  try {
+    const url = new URL(value)
+    return url.protocol === 'https:' || url.protocol === 'http:'
+  } catch {
+    try {
+      const url = new URL(`${value}x`)
+      return url.protocol === 'https:' || url.protocol === 'http:'
+    } catch {
+      return false
+    }
+  }
+}
+const inferSearchTemplate = (raw) => {
+  let input = String(raw || '').trim()
+  if (!input) return null
+  if (!/^[a-z][a-z0-9+.-]*:\/\//i.test(input)) input = `https://${input}`
+  let url
+  try { url = new URL(input) } catch { return null }
+  if (url.protocol !== 'https:' && url.protocol !== 'http:') return null
+  const host = url.hostname.replace(/^www\./, '')
+  const known = KNOWN_SEARCH_TEMPLATES[url.hostname] || KNOWN_SEARCH_TEMPLATES[host] || KNOWN_SEARCH_TEMPLATES[`www.${host}`]
+  const queryKeys = ['q', 'query', 'p', 'text', 'search', 's', 'wd', 'keyword', 'k', 'i']
+  for (const key of queryKeys) {
+    if (!url.searchParams.has(key)) continue
+    const href = url.href.replace(/#.*$/, '')
+    const re = new RegExp(`([?&]${key}=)[^&]*`, 'i')
+    if (!re.test(href)) continue
+    const template = href.replace(re, `$1`)
+    return { url: template, name: titleFromHost(host), domain: host, guessed: false }
+  }
+  if (known) return { url: known, name: titleFromHost(host), domain: host, guessed: false }
+  if (/search|find|query|zoek/i.test(url.pathname)) {
+    const path = url.pathname.endsWith('/') ? url.pathname.slice(0, -1) : url.pathname
+    return { url: `${url.origin}${path}?q=`, name: titleFromHost(host), domain: host, guessed: true }
+  }
+  return { url: `${url.origin}/search?q=`, name: titleFromHost(host), domain: host, guessed: true }
+}
 
-// DuckDuckGo is the default until the visitor picks another engine.
-let engine = engines.findIndex((e) => e.name === 'DuckDuckGo')
+let customEngines = []
 try {
-  const saved = engines.findIndex((e) => e.name === localStorage.getItem('engine'))
-  if (saved >= 0) engine = saved
+  const saved = JSON.parse(localStorage.getItem('customEngines') || 'null')
+  if (Array.isArray(saved)) {
+    customEngines = saved.filter((item) => item && typeof item.name === 'string' && typeof item.url === 'string' && isTemplateUrl(item.url)).slice(0, CUSTOM_ENGINE_LIMIT)
+  }
 } catch {}
+
+let engines = []
+const rebuildEngines = () => {
+  engines = [
+    ...BUILTIN_ENGINES.map((item) => ({ ...item, custom: false })),
+    ...customEngines.map((item) => ({
+      ...item,
+      custom: true,
+      icon: faviconHtml(item.domain || (() => { try { return new URL(item.url).hostname } catch { return '' } })()),
+    })),
+  ]
+}
+rebuildEngines()
+
+const persistCustomEngines = () => {
+  try {
+    localStorage.setItem('customEngines', JSON.stringify(customEngines.map(({ id, name, url, domain }) => ({ id, name, url, domain }))))
+  } catch {}
+  rebuildEngines()
+  engines.forEach((item) => {
+    if (typeof engineEnabled[item.name] !== 'boolean') engineEnabled[item.name] = true
+  })
+  Object.keys(engineEnabled).forEach((name) => {
+    if (!engines.some((item) => item.name === name)) delete engineEnabled[name]
+  })
+  persistEngineEnabled()
+  if (typeof renderManageCatalogs === 'function') renderManageCatalogs()
+}
+
+// Active destination for Enter: a search engine or an AI platform (query URL).
+// Optie 1: click toggles Search ↔ AI; long-press opens the pick overlay. Social stays under the bar.
+let engineEnabled = Object.fromEntries(engines.map((e) => [e.name, true]))
+try {
+  const saved = JSON.parse(localStorage.getItem('engineEnabled') || 'null')
+  if (saved && typeof saved === 'object') {
+    engines.forEach((e) => {
+      if (typeof saved[e.name] === 'boolean') engineEnabled[e.name] = saved[e.name]
+    })
+  }
+} catch {}
+const enabledEngines = () => engines.filter((e) => engineEnabled[e.name] !== false)
+const ensureOneEngine = () => {
+  if (enabledEngines().length) return
+  engineEnabled.DuckDuckGo = true
+}
+ensureOneEngine()
+
+let activeDest = { kind: 'engine', name: 'DuckDuckGo' }
+let lastEngineName = 'DuckDuckGo'
+let lastAiKey = 'claude'
+try {
+  const saved = JSON.parse(localStorage.getItem('activeDest') || 'null')
+  if (saved && saved.kind === 'engine' && engines.some((e) => e.name === saved.name)) activeDest = saved
+  else if (saved && saved.kind === 'ai' && typeof saved.key === 'string') activeDest = saved
+  else {
+    const legacy = localStorage.getItem('engine')
+    if (legacy && engines.some((e) => e.name === legacy)) activeDest = { kind: 'engine', name: legacy }
+  }
+  const savedEngine = localStorage.getItem('lastEngineName')
+  if (savedEngine && engines.some((e) => e.name === savedEngine)) lastEngineName = savedEngine
+  else if (activeDest.kind === 'engine') lastEngineName = activeDest.name
+  const savedAi = localStorage.getItem('lastAiKey')
+  if (savedAi) lastAiKey = savedAi
+  else if (activeDest.kind === 'ai') lastAiKey = activeDest.key
+} catch {}
+
+const engineOverlay = document.getElementById('engine-overlay')
+const engineOverlayList = document.getElementById('engine-overlay-list')
+const overlayTabSearch = document.getElementById('overlay-tab-search')
+const overlayTabAi = document.getElementById('overlay-tab-ai')
+let overlayTab = 'search'
+let engineOverlayOpen = false
+
+// Filled after AI overlay catalog is defined (same file, later).
+let getAiOverlayEnabled = () => []
+let getAiOverlayByKey = () => null
+let aiOverlayMasterOn = false
+let socialRowMasterOn = false
+
+const destinationIcon = () => {
+  if (activeDest.kind === 'ai') {
+    const item = getAiOverlayByKey(activeDest.key)
+    if (item?.icon) return item.icon
+  }
+  const eng = engines.find((e) => e.name === activeDest.name) || enabledEngines()[0] || engines[0]
+  return eng.icon
+}
+
+const destinationLabel = () => {
+  if (activeDest.kind === 'ai') {
+    const item = getAiOverlayByKey(activeDest.key)
+    return item?.title || activeDest.key
+  }
+  return activeDest.name
+}
+
+const destinationUrl = (query) => {
+  if (activeDest.kind === 'ai') {
+    const item = getAiOverlayByKey(activeDest.key)
+    if (!item) return null
+    if (item.queryUrl) return item.queryUrl + encodeURIComponent(query)
+    return item.homeUrl
+  }
+  const eng = engines.find((e) => e.name === activeDest.name && engineEnabled[e.name] !== false)
+    || enabledEngines()[0]
+  return eng ? eng.url + encodeURIComponent(query) : null
+}
+
+const persistDest = () => {
+  try { localStorage.setItem('activeDest', JSON.stringify(activeDest)) } catch {}
+  if (activeDest.kind === 'engine') {
+    lastEngineName = activeDest.name
+    try { localStorage.setItem('engine', activeDest.name) } catch {}
+    try { localStorage.setItem('lastEngineName', activeDest.name) } catch {}
+  } else if (activeDest.kind === 'ai') {
+    lastAiKey = activeDest.key
+    try { localStorage.setItem('lastAiKey', activeDest.key) } catch {}
+  }
+}
 
 const showEngine = () => {
   const copy = text[pageLang] || text.en
-  engineButton.innerHTML = engines[engine].icon
-  engineButton.title = copy.engineLabel.replace('{name}', engines[engine].name)
-  engineButton.setAttribute('aria-label', engineButton.title)
+  const name = destinationLabel()
+  engineButton.innerHTML = destinationIcon()
+  const label = (copy.enginePickLabel || copy.engineLabel).replace('{name}', name)
+  engineButton.title = label
+  engineButton.setAttribute('aria-label', label)
 }
 
-engineButton.addEventListener('click', () => {
-  engine = (engine + 1) % engines.length
+const closeEngineOverlay = () => {
+  if (!engineOverlayOpen) return
+  engineOverlayOpen = false
+  engineOverlay.hidden = true
+  engineButton.setAttribute('aria-expanded', 'false')
+}
+
+const pickDestination = (next) => {
+  activeDest = next
+  persistDest()
   showEngine()
-  try { localStorage.setItem('engine', engines[engine].name) } catch {}
+  closeEngineOverlay()
   searchBox.focus()
+}
+
+const renderEngineOverlayList = () => {
+  const copy = text[pageLang] || text.en
+  const items = overlayTab === 'ai' && aiOverlayMasterOn
+    ? getAiOverlayEnabled().map((item) => ({
+        key: `ai:${item.key}`,
+        label: item.title,
+        icon: item.icon,
+        selected: activeDest.kind === 'ai' && activeDest.key === item.key,
+        pick: () => pickDestination({ kind: 'ai', key: item.key }),
+      }))
+    : enabledEngines().map((item) => ({
+        key: `engine:${item.name}`,
+        label: item.name,
+        icon: item.icon,
+        selected: activeDest.kind === 'engine' && activeDest.name === item.name,
+        pick: () => pickDestination({ kind: 'engine', name: item.name }),
+      }))
+
+  engineOverlayList.replaceChildren(...items.map((item) => {
+    const btn = document.createElement('button')
+    btn.type = 'button'
+    btn.className = 'engine-overlay-option'
+    btn.setAttribute('aria-selected', String(item.selected))
+    const icon = el('span', 'eo-icon')
+    icon.innerHTML = item.icon
+    btn.append(icon, document.createTextNode(item.label))
+    const check = el('span', 'eo-check', '✓')
+    check.setAttribute('aria-hidden', 'true')
+    btn.append(check)
+    btn.addEventListener('click', item.pick)
+    const li = document.createElement('li')
+    li.append(btn)
+    return li
+  }))
+  if (!items.length) {
+    engineOverlayList.replaceChildren(el('li', '', copy.overlayEmpty || 'Nothing enabled yet.'))
+  }
+}
+
+const syncOverlayTabs = () => {
+  const showAi = aiOverlayMasterOn
+  overlayTabAi.hidden = !showAi
+  if (!showAi && overlayTab === 'ai') overlayTab = 'search'
+  overlayTabSearch.setAttribute('aria-selected', String(overlayTab === 'search'))
+  overlayTabAi.setAttribute('aria-selected', String(overlayTab === 'ai'))
+  overlayTabSearch.textContent = (text[pageLang] || text.en).overlaySearch || 'Search'
+  overlayTabAi.textContent = (text[pageLang] || text.en).overlayAi || 'AI'
+}
+
+const openEngineOverlay = (preferTab) => {
+  if (preferTab === 'ai' || preferTab === 'search') overlayTab = preferTab
+  else overlayTab = activeDest.kind === 'ai' && aiOverlayMasterOn ? 'ai' : 'search'
+  engineOverlayOpen = true
+  syncOverlayTabs()
+  renderEngineOverlayList()
+  engineOverlay.hidden = false
+  engineButton.setAttribute('aria-expanded', 'true')
+}
+
+const cycleEngines = () => {
+  const list = enabledEngines()
+  if (!list.length) return
+  const i = Math.max(0, list.findIndex((e) => e.name === (activeDest.kind === 'engine' ? activeDest.name : lastEngineName)))
+  const next = list[(i + 1) % list.length]
+  pickDestination({ kind: 'engine', name: next.name })
+}
+
+// Click: Search ↔ AI when AI is available; otherwise cycle engines. Long-press / right-click: overlay.
+const flipSearchAi = () => {
+  const ais = aiOverlayMasterOn ? getAiOverlayEnabled() : []
+  if (!ais.length) {
+    cycleEngines()
+    return
+  }
+  if (activeDest.kind === 'ai') {
+    const engName = enabledEngines().some((e) => e.name === lastEngineName)
+      ? lastEngineName
+      : enabledEngines()[0].name
+    pickDestination({ kind: 'engine', name: engName })
+    return
+  }
+  const ai = ais.find((item) => item.key === lastAiKey) || ais[0]
+  pickDestination({ kind: 'ai', key: ai.key })
+}
+
+const LONG_PRESS_MS = 450
+let pressTimer = null
+let longPressFired = false
+
+const clearPressTimer = () => {
+  if (pressTimer) clearTimeout(pressTimer)
+  pressTimer = null
+}
+
+engineButton.addEventListener('pointerdown', (e) => {
+  if (e.button !== 0) return
+  longPressFired = false
+  clearPressTimer()
+  pressTimer = setTimeout(() => {
+    longPressFired = true
+    openEngineOverlay()
+  }, LONG_PRESS_MS)
+})
+engineButton.addEventListener('pointerup', clearPressTimer)
+engineButton.addEventListener('pointercancel', clearPressTimer)
+engineButton.addEventListener('pointerleave', clearPressTimer)
+engineButton.addEventListener('contextmenu', (e) => {
+  e.preventDefault()
+  openEngineOverlay()
+})
+engineButton.addEventListener('click', (e) => {
+  e.preventDefault()
+  e.stopPropagation()
+  clearPressTimer()
+  if (longPressFired) {
+    longPressFired = false
+    return
+  }
+  if (engineOverlayOpen) {
+    closeEngineOverlay()
+    return
+  }
+  flipSearchAi()
+})
+
+overlayTabSearch.addEventListener('click', () => {
+  overlayTab = 'search'
+  syncOverlayTabs()
+  renderEngineOverlayList()
+})
+overlayTabAi.addEventListener('click', () => {
+  if (!aiOverlayMasterOn) return
+  overlayTab = 'ai'
+  syncOverlayTabs()
+  renderEngineOverlayList()
+})
+
+document.addEventListener('pointerdown', (e) => {
+  if (!engineOverlayOpen) return
+  if (engineOverlay.contains(e.target) || engineButton.contains(e.target)) return
+  closeEngineOverlay()
+})
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && engineOverlayOpen) {
+    closeEngineOverlay()
+    searchBox.focus()
+    return
+  }
+  // Subtle shortcut: Ctrl/Cmd+Shift+A flips Search ↔ AI (same as a click).
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+    const tag = (e.target && e.target.tagName) || ''
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
+      // Still allow from the search field — that is the intended place.
+      if (e.target !== searchBox) return
+    }
+    e.preventDefault()
+    flipSearchAi()
+  }
 })
 
 // Enter submits the form; preventDefault keeps the page from reloading.
@@ -65,9 +425,11 @@ engineButton.addEventListener('click', () => {
 let hintTimer
 searchForm.addEventListener('submit', (e) => {
   e.preventDefault()
+  closeEngineOverlay()
   const value = searchBox.value.trim()
   if (value.length > 0) {
-    const url = engines[engine].url + encodeURIComponent(value)
+    const url = destinationUrl(value)
+    if (!url) return
     if (searchNewTab) window.open(url, '_blank', 'noopener')
     else location.href = url
     return
@@ -354,7 +716,7 @@ const sectionText = {
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
 const aiText = {
-  en: { quickTitle: 'Quick start', quickEngineHead: 'Change search engine', quickEngineText: 'Each click on the icon goes to the next search engine: DuckDuckGo, Kagi, Brave or Google. Your choice is remembered.', quickClick: 'Click here', quickMoreHead: 'More from your page', quickAiHead: 'Add AI links', quickAiText: 'Under Manage data you pick up to five AI services, or add your own address.', quickPageHead: 'Pick a page', quickPageText: 'Minimal, Standard or Advanced, in the settings at the top right.', quickDone: 'Got it', quickLink: 'Quick start', quickCard: 'Quick start: the first steps', quickNote: 'Everything here is also in Help.', changelogLink: 'Changelog', hintText: 'Settings are here: click the gear, or press ?.', limitFull: '{n} of {n} · full', aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', versionUpdated: 'Updated', versionTagAria: 'Version {v}, show update details', versionText: 'Version {v}, updated {d}', secBackground: 'Background', resetIntro: 'Reset settings only sets your settings back to the defaults; your data stays. Delete my data removes your own links, AI shortcuts, time zones, city and extra places. This cannot be undone, so make a backup first on the Backup tab in Manage data.', resetSec: 'Reset', dateOnLbl: 'Show the date', dateSec: 'Date', dateShow: 'Show', dateLong: 'Long', dateShort: 'Short', dateOrderLbl: 'Order', dateAuto: 'Automatic', dateDmy: 'Day-month-year', dateMdy: 'Month-day-year', dateYmd: 'Year-month-day', timeSec: 'Time format', time24: '24 hours', time12: '12 hours (AM/PM)', timeFull: 'Full, with seconds', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick services', aiInvalid: 'Enter a valid https address' },
+  en: { quickTitle: 'Quick start', quickEngineHead: 'Change search engine', quickEngineText: 'Click the left icon to switch Search ↔ AI. Hold (or right-click) to pick which engine or AI. Shortcut: Ctrl+Shift+A. Enter sends your query. Social icons (when enabled) sit under the bar as jump links.', quickClick: 'Click here', quickMoreHead: 'More from your page', quickAiHead: 'Add AI links', quickAiText: 'Under Manage data you pick AI platforms for the overlay and up to five ASK AI shortcuts.', quickPageHead: 'Pick a page', quickPageText: 'Minimal, Standard or Advanced, in the settings at the top right.', quickDone: 'Got it', quickLink: 'Quick start', quickCard: 'Quick start: the first steps', quickNote: 'Everything here is also in Help.', changelogLink: 'Changelog', hintText: 'Settings are here: click the gear, or press ?.', limitFull: '{n} of {n} · full', aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', versionUpdated: 'Updated', versionTagAria: 'Version {v}, show update details', versionText: 'Version {v}, updated {d}', secBackground: 'Background', resetIntro: 'Reset settings only sets your settings back to the defaults; your data stays. Delete my data removes your own links, AI shortcuts, time zones, city and extra places. This cannot be undone, so make a backup first on the Backup tab in Manage data.', resetSec: 'Reset', dateOnLbl: 'Show the date', dateSec: 'Date', dateShow: 'Show', dateLong: 'Long', dateShort: 'Short', dateOrderLbl: 'Order', dateAuto: 'Automatic', dateDmy: 'Day-month-year', dateMdy: 'Month-day-year', dateYmd: 'Year-month-day', timeSec: 'Time format', time24: '24 hours', time12: '12 hours (AM/PM)', timeFull: 'Full, with seconds', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick services', aiInvalid: 'Enter a valid https address' },
   nl: { quickTitle: 'Quick start', quickEngineHead: 'Zoekmachine wisselen', quickEngineText: 'Elke klik op het icoon gaat naar de volgende zoekmachine: DuckDuckGo, Kagi, Brave of Google. Je keuze blijft bewaard.', quickClick: 'Klik hier', quickMoreHead: 'Meer uit je pagina', quickAiHead: 'AI-links toevoegen', quickAiText: 'Onder Data beheren kies je tot vijf AI-diensten, of voeg je eigen adres toe.', quickPageHead: 'Pagina kiezen', quickPageText: 'Minimaal, Standaard of Geavanceerd, in de instellingen rechtsboven.', quickDone: 'Begrepen', quickLink: 'Quick start', quickCard: 'Quick start: de eerste stappen', quickNote: 'Alles staat ook in Help.', changelogLink: 'Wijzigingen', hintText: 'Hier vind je de instellingen: klik op het tandwiel of druk op ?.', limitFull: '{n} van {n} · vol', aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', versionUpdated: 'Bijgewerkt', versionTagAria: 'Versie {v}, toon bijwerkdetails', versionText: 'Versie {v}, bijgewerkt {d}', secBackground: 'Achtergrond', resetIntro: 'Instellingen resetten zet alleen je instellingen terug naar de standaard; je gegevens blijven staan. Mijn gegevens wissen verwijdert je eigen links, AI-snelkoppelingen, tijdzones, stad en extra plaatsen. Dat kan niet ongedaan worden, dus maak eerst een backup op het tabblad Backup onder Data beheren.', resetSec: 'Resetten', dateOnLbl: 'Datum tonen', dateSec: 'Datum', dateShow: 'Weergave', dateLong: 'Lang', dateShort: 'Kort', dateOrderLbl: 'Volgorde', dateAuto: 'Automatisch', dateDmy: 'Dag-maand-jaar', dateMdy: 'Maand-dag-jaar', dateYmd: 'Jaar-maand-dag', timeSec: 'Tijdnotatie', time24: '24 uur', time12: '12 uur (AM/PM)', timeFull: 'Volledig, met seconden', searchSec: 'Zoeken', searchNewTab: 'Zoeken openen in een nieuw tabblad', aiNewTab: 'AI-links openen in een nieuw tabblad', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies diensten', aiInvalid: 'Vul een geldig https-adres in' },
   de: { quickTitle: 'Schnellstart', quickEngineHead: 'Suchmaschine wechseln', quickEngineText: 'Jeder Klick auf das Symbol führt zur nächsten Suchmaschine: DuckDuckGo, Kagi, Brave oder Google. Deine Wahl bleibt gespeichert.', quickClick: 'Hier klicken', quickMoreHead: 'Mehr aus deiner Seite', quickAiHead: 'KI-Links hinzufügen', quickAiText: 'Unter Daten verwalten wählst du bis zu fünf KI-Dienste oder fügst deine eigene Adresse hinzu.', quickPageHead: 'Seite wählen', quickPageText: 'Minimal, Standard oder Erweitert, in den Einstellungen oben rechts.', quickDone: 'Verstanden', quickLink: 'Schnellstart', quickCard: 'Schnellstart: die ersten Schritte', quickNote: 'Alles steht auch in der Hilfe.', changelogLink: 'Änderungen', hintText: 'Hier findest du die Einstellungen: Klick auf das Zahnrad oder drücke ?.', limitFull: '{n} von {n} · voll', aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', versionUpdated: 'Aktualisiert', versionTagAria: 'Version {v}, Aktualisierungsdetails anzeigen', versionText: 'Version {v}, aktualisiert {d}', secBackground: 'Hintergrund', resetIntro: 'Einstellungen zurücksetzen stellt nur die Standardwerte wieder her; deine Daten bleiben. Meine Daten löschen entfernt deine eigenen Links, KI-Verknüpfungen, Zeitzonen, Stadt und zusätzlichen Orte. Das lässt sich nicht rückgängig machen, also erstelle zuerst ein Backup im Reiter Backup unter Daten verwalten.', resetSec: 'Zurücksetzen', dateOnLbl: 'Datum anzeigen', dateSec: 'Datum', dateShow: 'Anzeige', dateLong: 'Lang', dateShort: 'Kurz', dateOrderLbl: 'Reihenfolge', dateAuto: 'Automatisch', dateDmy: 'Tag-Monat-Jahr', dateMdy: 'Monat-Tag-Jahr', dateYmd: 'Jahr-Monat-Tag', timeSec: 'Zeitformat', time24: '24 Stunden', time12: '12 Stunden (AM/PM)', timeFull: 'Vollständig, mit Sekunden', searchSec: 'Suche', searchNewTab: 'Suche in einem neuen Tab öffnen', aiNewTab: 'KI-Links in einem neuen Tab öffnen', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Dienste wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
   fr: { quickTitle: 'Démarrage rapide', quickEngineHead: 'Changer de moteur de recherche', quickEngineText: 'Chaque clic sur l’icône passe au moteur suivant : DuckDuckGo, Kagi, Brave ou Google. Votre choix est conservé.', quickClick: 'Cliquez ici', quickMoreHead: 'Plus sur votre page', quickAiHead: 'Ajouter des liens IA', quickAiText: 'Sous Gérer les données, choisissez jusqu’à cinq services IA, ou ajoutez votre propre adresse.', quickPageHead: 'Choisir une page', quickPageText: 'Minimal, Standard ou Avancé, dans les réglages en haut à droite.', quickDone: 'Compris', quickLink: 'Démarrage rapide', quickCard: 'Démarrage rapide : les premiers pas', quickNote: 'Tout cela figure aussi dans l’aide.', changelogLink: 'Modifications', hintText: 'Les réglages sont ici : cliquez sur l’engrenage ou appuyez sur ?.', limitFull: '{n} sur {n} · complet', aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', versionUpdated: 'Mis à jour', versionTagAria: 'Version {v}, afficher les détails de mise à jour', versionText: 'Version {v}, mise à jour {d}', secBackground: 'Arrière-plan', resetIntro: 'Réinitialiser les réglages remet seulement les réglages par défaut ; vos données restent. Effacer mes données supprime vos liens, raccourcis IA, fuseaux, ville et lieux supplémentaires. Action irréversible : faites d’abord une sauvegarde dans l’onglet Sauvegarde de Gérer les données.', resetSec: 'Réinitialiser', dateOnLbl: 'Afficher la date', dateSec: 'Date', dateShow: 'Affichage', dateLong: 'Long', dateShort: 'Court', dateOrderLbl: 'Ordre', dateAuto: 'Automatique', dateDmy: 'Jour-mois-année', dateMdy: 'Mois-jour-année', dateYmd: 'Année-mois-jour', timeSec: 'Format de l’heure', time24: '24 heures', time12: '12 heures (AM/PM)', timeFull: 'Complet, avec secondes', searchSec: 'Recherche', searchNewTab: 'Ouvrir la recherche dans un nouvel onglet', aiNewTab: 'Ouvrir les liens IA dans un nouvel onglet', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir les services', aiInvalid: 'Saisissez une adresse https valide' },
@@ -362,12 +724,12 @@ const aiText = {
   zh: { quickTitle: '快速入门', quickEngineHead: '更换搜索引擎', quickEngineText: '每次点击图标会切换到下一个搜索引擎：DuckDuckGo、Kagi、Brave 或 Google。你的选择会被保存。', quickClick: '点这里', quickMoreHead: '页面更多功能', quickAiHead: '添加 AI 链接', quickAiText: '在“管理数据”中最多选五个 AI 服务，也可以添加你自己的地址。', quickPageHead: '选择页面', quickPageText: '极简、标准或高级，在右上角的设置中切换。', quickDone: '知道了', quickLink: '快速入门', quickCard: '快速入门：最初的几步', quickNote: '这些内容也在帮助中。', changelogLink: '更新记录', hintText: '设置在这里：点击齿轮，或按 ?。', limitFull: '{n}/{n} · 已满', aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', versionUpdated: '更新', versionTagAria: '版本 {v}，显示更新详情', versionText: '版本 {v}，更新于 {d}', secBackground: '背景', resetIntro: '重置设置只会恢复默认值，你的数据会保留。删除我的数据会移除你自己的链接、AI 快捷方式、时区、城市和额外地点。此操作无法撤销，请先在管理数据的备份标签中备份。', resetSec: '重置', dateOnLbl: '显示日期', dateSec: '日期', dateShow: '显示', dateLong: '长格式', dateShort: '短格式', dateOrderLbl: '顺序', dateAuto: '自动', dateDmy: '日-月-年', dateMdy: '月-日-年', dateYmd: '年-月-日', timeSec: '时间格式', time24: '24 小时制', time12: '12 小时制 (AM/PM)', timeFull: '完整，含秒', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', aiDuplicate: '已在列表中。', aiPick: '选择服务', aiInvalid: '请输入有效的 https 地址' }
 }
 const manageText = {
-  en: { linkUp: 'Move up', linkDown: 'Move down', manageOpen: 'Manage data', tabBackup: 'Backup', backupNote: 'Export saves your settings, links, AI shortcuts, time zones and weather places to a file on your computer. Import loads such a file: Merge adds what is new and keeps what you have, Replace overwrites everything. Make a backup before you reset or delete your data.', tabLinks: 'Links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
-  nl: { linkUp: 'Omhoog', linkDown: 'Omlaag', manageOpen: 'Data beheren', tabBackup: 'Backup', backupNote: 'Exporteren slaat je instellingen, links, AI-snelkoppelingen, tijdzones en weerplaatsen op in een bestand op je computer. Importeren laadt zo’n bestand: Samenvoegen voegt toe wat nieuw is en laat staan wat je hebt, Vervangen overschrijft alles. Maak een backup voordat je gegevens reset of wist.', tabLinks: 'Links', tabZones: 'Tijdzones', tabAi: 'AI', tabWeather: 'Weer', placeLabel: 'Een stad toevoegen', placeAdd: 'Toevoegen', placeOwn: 'Je eigen plaats', placeNone: 'Nog geen plaats', placeDuplicate: 'Staat al in de lijst', placeRemove: 'Verwijderen' },
-  de: { linkUp: 'Nach oben', linkDown: 'Nach unten', manageOpen: 'Daten verwalten', tabBackup: 'Backup', backupNote: 'Exportieren speichert deine Einstellungen, Links, KI-Verknüpfungen, Zeitzonen und Wetterorte in einer Datei auf deinem Computer. Importieren lädt so eine Datei: Zusammenführen ergänzt das Neue und behält, was du hast; Ersetzen überschreibt alles. Erstelle ein Backup, bevor du Daten zurücksetzt oder löschst.', tabLinks: 'Links', tabZones: 'Zeitzonen', tabAi: 'KI', tabWeather: 'Wetter', placeLabel: 'Eine Stadt hinzufügen', placeAdd: 'Hinzufügen', placeOwn: 'Dein Ort', placeNone: 'Noch kein Ort', placeDuplicate: 'Ist schon in der Liste', placeRemove: 'Entfernen' },
-  fr: { linkUp: 'Monter', linkDown: 'Descendre', manageOpen: 'Gérer les données', tabBackup: 'Sauvegarde', backupNote: 'Exporter enregistre vos réglages, liens, raccourcis IA, fuseaux et lieux météo dans un fichier sur votre ordinateur. Importer charge ce fichier : Fusionner ajoute le nouveau et garde le reste ; Remplacer écrase tout. Faites une sauvegarde avant de réinitialiser ou d’effacer vos données.', tabLinks: 'Liens', tabZones: 'Fuseaux', tabAi: 'IA', tabWeather: 'Météo', placeLabel: 'Ajouter une ville', placeAdd: 'Ajouter', placeOwn: 'Votre lieu', placeNone: 'Aucun lieu pour l’instant', placeDuplicate: 'Déjà dans la liste', placeRemove: 'Supprimer' },
-  es: { linkUp: 'Subir', linkDown: 'Bajar', manageOpen: 'Gestionar datos', tabBackup: 'Copia', backupNote: 'Exportar guarda tus ajustes, enlaces, accesos de IA, zonas horarias y lugares del tiempo en un archivo de tu equipo. Importar carga ese archivo: Combinar añade lo nuevo y conserva lo que tienes; Reemplazar sobrescribe todo. Haz una copia antes de restablecer o borrar tus datos.', tabLinks: 'Enlaces', tabZones: 'Zonas horarias', tabAi: 'IA', tabWeather: 'Tiempo', placeLabel: 'Añadir una ciudad', placeAdd: 'Añadir', placeOwn: 'Tu lugar', placeNone: 'Aún no hay lugar', placeDuplicate: 'Ya está en la lista', placeRemove: 'Quitar' },
-  zh: { linkUp: '上移', linkDown: '下移', manageOpen: '管理数据', tabBackup: '备份', backupNote: '导出会把你的设置、链接、AI 快捷方式、时区和天气地点保存到电脑上的一个文件。导入会加载该文件：合并会添加新内容并保留现有内容；替换会覆盖全部。重置或删除数据前，请先备份。', tabLinks: '链接', tabZones: '时区', tabAi: 'AI', tabWeather: '天气', placeLabel: '添加城市', placeAdd: '添加', placeOwn: '你的地点', placeNone: '还没有地点', placeDuplicate: '已在列表中', placeRemove: '移除' }
+  en: { linkUp: 'Move up', linkDown: 'Move down', manageOpen: 'Manage data', tabBackup: 'Backup', backupNote: 'Export saves your settings, links, AI shortcuts, time zones and weather places to a file on your computer. Import loads such a file: Merge adds what is new and keeps what you have, Replace overwrites everything. Make a backup before you reset or delete your data.', tabLinks: 'Own links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
+  nl: { linkUp: 'Omhoog', linkDown: 'Omlaag', manageOpen: 'Data beheren', tabBackup: 'Backup', backupNote: 'Exporteren slaat je instellingen, links, AI-snelkoppelingen, tijdzones en weerplaatsen op in een bestand op je computer. Importeren laadt zo’n bestand: Samenvoegen voegt toe wat nieuw is en laat staan wat je hebt, Vervangen overschrijft alles. Maak een backup voordat je gegevens reset of wist.', tabLinks: 'Eigen links', tabZones: 'Tijdzones', tabAi: 'AI', tabWeather: 'Weer', placeLabel: 'Een stad toevoegen', placeAdd: 'Toevoegen', placeOwn: 'Je eigen plaats', placeNone: 'Nog geen plaats', placeDuplicate: 'Staat al in de lijst', placeRemove: 'Verwijderen' },
+  de: { linkUp: 'Nach oben', linkDown: 'Nach unten', manageOpen: 'Daten verwalten', tabBackup: 'Backup', backupNote: 'Exportieren speichert deine Einstellungen, Links, KI-Verknüpfungen, Zeitzonen und Wetterorte in einer Datei auf deinem Computer. Importieren lädt so eine Datei: Zusammenführen ergänzt das Neue und behält, was du hast; Ersetzen überschreibt alles. Erstelle ein Backup, bevor du Daten zurücksetzt oder löschst.', tabLinks: 'Eigene Links', tabZones: 'Zeitzonen', tabAi: 'KI', tabWeather: 'Wetter', placeLabel: 'Eine Stadt hinzufügen', placeAdd: 'Hinzufügen', placeOwn: 'Dein Ort', placeNone: 'Noch kein Ort', placeDuplicate: 'Ist schon in der Liste', placeRemove: 'Entfernen' },
+  fr: { linkUp: 'Monter', linkDown: 'Descendre', manageOpen: 'Gérer les données', tabBackup: 'Sauvegarde', backupNote: 'Exporter enregistre vos réglages, liens, raccourcis IA, fuseaux et lieux météo dans un fichier sur votre ordinateur. Importer charge ce fichier : Fusionner ajoute le nouveau et garde le reste ; Remplacer écrase tout. Faites une sauvegarde avant de réinitialiser ou d’effacer vos données.', tabLinks: 'Liens perso', tabZones: 'Fuseaux', tabAi: 'IA', tabWeather: 'Météo', placeLabel: 'Ajouter une ville', placeAdd: 'Ajouter', placeOwn: 'Votre lieu', placeNone: 'Aucun lieu pour l’instant', placeDuplicate: 'Déjà dans la liste', placeRemove: 'Supprimer' },
+  es: { linkUp: 'Subir', linkDown: 'Bajar', manageOpen: 'Gestionar datos', tabBackup: 'Copia', backupNote: 'Exportar guarda tus ajustes, enlaces, accesos de IA, zonas horarias y lugares del tiempo en un archivo de tu equipo. Importar carga ese archivo: Combinar añade lo nuevo y conserva lo que tienes; Reemplazar sobrescribe todo. Haz una copia antes de restablecer o borrar tus datos.', tabLinks: 'Enlaces propios', tabZones: 'Zonas horarias', tabAi: 'IA', tabWeather: 'Tiempo', placeLabel: 'Añadir una ciudad', placeAdd: 'Añadir', placeOwn: 'Tu lugar', placeNone: 'Aún no hay lugar', placeDuplicate: 'Ya está en la lista', placeRemove: 'Quitar' },
+  zh: { linkUp: '上移', linkDown: '下移', manageOpen: '管理数据', tabBackup: '备份', backupNote: '导出会把你的设置、链接、AI 快捷方式、时区和天气地点保存到电脑上的一个文件。导入会加载该文件：合并会添加新内容并保留现有内容；替换会覆盖全部。重置或删除数据前，请先备份。', tabLinks: '自有链接', tabZones: '时区', tabAi: 'AI', tabWeather: '天气', placeLabel: '添加城市', placeAdd: '添加', placeOwn: '你的地点', placeNone: '还没有地点', placeDuplicate: '已在列表中', placeRemove: '移除' }
 }
 const footerText = {
   en: { pre: 'Vibe coded with', post: 'by a4ds5t', title: 'View the README on GitHub' },
@@ -434,8 +796,8 @@ const wallpaperText = {
   zh: { wallpaperToggle: '壁纸', wallpaperButton: '壁纸按钮' }
 }
 const tintText = {
-  en: { tintToggle: 'Background colour button' },
-  nl: { tintToggle: 'Achtergrondkleur-knop' },
+  en: { tintToggle: 'Background colour button', tintShort: 'Colour' },
+  nl: { tintToggle: 'Achtergrondkleur-knop', tintShort: 'Kleur' },
   de: { tintToggle: 'Hintergrundfarbe-Knopf' },
   fr: { tintToggle: 'Bouton couleur du fond' },
   es: { tintToggle: 'Botón de color del fondo' },
@@ -458,12 +820,12 @@ const pageText = {
   zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetCustom: '个性化' }
 }
 const topbarText = {
-  en: { colorMode: 'Color mode', themeAuto: 'System theme', themeDark: 'Dark theme', themeLight: 'Light theme', themeMenuAuto: 'System', themeMenuDark: 'Dark', themeMenuLight: 'Light', langLabel: 'Language', searchLabel: 'Search the web', searchFormTitle: 'Type a search and press Enter', engineLabel: 'Search engine: {name}. Click to change.', searchSubmit: 'Search', timeClick: 'Click to cycle through 24-hour, 12-hour and full time', askAiCaption: 'Ask AI' },
-  nl: { colorMode: 'Kleurmodus', themeAuto: 'Systeemthema', themeDark: 'Donker thema', themeLight: 'Licht thema', themeMenuAuto: 'Systeem', themeMenuDark: 'Donker', themeMenuLight: 'Licht', langLabel: 'Taal', searchLabel: 'Zoek op het web', searchFormTitle: 'Typ een zoekopdracht en druk op Enter', engineLabel: 'Zoekmachine: {name}. Klik om te wisselen.', searchSubmit: 'Zoeken', timeClick: 'Klik om te wisselen tussen 24 uur, 12 uur en volledige tijd', askAiCaption: 'Vraag AI' },
-  de: { colorMode: 'Farbmodus', themeAuto: 'Systemdesign', themeDark: 'Dunkles Design', themeLight: 'Helles Design', themeMenuAuto: 'System', themeMenuDark: 'Dunkel', themeMenuLight: 'Hell', langLabel: 'Sprache', searchLabel: 'Im Web suchen', searchFormTitle: 'Suchbegriff eingeben und Enter drücken', engineLabel: 'Suchmaschine: {name}. Klicken zum Wechseln.', searchSubmit: 'Suchen', timeClick: 'Klicken, um zwischen 24-Stunden-, 12-Stunden- und Vollzeit zu wechseln', askAiCaption: 'KI fragen' },
-  fr: { colorMode: 'Mode couleur', themeAuto: 'Thème système', themeDark: 'Thème sombre', themeLight: 'Thème clair', themeMenuAuto: 'Système', themeMenuDark: 'Sombre', themeMenuLight: 'Clair', langLabel: 'Langue', searchLabel: 'Rechercher sur le web', searchFormTitle: 'Saisissez une recherche et appuyez sur Entrée', engineLabel: 'Moteur de recherche : {name}. Cliquez pour changer.', searchSubmit: 'Rechercher', timeClick: 'Cliquez pour alterner entre 24 h, 12 h et l’heure complète', askAiCaption: 'Demander à l’IA' },
-  es: { colorMode: 'Modo de color', themeAuto: 'Tema del sistema', themeDark: 'Tema oscuro', themeLight: 'Tema claro', themeMenuAuto: 'Sistema', themeMenuDark: 'Oscuro', themeMenuLight: 'Claro', langLabel: 'Idioma', searchLabel: 'Buscar en la web', searchFormTitle: 'Escribe una búsqueda y pulsa Intro', engineLabel: 'Buscador: {name}. Haz clic para cambiar.', searchSubmit: 'Buscar', timeClick: 'Haz clic para alternar entre 24 horas, 12 horas y hora completa', askAiCaption: 'Preguntar a la IA' },
-  zh: { colorMode: '颜色模式', themeAuto: '跟随系统', themeDark: '深色主题', themeLight: '浅色主题', themeMenuAuto: '系统', themeMenuDark: '深色', themeMenuLight: '浅色', langLabel: '语言', searchLabel: '搜索网页', searchFormTitle: '输入搜索内容并按 Enter', engineLabel: '搜索引擎：{name}。点击切换。', searchSubmit: '搜索', timeClick: '点击可在 24 小时制、12 小时制和完整时间之间切换', askAiCaption: '询问 AI' },
+  en: { colorMode: 'Color mode', themeAuto: 'System theme', themeDark: 'Dark theme', themeLight: 'Light theme', themeMenuAuto: 'System', themeMenuDark: 'Dark', themeMenuLight: 'Light', langLabel: 'Language', searchLabel: 'Search the web', searchFormTitle: 'Type a search and press Enter', engineLabel: 'Search engine: {name}. Click to change.', enginePickLabel: '{name}. Click: Search ↔ AI. Hold to pick. Shortcut: Ctrl+Shift+A.', searchSubmit: 'Search', timeClick: 'Click to cycle through 24-hour, 12-hour and full time', askAiCaption: 'Ask AI', overlaySearch: 'Search', overlayAi: 'AI', overlayEmpty: 'Nothing enabled yet.', manageShowLabel: 'Show on page', clockDateSec: 'Clock & date', clockLbl: 'Clock', advShowHint: 'Social and Ask AI rows are mutually exclusive — choose one under Manage data.', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Social row', lblAskaiMaster: 'Ask AI row', lblLinksMaster: 'Links button', tabSearch: 'Search', tabSocial: 'Social', enginesNote: 'Turn engines on or off, and add your own below. Always keep at least one on.', engineAdd: 'Add search engine', engineEdit: 'Edit search engine', engineUrlLbl: 'Search URL template', engineUrlHint: 'Paste a homepage or a results URL. Look up fills the query template (…?q=).', engineSuggest: 'Look up', engineInvalid: 'Enter a name and an https search URL ending with the query (for example …?q=).', engineExists: 'That name is already in the list.', engineGuessed: 'Guessed template — check that searching works.', engineLimit: 'You can add up to {n} custom engines.', socialNote: 'Jump-only icons under the search bar. Not shown together with the Ask AI row. Off for Minimal.', aiOverlayNote: 'AI platforms for the search overlay (type + Enter). Turn “AI in overlay” off for Minimal.', aiShortcutsHead: 'Ask AI row shortcuts', socialAria: 'Social' },
+  nl: { colorMode: 'Kleurmodus', themeAuto: 'Systeemthema', themeDark: 'Donker thema', themeLight: 'Licht thema', themeMenuAuto: 'Systeem', themeMenuDark: 'Donker', themeMenuLight: 'Licht', langLabel: 'Taal', searchLabel: 'Zoek op het web', searchFormTitle: 'Typ een zoekopdracht en druk op Enter', engineLabel: 'Zoekmachine: {name}. Klik om te wisselen.', enginePickLabel: '{name}. Klik: Zoeken ↔ AI. Ingedrukt houden om te kiezen. Sneltoets: Ctrl+Shift+A.', searchSubmit: 'Zoeken', timeClick: 'Klik om te wisselen tussen 24 uur, 12 uur en volledige tijd', askAiCaption: 'Vraag AI', overlaySearch: 'Zoeken', overlayAi: 'AI', overlayEmpty: 'Nog niets ingeschakeld.', manageShowLabel: 'Tonen op de pagina', clockDateSec: 'Klok & datum', clockLbl: 'Klok', advShowHint: 'Sociale rij en Vraag AI-rij gaan niet samen — kies er één onder Data beheren.', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Sociale rij', lblAskaiMaster: 'Vraag AI-rij', lblLinksMaster: 'Links-knop', tabSearch: 'Zoeken', tabSocial: 'Sociaal', enginesNote: 'Zet zoekmachines aan of uit en voeg hieronder je eigen toe. Houd altijd minstens één aan.', engineAdd: 'Zoekmachine toevoegen', engineEdit: 'Zoekmachine bewerken', engineUrlLbl: 'Zoek-URL-sjabloon', engineUrlHint: 'Plak een homepage of resultaten-URL. Opzoeken vult het query-sjabloon (…?q=).', engineSuggest: 'Opzoeken', engineInvalid: 'Vul een naam en een https-zoek-URL in die eindigt op de query (bijvoorbeeld …?q=).', engineExists: 'Die naam staat al in de lijst.', engineGuessed: 'Geschat sjabloon — controleer of zoeken werkt.', engineLimit: 'Je kunt tot {n} eigen zoekmachines toevoegen.', socialNote: 'Alleen spring-iconen onder de zoekbalk. Niet tegelijk met de Vraag AI-rij. Uit voor Minimaal.', aiOverlayNote: 'AI-platformen voor de zoek-overlay (typen + Enter). Zet “AI in overlay” uit voor Minimaal.', aiShortcutsHead: 'Vraag AI-rij snelkoppelingen', socialAria: 'Sociaal' },
+  de: { colorMode: 'Farbmodus', themeAuto: 'Systemdesign', themeDark: 'Dunkles Design', themeLight: 'Helles Design', themeMenuAuto: 'System', themeMenuDark: 'Dunkel', themeMenuLight: 'Hell', langLabel: 'Sprache', searchLabel: 'Im Web suchen', searchFormTitle: 'Suchbegriff eingeben und Enter drücken', engineLabel: 'Suchmaschine: {name}. Klicken zum Wechseln.', enginePickLabel: '{name}. Klick: Suche ↔ KI. Halten zum Wählen. Tastatur: Strg+Umschalt+A.', searchSubmit: 'Suchen', timeClick: 'Klicken, um zwischen 24-Stunden-, 12-Stunden- und Vollzeit zu wechseln', askAiCaption: 'KI fragen', overlaySearch: 'Suche', overlayAi: 'KI', overlayEmpty: 'Noch nichts aktiviert.', manageShowLabel: 'Auf der Seite zeigen', clockDateSec: 'Uhr & Datum', clockLbl: 'Uhr', advShowHint: 'Social-Zeile und KI-fragen-Zeile schließen sich aus — unter Daten verwalten wählen.', lblAiOverlay: 'KI im Overlay', lblSocialRow: 'Social-Zeile', lblAskaiMaster: 'KI-fragen-Zeile', lblLinksMaster: 'Links-Schaltfläche', tabSearch: 'Suche', tabSocial: 'Social', enginesNote: 'Suchmaschinen an/aus und eigene unten hinzufügen. Mindestens eine bleibt an.', engineAdd: 'Suchmaschine hinzufügen', engineEdit: 'Suchmaschine bearbeiten', engineUrlLbl: 'Such-URL-Vorlage', engineUrlHint: 'Homepage oder Ergebnis-URL einfügen. Nachschlagen füllt die Query-Vorlage (…?q=).', engineSuggest: 'Nachschlagen', engineInvalid: 'Name und https-Such-URL mit Query-Ende eingeben (z. B. …?q=).', engineExists: 'Dieser Name ist schon in der Liste.', engineGuessed: 'Geschätzte Vorlage — Suche prüfen.', engineLimit: 'Bis zu {n} eigene Suchmaschinen.', socialNote: 'Nur Sprung-Icons unter der Suchleiste. Social-Zeile für Minimal aus.', aiOverlayNote: 'KI-Plattformen für das Such-Overlay (tippen + Enter). „KI im Overlay“ für Minimal aus.', aiShortcutsHead: 'KI-fragen-Zeilen-Verknüpfungen', socialAria: 'Social' },
+  fr: { colorMode: 'Mode couleur', themeAuto: 'Thème système', themeDark: 'Thème sombre', themeLight: 'Thème clair', themeMenuAuto: 'Système', themeMenuDark: 'Sombre', themeMenuLight: 'Clair', langLabel: 'Langue', searchLabel: 'Rechercher sur le web', searchFormTitle: 'Saisissez une recherche et appuyez sur Entrée', engineLabel: 'Moteur de recherche : {name}. Cliquez pour changer.', enginePickLabel: '{name}. Clic : Recherche ↔ IA. Maintenir pour choisir. Raccourci : Ctrl+Maj+A.', searchSubmit: 'Rechercher', timeClick: 'Cliquez pour alterner entre 24 h, 12 h et l’heure complète', askAiCaption: 'Demander à l’IA', overlaySearch: 'Recherche', overlayAi: 'IA', overlayEmpty: 'Rien n’est activé.', manageShowLabel: 'Afficher sur la page', clockDateSec: 'Horloge et date', clockLbl: 'Horloge', advShowHint: 'Rangée sociale et rangée Demander à l’IA sont exclusives — choisissez sous Gérer les données.', lblAiOverlay: 'IA dans l’overlay', lblSocialRow: 'Rangée sociale', lblAskaiMaster: 'Rangée Demander à l’IA', lblLinksMaster: 'Bouton Liens', tabSearch: 'Recherche', tabSocial: 'Social', enginesNote: 'Activez/désactivez les moteurs et ajoutez les vôtres. Gardez-en au moins un.', engineAdd: 'Ajouter un moteur', engineEdit: 'Modifier le moteur', engineUrlLbl: 'Modèle d’URL de recherche', engineUrlHint: 'Collez une page d’accueil ou une URL de résultats. Rechercher remplit le modèle (…?q=).', engineSuggest: 'Rechercher', engineInvalid: 'Indiquez un nom et une URL https se terminant par la requête (ex. …?q=).', engineExists: 'Ce nom est déjà dans la liste.', engineGuessed: 'Modèle estimé — vérifiez la recherche.', engineLimit: 'Jusqu’à {n} moteurs personnalisés.', socialNote: 'Icônes de saut sous la barre. Désactivez la rangée sociale pour Minimal.', aiOverlayNote: 'Plateformes IA pour l’overlay (saisir + Entrée). Désactivez « IA dans l’overlay » pour Minimal.', aiShortcutsHead: 'Raccourcis de la rangée Demander à l’IA', socialAria: 'Social' },
+  es: { colorMode: 'Modo de color', themeAuto: 'Tema del sistema', themeDark: 'Tema oscuro', themeLight: 'Tema claro', themeMenuAuto: 'Sistema', themeMenuDark: 'Oscuro', themeMenuLight: 'Claro', langLabel: 'Idioma', searchLabel: 'Buscar en la web', searchFormTitle: 'Escribe una búsqueda y pulsa Intro', engineLabel: 'Buscador: {name}. Haz clic para cambiar.', enginePickLabel: '{name}. Clic: Buscar ↔ IA. Mantén para elegir. Atajo: Ctrl+Mayús+A.', searchSubmit: 'Buscar', timeClick: 'Haz clic para alternar entre 24 horas, 12 horas y hora completa', askAiCaption: 'Preguntar a la IA', overlaySearch: 'Buscar', overlayAi: 'IA', overlayEmpty: 'Nada activado aún.', manageShowLabel: 'Mostrar en la página', clockDateSec: 'Reloj y fecha', clockLbl: 'Reloj', advShowHint: 'La fila social y la de Preguntar a la IA son excluyentes — elige una en Gestionar datos.', lblAiOverlay: 'IA en el overlay', lblSocialRow: 'Fila social', lblAskaiMaster: 'Fila Preguntar a la IA', lblLinksMaster: 'Botón Enlaces', tabSearch: 'Buscar', tabSocial: 'Social', enginesNote: 'Activa o desactiva buscadores y añade los tuyos. Mantén al menos uno.', engineAdd: 'Añadir buscador', engineEdit: 'Editar buscador', engineUrlLbl: 'Plantilla de URL de búsqueda', engineUrlHint: 'Pega una portada o una URL de resultados. Buscar completa la plantilla (…?q=).', engineSuggest: 'Buscar', engineInvalid: 'Pon un nombre y una URL https que termine en la consulta (p. ej. …?q=).', engineExists: 'Ese nombre ya está en la lista.', engineGuessed: 'Plantilla estimada — comprueba la búsqueda.', engineLimit: 'Hasta {n} buscadores propios.', socialNote: 'Iconos de salto bajo la barra. Desactiva la fila social para Mínimo.', aiOverlayNote: 'Plataformas de IA para el overlay (escribir + Intro). Desactiva «IA en el overlay» para Mínimo.', aiShortcutsHead: 'Accesos de la fila Preguntar a la IA', socialAria: 'Social' },
+  zh: { colorMode: '颜色模式', themeAuto: '跟随系统', themeDark: '深色主题', themeLight: '浅色主题', themeMenuAuto: '系统', themeMenuDark: '深色', themeMenuLight: '浅色', langLabel: '语言', searchLabel: '搜索网页', searchFormTitle: '输入搜索内容并按 Enter', engineLabel: '搜索引擎：{name}。点击切换。', enginePickLabel: '{name}。单击：搜索 ↔ AI。长按选择。快捷键：Ctrl+Shift+A。', searchSubmit: '搜索', timeClick: '点击可在 24 小时制、12 小时制和完整时间之间切换', askAiCaption: '询问 AI', overlaySearch: '搜索', overlayAi: 'AI', overlayEmpty: '尚未启用任何项。', manageShowLabel: '在页面显示', clockDateSec: '时钟与日期', clockLbl: '时钟', advShowHint: '社交行与询问 AI 行互斥 — 请在“管理数据”中二选一。', lblAiOverlay: '叠加层中的 AI', lblSocialRow: '社交行', lblAskaiMaster: '询问 AI 行', lblLinksMaster: '链接按钮', tabSearch: '搜索', tabSocial: '社交', enginesNote: '可开关搜索引擎，并在下方添加自己的。请至少保留一个。', engineAdd: '添加搜索引擎', engineEdit: '编辑搜索引擎', engineUrlLbl: '搜索 URL 模板', engineUrlHint: '粘贴主页或结果页 URL。查找会填充查询模板（…?q=）。', engineSuggest: '查找', engineInvalid: '请输入名称和以查询结尾的 https 搜索 URL（例如 …?q=）。', engineExists: '该名称已在列表中。', engineGuessed: '已猜测模板 — 请确认搜索可用。', engineLimit: '最多可添加 {n} 个自定义搜索引擎。', socialNote: '搜索栏下方仅跳转图标。极简模式请关闭社交行。', aiOverlayNote: '用于搜索叠加层的 AI 平台（输入 + Enter）。极简模式请关闭“叠加层中的 AI”。', aiShortcutsHead: '询问 AI 行快捷方式', socialAria: '社交' },
 }
 const advancedText = {
   en: { advTitle: 'Advanced settings', advancedOpen: 'Advanced', advancedClosed: '← Back to basic settings' },
@@ -487,11 +849,11 @@ for (const lang of Object.keys(text)) Object.assign(text[lang], weatherWording[l
 const helpText = {
   en: { title: 'Help', settings: 'Settings', close: 'Close', faq: 'Frequently asked questions', sections: [
     ['About this page', 'A quiet start page, built with Claude Code as an experiment in vibe coding. I wanted to see how far plain language gets you with a small web app. My opinion: a start page should be nearly empty; extras earn their place by being found, not by staring back at you.', ['https://github.com/a4ds5t/start.soholocal', 'https://start.soholocal.nl/']],
-    ['Search', 'Type and press Enter, or click the magnifier. The icon on the left shows the search engine: click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered. Under Advanced you can also open search in a new tab.'],
+    ['Search', 'Type and press Enter, or click the magnifier. The left icon shows the current Search engine or AI: click to switch Search ↔ AI (Ctrl+Shift+A), hold to pick which one from the overlay. Choices are remembered. Under Advanced you can also open search in a new tab.'],
     ['AI shortcuts', 'Shortcuts below the search bar. In Manage data you tick the AI services you want, up to five; your own shortcuts count toward the same five. Each shortcut shows its service icon. AI links open in a new tab by default, and you can change that under Advanced.'],
     ['Clock', 'Hover over the time to see your time zone. Click the time to cycle through 24-hour, 12-hour and full time with seconds. When time zones are on, the clock icon above the time opens the zones you chose.'],
     ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and a short numeric date. The order follows your browser unless you choose one under Advanced.'],
-    ['Links', 'The button at the top left opens your links. The icons at the top of that window are permanent. Hovering the button shows your own links. You can add up to 15 links of your own, each with an optional description, and remove or edit them. With Own links off, the button opens Wikipedia directly.'],
+    ['Links', 'The button at the top left opens your own links only (add, edit, reorder). There is no canned permanent row. Hovering the button shows your own links. You can add up to 15, each with an optional description.'],
     ['Weather', 'Off by default. Turn it on in Settings and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 6 hours and seven days. Up to five more places can be added in Manage, under Weather; choose one in this window to see its forecast.'],
     ['Background', 'Each press of the round button at the bottom right goes to the next background: none first, then the ones switched on in Data beheren. The button at the bottom left changes the background colour in steps; on a computer that is the button too.'],
     ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. Options that depend on another option are greyed out until that one is on. The page presets (Minimal and Standard) sit at the top. Personal shows when your choices match neither. Advanced lists every option, in groups; its link goes back to the basic settings. Bottom right you see the version and the date of the last change. The last number rises with every change; a release gets the next version number, such as 1.4. At the bottom of Advanced, Reset settings brings back the defaults and keeps your data. Delete my data removes your own links, AI shortcuts, time zones, city and extra places. That cannot be undone, so first make a backup with Manage data and Export data.'],
@@ -986,9 +1348,6 @@ document.getElementById('place-form').addEventListener('submit', async (e) => {
     placeMsg.textContent = t.unavailable
   }
 })
-const manageOpenButton = document.getElementById('manage-open')
-manageOpenButton.addEventListener('click', () => openManage(manageTab))
-
 // Settings and help: a floating panel, opened with ? and closed with Escape.
 const openedFrom = { el: null }
 let settingsVersionTag
@@ -1001,8 +1360,9 @@ const versionTagStrings = () => ({
 })
 
 const applySettingsText = () => {
-  document.getElementById('settings-title').textContent = document.getElementById('advanced').hidden ? t.title : t.advTitle
-  document.getElementById('settings-hint').textContent = t.hint
+  document.getElementById('settings-title').textContent = t.title
+  const settingsHintEl = document.getElementById('settings-hint')
+  if (settingsHintEl) settingsHintEl.textContent = t.hint
   const versionMount = document.getElementById('app-version-root')
   if (versionMount) {
     if (!settingsVersionTag) {
@@ -1025,7 +1385,7 @@ const applySettingsText = () => {
   document.getElementById('lbl-location').textContent = t.location
   document.getElementById('help-open').textContent = helpCopy.title
   document.getElementById('sec-weather').textContent = t.secWeather
-  document.getElementById('sec-look').textContent = t.secLook
+  document.getElementById('sec-look').textContent = t.manageShowLabel || t.secLook
   document.getElementById('lbl-loc-ip').textContent = t.locIp
   document.getElementById('lbl-loc-city').textContent = t.locCity
   document.getElementById('ip-window-title').textContent = t.ipWindowTitle
@@ -1035,7 +1395,7 @@ const applySettingsText = () => {
   document.getElementById('links-window-close').setAttribute('aria-label', t.close)
   document.getElementById('links-manage').textContent = t.linksEdit
   document.getElementById('ask-ai-caption').textContent = t.askAiCaption
-  document.getElementById('ask-ai-caption').title = t.askAiTip
+  document.getElementById('ask-ai').setAttribute('aria-label', t.askAiCaption || 'AI shortcuts')
   document.getElementById('forecast-edit').textContent = t.placesEdit
   document.getElementById('zones-window-title').textContent = t.zonesTitle
   document.getElementById('zones-window-close').setAttribute('aria-label', t.close)
@@ -1047,15 +1407,20 @@ const applySettingsText = () => {
   document.getElementById('lbl-quote').textContent = t.quote
   document.getElementById('lbl-zones').textContent = t.zonesToggle
   document.getElementById('lbl-wallpaper').textContent = t.wallpaperToggle
-  document.getElementById('sec-bg').textContent = t.secBackground
   document.querySelector('.presets').setAttribute('aria-label', t.secPage)
   document.getElementById('lbl-preset-minimal').textContent = t.presetMinimal
   document.getElementById('lbl-preset-standard').textContent = t.presetStandard
   document.getElementById('lbl-preset-custom').textContent = t.presetCustom
   document.getElementById('sec-ai').textContent = t.aiSec
-  document.getElementById('lbl-askai').textContent = t.aiOn
-  document.getElementById('sec-time').textContent = t.timeSec
-  document.getElementById('sec-date').textContent = t.dateSec
+  document.getElementById('lbl-askai').textContent = t.lblAskaiMaster || t.aiOn
+  document.getElementById('sec-time').textContent = t.clockDateSec || 'Clock & date'
+  const lblClock = document.getElementById('lbl-clock')
+  if (lblClock) lblClock.textContent = t.clockLbl || 'Clock'
+  const advShowHint = document.getElementById('adv-show-hint')
+  if (advShowHint) {
+    advShowHint.textContent = t.advShowHint
+      || 'Social and Ask AI rows are mutually exclusive — choose one under Manage data.'
+  }
   document.getElementById('lbl-date-on').textContent = t.dateOnLbl
   document.getElementById('lbl-date-style').textContent = t.dateShow
   document.getElementById('lbl-date-order').textContent = t.dateOrderLbl
@@ -1073,18 +1438,19 @@ const applySettingsText = () => {
   document.getElementById('lbl-ai-newtab').textContent = t.aiNewTab
   document.getElementById('ai-name').setAttribute('aria-label', t.aiName)
   document.getElementById('ai-url').setAttribute('aria-label', t.aiUrl)
-  document.getElementById('manage-open').textContent = t.manageOpen
-  document.getElementById('manage-title').textContent = t.manageOpen
+  const navGeneral = document.getElementById('nav-general')
+  if (navGeneral) navGeneral.textContent = t.navGeneral || 'General'
+  const navAdvanced = document.getElementById('nav-advanced')
+  if (navAdvanced) navAdvanced.textContent = t.advancedOpen || 'Advanced'
   document.getElementById('ai-save').textContent = t.aiSave
   document.getElementById('ai-pick-label').textContent = t.aiPick
   document.getElementById('ai-cancel').textContent = t.aiCancel
   document.getElementById('ai-form-title').textContent = t.aiAddTitle
   document.getElementById('lbl-ai-name').textContent = t.aiName
   document.getElementById('lbl-ai-url').textContent = t.aiUrl
-  document.getElementById('lbl-tint').textContent = t.tintToggle
+  document.getElementById('lbl-tint').textContent = t.tintShort || t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
-  document.getElementById('advanced-toggle').textContent = advancedToggle.getAttribute('aria-expanded') === 'true' ? t.advancedClosed : t.advancedOpen
   tintCycle.setAttribute('aria-label', t.tintCycle)
   document.getElementById('quote').title = t.quoteAnother
   tintCycle.title = t.tintCycle
@@ -1095,8 +1461,37 @@ const applySettingsText = () => {
   document.getElementById('lbl-links-own').textContent = t.linksOwn
   document.getElementById('zone-label').textContent = t.zonesAdd
   document.getElementById('zone-add-btn').textContent = t.zoneAddBtn
-  document.getElementById('manage-close').setAttribute('aria-label', t.close)
+  const manageShowLabel = document.getElementById('manage-show-label')
+  if (manageShowLabel) manageShowLabel.textContent = t.manageShowLabel
+  document.getElementById('lbl-ai-overlay').textContent = t.lblAiOverlay
+  document.getElementById('lbl-social-row').textContent = t.lblSocialRow
+  document.getElementById('lbl-askai-master').textContent = t.lblAskaiMaster
+  document.getElementById('lbl-links-master').textContent = t.lblLinksMaster
+  document.getElementById('engines-note').textContent = t.enginesNote
+  document.getElementById('social-note').textContent = t.socialNote
+  document.getElementById('ai-overlay-note').textContent = t.aiOverlayNote
+  document.getElementById('ai-shortcuts-head').textContent = t.aiShortcutsHead
+  document.getElementById('social-row').setAttribute('aria-label', t.socialAria)
+  document.getElementById('tab-search').textContent = t.tabSearch
+  document.getElementById('tab-social').textContent = t.tabSocial
   document.getElementById('tab-links').textContent = t.tabLinks
+  const engineFormTitleEl = document.getElementById('engine-form-title')
+  if (engineFormTitleEl && !editingEngineId) engineFormTitleEl.textContent = t.engineAdd || 'Add search engine'
+  const lblEngineName = document.getElementById('lbl-engine-name')
+  if (lblEngineName) lblEngineName.textContent = t.lblName
+  const lblEngineUrl = document.getElementById('lbl-engine-url')
+  if (lblEngineUrl) lblEngineUrl.textContent = t.engineUrlLbl || 'Search URL template'
+  const engineUrlHint = document.getElementById('engine-url-hint')
+  if (engineUrlHint) engineUrlHint.textContent = t.engineUrlHint || ''
+  const engineSuggestBtn = document.getElementById('engine-suggest')
+  if (engineSuggestBtn) engineSuggestBtn.textContent = t.engineSuggest || 'Look up'
+  const engineSaveBtn = document.getElementById('engine-save')
+  if (engineSaveBtn && !editingEngineId) engineSaveBtn.textContent = t.linkSave || 'Save'
+  const engineCancelBtn = document.getElementById('engine-cancel')
+  if (engineCancelBtn) engineCancelBtn.textContent = t.linkCancel || 'Cancel'
+  if (typeof syncOverlayTabs === 'function') syncOverlayTabs()
+  if (typeof renderManageCatalogs === 'function') renderManageCatalogs()
+  if (typeof renderSocialRow === 'function') renderSocialRow()
   document.getElementById('tab-zones').textContent = t.tabZones
   document.getElementById('tab-ai').textContent = t.tabAi
   document.getElementById('tab-weather').textContent = t.tabWeather
@@ -1176,7 +1571,7 @@ const applySettingsText = () => {
   settingsFields.resetData.textContent = t.resetData
   document.getElementById('sec-reset').textContent = t.resetSec
   document.getElementById('reset-intro').textContent = t.resetIntro
-  document.getElementById('reset-backup').textContent = t.manageOpen
+  document.getElementById('reset-backup').textContent = t.tabBackup
   document.getElementById('settings-close').setAttribute('aria-label', t.close)
   document.getElementById('forecast-close').setAttribute('aria-label', t.close)
   settingsButton.setAttribute('aria-label', t.open)
@@ -1198,6 +1593,10 @@ const syncSettings = () => {
   settingsFields.links.checked = linksOn
   settingsFields.linksOwn.checked = linksOwn
   settingsFields.askai.checked = askaiOn
+  if (askaiMaster) askaiMaster.checked = askaiOn
+  if (linksMaster) linksMaster.checked = linksOn
+  if (aiOverlayField) aiOverlayField.checked = aiOverlayMasterOn
+  if (socialRowField) socialRowField.checked = socialRowMasterOn
   settingsFields.clock.value = clockMode
   settingsFields.dateStyle.value = dateNumeric ? 'short' : 'long'
   settingsFields.dateOrder.value = dateOrder
@@ -1211,38 +1610,25 @@ const syncSettings = () => {
   settingsFields.cityMessage.textContent = ''
 }
 
-// Advanced options: the page presets and the disclaimer are the basic view; the rest opens from a link.
-const advancedToggle = document.getElementById('advanced-toggle')
 const advancedBlock = document.getElementById('advanced')
-const basicPages = [document.querySelector('.presets')]
-const setAdvanced = (open) => {
-  advancedBlock.hidden = !open
-  basicPages.forEach((el) => { el.hidden = open })
-  advancedBlock.closest('.settings-panel').classList.toggle('is-wide', open)
-  advancedToggle.setAttribute('aria-expanded', String(open))
-  advancedToggle.textContent = open ? t.advancedClosed : t.advancedOpen
-  document.getElementById('settings-title').textContent = open ? t.advTitle : t.title
-  // Data beheren and IP details live in the basic view only; one place is enough.
-  manageOpenButton.hidden = open
-  ipOpen.hidden = open
-}
-advancedToggle.addEventListener('click', () => setAdvanced(advancedBlock.hidden))
 
-const openSettings = () => {
+const openSettings = (pane = 'general') => {
   openedFrom.el = document.activeElement
-  setAdvanced(false)
   syncSettings()
   settings.hidden = false
+  showSettingsPane(pane)
   settings.querySelector('.settings-panel').focus()
 }
 
 const closeSettings = () => {
   settings.hidden = true
-  setAdvanced(false)
+  settingsNav?.classList.remove('is-open')
+  const navToggle = document.getElementById('settings-nav-toggle')
+  if (navToggle) navToggle.setAttribute('aria-expanded', 'false')
   if (openedFrom.el && openedFrom.el.focus) openedFrom.el.focus()
 }
 
-settingsButton.addEventListener('click', openSettings)
+settingsButton.addEventListener('click', () => openSettings('general'))
 
 // Help: the same guide as the README, opened from the settings window. Escape closes it.
 const helpWindow = document.getElementById('help')
@@ -1285,11 +1671,11 @@ document.getElementById('settings-close').addEventListener('click', closeSetting
 settings.addEventListener('click', (e) => { if (e.target === settings) closeSettings() })
 
 document.addEventListener('keydown', (e) => {
-  const open = [importWindow, helpWindow, ipWindow, linksWindow, zonesWindow, forecastDialog, manageWindow, settings].find((d) => !d.hidden) || null
+  const open = [importWindow, helpWindow, ipWindow, linksWindow, zonesWindow, forecastDialog, settings].find((d) => !d.hidden) || null
   if (!open) {
     if (e.key === '?' && !isTyping(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault()
-      openSettings()
+      openSettings('general')
     }
     return
   }
@@ -1300,8 +1686,6 @@ document.addEventListener('keydown', (e) => {
     else if (open === zonesWindow) closeZones()
     else if (open === importWindow) closeImport()
     else if (open === forecastDialog) closeForecast()
-    else if (open === manageWindow) closeManage()
-    else if (!advancedBlock.hidden) setAdvanced(false)
     else closeSettings()
     return
   }
@@ -1342,7 +1726,7 @@ settingsFields.zones.addEventListener('change', () => {
   zonesOn = settingsFields.zones.checked
   writeKey('timeZones', zonesOn ? 'on' : 'off')
   applyZonesVisibility()
-  if (!zonesOn && manageTab === 'zones' && !manageWindow.hidden) closeManage()
+  if (!zonesOn && manageTab === 'zones' && !settings.hidden) showSettingsPane('general')
   if (!zonesOn && !zonesWindow.hidden) closeZones()
 })
 
@@ -1370,22 +1754,61 @@ settingsFields.aiNewTab.addEventListener('change', () => {
 // Ask AI links below the search bar.
 let askaiOn = readFlag('askai', false)
 const askAi = document.getElementById('ask-ai')
-settingsFields.askai.addEventListener('change', () => {
-  askaiOn = settingsFields.askai.checked
-  writeKey('askai', askaiOn ? 'on' : 'off')
+const askaiMaster = document.getElementById('set-askai-master')
+const linksMaster = document.getElementById('set-links-master')
+const aiOverlayField = document.getElementById('set-ai-overlay')
+const socialRowField = document.getElementById('set-social-row')
+aiOverlayMasterOn = readFlag('aiOverlay', false)
+socialRowMasterOn = readFlag('socialRow', false)
+// Social row and Ask AI row share the slot under the bar — never both.
+if (askaiOn && socialRowMasterOn) {
+  socialRowMasterOn = false
+  try { localStorage.setItem('socialRow', 'off') } catch {}
+}
+aiOverlayField.checked = aiOverlayMasterOn
+socialRowField.checked = socialRowMasterOn
+askaiMaster.checked = askaiOn
+
+const syncUnderBarMasters = () => {
+  askaiMaster.checked = askaiOn
+  settingsFields.askai.checked = askaiOn
+  socialRowField.checked = socialRowMasterOn
   renderAskAi()
+  renderSocialRow()
+  keepPersonal()
+  settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
+}
+
+const setAskAiRowOn = (on, { peer = false } = {}) => {
+  askaiOn = !!on
+  writeKey('askai', askaiOn ? 'on' : 'off')
+  if (askaiOn && socialRowMasterOn && !peer) setSocialRowOn(false, { peer: true })
+  syncUnderBarMasters()
+}
+
+const setSocialRowOn = (on, { peer = false } = {}) => {
+  socialRowMasterOn = !!on
+  writeKey('socialRow', socialRowMasterOn ? 'on' : 'off')
+  if (socialRowMasterOn && askaiOn && !peer) setAskAiRowOn(false, { peer: true })
+  syncUnderBarMasters()
+}
+
+settingsFields.askai.addEventListener('change', () => {
+  setAskAiRowOn(settingsFields.askai.checked)
+})
+askaiMaster.addEventListener('change', () => {
+  setAskAiRowOn(askaiMaster.checked)
 })
 
 // Pages: presets for how much is on the page. They only switch the display options; weather and the
 // IP address are never changed by a preset, since they send data.
 const presets = {
-  // Minimal starts with nothing extra, but keeps the colour button at the bottom left. Standard adds the Wikipedia button and the colour and wallpaper buttons;
-  // AI shortcuts, time zones and the rest are found later, in the settings.
-  minimal: { quote: false, links: false, linksOwn: false, zones: false, askai: false, weather: false, wallpaper: false, wallpaperButton: false, tint: true, date: false },
-  standard: { quote: false, links: true, linksOwn: false, zones: false, askai: false, weather: false, wallpaper: true, wallpaperButton: true, tint: true, date: true },
+  // Minimal: clock + search (+ colour). Overlay AI, Social row, ASK AI, Links all off.
+  minimal: { quote: false, links: false, linksOwn: false, zones: false, askai: false, aiOverlay: false, socialRow: false, weather: false, wallpaper: false, wallpaperButton: false, tint: true, date: false },
+  standard: { quote: false, links: true, linksOwn: false, zones: false, askai: false, aiOverlay: false, socialRow: false, weather: false, wallpaper: true, wallpaperButton: true, tint: true, date: true },
 }
 // Weather is off in both presets. A preset only ever switches weather off, never on, so choosing one never starts a lookup.
-const currentState = () => ({ quote: quoteOn, links: linksOn, linksOwn: linksOwn, zones: zonesOn, askai: askaiOn, weather: weatherOn, wallpaper: wallpaperOn, wallpaperButton: wallpaperButtonOn, tint: tintOn, date: dateOn })
+const currentState = () => ({ quote: quoteOn, links: linksOn, linksOwn: linksOwn, zones: zonesOn, askai: askaiOn, aiOverlay: aiOverlayMasterOn, socialRow: socialRowMasterOn, weather: weatherOn, wallpaper: wallpaperOn, wallpaperButton: wallpaperButtonOn, tint: tintOn, date: dateOn })
 // The preset that matches the current choices: only the keys a preset names are compared.
 const matchPreset = () => {
   const now = currentState()
@@ -1404,7 +1827,18 @@ const applyPreset = (name) => {
   if (!choice) return syncSettings()
   keepPersonal()
   Object.keys(choice).forEach((key) => {
+    if (key === 'aiOverlay') {
+      aiOverlayField.checked = choice[key]
+      aiOverlayField.dispatchEvent(new Event('change'))
+      return
+    }
+    if (key === 'socialRow') {
+      socialRowField.checked = choice[key]
+      socialRowField.dispatchEvent(new Event('change'))
+      return
+    }
     const field = key === 'wallpaper' ? settingsFields.wallpaper : settingsFields[key === 'wallpaperButton' ? 'wallpaperButton' : key]
+    if (!field) return
     field.checked = choice[key]
     field.dispatchEvent(new Event('change'))
   })
@@ -1468,7 +1902,7 @@ const clearKeys = (keys) => {
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
 }
-const personalKeys = ['links', 'askAiList', 'city', 'zones', 'location', 'weatherPlaces', 'personalState']
+const personalKeys = ['links', 'askAiList', 'city', 'zones', 'location', 'weatherPlaces', 'personalState', 'customEngines', 'engineEnabled']
 const storedLang = () => {
   try { return localStorage.getItem('lang') || 'auto' } catch { return 'auto' }
 }
@@ -1530,7 +1964,7 @@ settingsFields.resetSettings.addEventListener('click', () => {
   clearKeys(['personalState', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'wallpaperEnabled', 'hue', 'weather', 'location', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'dateNotation', 'showDate', 'preset'])
   location.reload()
 })
-document.getElementById('reset-backup').addEventListener('click', () => manageOpenButton.click())
+document.getElementById('reset-backup').addEventListener('click', () => showSettingsPane('backup'))
 
 settingsFields.resetData.addEventListener('click', () => {
   if (!confirm(t.resetDataConfirm)) return
@@ -1540,8 +1974,8 @@ settingsFields.resetData.addEventListener('click', () => {
 
 // Export and import: one JSON file with the settings and the personal data. Caches are left out.
 // The file is for the user to keep (for example in iCloud Drive) and open on another device.
-const EXPORT_SETTINGS = ['wallpaperEnabled', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'dateNotation', 'showDate', 'preset', 'personalState']
-const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
+const EXPORT_SETTINGS = ['wallpaperEnabled', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'dateNotation', 'showDate', 'preset', 'personalState', 'engineEnabled', 'aiOverlay', 'socialRow', 'activeDest', 'lastEngineName', 'lastAiKey']
+const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces', 'customEngines']
 // The export is a real link with a download name, so every browser treats the click as the user's download.
 // Export: the file is made in the click and saved through a fresh download link, which is the pattern Safari
 // on both iPhone and Mac handles as a normal download. The address is released after a while.
@@ -1763,53 +2197,74 @@ const utcLabel = (zone, now) => {
 const zoneName = (zone) => el('span', 'zone-name', cityOf(zone))
 const zoneTag = (zone, now) => el('span', 'zone-tag', utcLabel(zone, now))
 
-// One panel for the links, time zones, AI shortcuts and weather places. Each opens on its own tab.
-const manageWindow = document.getElementById('manage')
-const manageTabs = [...manageWindow.querySelectorAll('.manage-tab-button')]
-const manageSections = [...manageWindow.querySelectorAll('.manage-section')]
-let manageTab = 'links'
+// Settings shell A: one fixed panel with left nav (bottom tabs on small screens).
+const manageWindow = document.getElementById('manage') // legacy stub; shell lives in #settings
+const settingsNav = document.getElementById('settings-nav')
+const settingsNavButtons = [...(settingsNav?.querySelectorAll('.settings-nav-btn') || [])]
+const manageSections = [...document.querySelectorAll('#settings-content .manage-section')]
+let manageTab = 'general'
 let manageFrom = null
-const showManageTab = (tab) => {
+
+const showSettingsPane = (pane) => {
+  const tab = pane || 'general'
   manageTab = tab
-  manageTabs.forEach((button) => {
-    const on = button.dataset.tab === tab
+  settingsNavButtons.forEach((button) => {
+    const on = button.dataset.pane === tab
     button.setAttribute('aria-selected', String(on))
     button.tabIndex = on ? 0 : -1
   })
-  manageSections.forEach((section) => { section.hidden = section.dataset.tab !== tab })
-  if (tab === 'links') resetLinkForm()
-  if (tab === 'zones') renderZones()
-  if (tab === 'ai') resetAiForm()
-  if (tab === 'weather') renderPlaces()
-  if (tab === 'wallpapers') renderWallpapers()
+  manageSections.forEach((section) => {
+    const id = section.dataset.pane || section.dataset.tab
+    section.hidden = id !== tab
+  })
+  if (tab === 'links' && typeof resetLinkForm === 'function') resetLinkForm()
+  if (tab === 'zones' && typeof renderZones === 'function') renderZones()
+  if (tab === 'ai' && typeof resetAiForm === 'function') resetAiForm()
+  if (tab === 'weather' && typeof renderPlaces === 'function') renderPlaces()
+  if (tab === 'wallpapers' && typeof renderWallpapers === 'function') renderWallpapers()
+  if (tab === 'advanced') syncSettings()
+  settingsNav?.classList.remove('is-open')
+  const navToggle = document.getElementById('settings-nav-toggle')
+  if (navToggle) navToggle.setAttribute('aria-expanded', 'false')
 }
+
+const showManageTab = showSettingsPane
+
 const openManage = (tab) => {
   manageFrom = document.activeElement
-  showManageTab(tab)
-  manageWindow.hidden = false
-  manageWindow.querySelector('.settings-panel').focus()
+  if (settings.hidden) openSettings(tab || 'search')
+  else showSettingsPane(tab || 'search')
 }
+
 const closeManage = () => {
-  manageWindow.hidden = true
-  if (manageFrom && manageFrom.focus) manageFrom.focus()
+  // Shell owns manage; closing manage means leave the shell or return to General.
+  if (!settings.hidden) closeSettings()
+  else if (manageFrom && manageFrom.focus) manageFrom.focus()
 }
-manageTabs.forEach((button, index) => {
-  button.addEventListener('click', () => showManageTab(button.dataset.tab))
-  // Arrow keys move between the tabs, as the tab pattern expects; Home and End jump to the ends.
+
+settingsNavButtons.forEach((button, index) => {
+  button.addEventListener('click', () => showSettingsPane(button.dataset.pane))
   button.addEventListener('keydown', (e) => {
-    const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key]
+    const step = { ArrowDown: 1, ArrowUp: -1, ArrowRight: 1, ArrowLeft: -1 }[e.key]
     let next = null
-    if (step) next = (index + step + manageTabs.length) % manageTabs.length
+    if (step) next = (index + step + settingsNavButtons.length) % settingsNavButtons.length
     else if (e.key === 'Home') next = 0
-    else if (e.key === 'End') next = manageTabs.length - 1
+    else if (e.key === 'End') next = settingsNavButtons.length - 1
     if (next === null) return
     e.preventDefault()
-    manageTabs[next].focus()
-    showManageTab(manageTabs[next].dataset.tab)
+    settingsNavButtons[next].focus()
+    showSettingsPane(settingsNavButtons[next].dataset.pane)
   })
 })
-document.getElementById('manage-close').addEventListener('click', closeManage)
-manageWindow.addEventListener('click', (e) => { if (e.target === manageWindow) closeManage() })
+
+const settingsNavToggle = document.getElementById('settings-nav-toggle')
+if (settingsNavToggle) {
+  settingsNavToggle.addEventListener('click', () => {
+    const open = !settingsNav.classList.contains('is-open')
+    settingsNav.classList.toggle('is-open', open)
+    settingsNavToggle.setAttribute('aria-expanded', String(open))
+  })
+}
 
 const zonesWindow = document.getElementById('zones-window')
 const zonesWindowList = document.getElementById('zones-window-list')
@@ -1873,16 +2328,15 @@ applyZonesVisibility()
 // The window ticks along with the clock while it is open.
 setInterval(() => {
   renderPreview()
-  if (!manageWindow.hidden && manageTab === 'zones') renderZones()
+  if (!settings.hidden && manageTab === 'zones') renderZones()
 }, 1000)
 
 // Links. Permanent links are built in: Wikipedia, in the browser's language. They cannot be removed.
 // Custom links are added by the visitor, up to 15. The whole links button can be switched off in settings.
 const linksButton = document.getElementById('links-button')
 const linksButtonIcon = linksButton.innerHTML
-// Own links off: the button is a plain Wikipedia link with its logo, and the label says so.
 const labelLinksButton = () => {
-  const label = linksOwn ? t.linksButton : 'Wikipedia'
+  const label = t.linksButton || 'Links'
   linksButton.setAttribute('aria-label', label)
   linksButton.title = label
 }
@@ -1914,36 +2368,8 @@ const hostOf = (value) => {
   try { return new URL(value).host } catch { return '' }
 }
 
-// The Wikipedia edition follows the browser language, with English as the fallback.
-const wikiCode = ['nl', 'de', 'fr', 'es', 'zh'].includes(uiLang) ? uiLang : 'en'
-const brandIcons = {
-  wikipedia: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.09 13.119c-.936 1.932-2.217 4.548-2.853 5.728-.616 1.074-1.127.931-1.532.029-1.406-3.321-4.293-9.144-5.651-12.409-.251-.601-.441-.987-.619-1.139-.181-.15-.554-.24-1.122-.271C.103 5.033 0 4.982 0 4.898v-.455l.052-.045c.924-.005 5.401 0 5.401 0l.051.045v.434c0 .119-.075.176-.225.176l-.564.031c-.485.029-.727.164-.727.436 0 .135.053.33.166.601 1.082 2.646 4.818 10.521 4.818 10.521l.136.046 2.411-4.81-.482-1.067-1.658-3.264s-.318-.654-.428-.872c-.728-1.443-.712-1.518-1.447-1.617-.207-.023-.313-.05-.313-.149v-.468l.06-.045h4.292l.113.037v.451c0 .105-.076.15-.227.15l-.308.047c-.792.061-.661.381-.136 1.422l1.582 3.252 1.758-3.504c.293-.64.233-.801.111-.947-.07-.084-.305-.22-.812-.24l-.201-.021c-.052 0-.098-.015-.145-.051-.045-.031-.067-.076-.067-.129v-.427l.061-.045c1.247-.008 4.043 0 4.043 0l.059.045v.436c0 .121-.059.178-.193.178-.646.03-.782.095-1.023.439-.12.186-.375.589-.646 1.039l-2.301 4.273-.065.135 2.792 5.712.17.048 4.396-10.438c.154-.422.129-.722-.064-.895-.197-.172-.346-.273-.857-.295l-.42-.016c-.061 0-.105-.014-.152-.045-.043-.029-.072-.075-.072-.119v-.436l.059-.045h4.961l.041.045v.437c0 .119-.074.18-.209.18-.648.03-1.127.18-1.443.421-.314.255-.557.616-.736 1.067 0 0-4.043 9.258-5.426 12.339-.525 1.007-1.053.917-1.503-.031-.571-1.171-1.773-3.786-2.646-5.71l.053-.036z"/></svg>',
-  google: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>',
-  apple: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>',
-  facebook: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>',
-  x: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg>',
-  instagram: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>',
-  dw: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.143 5.182A6.854 6.854 0 0 0 12 7.493a6.855 6.855 0 0 0-5.143-2.311C3.07 5.182 0 8.234 0 12c0 3.766 3.07 6.818 6.857 6.818A6.855 6.855 0 0 0 12 16.507a6.854 6.854 0 0 0 5.143 2.311C20.929 18.818 24 15.766 24 12c0-3.766-3.07-6.818-6.857-6.818zm-6.04 10.05a5.349 5.349 0 0 1-4.246 2.086c-2.954 0-5.348-2.38-5.348-5.318 0-2.937 2.394-5.318 5.348-5.318 1.731 0 3.27.818 4.247 2.087A5.274 5.274 0 0 1 12.206 12a5.274 5.274 0 0 1-1.102 3.231zm8.88-.641h-1.608l-1.049-2.549-1.025 2.549h-1.605l-1.661-5.182h1.833l.779 2.602.972-2.602h1.434l.973 2.602.778-2.602h1.841zM7.058 9.273H4.083v5.454h2.975c1.534 0 3.107-.878 3.107-2.727 0-1.768-1.434-2.727-3.107-2.727zm-.161 3.874H5.729v-2.318h1.168c1.062 0 1.44.59 1.44 1.159.001.561-.375 1.159-1.44 1.159z"/></svg>'
-}
-// Permanent links: recognisable logos (Simple Icons, CC0). Grouped: reference, tech, then social. The Wikipedia edition follows the browser language.
-// Reuters is the news link, shown by its name: no Reuters logo is in the open icon set.
-const wikipediaIcon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.09 13.119c-.936 1.932-2.217 4.548-2.853 5.728-.616 1.074-1.127.931-1.532.029-1.406-3.321-4.293-9.144-5.651-12.409-.251-.601-.441-.987-.619-1.139-.181-.15-.554-.24-1.122-.271C.103 5.033 0 4.982 0 4.898v-.455l.052-.045c.924-.005 5.401 0 5.401 0l.051.045v.434c0 .119-.075.176-.225.176l-.564.031c-.485.029-.727.164-.727.436 0 .135.053.33.166.601 1.082 2.646 4.818 10.521 4.818 10.521l.136.046 2.411-4.81-.482-1.067-1.658-3.264s-.318-.654-.428-.872c-.728-1.443-.712-1.518-1.447-1.617-.207-.023-.313-.05-.313-.149v-.468l.06-.045h4.292l.113.037v.451c0 .105-.076.15-.227.15l-.308.047c-.792.061-.661.381-.136 1.422l1.582 3.252 1.758-3.504c.293-.64.233-.801.111-.947-.07-.084-.305-.22-.812-.24l-.201-.021c-.052 0-.098-.015-.145-.051-.045-.031-.067-.076-.067-.129v-.427l.061-.045c1.247-.008 4.043 0 4.043 0l.059.045v.436c0 .121-.059.178-.193.178-.646.03-.782.095-1.023.439-.12.186-.375.589-.646 1.039l-2.301 4.273-.065.135 2.792 5.712.17.048 4.396-10.438c.154-.422.129-.722-.064-.895-.197-.172-.346-.273-.857-.295l-.42-.016c-.061 0-.105-.014-.152-.045-.043-.029-.072-.075-.072-.119v-.436l.059-.045h4.961l.041.045v.437c0 .119-.074.18-.209.18-.648.03-1.127.18-1.443.421-.314.255-.557.616-.736 1.067 0 0-4.043 9.258-5.426 12.339-.525 1.007-1.053.917-1.503-.031-.571-1.171-1.773-3.786-2.646-5.71l.053-.036z"/></svg>'
-const microsoftIcon = '<svg class="wide" viewBox="0 0 60 24" fill="currentColor" aria-hidden="true"><text x="30" y="17" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="600">Microsoft</text></svg>'
-const reutersIcon = '<svg class="wide" viewBox="0 0 60 24" fill="currentColor" aria-hidden="true"><text x="30" y="17" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="700">Reuters</text></svg>'
-const permanentLinks = () => [
-  { title: 'Wikipedia', url: `https://${wikiCode}.wikipedia.org/`, description: '', icon: wikipediaIcon },
-  { title: 'Google', url: 'https://www.google.com/', description: '', icon: brandIcons.google },
-  { title: 'Reuters', url: 'https://www.reuters.com/', description: '', icon: reutersIcon },
-  { title: 'Apple', url: 'https://www.apple.com/', description: '', icon: brandIcons.apple },
-  { title: 'Microsoft', url: 'https://www.microsoft.com/', description: '', icon: microsoftIcon },
-  { title: 'GitHub', url: 'https://github.com/', description: '', icon: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>' },
-  { title: 'Facebook', url: 'https://www.facebook.com/', description: '', icon: brandIcons.facebook },
-  { title: 'Instagram', url: 'https://www.instagram.com/', description: '', icon: brandIcons.instagram },
-  { title: 'X', url: 'https://x.com/', description: '', icon: brandIcons.x },
-  { title: 'Reddit', url: 'https://www.reddit.com/', description: '', icon: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-2.286 2.286C.775 23.225 1.097 24 1.738 24H12c6.627 0 12-5.373 12-12S18.627 0 12 0Zm4.388 3.199c1.104 0 1.999.895 1.999 1.999 0 1.105-.895 2-1.999 2-.946 0-1.739-.657-1.947-1.539v.002c-1.147.162-2.032 1.15-2.032 2.341v.007c1.776.067 3.4.567 4.686 1.363.473-.363 1.064-.58 1.707-.58 1.547 0 2.802 1.254 2.802 2.802 0 1.117-.655 2.081-1.601 2.531-.088 3.256-3.637 5.876-7.997 5.876-4.361 0-7.905-2.617-7.998-5.87-.954-.447-1.614-1.415-1.614-2.538 0-1.548 1.255-2.802 2.803-2.802.645 0 1.239.218 1.712.585 1.275-.79 2.881-1.291 4.64-1.365v-.01c0-1.663 1.263-3.034 2.88-3.207.188-.911.993-1.595 1.959-1.595Zm-8.085 8.376c-.784 0-1.459.78-1.506 1.797-.047 1.016.64 1.429 1.426 1.429.786 0 1.371-.369 1.418-1.385.047-1.017-.553-1.841-1.338-1.841Zm7.406 0c-.786 0-1.385.824-1.338 1.841.047 1.017.634 1.385 1.418 1.385.785 0 1.473-.413 1.426-1.429-.046-1.017-.721-1.797-1.506-1.797Zm-3.703 4.013c-.974 0-1.907.048-2.77.135-.147.015-.241.168-.183.305.483 1.154 1.622 1.964 2.953 1.964 1.33 0 2.47-.81 2.953-1.964.057-.137-.037-.29-.184-.305-.863-.087-1.795-.135-2.769-.135Z"/></svg>' },
-]
-const isPermanent = (url) => permanentLinks().some((link) => link.url === url)
-const isValidLink = (link) => !!link && typeof link.title === 'string' && typeof link.url === 'string' && safeUrl(link.url) && !isPermanent(link.url)
+// Links panel is own-only: canned permanent icons (Wikipedia…Reddit) were removed.
+const isValidLink = (link) => !!link && typeof link.title === 'string' && typeof link.url === 'string' && safeUrl(link.url)
 
 let links = []
 try {
@@ -1956,10 +2382,31 @@ let editing = null
 
 const saveLinks = () => writeKey('links', JSON.stringify(links))
 
+const faviconEl = (url) => {
+  const host = hostOf(url)
+  if (!host) return null
+  const img = document.createElement('img')
+  img.className = 'favicon-img'
+  img.width = 16
+  img.height = 16
+  img.alt = ''
+  img.loading = 'lazy'
+  img.src = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=32`
+  img.onerror = () => {
+    img.src = `https://icons.duckduckgo.com/ip3/${host}.ico`
+    img.onerror = null
+  }
+  return img
+}
+
 // A link as a row in the preview or the window. Link text is set with textContent, never as HTML.
 const linkAnchor = (link, withDescription) => {
   const anchor = Object.assign(document.createElement('a'), { href: link.url, target: '_blank', rel: 'noopener', className: 'link-main' })
-  anchor.append(el('span', 'link-title', link.title))
+  const head = el('span', 'link-title-row')
+  const icon = faviconEl(link.url)
+  if (icon) head.append(icon)
+  head.append(el('span', 'link-title', link.title))
+  anchor.append(head)
   const detail = [hostOf(link.url), withDescription ? link.description : ''].filter(Boolean).join(' · ')
   if (detail) anchor.append(el('small', '', detail))
   return anchor
@@ -1967,20 +2414,16 @@ const linkAnchor = (link, withDescription) => {
 
 const renderLinks = () => {
   linksButton.hidden = !linksOn
-  linksButton.innerHTML = linksOwn ? linksButtonIcon : wikipediaIcon
+  linksButton.innerHTML = linksButtonIcon
   labelLinksButton()
   linksPreview.hidden = !linksOwn
   settingsFields.linksOwn.disabled = !linksOn
-  // The hover list shows only the links the visitor added; the permanent ones live in the window.
+  // Own links only — canned permanent row removed.
   linksPreview.replaceChildren(...links.map((link) => linkAnchor(link, false)))
-
-  // Permanent links as a row of icons at the top of the window.
-  linksIcons.replaceChildren(...permanentLinks().map((link) => {
-    const icon = Object.assign(document.createElement('a'), { href: link.url, target: '_blank', rel: 'noopener', className: 'link-icon', title: link.title })
-    icon.setAttribute('aria-label', link.title)
-    icon.innerHTML = link.icon
-    return icon
-  }))
+  if (linksIcons) {
+    linksIcons.replaceChildren()
+    linksIcons.hidden = true
+  }
 
   const rows = links.map((link, index) => {
     const row = el('div', 'link-row')
@@ -2016,7 +2459,9 @@ const renderLinks = () => {
   linksList.replaceChildren(...(rows.length ? rows : [el('p', 'zones-empty', t.linksEmpty)]))
   const ownRows = links.map((link) => {
     const row = Object.assign(document.createElement('a'), { href: link.url, target: '_blank', rel: 'noopener', className: 'own-link' })
-    row.append(link.title)
+    const icon = faviconEl(link.url)
+    if (icon) row.append(icon)
+    row.append(document.createTextNode(link.title))
     if (link.description) row.append(el('span', 'own-desc', link.description))
     return row
   })
@@ -2045,7 +2490,7 @@ linkForm.addEventListener('submit', (e) => {
   // A bare host such as example.com gets https:// in front of it.
   let url = linkUrl.value.trim()
   if (url && !/^[a-z][a-z0-9+.-]*:\/\//i.test(url)) url = `https://${url}`
-  if (!safeUrl(url) || isPermanent(url)) {
+  if (!safeUrl(url)) {
     linkMsg.textContent = t.linkInvalid
     return
   }
@@ -2103,15 +2548,13 @@ document.getElementById('links-manage').addEventListener('click', () => {
   openManage('links')
 })
 linksButton.addEventListener('click', () => {
-  if (!linksOwn) return window.open(permanentLinks()[0].url, '_blank', 'noopener')
   openLinks()
 })
 
-// The links button can be switched off in settings; the window closes with it.
+// Show on page: Links master only shows/hides the globe. Manage data stays open.
 settingsFields.links.addEventListener('change', () => {
   linksOn = settingsFields.links.checked
   writeKey('linksOn', linksOn ? 'on' : 'off')
-  if (!linksOn && manageTab === 'links' && !manageWindow.hidden) closeManage()
   if (!linksOn && !linksWindow.hidden) closeLinks()
   renderLinks()
 })
@@ -2148,6 +2591,371 @@ const aiCatalog = [
   { key: 'meta', title: 'Meta AI', url: 'https://www.meta.ai/' },
   { key: 'gemini', title: 'Gemini', url: 'https://gemini.google.com/app' },
 ]
+
+// Overlay AI platforms: pick in the left-icon popover, then type + Enter uses queryUrl.
+const aiOverlayCatalog = [
+  { key: 'claude', title: 'Claude', homeUrl: 'https://claude.ai/', queryUrl: 'https://claude.ai/new?q=', icon: askAiIcons.claude },
+  { key: 'chatgpt', title: 'ChatGPT', homeUrl: 'https://chatgpt.com/', queryUrl: 'https://chatgpt.com/?q=', icon: askAiIcons.chatgpt },
+  { key: 'grok', title: 'Grok', homeUrl: 'https://grok.com/', queryUrl: 'https://grok.com/?q=', icon: askAiIcons.grok },
+  { key: 'gemini', title: 'Gemini', homeUrl: 'https://gemini.google.com/app', queryUrl: 'https://www.google.com/search?udm=50&q=', icon: askAiIcons.gemini },
+  { key: 'duck', title: 'Duck.ai', homeUrl: 'https://duck.ai/', queryUrl: 'https://duck.ai/?q=', icon: askAiIcons.duck },
+  { key: 'lumo', title: 'Lumo', homeUrl: 'https://lumo.proton.me/', queryUrl: 'https://lumo.proton.me/?q=', icon: askAiIcons.lumo },
+  { key: 'kagi', title: 'Kagi Assistant', homeUrl: 'https://assistant.kagi.com/', queryUrl: 'https://assistant.kagi.com/?q=', icon: askAiIcons.kagi },
+  { key: 'meta', title: 'Meta AI', homeUrl: 'https://www.meta.ai/', queryUrl: 'https://www.meta.ai/?q=', icon: askAiIcons.meta },
+]
+let aiOverlayOrder = aiOverlayCatalog.map((item) => item.key)
+let aiOverlayEnabled = Object.fromEntries(aiOverlayCatalog.map((item) => [item.key, true]))
+try {
+  const savedOrder = JSON.parse(localStorage.getItem('aiOverlayOrder') || 'null')
+  if (Array.isArray(savedOrder)) {
+    const known = new Set(aiOverlayCatalog.map((item) => item.key))
+    aiOverlayOrder = [...savedOrder.filter((key) => known.has(key)), ...aiOverlayCatalog.map((item) => item.key).filter((key) => !savedOrder.includes(key))]
+  }
+  const savedOn = JSON.parse(localStorage.getItem('aiOverlayEnabled') || 'null')
+  if (savedOn && typeof savedOn === 'object') {
+    aiOverlayCatalog.forEach((item) => {
+      if (typeof savedOn[item.key] === 'boolean') aiOverlayEnabled[item.key] = savedOn[item.key]
+    })
+  }
+} catch {}
+getAiOverlayByKey = (key) => aiOverlayCatalog.find((item) => item.key === key) || null
+getAiOverlayEnabled = () => aiOverlayOrder.map(getAiOverlayByKey).filter((item) => item && aiOverlayEnabled[item.key] !== false)
+
+// Social: quiet jump row under the bar (no query-search).
+const socialIcons = {
+  tiktok: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .55.04.81.1v-3.5a6.37 6.37 0 0 0-.81-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.73a8.2 8.2 0 0 0 4.76 1.51V6.79a4.85 4.85 0 0 1-1-.1z"/></svg>`,
+  threads: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.5 12.07 1.5 5.79 5.977 1.5 12.186 1.5c3.12 0 5.54.88 7.2 2.615C20.91 5.715 21.75 8.01 21.75 10.8c0 3.39-1.59 5.76-4.38 6.51-.66.18-1.26.24-1.95.24-1.02 0-1.86-.24-2.52-.72-.54-.39-.9-.93-1.08-1.62 1.14.69 2.4 1.05 3.78 1.05.72 0 1.38-.09 1.98-.27 1.86-.54 2.94-2.16 2.94-4.44 0-2.04-.66-3.69-1.95-4.89-1.32-1.23-3.18-1.86-5.52-1.86-4.62 0-7.8 2.91-7.8 7.14 0 2.49.63 4.56 1.86 6.15 1.35 1.74 3.42 2.64 6.15 2.67h.006c.99 0 1.98-.09 2.94-.27v2.55c-.96.21-1.95.33-2.94.33zm1.02-10.59c-.18 1.41-.84 2.28-2.04 2.28-.9 0-1.5-.54-1.68-1.53-.06-.36-.09-.75-.09-1.17 0-.45.03-.87.09-1.26.21-1.29.9-2.07 1.98-2.07.87 0 1.44.51 1.65 1.47.06.33.09.72.09 1.14 0 .42-.03.81-.09 1.14h.09z"/></svg>`,
+  facebook: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S1.86 6.48 1.86 12.07c0 5.02 3.66 9.18 8.44 9.93v-7.03H7.9v-2.9h2.4V9.84c0-2.37 1.4-3.69 3.56-3.69 1.03 0 2.11.19 2.11.19v2.33h-1.19c-1.17 0-1.54.73-1.54 1.48v1.78h2.62l-.42 2.9h-2.2V22c4.78-.75 8.44-4.91 8.44-9.93z"/></svg>`,
+  instagram: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm11 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>`,
+  x: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+  reddit: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6.1 8.2c.5 0 .9.4.9.9 0 .3-.2.6-.4.8-.9.7-2.1 1.1-3.4 1.3.1.4.2.9.2 1.3 0 2.1-2.4 3.8-5.4 3.8S4.6 16.6 4.6 14.5c0-.4.1-.9.2-1.3-1.3-.2-2.5-.6-3.4-1.3-.2-.2-.4-.5-.4-.8 0-.5.4-.9.9-.9.3 0 .5.1.7.3.7.6 1.7 1 2.8 1.2.6-1.1 1.7-1.9 3.1-2.1l.6-2.7c0-.2.2-.3.4-.3h.1l1.9.4c.2-.4.6-.7 1.1-.7.6 0 1.1.5 1.1 1.1s-.5 1.1-1.1 1.1c-.4 0-.8-.3-.9-.6l-1.7-.4-.5 2.4c1.3.2 2.5 1 3.1 2.1 1.1-.2 2.1-.6 2.8-1.2.2-.2.4-.3.7-.3zM8.7 13.4c-.6 0-1.1.5-1.1 1.1s.5 1.1 1.1 1.1 1.1-.5 1.1-1.1-.5-1.1-1.1-1.1zm6.6 0c-.6 0-1.1.5-1.1 1.1s.5 1.1 1.1 1.1 1.1-.5 1.1-1.1-.5-1.1-1.1-1.1zm-6.1 3.1c.5.5 1.4.8 2.8.8s2.3-.3 2.8-.8c.1-.1.3-.1.4 0 .1.1.1.3 0 .4-.6.6-1.8 1-3.2 1s-2.6-.4-3.2-1c-.1-.1-.1-.3 0-.4.1-.1.3-.1.4 0z"/></svg>`,
+}
+const socialCatalog = [
+  { key: 'tiktok', title: 'TikTok', url: 'https://www.tiktok.com/' },
+  { key: 'threads', title: 'Threads', url: 'https://www.threads.net/' },
+  { key: 'facebook', title: 'Facebook', url: 'https://www.facebook.com/' },
+  { key: 'instagram', title: 'Instagram', url: 'https://www.instagram.com/' },
+  { key: 'x', title: 'X', url: 'https://x.com/' },
+  { key: 'reddit', title: 'Reddit', url: 'https://www.reddit.com/' },
+]
+let socialOrder = socialCatalog.map((item) => item.key)
+let socialEnabled = Object.fromEntries(socialCatalog.map((item) => [item.key, true]))
+try {
+  const savedOrder = JSON.parse(localStorage.getItem('socialOrder') || 'null')
+  if (Array.isArray(savedOrder)) {
+    const known = new Set(socialCatalog.map((item) => item.key))
+    socialOrder = [...savedOrder.filter((key) => known.has(key)), ...socialCatalog.map((item) => item.key).filter((key) => !savedOrder.includes(key))]
+  }
+  const savedOn = JSON.parse(localStorage.getItem('socialEnabled') || 'null')
+  if (savedOn && typeof savedOn === 'object') {
+    socialCatalog.forEach((item) => {
+      if (typeof savedOn[item.key] === 'boolean') socialEnabled[item.key] = savedOn[item.key]
+    })
+  }
+} catch {}
+const socialRowEl = document.getElementById('social-row')
+const socialListEl = document.getElementById('social-list')
+const enginesListEl = document.getElementById('engines-list')
+const aiOverlayListEl = document.getElementById('ai-overlay-list')
+const socialManageListEl = document.getElementById('social-manage-list')
+
+const persistEngineEnabled = () => {
+  ensureOneEngine()
+  writeKey('engineEnabled', JSON.stringify(engineEnabled))
+  if (activeDest.kind === 'engine' && engineEnabled[activeDest.name] === false) {
+    activeDest = { kind: 'engine', name: enabledEngines()[0].name }
+    persistDest()
+  }
+  showEngine()
+  if (engineOverlayOpen) renderEngineOverlayList()
+}
+
+const persistAiOverlay = () => {
+  writeKey('aiOverlayOrder', JSON.stringify(aiOverlayOrder))
+  writeKey('aiOverlayEnabled', JSON.stringify(aiOverlayEnabled))
+  if (activeDest.kind === 'ai' && (aiOverlayEnabled[activeDest.key] === false || !aiOverlayMasterOn)) {
+    activeDest = { kind: 'engine', name: enabledEngines()[0].name }
+    persistDest()
+    showEngine()
+  }
+  if (engineOverlayOpen) {
+    syncOverlayTabs()
+    renderEngineOverlayList()
+  }
+}
+
+const persistSocial = () => {
+  writeKey('socialOrder', JSON.stringify(socialOrder))
+  writeKey('socialEnabled', JSON.stringify(socialEnabled))
+}
+
+const renderSocialRow = () => {
+  const enabled = socialRowMasterOn
+    ? socialOrder.map((key) => socialCatalog.find((item) => item.key === key)).filter((item) => item && socialEnabled[item.key] !== false)
+    : []
+  socialRowEl.hidden = !enabled.length
+  socialListEl.replaceChildren(...enabled.map((item) => {
+    const a = Object.assign(document.createElement('a'), { href: item.url, title: item.title })
+    a.target = '_blank'
+    a.rel = 'noopener'
+    a.setAttribute('aria-label', item.title)
+    a.innerHTML = socialIcons[item.key] || ''
+    const li = document.createElement('li')
+    li.append(a)
+    return li
+  }))
+}
+
+const catalogRow = ({ name, iconHtml, on, onToggle, onUp, onDown, canUp, canDown, canToggleOff = true, onRemove, onEdit }) => {
+  const row = document.createElement('li')
+  if (iconHtml) {
+    const icon = el('span', 'catalog-icon')
+    icon.innerHTML = iconHtml
+    const img = icon.querySelector('img.favicon-img')
+    if (img) {
+      img.onerror = () => {
+        const host = (img.src.match(/domain=([^&]+)/) || [])[1]
+        if (host) img.src = `https://icons.duckduckgo.com/ip3/${decodeURIComponent(host)}.ico`
+        img.onerror = null
+      }
+    }
+    row.append(icon)
+  }
+  row.append(el('span', 'catalog-name', name))
+  if (onUp || onDown) {
+    const move = el('span', 'catalog-move')
+    move.append(
+      aiButton(t.aiUp || 'Up', '↑', onUp || (() => {}), !canUp),
+      aiButton(t.aiDown || 'Down', '↓', onDown || (() => {}), !canDown),
+    )
+    row.append(move)
+  }
+  if (onEdit) row.append(aiButton(t.linkEditBtn || 'Edit', '✎', onEdit, false))
+  if (onRemove) row.append(aiButton(t.linkRemove || 'Remove', '×', onRemove, false))
+  const toggle = Object.assign(document.createElement('input'), {
+    type: 'checkbox',
+    className: 'catalog-toggle',
+    checked: on,
+    disabled: on && !canToggleOff,
+  })
+  toggle.addEventListener('change', () => onToggle(toggle.checked, toggle))
+  row.append(toggle)
+  return row
+}
+
+const renderManageCatalogs = () => {
+  if (!enginesListEl) return
+  enginesListEl.replaceChildren(...engines.map((item) => catalogRow({
+    name: item.name,
+    iconHtml: item.icon,
+    on: engineEnabled[item.name] !== false,
+    canToggleOff: enabledEngines().length > 1 || engineEnabled[item.name] === false,
+    onEdit: item.custom ? () => startEngineEdit(item) : undefined,
+    onRemove: item.custom ? () => {
+      if (enabledEngines().length <= 1 && engineEnabled[item.name] !== false) return
+      customEngines = customEngines.filter((entry) => entry.id !== item.id && entry.name !== item.name)
+      if (activeDest.kind === 'engine' && activeDest.name === item.name) {
+        activeDest = { kind: 'engine', name: 'DuckDuckGo' }
+        persistDest()
+      }
+      persistCustomEngines()
+      resetEngineForm()
+    } : undefined,
+    onToggle: (checked, toggle) => {
+      if (!checked && enabledEngines().length <= 1) {
+        toggle.checked = true
+        return
+      }
+      engineEnabled[item.name] = checked
+      persistEngineEnabled()
+      renderManageCatalogs()
+    },
+  })))
+
+  aiOverlayListEl.replaceChildren(...aiOverlayOrder.map((key, index) => {
+    const item = getAiOverlayByKey(key)
+    if (!item) return null
+    return catalogRow({
+      name: item.title,
+      iconHtml: item.icon,
+      on: aiOverlayEnabled[item.key] !== false,
+      canUp: index > 0,
+      canDown: index < aiOverlayOrder.length - 1,
+      onUp: () => {
+        ;[aiOverlayOrder[index - 1], aiOverlayOrder[index]] = [aiOverlayOrder[index], aiOverlayOrder[index - 1]]
+        persistAiOverlay()
+        renderManageCatalogs()
+      },
+      onDown: () => {
+        ;[aiOverlayOrder[index + 1], aiOverlayOrder[index]] = [aiOverlayOrder[index], aiOverlayOrder[index + 1]]
+        persistAiOverlay()
+        renderManageCatalogs()
+      },
+      onToggle: (checked) => {
+        aiOverlayEnabled[item.key] = checked
+        persistAiOverlay()
+      },
+    })
+  }).filter(Boolean))
+
+  socialManageListEl.replaceChildren(...socialOrder.map((key, index) => {
+    const item = socialCatalog.find((entry) => entry.key === key)
+    if (!item) return null
+    return catalogRow({
+      name: item.title,
+      iconHtml: socialIcons[item.key],
+      on: socialEnabled[item.key] !== false,
+      canUp: index > 0,
+      canDown: index < socialOrder.length - 1,
+      onUp: () => {
+        ;[socialOrder[index - 1], socialOrder[index]] = [socialOrder[index], socialOrder[index - 1]]
+        persistSocial()
+        renderManageCatalogs()
+        renderSocialRow()
+      },
+      onDown: () => {
+        ;[socialOrder[index + 1], socialOrder[index]] = [socialOrder[index], socialOrder[index + 1]]
+        persistSocial()
+        renderManageCatalogs()
+        renderSocialRow()
+      },
+      onToggle: (checked) => {
+        socialEnabled[item.key] = checked
+        persistSocial()
+        renderSocialRow()
+      },
+    })
+  }).filter(Boolean))
+}
+
+// Custom search engines: add / edit with Look up for query URL templates.
+const engineForm = document.getElementById('engine-form')
+const engineName = document.getElementById('engine-name')
+const engineUrl = document.getElementById('engine-url')
+const engineMsg = document.getElementById('engine-msg')
+const engineCancel = document.getElementById('engine-cancel')
+const engineSave = document.getElementById('engine-save')
+const engineSuggest = document.getElementById('engine-suggest')
+const engineFormTitle = document.getElementById('engine-form-title')
+let editingEngineId = null
+
+const resetEngineForm = () => {
+  editingEngineId = null
+  if (!engineForm) return
+  engineForm.reset()
+  if (engineFormTitle) engineFormTitle.textContent = t.engineAdd || 'Add search engine'
+  if (engineSave) engineSave.textContent = t.linkSave || 'Save'
+  if (engineCancel) engineCancel.hidden = true
+  if (engineMsg) engineMsg.textContent = ''
+}
+
+const startEngineEdit = (item) => {
+  editingEngineId = item.id || item.name
+  engineName.value = item.name
+  engineUrl.value = item.url
+  engineFormTitle.textContent = t.engineEdit || 'Edit search engine'
+  engineSave.textContent = t.linkSave || 'Save'
+  engineCancel.hidden = false
+  engineMsg.textContent = ''
+  engineName.focus()
+}
+
+const applyEngineLookup = () => {
+  const found = inferSearchTemplate(engineUrl.value || engineName.value)
+  if (!found) {
+    engineMsg.textContent = t.engineInvalid || 'Enter a valid site or search URL.'
+    return null
+  }
+  engineUrl.value = found.url
+  if (!engineName.value.trim()) engineName.value = found.name
+  engineMsg.textContent = found.guessed
+    ? (t.engineGuessed || 'Guessed template — check that searching works.')
+    : ''
+  return found
+}
+
+if (engineSuggest) {
+  engineSuggest.addEventListener('click', () => applyEngineLookup())
+}
+if (engineCancel) engineCancel.addEventListener('click', resetEngineForm)
+if (engineUrl) {
+  engineUrl.addEventListener('blur', () => {
+    if (!engineUrl.value.trim()) return
+    if (!/[?&](q|query|p|text|search|s)=/i.test(engineUrl.value)) applyEngineLookup()
+  })
+}
+if (engineForm) {
+  engineForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const looked = applyEngineLookup() || inferSearchTemplate(engineUrl.value)
+    const name = engineName.value.trim()
+    const url = (looked?.url || engineUrl.value.trim())
+    if (!name || !isTemplateUrl(url)) {
+      engineMsg.textContent = t.engineInvalid || 'Enter a name and an https search URL ending with the query (for example …?q=).'
+      return
+    }
+    const clash = engines.some((item) => item.name.toLowerCase() === name.toLowerCase()
+      && (!editingEngineId || (item.id || item.name) !== editingEngineId))
+    if (clash) {
+      engineMsg.textContent = t.engineExists || 'That name is already in the list.'
+      return
+    }
+    let domain = looked?.domain || ''
+    try { domain = domain || new URL(url).hostname.replace(/^www\./, '') } catch {}
+    if (editingEngineId) {
+      const idx = customEngines.findIndex((item) => (item.id || item.name) === editingEngineId)
+      if (idx < 0) {
+        engineMsg.textContent = t.engineInvalid || 'Could not edit that engine.'
+        return
+      }
+      const prevName = customEngines[idx].name
+      customEngines[idx] = { ...customEngines[idx], name, url, domain }
+      if (prevName !== name) {
+        engineEnabled[name] = engineEnabled[prevName] !== false
+        delete engineEnabled[prevName]
+        if (activeDest.kind === 'engine' && activeDest.name === prevName) {
+          activeDest = { kind: 'engine', name }
+          persistDest()
+        }
+      }
+    } else {
+      if (customEngines.length >= CUSTOM_ENGINE_LIMIT) {
+        engineMsg.textContent = (t.engineLimit || 'You can add up to {n} custom engines.').replace('{n}', String(CUSTOM_ENGINE_LIMIT))
+        return
+      }
+      customEngines = [...customEngines, {
+        id: `custom-${Date.now().toString(36)}`,
+        name,
+        url,
+        domain,
+      }]
+      engineEnabled[name] = true
+    }
+    persistCustomEngines()
+    resetEngineForm()
+  })
+}
+resetEngineForm()
+
+aiOverlayField.addEventListener('change', () => {
+  aiOverlayMasterOn = aiOverlayField.checked
+  writeKey('aiOverlay', aiOverlayMasterOn ? 'on' : 'off')
+  persistAiOverlay()
+  syncOverlayTabs()
+  keepPersonal()
+  settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
+})
+socialRowField.addEventListener('change', () => {
+  setSocialRowOn(socialRowField.checked)
+})
+linksMaster.checked = settingsFields.links.checked
+linksMaster.addEventListener('change', () => {
+  settingsFields.links.checked = linksMaster.checked
+  settingsFields.links.dispatchEvent(new Event('change'))
+})
+settingsFields.links.addEventListener('change', () => {
+  linksMaster.checked = settingsFields.links.checked
+})
 const catalogKeyForUrl = (url) => aiCatalog.find((service) => normalizeUrl(service.url) === normalizeUrl(url))?.key || ''
 const normalizeAskAiItem = (item) => {
   const catalogKey = catalogKeyForUrl(item.url)
@@ -2349,7 +3157,19 @@ aiForm.addEventListener('submit', (e) => {
 })
 
 
+// If a saved AI destination is no longer available, fall back to an enabled engine.
+if (activeDest.kind === 'ai' && (!aiOverlayMasterOn || !getAiOverlayByKey(activeDest.key) || aiOverlayEnabled[activeDest.key] === false)) {
+  activeDest = { kind: 'engine', name: enabledEngines()[0].name }
+  persistDest()
+}
+if (activeDest.kind === 'engine' && engineEnabled[activeDest.name] === false) {
+  activeDest = { kind: 'engine', name: enabledEngines()[0].name }
+  persistDest()
+}
 renderAskAi()
+renderManageCatalogs()
+renderSocialRow()
+showEngine()
 root.toggleAttribute('data-quote-off', !quoteOn)
 applySettingsText()
 syncLangSelects()

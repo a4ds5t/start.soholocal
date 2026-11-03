@@ -2,6 +2,8 @@
 :root {
   --panel-md: 640px;
   --panel-lg: 820px;
+  --shell-w: min(92vw, 920px);
+  --shell-h: min(84vh, 720px);
 }
 
 @font-face {
@@ -188,7 +190,7 @@ button {
 
 #main > * {
   width: 100%;
-  max-width: 360px;
+  max-width: 480px;
 }
 
 /* The search sits in the middle; the clock is placed above it and the AI row below, so neither moves it. */
@@ -208,12 +210,21 @@ button {
   position: fixed;
 }
 
+.centre > .social-row,
 .centre > .links {
   position: absolute;
   left: 0;
   right: 0;
   top: 100%;
-  margin-top: 24px;
+  margin-top: 18px;
+}
+
+.centre > .links {
+  margin-top: 18px;
+}
+
+.centre > .social-row:not([hidden]) ~ .links {
+  margin-top: 64px;
 }
 
 #main {
@@ -223,17 +234,18 @@ button {
 .searchbar {
   position: relative;
   display: block;
+  z-index: 3;
 }
 
 #search {
   width: 100%;
-  height: 48px;
+  height: 52px;
   padding: 0 84px;
   background: var(--color-field);
   color: var(--color-fg-1);
   border: 1px solid var(--color-border);
-  border-radius: 12px;
-  font: 400 15px "Open Sans", system-ui, sans-serif;
+  border-radius: 14px;
+  font: 400 16px "Open Sans", system-ui, sans-serif;
   text-align: center;
   /* Autofocus stays; hide the blinking caret until the field has text. */
   caret-color: transparent;
@@ -289,6 +301,163 @@ button {
   display: block;
 }
 
+#engine[aria-expanded="true"] {
+  color: var(--color-fg-1);
+}
+
+/* Popover: Search | AI pick list under the left icon. Social stays on the page row. */
+.engine-overlay {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 5;
+  min-width: 220px;
+  max-width: min(280px, 92vw);
+  padding: 8px;
+  background: color-mix(in srgb, var(--color-field) 94%, transparent);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .18);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  animation: overlay-in .14s ease-out;
+}
+
+.engine-overlay[hidden] {
+  display: none;
+}
+
+@keyframes overlay-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.engine-overlay-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.engine-overlay-tab {
+  flex: 1;
+  padding: 8px 10px;
+  color: var(--color-fg-2);
+  font: 500 13px "Open Sans", system-ui, sans-serif;
+  border-radius: 8px 8px 0 0;
+}
+
+.engine-overlay-tab[aria-selected="true"] {
+  color: var(--color-fg-1);
+  box-shadow: inset 0 -2px 0 var(--color-fg-1);
+}
+
+.engine-overlay-tab[hidden] {
+  display: none;
+}
+
+.engine-overlay-list {
+  list-style: none;
+  margin: 0;
+  padding: 2px 0;
+  max-height: 280px;
+  overflow: auto;
+}
+
+.engine-overlay-list li {
+  margin: 0;
+}
+
+.engine-overlay-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  color: var(--color-fg-1);
+  font: 400 14px "Open Sans", system-ui, sans-serif;
+  text-align: left;
+}
+
+.engine-overlay-option:hover,
+.engine-overlay-option:focus-visible {
+  background: color-mix(in srgb, var(--color-border) 55%, transparent);
+}
+
+.engine-overlay-option[aria-selected="true"] {
+  background: color-mix(in srgb, var(--color-border) 70%, transparent);
+}
+
+.engine-overlay-option .eo-icon {
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  color: var(--color-fg-2);
+}
+
+.engine-overlay-option .eo-icon svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.engine-overlay-option .eo-check {
+  margin-left: auto;
+  opacity: 0;
+  color: var(--color-fg-2);
+}
+
+.engine-overlay-option[aria-selected="true"] .eo-check {
+  opacity: 1;
+}
+
+/* Quiet social jump row under the search bar. */
+.social-row {
+  display: flex;
+  justify-content: center;
+}
+
+.social-row[hidden] {
+  display: none;
+}
+
+.social-row ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.social-row a {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  color: var(--color-fg-2);
+  opacity: 0.78;
+  transition: color .15s ease, opacity .15s ease, background .15s ease;
+}
+
+.social-row a:hover,
+.social-row a:focus-visible {
+  color: var(--color-fg-1);
+  opacity: 1;
+  background: color-mix(in srgb, var(--color-field) 70%, transparent);
+}
+
+.social-row a svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
 /* Submit button on the right: clearly clickable, with a hover state. */
 #go {
   position: absolute;
@@ -312,6 +481,28 @@ button {
 
 .links {
   margin-top: 40px;
+}
+
+/* ASK AI jump row: icons only (caption is sr-only); sit closer under search/social. */
+.ask-ai-row {
+  margin-top: 18px;
+}
+
+.ask-ai-row .caption.sr-only {
+  margin: 0;
+}
+
+.ask-ai-row a {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  opacity: 0.78;
+  transition: color .15s ease, opacity .15s ease, background .15s ease;
+}
+
+.ask-ai-row a:hover,
+.ask-ai-row a:focus-visible {
+  background: color-mix(in srgb, var(--color-field) 70%, transparent);
 }
 
 .caption {
@@ -1272,6 +1463,102 @@ img.ai-icon {
   box-shadow: 0 10px 40px rgba(0, 0, 0, .12);
 }
 
+/* Settings shell A: fixed size; Manage + Advanced live inside. */
+.settings-panel.settings-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: var(--shell-w);
+  height: var(--shell-h);
+  max-height: var(--shell-h);
+  overflow: hidden;
+  padding: 0;
+}
+
+.settings-shell > .settings-head {
+  flex: none;
+  margin: 0;
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--color-border);
+  gap: 10px;
+}
+
+.settings-shell > .settings-head h2 {
+  margin-right: auto;
+}
+
+.settings-nav-toggle {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--color-fg-2);
+}
+
+.settings-nav-toggle:hover,
+.settings-nav-toggle:focus-visible {
+  color: var(--color-fg-1);
+  background: color-mix(in srgb, var(--color-bg) 45%, var(--color-field));
+}
+
+.settings-shell-body {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.settings-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 10px;
+  overflow: auto;
+  border-right: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 28%, var(--color-field));
+}
+
+.settings-nav-btn {
+  display: block;
+  width: 100%;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-fg-2);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.settings-nav-btn:hover,
+.settings-nav-btn:focus-visible {
+  color: var(--color-fg-1);
+  background: color-mix(in srgb, var(--color-bg) 40%, transparent);
+}
+
+.settings-nav-btn[aria-selected="true"] {
+  color: var(--color-fg-1);
+  background: color-mix(in srgb, var(--color-bg) 55%, var(--color-field));
+  font-weight: 600;
+}
+
+.settings-content {
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: 16px 20px 20px;
+}
+
+.settings-pane[hidden] {
+  display: none;
+}
+
+.settings-pane .app-version {
+  margin-top: 24px;
+}
+
 .settings-head {
   display: flex;
   align-items: center;
@@ -1316,8 +1603,66 @@ img.ai-icon {
   cursor: pointer;
 }
 
-.setting input {
-  accent-color: var(--color-fg-2);
+/* Checkboxes/radios: quiet monochrome accents (not browser blue). */
+.setting input[type="checkbox"],
+.setting input[type="radio"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  flex: 0 0 auto;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 40%, var(--color-field));
+  color: var(--color-fg-1);
+  display: grid;
+  place-content: center;
+  transition: border-color .15s ease, background .15s ease;
+}
+
+.setting input[type="checkbox"] {
+  border-radius: 4px;
+}
+
+.setting input[type="radio"] {
+  border-radius: 50%;
+}
+
+.setting input[type="checkbox"]::before,
+.setting input[type="radio"]::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  transform: scale(0);
+  transition: transform .12s ease;
+  box-shadow: inset 1em 1em var(--color-fg-1);
+}
+
+.setting input[type="checkbox"]::before {
+  clip-path: polygon(14% 44%, 0 65%, 40% 100%, 100% 16%, 80% 0, 38% 62%);
+  box-shadow: none;
+  background: var(--color-fg-1);
+}
+
+.setting input[type="radio"]::before {
+  border-radius: 50%;
+}
+
+.setting input[type="checkbox"]:checked,
+.setting input[type="radio"]:checked {
+  border-color: var(--color-fg-1);
+  background: var(--color-field);
+}
+
+.setting input[type="checkbox"]:checked::before,
+.setting input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+.setting input[type="checkbox"]:hover,
+.setting input[type="radio"]:hover,
+.setting input[type="checkbox"]:focus-visible,
+.setting input[type="radio"]:focus-visible {
+  border-color: var(--color-border-hover);
 }
 
 .city-form {
@@ -1344,7 +1689,11 @@ img.ai-icon {
 #link-url,
 #link-desc,
 #ai-name,
-#ai-url {
+#ai-url,
+#engine-name,
+#engine-url {
+  box-sizing: border-box;
+  width: 100%;
   min-width: 0;
   height: 36px;
   padding: 0 10px;
@@ -1766,25 +2115,243 @@ html[data-quote-off] #quote {
   color: var(--color-fg-1);
 }
 
+.link-main .link-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .link-main small {
   font-size: 11px;
   color: var(--color-fg-2);
+  margin-left: 24px;
 }
 
 .links-preview .link-main {
   padding: 4px 0;
 }
 
-/* Advanced and Manage sit side by side under the presets. */
+/* Advanced / Manage / IP: same ghost chrome as the rest of Minimal. */
 .settings-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0 12px;
+  gap: 8px 10px;
+  margin-top: 12px;
 }
 
-.settings-actions button {
-  margin-top: 16px;
+.settings-actions .ghost-button {
+  margin: 0;
+}
+
+/* Settings shell / former Manage: theme tokens (follows light/dark). */
+.settings-shell .manage-note,
+.settings-shell .manage-show-label,
+.settings-shell .location-title {
+  color: var(--color-fg-2);
+}
+
+.settings-shell .catalog-list .catalog-name {
+  color: var(--color-fg-1);
+}
+
+.settings-shell .manage-show {
+  border-color: var(--color-border);
+}
+
+.settings-shell .link-form label,
+.settings-shell .link-form-title,
+.settings-shell .city-msg {
+  color: var(--color-fg-2);
+}
+
+.settings-shell .link-form input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 36px;
+  height: 36px;
+  padding: 0 10px;
+  background: color-mix(in srgb, var(--color-bg) 55%, var(--color-field));
+  color: var(--color-fg-1);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font: inherit;
+}
+
+.manage-show {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--color-bg) 35%, var(--color-field));
+}
+
+.manage-show-label {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--color-fg-2);
+}
+
+.manage-masters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+
+.master-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--color-fg-1);
+  cursor: pointer;
+}
+
+.master-toggle input {
+  width: 36px;
+  height: 20px;
+  appearance: none;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-border) 70%, var(--color-fg-2));
+  position: relative;
+  cursor: pointer;
+  transition: background .15s ease;
+}
+
+.master-toggle input::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-field);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+  transition: transform .15s ease;
+}
+
+.master-toggle input:checked {
+  background: var(--color-fg-1);
+}
+
+.master-toggle input:checked::after {
+  transform: translateX(16px);
+}
+
+.catalog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.catalog-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.catalog-list li:hover {
+  background: color-mix(in srgb, var(--color-border) 55%, transparent);
+}
+
+.catalog-list .catalog-name {
+  flex: 1;
+  font-size: 14px;
+}
+
+.catalog-list .catalog-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--color-fg-2);
+  display: grid;
+  place-items: center;
+}
+
+.catalog-list .catalog-icon svg,
+.catalog-list .catalog-icon .favicon-img,
+.favicon-img {
+  width: 16px;
+  height: 16px;
+  display: block;
+  border-radius: 3px;
+}
+
+.catalog-list .catalog-toggle {
+  width: 36px;
+  height: 20px;
+  appearance: none;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-border) 70%, var(--color-fg-2));
+  position: relative;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.catalog-list .catalog-toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-field);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+  transition: transform .15s ease;
+}
+
+.catalog-list .catalog-toggle:checked {
+  background: var(--color-fg-1);
+}
+
+.catalog-list .catalog-toggle:checked::after {
+  transform: translateX(16px);
+}
+
+.catalog-list .catalog-move {
+  display: flex;
+  gap: 2px;
+}
+
+.catalog-list .catalog-move button {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  color: var(--color-fg-2);
+  border: 1px solid var(--color-border);
+  background: var(--color-field);
+}
+
+.catalog-list .catalog-move button:hover:not(:disabled),
+.catalog-list .catalog-move button:focus-visible:not(:disabled) {
+  color: var(--color-fg-1);
+}
+
+.catalog-list .catalog-move button:disabled {
+  opacity: .35;
+}
+
+.link-row .favicon-img,
+.own-link .favicon-img,
+.links-preview .favicon-img {
+  flex: 0 0 auto;
+  margin-right: 8px;
+  opacity: .9;
+}
+
+#engine .favicon-img {
+  width: 16px;
+  height: 16px;
 }
 
 /* The tabs of the manage panel; the active one is underlined. */
@@ -1948,7 +2515,11 @@ html[data-quote-off] #quote {
   opacity: .5;
 }
 
-/* Permanent links as a row of icons at the top of the links window. */
+/* Permanent canned icons removed — Links is own-only. */
+.link-icons[hidden] {
+  display: none;
+}
+
 .link-icons {
   display: flex;
   gap: 8px;
@@ -2166,13 +2737,53 @@ html[data-quote-off] #quote {
   display: none;
 }
 
-/* Advanced: a wider window. The options sit in four groups, two per row, so each group keeps its own column. */
-
 .settings-panel.is-wide {
   width: min(100%, var(--panel-lg));
 }
 
-.advanced {
+/* Option B: Show first (full width), then Weather | Clock & date. */
+.advanced.advanced-show-first {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+  margin-top: 0;
+}
+
+#section-advanced .advanced {
+  margin-top: 0;
+}
+
+.adv-show-first {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--color-bg) 35%, var(--color-field));
+}
+
+.adv-show-first > .location-title {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--color-fg-2);
+}
+
+.adv-show-masters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+
+.adv-show-hint {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: var(--color-fg-2);
+}
+
+.adv-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px 40px;
@@ -2182,42 +2793,47 @@ html[data-quote-off] #quote {
 .adv-group {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 8px;
   min-width: 0;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--color-border);
 }
 
 .adv-group > .location-title {
-  margin-bottom: 4px;
+  margin: 0 0 2px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--color-fg-2);
 }
 
 .adv-group > .location-title:not(:first-child) {
   margin-top: 14px;
 }
 
-/* Advanced and Manage are buttons, not links: they are actions that open more options. */
+.adv-group .master-toggle {
+  margin: 2px 0;
+}
+
+.setting-select {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.setting-select .lang-select {
+  margin-left: 0;
+  min-width: 0;
+  flex: 1 1 auto;
+  max-width: 220px;
+  height: 36px;
+}
+
+/* Advanced / Manage / IP inherit .ghost-button; keep text-decoration reset if ever used as links. */
 #advanced-toggle,
 #manage-open,
 #ip-open {
-  align-self: flex-start;
-  height: 32px;
-  margin: 14px 0 6px;
-  padding: 0 14px;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  color: var(--color-fg-1);
-  font-size: 13px;
   text-decoration: none;
-}
-
-#advanced-toggle:hover,
-#advanced-toggle:focus-visible,
-#manage-open:hover,
-#manage-open:focus-visible,
-#ip-open:hover,
-#ip-open:focus-visible {
-  border-color: var(--color-fg-2);
 }
 
 /* The data reset has a short line above its button, so the button says only what it does. */
@@ -2466,20 +3082,94 @@ button.action:disabled {
   text-align: left;
 }
 
-/* Phones: the advanced settings use two columns for the short checkbox groups, and a select group takes the full width.
-   The help stays in one column. */
-@media (max-width: 600px) {
-  .advanced {
-    grid-template-columns: 1fr 1fr;
-    gap: 4px 16px;
+/* Phones / narrow: shell keeps fixed size; sidebar becomes bottom tabs (+ hamburger More). */
+@media (max-width: 640px) {
+  .settings-panel.settings-shell {
+    width: min(100vw - 16px, 560px);
+    height: min(90vh, 720px);
+    max-height: min(90vh, 720px);
+  }
+
+  .settings-shell > .settings-head {
+    padding: 14px 14px 10px;
+  }
+
+  .settings-nav-toggle {
+    display: inline-grid;
+    place-items: center;
+  }
+
+  .settings-shell-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+
+  .settings-nav {
+    order: 2;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 4px;
+    padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px));
+    overflow-x: auto;
+    border-right: 0;
+    border-top: 1px solid var(--color-border);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .settings-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .settings-nav-btn {
+    flex: 0 0 auto;
+    padding: 8px 12px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* Hamburger opens full nav as overlay list when needed. */
+  .settings-nav.is-open {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+    z-index: 2;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    max-height: 55%;
+    overflow: auto;
+    padding: 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-field);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .28);
+  }
+
+  .settings-nav.is-open .settings-nav-btn {
+    text-align: left;
+  }
+
+  .settings-content {
+    order: 1;
+    padding: 14px 14px 16px;
+  }
+
+  .advanced.advanced-show-first {
+    gap: 12px;
+  }
+
+  .adv-body {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .adv-group:has(select),
   .adv-group:has(#city-form) {
-    grid-column: 1 / -1;
+    grid-column: auto;
   }
 
-  /* The place field takes the row; Save stays beside it. */
   .city-row {
     width: 100%;
   }
@@ -2508,7 +3198,7 @@ button.action:disabled {
     width: 100%;
   }
 
-  .settings-panel {
+  .settings-panel:not(.settings-shell) {
     max-height: 90vh;
   }
 
@@ -2537,7 +3227,10 @@ button.action:disabled {
 }
 
 .own-link {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
   padding: 8px 0;
   border-bottom: 1px solid var(--color-border);
   color: var(--color-fg-1);

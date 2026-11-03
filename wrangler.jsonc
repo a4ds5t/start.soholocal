@@ -5,6 +5,10 @@
   "name": "minimal-startpage",
   "main": "worker.js",
   "compatibility_date": "2026-10-25",
+  // Keep workers.dev + Version URLs so `wrangler versions upload --preview-alias`
+  // can publish a reviewable URL without a production deploy.
+  "workers_dev": true,
+  "preview_urls": true,
   "build": {
     "command": "node scripts/generate-build-info.js"
   },
