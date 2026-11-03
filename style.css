@@ -2697,34 +2697,44 @@ html[data-quote-off] #quote {
 .help-scroll {
   flex: 1 1 auto;
   min-height: 0;
-  overflow: auto;
-  padding-right: 2px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding-right: 4px;
   scrollbar-gutter: stable;
+  /* Firefox: thick thumb + visible track (avoid “thin”). */
   scrollbar-width: auto;
-  scrollbar-color: color-mix(in srgb, var(--color-fg-2) 85%, transparent) color-mix(in srgb, var(--color-bg) 40%, var(--color-field));
+  scrollbar-color: var(--color-fg-2) color-mix(in srgb, var(--color-field) 70%, var(--color-border));
 }
 
 .help-scroll::-webkit-scrollbar {
-  width: 14px;
+  width: 16px;
+  height: 16px;
 }
 
 .help-scroll::-webkit-scrollbar-track {
-  background: color-mix(in srgb, var(--color-bg) 40%, var(--color-field));
+  background: color-mix(in srgb, var(--color-field) 65%, var(--color-border));
   border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
 }
 
 .help-scroll::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--color-fg-2) 75%, transparent);
-  border: 2px solid transparent;
-  background-clip: padding-box;
+  background: color-mix(in srgb, var(--color-fg-2) 92%, var(--color-fg-1));
   border-radius: 8px;
-  min-height: 40px;
+  border: 3px solid color-mix(in srgb, var(--color-field) 65%, var(--color-border));
+  background-clip: padding-box;
+  min-height: 48px;
 }
 
 .help-scroll::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in srgb, var(--color-fg-1) 80%, transparent);
-  border: 2px solid transparent;
+  background: var(--color-fg-1);
+  border: 3px solid color-mix(in srgb, var(--color-field) 65%, var(--color-border));
   background-clip: padding-box;
+}
+
+.help-scroll::-webkit-scrollbar-button {
+  height: 0;
+  width: 0;
+  display: none;
 }
 
 .help-top-link {
