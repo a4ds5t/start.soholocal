@@ -1990,7 +1990,7 @@ img.ai-icon {
   color: var(--color-fg-1);
 }
 
-/* Live current for the active city: icon + temp + short city name. */
+/* Live current for the active city: City - icon temp. */
 .weather-live {
   display: inline-flex;
   align-items: center;
@@ -2011,12 +2011,15 @@ img.ai-icon {
   display: none;
 }
 
-.weather-live .weather-icon {
+.weather-live .weather-icon,
+.weather-tip .weather-icon {
   margin-right: 0;
   flex: 0 0 auto;
+  vertical-align: -2px;
 }
 
-.weather-live-temp {
+.weather-live-temp,
+.weather-tip-temp {
   flex: 0 0 auto;
 }
 
@@ -2025,7 +2028,15 @@ img.ai-icon {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.weather-tip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   color: var(--color-fg-2);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .city-row {
@@ -2874,7 +2885,16 @@ html[data-quote-off] #quote {
   gap: 6px;
 }
 
-.place-list li span {
+.place-list li .place-row-label {
+  display: inline-flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 0 2px;
+}
+
+.place-list li > span:not(.place-row-label) {
   flex: 1;
   min-width: 0;
 }

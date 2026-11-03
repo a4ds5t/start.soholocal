@@ -987,7 +987,24 @@ const weatherIcons = {
 }
 const weatherIcon = (key) => `<svg class="weather-icon ${key || 'cloudy'}" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${weatherIcons[key] || weatherIcons.cloudy}</svg>`
 
-// Settings → Weather: live chip = icon + temp + short city (e.g. ☁ 9° Woudenberg).
+// Append " - ☁ 9°" from a forecast current block (real data only — omit if missing).
+const appendWeatherTip = (parent, forecast) => {
+  const now = forecast?.current
+  if (!now || typeof now.temperature_2m !== 'number') return
+  const key = weatherKey(now.weather_code)
+  const temperature = `${Math.round(now.temperature_2m)}°`
+  const tip = document.createElement('span')
+  tip.className = 'weather-tip'
+  tip.append(document.createTextNode(' - '))
+  tip.insertAdjacentHTML('beforeend', weatherIcon(key))
+  const tempEl = document.createElement('span')
+  tempEl.className = 'weather-tip-temp'
+  tempEl.textContent = temperature
+  tip.append(tempEl)
+  parent.append(tip)
+}
+
+// Settings → Weather: live chip = City - icon temp (e.g. Woudenberg - ☁ 9°).
 const paintWeatherLive = () => {
   const live = document.getElementById('weather-live')
   if (!live) return
@@ -998,15 +1015,20 @@ const paintWeatherLive = () => {
     const temperature = `${Math.round(now.temperature_2m)}°`
     const place = placeDisplayLabel(shown.place)
     live.hidden = false
-    live.innerHTML = `${weatherIcon(key)}<span class="weather-live-temp"></span>`
-    live.querySelector('.weather-live-temp').textContent = temperature
+    live.replaceChildren()
     if (place) {
       const placeEl = document.createElement('span')
       placeEl.className = 'weather-live-place'
       placeEl.textContent = place
       live.append(placeEl)
+      live.append(document.createTextNode(' - '))
     }
-    const label = place ? `${temperature} ${place}` : temperature
+    live.insertAdjacentHTML('beforeend', weatherIcon(key))
+    const tempEl = document.createElement('span')
+    tempEl.className = 'weather-live-temp'
+    tempEl.textContent = temperature
+    live.append(tempEl)
+    const label = place ? `${place} - ${temperature}` : temperature
     live.title = label
     live.setAttribute('aria-label', label)
   } else {
@@ -1406,17 +1428,35 @@ const sortPlaces = () => {
   extraPlaces.sort((a, b) => offset(a.timezone) - offset(b.timezone) || placeDisplayLabel(a).localeCompare(placeDisplayLabel(b)))
 }
 
-// The weather tab: the own place, and the extra places with a remove button each.
+// Data → Weather: Your place + extras as "City - ☁ 9°" with real current (cached fetch).
 const renderPlaces = () => {
   sortPlaces()
-  document.getElementById('weather-own').textContent = `${t.placeOwn}: ${current ? placeDisplayLabel(current.place) : t.placeNone}`
+  const ownEl = document.getElementById('weather-own')
+  const ownName = current ? placeDisplayLabel(current.place) : t.placeNone
+  ownEl.replaceChildren()
+  ownEl.append(document.createTextNode(`${t.placeOwn}: ${ownName}`))
+  const paintOwnTip = (forecast) => {
+    ownEl.querySelector('.weather-tip')?.remove()
+    appendWeatherTip(ownEl, forecast)
+  }
+  if (current?.forecast) paintOwnTip(current.forecast)
+  else if (current?.place) {
+    loadPlace(current.place).then((forecast) => {
+      if (!current || placeDisplayLabel(current.place) !== ownName) return
+      current = { ...current, forecast }
+      paintOwnTip(forecast)
+      paintWeatherLive()
+    }).catch(() => {})
+  }
   const full = extraPlaces.length >= PLACE_LIMIT
   limitCount('place-input', extraPlaces.length, PLACE_LIMIT)
   document.getElementById('place-input').disabled = full
   document.getElementById('place-add').disabled = full
   document.getElementById('place-list').replaceChildren(...extraPlaces.map((place, index) => {
     const row = document.createElement('li')
-    row.append(el('span', '', placeDisplayLabel(place)))
+    const name = placeDisplayLabel(place)
+    const label = el('span', 'place-row-label', name)
+    row.append(label)
     row.append(aiButton(t.placeRemove, '×', () => {
       extraPlaces = extraPlaces.filter((_, i) => i !== index)
       const removedChip = current ? index + 1 : index
@@ -1427,6 +1467,11 @@ const renderPlaces = () => {
       renderPlaceChips()
       if (weatherOn && (viewed || current)) paintWeatherPreview(viewed || current)
     }))
+    loadPlace(place).then((forecast) => {
+      if (!extraPlaces.some((p) => placeDisplayLabel(p) === name)) return
+      label.querySelector('.weather-tip')?.remove()
+      appendWeatherTip(label, forecast)
+    }).catch(() => {})
     return row
   }))
 }
