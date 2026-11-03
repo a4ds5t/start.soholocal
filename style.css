@@ -1513,12 +1513,129 @@ img.ai-icon {
   min-width: 0;
 }
 
+.settings-seg {
+  display: inline-flex;
+  flex: none;
+  margin-right: auto;
+  padding: 3px;
+  gap: 2px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-bg) 35%, var(--color-field));
+}
+
+.settings-seg-btn {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 14px;
+  background: transparent;
+  color: var(--color-fg-2);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.settings-seg-btn[aria-selected="true"] {
+  background: color-mix(in srgb, var(--color-bg) 55%, var(--color-field));
+  color: var(--color-fg-1);
+  font-weight: 600;
+}
+
 .settings-head-actions {
   display: flex;
   flex: none;
   align-items: center;
   gap: 6px;
   margin-left: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.settings-shell[data-world="settings"] .settings-shell-body {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.settings-shell[data-world="settings"] .settings-nav {
+  display: none;
+}
+
+.data-home-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.data-home-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--color-bg) 35%, var(--color-field));
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.data-home-card:hover,
+.data-home-card:focus-visible {
+  background: color-mix(in srgb, var(--color-bg) 50%, var(--color-field));
+}
+
+.data-home-copy {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.data-home-copy b {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-fg-1);
+}
+
+.data-home-copy span {
+  font-size: 12px;
+  color: var(--color-fg-2);
+}
+
+.data-home-chev {
+  color: var(--color-fg-2);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.data-back {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-fg-2);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.data-back[hidden] {
+  display: none !important;
 }
 
 .settings-shell .settings-head-actions .text-button {
@@ -3280,7 +3397,7 @@ button.action:disabled {
   text-align: left;
 }
 
-/* Phones / narrow: shell keeps fixed size; sidebar becomes bottom tabs (+ hamburger More). */
+/* Phones / narrow: fixed shell; Data uses vertical list (no horizontal tab strip). */
 @media (max-width: 640px) {
   .settings {
     padding: 10px;
@@ -3307,86 +3424,31 @@ button.action:disabled {
     font-size: 13px;
   }
 
-  .settings-shell .settings-head-actions .settings-close,
-  .settings-shell .settings-head-actions .settings-nav-toggle {
+  .settings-shell .settings-head-actions .settings-close {
     width: 34px;
     height: 34px;
   }
 
-  .settings-nav-toggle {
-    display: inline-grid;
-    place-items: center;
-  }
-
-  .settings-shell-body {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr auto;
-  }
-
-  .settings-nav {
-    order: 2;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 4px;
-    /* Equal side padding so the strip reads centered in the shell; tabs still scroll. */
-    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    border-right: 0;
-    border-top: 1px solid var(--color-border);
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    scroll-padding-inline: 16px;
-    /* Hint that more tabs sit off-screen to the right. */
-    mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%);
-  }
-
-  .settings-nav::-webkit-scrollbar {
-    display: none;
-  }
-
-  .settings-nav-btn {
-    flex: 0 0 auto;
-    width: auto;
-    max-width: none;
-    padding: 8px 12px;
+  .settings-seg-btn {
+    padding: 6px 12px;
     font-size: 12px;
-    text-align: center;
-    white-space: nowrap;
   }
 
-  /* Hamburger opens full nav as overlay list when needed. */
-  .settings-nav.is-open {
-    position: absolute;
-    left: 12px;
-    right: 12px;
-    bottom: calc(56px + env(safe-area-inset-bottom, 0px));
-    z-index: 2;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    justify-content: flex-start;
-    max-height: 55%;
-    overflow: auto;
-    padding: 10px;
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    background: var(--color-field);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, .28);
-    mask-image: none;
-    -webkit-mask-image: none;
+  .settings-nav-toggle {
+    display: none !important;
   }
 
-  .settings-nav.is-open .settings-nav-btn {
-    width: 100%;
-    text-align: left;
+  .settings-shell-body,
+  .settings-shell[data-world="data"] .settings-shell-body {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile Data: home list / drill-in — hide the desktop sidebar nav. */
+  .settings-shell[data-world="data"] .settings-nav {
+    display: none !important;
   }
 
   .settings-content {
-    order: 1;
     padding: 14px 16px 16px;
   }
 

@@ -840,7 +840,15 @@ const advancedText = {
   es: { advTitle: 'Ajustes avanzados', advancedOpen: 'Avanzado', advancedClosed: '← Volver a los ajustes básicos' },
   zh: { advTitle: '高级设置', advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], pageText[lang], topbarText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], tintCycleText[lang], quoteTitleText[lang], ipText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+const shellSegText = {
+  en: { segSettings: 'Settings', segData: 'Data', dataBack: '← Data', dataHomeHint: 'Choose a catalog. No scrolling tab bar.', dataDescSearch: 'Engines', dataDescAi: 'Overlay + shortcuts', dataDescSocial: 'Jump icons', dataDescLinks: 'List', dataDescZones: 'Cities', dataDescWeather: 'Places', dataDescWall: 'Wallpapers', dataDescBackup: 'Export / import' },
+  nl: { segSettings: 'Instellingen', segData: 'Data', dataBack: '← Data', dataHomeHint: 'Kies een catalogus. Geen scrollende tabbalk.', dataDescSearch: 'Machines', dataDescAi: 'Overlay + snelkoppelingen', dataDescSocial: 'Sprongiconen', dataDescLinks: 'Lijst', dataDescZones: 'Steden', dataDescWeather: 'Plaatsen', dataDescWall: 'Achtergronden', dataDescBackup: 'Export / import' },
+  de: { segSettings: 'Einstellungen', segData: 'Daten', dataBack: '← Daten', dataHomeHint: 'Katalog wählen. Keine scrollende Tab-Leiste.', dataDescSearch: 'Maschinen', dataDescAi: 'Overlay + Verknüpfungen', dataDescSocial: 'Sprung-Icons', dataDescLinks: 'Liste', dataDescZones: 'Städte', dataDescWeather: 'Orte', dataDescWall: 'Hintergründe', dataDescBackup: 'Export / Import' },
+  fr: { segSettings: 'Réglages', segData: 'Données', dataBack: '← Données', dataHomeHint: 'Choisissez un catalogue. Pas de barre d’onglets.', dataDescSearch: 'Moteurs', dataDescAi: 'Overlay + raccourcis', dataDescSocial: 'Icônes', dataDescLinks: 'Liste', dataDescZones: 'Villes', dataDescWeather: 'Lieux', dataDescWall: 'Fonds', dataDescBackup: 'Export / import' },
+  es: { segSettings: 'Ajustes', segData: 'Datos', dataBack: '← Datos', dataHomeHint: 'Elige un catálogo. Sin barra de pestañas.', dataDescSearch: 'Buscadores', dataDescAi: 'Overlay + accesos', dataDescSocial: 'Iconos', dataDescLinks: 'Lista', dataDescZones: 'Ciudades', dataDescWeather: 'Lugares', dataDescWall: 'Fondos', dataDescBackup: 'Exportar / importar' },
+  zh: { segSettings: '设置', segData: '数据', dataBack: '← 数据', dataHomeHint: '选择一个目录。无横向标签栏。', dataDescSearch: '引擎', dataDescAi: '叠加层与快捷方式', dataDescSocial: '跳转图标', dataDescLinks: '列表', dataDescZones: '城市', dataDescWeather: '地点', dataDescWall: '壁纸', dataDescBackup: '导出 / 导入' },
+}
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], pageText[lang], topbarText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], tintCycleText[lang], quoteTitleText[lang], ipText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] }, shellSegText[lang])
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -1466,6 +1474,27 @@ const versionTagStrings = () => ({
 
 const applySettingsText = () => {
   document.getElementById('settings-title').textContent = t.title
+  if (segSettingsBtn) segSettingsBtn.textContent = t.segSettings || 'Settings'
+  if (segDataBtn) segDataBtn.textContent = t.segData || 'Data'
+  const dataHomeHint = document.getElementById('data-home-hint')
+  if (dataHomeHint) dataHomeHint.textContent = t.dataHomeHint || ''
+  const cardMap = [
+    ['data-card-search', 'data-desc-search', t.tabSearch, t.dataDescSearch],
+    ['data-card-ai', 'data-desc-ai', t.tabAi, t.dataDescAi],
+    ['data-card-social', 'data-desc-social', t.tabSocial, t.dataDescSocial],
+    ['data-card-links', 'data-desc-links', t.tabLinks, t.dataDescLinks],
+    ['data-card-zones', 'data-desc-zones', t.tabZones, t.dataDescZones],
+    ['data-card-weather', 'data-desc-weather', t.tabWeather, t.dataDescWeather],
+    ['data-card-wall', 'data-desc-wall', t.tabWallpaper, t.dataDescWall],
+    ['data-card-backup', 'data-desc-backup', t.tabBackup, t.dataDescBackup],
+  ]
+  for (const [titleId, descId, label, desc] of cardMap) {
+    const titleEl = document.getElementById(titleId)
+    const descEl = document.getElementById(descId)
+    if (titleEl) titleEl.textContent = label || ''
+    if (descEl) descEl.textContent = desc || ''
+  }
+  if (dataBackBtn && !dataBackBtn.hidden) dataBackBtn.textContent = t.dataBack || '← Data'
   const settingsHintEl = document.getElementById('settings-hint')
   if (settingsHintEl) settingsHintEl.textContent = t.hint
   const versionMount = document.getElementById('app-version-root')
@@ -1707,21 +1736,19 @@ const syncSettings = () => {
 }
 
 const settingsContent = document.getElementById('settings-content')
+const settingsShell = settings?.querySelector('.settings-shell')
 
 const openSettings = (pane = 'general') => {
   openedFrom.el = document.activeElement
   syncSettings()
   settings.hidden = false
-  // Legacy Advanced deep-link opens General (page + language).
+  // Legacy Advanced deep-link opens Settings prefs.
   showSettingsPane(pane === 'advanced' ? 'general' : pane)
   settings.querySelector('.settings-panel').focus()
 }
 
 const closeSettings = () => {
   settings.hidden = true
-  settingsNav?.classList.remove('is-open')
-  const navToggle = document.getElementById('settings-nav-toggle')
-  if (navToggle) navToggle.setAttribute('aria-expanded', 'false')
   if (openedFrom.el && openedFrom.el.focus) openedFrom.el.focus()
 }
 
@@ -1839,7 +1866,7 @@ settingsFields.zones.addEventListener('change', () => {
   zonesOn = settingsFields.zones.checked
   writeKey('timeZones', zonesOn ? 'on' : 'off')
   applyZonesVisibility()
-  if (!zonesOn && manageTab === 'zones' && !settings.hidden) showSettingsPane('general')
+  if (!zonesOn && manageTab === 'zones' && !settings.hidden) showSettingsPane(isNarrowSettings() ? 'data-home' : 'search')
   if (!zonesOn && !zonesWindow.hidden) closeZones()
 })
 
@@ -2309,17 +2336,47 @@ const utcLabel = (zone, now) => {
 const zoneName = (zone) => el('span', 'zone-name', cityOf(zone))
 const zoneTag = (zone, now) => el('span', 'zone-tag', utcLabel(zone, now))
 
-// Settings shell A: one fixed panel with left nav (bottom tabs on small screens).
+// Settings shell B: Settings | Data segment; Data = catalogs (sidebar desktop, list mobile).
 const manageWindow = document.getElementById('manage') // legacy stub; shell lives in #settings
 const settingsNav = document.getElementById('settings-nav')
 const settingsNavButtons = [...(settingsNav?.querySelectorAll('.settings-nav-btn') || [])]
 const manageSections = [...document.querySelectorAll('#settings-content .manage-section')]
+const segSettingsBtn = document.getElementById('seg-settings')
+const segDataBtn = document.getElementById('seg-data')
+const dataBackBtn = document.getElementById('data-back')
+const DATA_PANES = new Set(['search', 'ai', 'social', 'links', 'zones', 'weather', 'wallpapers', 'backup', 'data-home'])
 let manageTab = 'general'
+let settingsWorld = 'settings'
 let manageFrom = null
+
+const isNarrowSettings = () => window.matchMedia('(max-width: 640px)').matches
+
+const setSettingsWorld = (world) => {
+  settingsWorld = world === 'data' ? 'data' : 'settings'
+  if (settingsShell) settingsShell.dataset.world = settingsWorld
+  if (segSettingsBtn) segSettingsBtn.setAttribute('aria-selected', String(settingsWorld === 'settings'))
+  if (segDataBtn) segDataBtn.setAttribute('aria-selected', String(settingsWorld === 'data'))
+  if (settingsNav) settingsNav.hidden = settingsWorld !== 'data' || isNarrowSettings()
+}
 
 const showSettingsPane = (pane) => {
   let tab = pane || 'general'
-  if (tab === 'advanced') tab = 'general'
+  if (tab === 'advanced' || tab === 'general') tab = 'general'
+  if (tab === 'manage') tab = 'data-home'
+
+  if (tab === 'general') {
+    setSettingsWorld('settings')
+  } else {
+    setSettingsWorld('data')
+    if (isNarrowSettings() && tab !== 'data-home' && !DATA_PANES.has(tab)) tab = 'data-home'
+    // Mobile Data: start on the vertical list unless a concrete catalog is requested.
+    if (isNarrowSettings() && tab === 'data') tab = 'data-home'
+  }
+
+  // Mobile Data entry with no catalog yet → home list.
+  if (settingsWorld === 'data' && isNarrowSettings() && (tab === 'data' || !tab)) tab = 'data-home'
+  if (settingsWorld === 'data' && !isNarrowSettings() && (tab === 'data-home' || tab === 'data')) tab = 'search'
+
   manageTab = tab
   settingsNavButtons.forEach((button) => {
     const on = button.dataset.pane === tab
@@ -2330,36 +2387,41 @@ const showSettingsPane = (pane) => {
     const id = section.dataset.pane || section.dataset.tab
     section.hidden = id !== tab
   })
+  if (dataBackBtn) {
+    const showBack = settingsWorld === 'data' && isNarrowSettings() && tab !== 'data-home'
+    dataBackBtn.hidden = !showBack
+    dataBackBtn.textContent = t.dataBack || '← Data'
+  }
   if (tab === 'links' && typeof resetLinkForm === 'function') resetLinkForm()
   if (tab === 'zones' && typeof renderZones === 'function') renderZones()
   if (tab === 'ai' && typeof resetAiForm === 'function') resetAiForm()
   if (tab === 'weather' && typeof renderPlaces === 'function') renderPlaces()
   if (tab === 'wallpapers' && typeof renderWallpapers === 'function') renderWallpapers()
   if (tab === 'general') syncSettings()
-  settingsNav?.classList.remove('is-open')
-  const navToggle = document.getElementById('settings-nav-toggle')
-  if (navToggle) navToggle.setAttribute('aria-expanded', 'false')
-  const activeNav = settingsNavButtons.find((button) => button.dataset.pane === tab)
-  if (activeNav && typeof activeNav.scrollIntoView === 'function') {
-    requestAnimationFrame(() => {
-      activeNav.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' })
-    })
-  }
 }
 
 const showManageTab = showSettingsPane
 
 const openManage = (tab) => {
   manageFrom = document.activeElement
-  if (settings.hidden) openSettings(tab || 'search')
-  else showSettingsPane(tab || 'search')
+  const target = tab || (isNarrowSettings() ? 'data-home' : 'search')
+  if (settings.hidden) openSettings(target)
+  else showSettingsPane(target)
 }
 
 const closeManage = () => {
-  // Shell owns manage; closing manage means leave the shell or return to General.
   if (!settings.hidden) closeSettings()
   else if (manageFrom && manageFrom.focus) manageFrom.focus()
 }
+
+segSettingsBtn?.addEventListener('click', () => showSettingsPane('general'))
+segDataBtn?.addEventListener('click', () => showSettingsPane(isNarrowSettings() ? 'data-home' : 'search'))
+dataBackBtn?.addEventListener('click', () => showSettingsPane('data-home'))
+document.getElementById('data-home-list')?.addEventListener('click', (event) => {
+  const card = event.target.closest('[data-pane]')
+  if (!card) return
+  showSettingsPane(card.dataset.pane)
+})
 
 settingsNavButtons.forEach((button, index) => {
   button.addEventListener('click', () => showSettingsPane(button.dataset.pane))
@@ -2376,14 +2438,10 @@ settingsNavButtons.forEach((button, index) => {
   })
 })
 
-const settingsNavToggle = document.getElementById('settings-nav-toggle')
-if (settingsNavToggle) {
-  settingsNavToggle.addEventListener('click', () => {
-    const open = !settingsNav.classList.contains('is-open')
-    settingsNav.classList.toggle('is-open', open)
-    settingsNavToggle.setAttribute('aria-expanded', String(open))
-  })
-}
+window.addEventListener('resize', () => {
+  if (settings.hidden) return
+  showSettingsPane(manageTab === 'general' ? 'general' : (isNarrowSettings() && manageTab !== 'data-home' ? manageTab : manageTab))
+})
 
 const zonesWindow = document.getElementById('zones-window')
 const zonesWindowList = document.getElementById('zones-window-list')
