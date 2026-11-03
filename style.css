@@ -100,7 +100,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 1;
+  /* Above .searchbar (z-index 3) so weather/links previews cover the bar ends. */
+  z-index: 4;
   overflow: visible;
 }
 
@@ -575,6 +576,9 @@ footer a:focus-visible svg {
   color: var(--color-fg-1);
   line-height: 1.7;
   z-index: 2;
+  box-shadow: 0 8px 28px rgba(27, 35, 48, 0.12);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .weather-detail:empty {
@@ -621,6 +625,17 @@ footer a:focus-visible svg {
 
 .weather-row + .weather-row {
   color: var(--color-fg-2);
+}
+
+.preview-places {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.preview-places .place-chip {
+  cursor: pointer;
 }
 
 .preview-title {
@@ -760,8 +775,12 @@ html[data-wallpaper-on] .lang-trigger {
   color: var(--color-fg-1);
 }
 
+/* Soften only the chip; keep the detail panel fully opaque over the page/search. */
 html[data-wallpaper-on] .weather {
   color: var(--color-fg-1);
+}
+
+html[data-wallpaper-on] .weather > button {
   opacity: 0.55;
 }
 
@@ -1480,11 +1499,25 @@ img.ai-icon {
   margin: 0;
   padding: 16px 20px 12px;
   border-bottom: 1px solid var(--color-border);
-  gap: 10px;
+  gap: 12px;
 }
 
 .settings-shell > .settings-head h2 {
   margin-right: auto;
+  min-width: 0;
+}
+
+.settings-head-actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.settings-shell .settings-head-actions .text-button {
+  margin: 0;
+  padding: 6px 10px;
 }
 
 .settings-nav-toggle {
@@ -2002,9 +2035,37 @@ html[data-quote-off] #quote {
   display: block;
 }
 
-/* Options that belong to the weather sit under it, indented, and grey out while it is off. */
+/* Weather location options sit under the On toggle; keep the same left edge (no staircase indent). */
 .weather-sub {
-  margin-left: 24px;
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.weather-sub > .location-title {
+  margin-top: 4px;
+}
+
+.weather-sub .privacy {
+  margin: 0;
+  padding-left: 26px;
+}
+
+.settings-shell .adv-group .city-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.settings-shell .city-row {
+  min-width: 0;
+  width: 100%;
+}
+
+.settings-shell .city-row .ghost-button {
+  flex: none;
 }
 
 .setting:has(input:disabled) {
@@ -2640,6 +2701,11 @@ html[data-quote-off] #quote {
   margin-right: 12px;
 }
 
+.settings-shell .settings-head .text-button {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 /* Dialog panels are focused as a whole when they open; the outline is not wanted there. */
 .settings-panel:focus {
   outline: none;
@@ -3091,7 +3157,17 @@ button.action:disabled {
   }
 
   .settings-shell > .settings-head {
-    padding: 14px 14px 10px;
+    padding: 12px 14px 10px;
+    gap: 8px;
+  }
+
+  .settings-head-actions {
+    gap: 0;
+  }
+
+  .settings-shell .settings-head-actions .text-button {
+    padding: 6px 8px;
+    font-size: 13px;
   }
 
   .settings-nav-toggle {
@@ -3108,13 +3184,18 @@ button.action:disabled {
     order: 2;
     flex-direction: row;
     flex-wrap: nowrap;
-    gap: 4px;
-    padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px));
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+    /* width:100% on desktop nav buttons made each tab fill the bar — only General showed. */
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
     overflow-x: auto;
+    overscroll-behavior-x: contain;
     border-right: 0;
     border-top: 1px solid var(--color-border);
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    scroll-padding-inline: 12px;
   }
 
   .settings-nav::-webkit-scrollbar {
@@ -3123,7 +3204,9 @@ button.action:disabled {
 
   .settings-nav-btn {
     flex: 0 0 auto;
-    padding: 8px 12px;
+    width: auto;
+    max-width: none;
+    padding: 8px 14px;
     font-size: 12px;
     text-align: center;
     white-space: nowrap;
@@ -3138,6 +3221,8 @@ button.action:disabled {
     z-index: 2;
     flex-direction: column;
     flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
     max-height: 55%;
     overflow: auto;
     padding: 10px;
@@ -3148,12 +3233,25 @@ button.action:disabled {
   }
 
   .settings-nav.is-open .settings-nav-btn {
+    width: 100%;
     text-align: left;
   }
 
   .settings-content {
     order: 1;
     padding: 14px 14px 16px;
+  }
+
+  .settings-shell .service-picks {
+    gap: 8px;
+  }
+
+  .settings-shell .service-pick {
+    max-width: calc(50% - 4px);
+    height: auto;
+    min-height: 32px;
+    padding: 6px 10px;
+    white-space: nowrap;
   }
 
   .advanced.advanced-show-first {
