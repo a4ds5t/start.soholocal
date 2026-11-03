@@ -1600,6 +1600,8 @@ const applySettingsText = () => {
   document.getElementById('first-hint-text').textContent = t.hintText
   document.getElementById('first-hint-close').setAttribute('aria-label', t.close)
   document.getElementById('first-hint-quick').textContent = t.quickCard
+  const helpQuickOpen = document.getElementById('help-quickstart-open')
+  if (helpQuickOpen) helpQuickOpen.textContent = t.quickLink
   document.getElementById('quickstart-engine-head').textContent = t.quickEngineHead
   document.getElementById('quickstart-engine-text').textContent = t.quickEngineText
   document.getElementById('quickstart-click').textContent = t.quickClick
@@ -1744,9 +1746,17 @@ const renderHelp = () => {
 }
 // Help opens over the settings; the settings are hidden meanwhile so their scrollbar does not show through.
 let helpOverSettings = false
-const openHelp = () => {
+const setHelpQuickstart = (open) => {
+  const panel = document.getElementById('help-quickstart')
+  const link = document.getElementById('help-quickstart-open')
+  if (!panel || !link) return
+  panel.hidden = !open
+  link.setAttribute('aria-expanded', open ? 'true' : 'false')
+}
+const openHelp = (opts = {}) => {
   helpFrom = document.activeElement
   renderHelp()
+  setHelpQuickstart(!!opts.expandQuickstart)
   helpOverSettings = !settings.hidden
   settings.hidden = true
   helpWindow.hidden = false
@@ -1754,13 +1764,21 @@ const openHelp = () => {
 }
 const closeHelp = () => {
   helpWindow.hidden = true
+  setHelpQuickstart(false)
   if (helpOverSettings) settings.hidden = false
   helpOverSettings = false
   if (helpFrom && helpFrom.focus) helpFrom.focus()
 }
-document.getElementById('help-open').addEventListener('click', openHelp)
+document.getElementById('help-open').addEventListener('click', () => openHelp())
 document.getElementById('help-close').addEventListener('click', closeHelp)
 helpWindow.addEventListener('click', (e) => { if (e.target === helpWindow) closeHelp() })
+document.getElementById('help-quickstart-open').addEventListener('click', (event) => {
+  event.preventDefault()
+  const panel = document.getElementById('help-quickstart')
+  const next = !!panel?.hidden
+  setHelpQuickstart(next)
+  if (next) panel.scrollIntoView({ block: 'nearest' })
+})
 document.getElementById('settings-close').addEventListener('click', closeSettings)
 settings.addEventListener('click', (e) => { if (e.target === settings) closeSettings() })
 
@@ -3533,9 +3551,9 @@ document.getElementById('first-hint-close').addEventListener('click', hideFirstH
 document.addEventListener('click', hideFirstHint)
 document.addEventListener('keydown', (e) => { if (e.key === '?') hideFirstHint() })
 
-// First-visit card: open Help (Quick start content lives there now).
+// First-visit card: open Help with Quick start expanded (collapsed by default otherwise).
 document.getElementById('first-hint-quick').addEventListener('click', (event) => {
   event.preventDefault()
   hideFirstHint()
-  openHelp()
+  openHelp({ expandQuickstart: true })
 })

@@ -124,7 +124,8 @@ const emptyForecast = {
   await page.click('#first-hint-quick');
   check(await isOpen('#help'), 'Help opens from the first-visit card');
   check(!(await page.isVisible('#first-hint')), 'the first-visit card is gone once Help opens');
-  check(await page.isVisible('#help-quickstart'), 'Help shows the Quick start block');
+  check(await page.isVisible('#help-quickstart-open'), 'Help shows a Quick start link at the top');
+  check(await page.isVisible('#help-quickstart'), 'first-visit opens Help with Quick start expanded');
   await page.click('#help-close');
   check(!(await isOpen('#help')), 'Help closes with the close button');
   await page.reload();
@@ -136,6 +137,12 @@ const emptyForecast = {
   check(!(await page.$('#quickstart-open')), 'General has no Quick start link');
   await page.click('#help-open');
   check(await isOpen('#help'), 'Help opens from Settings');
+  check(await page.isVisible('#help-quickstart-open'), 'Help keeps the Quick start link');
+  check(!(await page.isVisible('#help-quickstart')), 'Quick start stays collapsed by default');
+  await page.click('#help-quickstart-open');
+  check(await page.isVisible('#help-quickstart'), 'Quick start opens from the top link');
+  await page.click('#help-quickstart-open');
+  check(!(await page.isVisible('#help-quickstart')), 'Quick start collapses again from the link');
   await page.keyboard.press('Escape');
   check(!(await isOpen('#help')), 'Escape closes Help');
 
