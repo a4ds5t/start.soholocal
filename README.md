@@ -69,7 +69,7 @@ Each option can still be changed on its own. When your choices match neither pag
 
 - **Background.** The round button at the bottom right steps through the backgrounds: none, then each wallpaper you have switched on, and back again. The button at the bottom left changes the background colour in steps. In **Manage data**, the Background tab shows the wallpapers and lets you switch each one on or off. Under **Show** in Advanced, **Background colour button** hides or shows the colour button at the bottom left; with it hidden the background stays neutral. The background adapts to light and dark mode.
 
-- **Settings and help.** Open the settings with the gear at the top right, or press `?`. The basic view has the pages and the privacy note. **Advanced** opens the rest, grouped into Weather, Show, Time format, Date, Search, AI shortcuts, Background and Language. Under **Language** in the Advanced settings you can choose the page language; **Automatic** follows your browser. The **Help** button opens a guide to every feature. Press `Esc` to close.
+- **Settings and help.** Open the settings with the gear at the top right, or press `?`. One window with **Settings | Data**: prefs (General, Show on page, Weather, Clock & date) and catalogs (Search, AI, Social, Links, Time zones, Weather, Background, Backup). A quiet search field filters sections and rows on both sides. Language lives under General (**Automatic** follows your browser). **Help** opens a guide to every feature. Press `Esc` to close.
 
 - **Phones.** The bottom controls sit above the browser's bar, and the layout fits landscape phones too.
 
