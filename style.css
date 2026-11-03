@@ -2801,6 +2801,12 @@ html[data-quote-off] #quote {
   height: 16px;
 }
 
+/* Custom engine favicons are colour; greyscale them on the page chrome so they match built-in SVGs. Data catalog keeps colour. */
+#engine .favicon-img,
+.engine-overlay-option .eo-icon .favicon-img {
+  filter: grayscale(1);
+}
+
 /* The tabs of the manage panel; the active one is underlined. */
 .manage-tabs {
   display: flex;
