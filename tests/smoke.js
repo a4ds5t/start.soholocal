@@ -207,6 +207,28 @@ const emptyForecast = {
   await page.click('#tab-weather');
   check(await page.isVisible('#place-form'), 'Data Weather holds extra places');
   check(await page.$eval('#weather-own', (el) => el.classList.contains('weather-own-row')), 'Data Weather own place uses place-row rhythm');
+  // Seed two extras and confirm ↑↓ reorder (Your place stays fixed; order persists).
+  await page.evaluate(() => {
+    const places = [
+      { label: 'Alpha', latitude: 1, longitude: 1, timezone: 'UTC' },
+      { label: 'Beta', latitude: 2, longitude: 2, timezone: 'UTC' },
+    ]
+    localStorage.setItem('weatherPlaces', JSON.stringify(places))
+  })
+  await page.reload()
+  await page.waitForSelector('#search')
+  await openSettings()
+  await page.click('#seg-data')
+  await page.click('#tab-weather')
+  check(await page.locator('#place-list .place-row').count() === 2, 'Data Weather lists seeded extras')
+  check(await page.locator('#place-list .place-move').count() === 2, 'Data Weather extras show move controls')
+  const before = await page.locator('#place-list .place-row-name').allTextContents()
+  check(before[0] === 'Alpha' && before[1] === 'Beta', 'Seeded weather order starts Alpha then Beta')
+  await page.locator('#place-list .place-row').nth(1).getByRole('button', { name: 'Move up' }).click()
+  const reordered = await page.locator('#place-list .place-row-name').allTextContents()
+  check(reordered[0] === 'Beta' && reordered[1] === 'Alpha', 'Weather ↑ moves Beta above Alpha')
+  const savedPlaces = await page.evaluate(() => JSON.parse(localStorage.getItem('weatherPlaces') || '[]').map((p) => p.label))
+  check(savedPlaces[0] === 'Beta' && savedPlaces[1] === 'Alpha', 'Weather reorder persists in weatherPlaces')
   check(!(await page.$('#section-weather #set-weather')), 'Weather master stays in Settings');
   await page.click('#tab-backup');
   check(await page.isVisible('#sec-export'), 'Backup has Export / import block');

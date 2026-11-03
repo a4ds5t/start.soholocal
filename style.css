@@ -2945,7 +2945,7 @@ html[data-quote-off] #quote {
 }
 
 .place-list li.place-row {
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
 }
 
 .place-row-name {
@@ -2961,6 +2961,11 @@ html[data-quote-off] #quote {
   min-width: 0;
 }
 
+.place-list .place-move {
+  display: flex;
+  gap: 2px;
+}
+
 .place-list button {
   width: 24px;
   height: 24px;
@@ -2974,9 +2979,14 @@ html[data-quote-off] #quote {
   cursor: pointer;
 }
 
-.place-list button:hover,
-.place-list button:focus-visible {
+.place-list button:hover:not(:disabled),
+.place-list button:focus-visible:not(:disabled) {
   color: var(--color-fg-1);
+}
+
+.place-list button:disabled {
+  opacity: .35;
+  cursor: default;
 }
 
 /* The extra places in the forecast window: pick one to see its forecast. */
