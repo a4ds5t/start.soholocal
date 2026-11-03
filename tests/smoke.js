@@ -151,12 +151,13 @@ const emptyForecast = {
   await page.click('#nav-weather-prefs');
   check(await page.isVisible('#set-weather'), 'Weather prefs pane holds weather');
   check(await page.isVisible('.prefs-split'), 'Weather prefs uses a 2-col split');
-  check(!!(await page.$('#city-selected')), 'Weather city has a selected-city slot');
-  check(!!(await page.$('#city-remove')), 'Weather city has a remove control');
+  check(!(await page.$('#city-selected')), 'Location has no selected-city chip');
+  check(!(await page.$('#city-remove')), 'Location has no in-pane city remove');
+  check(!!(await page.$('#city-input')), 'Location keeps a choose-city field');
+  check(!!(await page.$('#city-form')), 'Location keeps the city choose form');
   check(!!(await page.$('#weather-live')), 'Weather prefs has a live current slot');
   check(!(await page.$('#weather-icon-samples')), 'Weather prefs has no sample icon row');
   check(!(await page.$('#city-selected-weather')), 'City chip does not duplicate live weather');
-  check(!!(await page.$('#city-selected-name')), 'Location city chip keeps the name slot for remove/edit');
   await page.click('#nav-show');
   check(await page.isVisible('#set-ai-overlay'), 'Show on page holds masters');
   check(await page.locator('#lbl-ai-overlay').textContent() === 'AI in search field', 'AI master is labeled AI in search field');
@@ -199,6 +200,7 @@ const emptyForecast = {
   check(await page.isVisible('#social-form'), 'Data Social has add form');
   await page.click('#tab-weather');
   check(await page.isVisible('#place-form'), 'Data Weather holds extra places');
+  check(await page.$eval('#weather-own', (el) => el.classList.contains('weather-own-row')), 'Data Weather own place uses place-row rhythm');
   check(!(await page.$('#section-weather #set-weather')), 'Weather master stays in Settings');
   await page.click('#tab-backup');
   check(await page.isVisible('#sec-export'), 'Backup has Export / import block');

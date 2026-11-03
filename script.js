@@ -734,12 +734,12 @@ const aiText = {
   zh: { quickTitle: '快速入门', quickEngineHead: '更换搜索引擎', quickEngineText: '每次点击图标会切换到下一个搜索引擎：DuckDuckGo、Kagi、Brave 或 Google。你的选择会被保存。', quickClick: '点这里', quickMoreHead: '页面更多功能', quickAiHead: '添加 AI 链接', quickAiText: '在“设置 → AI”中最多选五个 AI 服务，也可以添加你自己的地址。', quickPageHead: '选择页面', quickPageText: '极简、标准或高级，在右上角的设置中切换。', quickDone: '知道了', quickLink: '切换快速入门', quickCard: '快速入门：最初的几步', quickNote: '这些内容也在帮助中。', changelogLink: '更新记录', hintText: '设置在这里：点击齿轮，或按 ?。', limitFull: '{n}/{n} · 已满', aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加 AI', aiEditTitle: '编辑 AI', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', versionUpdated: '更新', versionTagAria: '版本 {v}，显示更新详情', versionText: '版本 {v}，更新于 {d}', secBackground: '背景', resetIntro: '重置设置只会恢复默认值，你的数据会保留。删除我的数据会移除你自己的链接、AI 快捷方式、时区、城市和额外地点。此操作无法撤销，请先在管理数据的备份标签中备份。', resetSec: '重置', dateOnLbl: '显示日期', dateSec: '日期', dateShow: '显示', dateLong: '长格式', dateShort: '短格式', dateOrderLbl: '顺序', dateAuto: '自动', dateDmy: '日-月-年', dateMdy: '月-日-年', dateYmd: '年-月-日', timeSec: '时间格式', time24: '24 小时制', time12: '12 小时制 (AM/PM)', timeFull: '完整，含秒', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', linksNewTab: '在新标签页中打开链接', aiDuplicate: '已在列表中。', aiPick: '选择服务', aiInvalid: '请输入有效的 https 地址' }
 }
 const manageText = {
-  en: { linkUp: 'Move up', linkDown: 'Move down', manageOpen: 'Manage data', tabBackup: 'Backup', backupNote: 'Export saves your settings, links, AI shortcuts, time zones and weather places to a file on your computer. Import loads such a file: Merge adds what is new and keeps what you have, Replace overwrites everything. Make a backup before you reset or delete your data.', tabLinks: 'Own links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
-  nl: { linkUp: 'Omhoog', linkDown: 'Omlaag', manageOpen: 'Data beheren', tabBackup: 'Backup', backupNote: 'Exporteren slaat je instellingen, links, AI-snelkoppelingen, tijdzones en weerplaatsen op in een bestand op je computer. Importeren laadt zo’n bestand: Samenvoegen voegt toe wat nieuw is en laat staan wat je hebt, Vervangen overschrijft alles. Maak een backup voordat je gegevens reset of wist.', tabLinks: 'Eigen links', tabZones: 'Tijdzones', tabAi: 'AI', tabWeather: 'Weer', placeLabel: 'Een stad toevoegen', placeAdd: 'Toevoegen', placeOwn: 'Je eigen plaats', placeNone: 'Nog geen plaats', placeDuplicate: 'Staat al in de lijst', placeRemove: 'Verwijderen' },
-  de: { linkUp: 'Nach oben', linkDown: 'Nach unten', manageOpen: 'Daten verwalten', tabBackup: 'Backup', backupNote: 'Exportieren speichert deine Einstellungen, Links, KI-Verknüpfungen, Zeitzonen und Wetterorte in einer Datei auf deinem Computer. Importieren lädt so eine Datei: Zusammenführen ergänzt das Neue und behält, was du hast; Ersetzen überschreibt alles. Erstelle ein Backup, bevor du Daten zurücksetzt oder löschst.', tabLinks: 'Eigene Links', tabZones: 'Zeitzonen', tabAi: 'KI', tabWeather: 'Wetter', placeLabel: 'Eine Stadt hinzufügen', placeAdd: 'Hinzufügen', placeOwn: 'Dein Ort', placeNone: 'Noch kein Ort', placeDuplicate: 'Ist schon in der Liste', placeRemove: 'Entfernen' },
-  fr: { linkUp: 'Monter', linkDown: 'Descendre', manageOpen: 'Gérer les données', tabBackup: 'Sauvegarde', backupNote: 'Exporter enregistre vos réglages, liens, raccourcis IA, fuseaux et lieux météo dans un fichier sur votre ordinateur. Importer charge ce fichier : Fusionner ajoute le nouveau et garde le reste ; Remplacer écrase tout. Faites une sauvegarde avant de réinitialiser ou d’effacer vos données.', tabLinks: 'Liens perso', tabZones: 'Fuseaux', tabAi: 'IA', tabWeather: 'Météo', placeLabel: 'Ajouter une ville', placeAdd: 'Ajouter', placeOwn: 'Votre lieu', placeNone: 'Aucun lieu pour l’instant', placeDuplicate: 'Déjà dans la liste', placeRemove: 'Supprimer' },
-  es: { linkUp: 'Subir', linkDown: 'Bajar', manageOpen: 'Gestionar datos', tabBackup: 'Copia', backupNote: 'Exportar guarda tus ajustes, enlaces, accesos de IA, zonas horarias y lugares del tiempo en un archivo de tu equipo. Importar carga ese archivo: Combinar añade lo nuevo y conserva lo que tienes; Reemplazar sobrescribe todo. Haz una copia antes de restablecer o borrar tus datos.', tabLinks: 'Enlaces propios', tabZones: 'Zonas horarias', tabAi: 'IA', tabWeather: 'Tiempo', placeLabel: 'Añadir una ciudad', placeAdd: 'Añadir', placeOwn: 'Tu lugar', placeNone: 'Aún no hay lugar', placeDuplicate: 'Ya está en la lista', placeRemove: 'Quitar' },
-  zh: { linkUp: '上移', linkDown: '下移', manageOpen: '管理数据', tabBackup: '备份', backupNote: '导出会把你的设置、链接、AI 快捷方式、时区和天气地点保存到电脑上的一个文件。导入会加载该文件：合并会添加新内容并保留现有内容；替换会覆盖全部。重置或删除数据前，请先备份。', tabLinks: '自有链接', tabZones: '时区', tabAi: 'AI', tabWeather: '天气', placeLabel: '添加城市', placeAdd: '添加', placeOwn: '你的地点', placeNone: '还没有地点', placeDuplicate: '已在列表中', placeRemove: '移除' }
+  en: { linkUp: 'Move up', linkDown: 'Move down', manageOpen: 'Manage data', tabBackup: 'Backup', backupNote: 'Export saves your settings, links, AI shortcuts, time zones and weather places to a file on your computer. Import loads such a file: Merge adds what is new and keeps what you have, Replace overwrites everything. Make a backup before you reset or delete your data.', tabLinks: 'Own links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeDuplicate: 'Already in the list', placeRemove: 'Remove', chosenPlaceholder: 'Chosen' },
+  nl: { linkUp: 'Omhoog', linkDown: 'Omlaag', manageOpen: 'Data beheren', tabBackup: 'Backup', backupNote: 'Exporteren slaat je instellingen, links, AI-snelkoppelingen, tijdzones en weerplaatsen op in een bestand op je computer. Importeren laadt zo’n bestand: Samenvoegen voegt toe wat nieuw is en laat staan wat je hebt, Vervangen overschrijft alles. Maak een backup voordat je gegevens reset of wist.', tabLinks: 'Eigen links', tabZones: 'Tijdzones', tabAi: 'AI', tabWeather: 'Weer', placeLabel: 'Een stad toevoegen', placeAdd: 'Toevoegen', placeOwn: 'Je eigen plaats', placeNone: 'Nog geen plaats', placeDuplicate: 'Staat al in de lijst', placeRemove: 'Verwijderen', chosenPlaceholder: 'Gekozen' },
+  de: { linkUp: 'Nach oben', linkDown: 'Nach unten', manageOpen: 'Daten verwalten', tabBackup: 'Backup', backupNote: 'Exportieren speichert deine Einstellungen, Links, KI-Verknüpfungen, Zeitzonen und Wetterorte in einer Datei auf deinem Computer. Importieren lädt so eine Datei: Zusammenführen ergänzt das Neue und behält, was du hast; Ersetzen überschreibt alles. Erstelle ein Backup, bevor du Daten zurücksetzt oder löschst.', tabLinks: 'Eigene Links', tabZones: 'Zeitzonen', tabAi: 'KI', tabWeather: 'Wetter', placeLabel: 'Eine Stadt hinzufügen', placeAdd: 'Hinzufügen', placeOwn: 'Dein Ort', placeNone: 'Noch kein Ort', placeDuplicate: 'Ist schon in der Liste', placeRemove: 'Entfernen', chosenPlaceholder: 'Gewählt' },
+  fr: { linkUp: 'Monter', linkDown: 'Descendre', manageOpen: 'Gérer les données', tabBackup: 'Sauvegarde', backupNote: 'Exporter enregistre vos réglages, liens, raccourcis IA, fuseaux et lieux météo dans un fichier sur votre ordinateur. Importer charge ce fichier : Fusionner ajoute le nouveau et garde le reste ; Remplacer écrase tout. Faites une sauvegarde avant de réinitialiser ou d’effacer vos données.', tabLinks: 'Liens perso', tabZones: 'Fuseaux', tabAi: 'IA', tabWeather: 'Météo', placeLabel: 'Ajouter une ville', placeAdd: 'Ajouter', placeOwn: 'Votre lieu', placeNone: 'Aucun lieu pour l’instant', placeDuplicate: 'Déjà dans la liste', placeRemove: 'Supprimer', chosenPlaceholder: 'Choisie' },
+  es: { linkUp: 'Subir', linkDown: 'Bajar', manageOpen: 'Gestionar datos', tabBackup: 'Copia', backupNote: 'Exportar guarda tus ajustes, enlaces, accesos de IA, zonas horarias y lugares del tiempo en un archivo de tu equipo. Importar carga ese archivo: Combinar añade lo nuevo y conserva lo que tienes; Reemplazar sobrescribe todo. Haz una copia antes de restablecer o borrar tus datos.', tabLinks: 'Enlaces propios', tabZones: 'Zonas horarias', tabAi: 'IA', tabWeather: 'Tiempo', placeLabel: 'Añadir una ciudad', placeAdd: 'Añadir', placeOwn: 'Tu lugar', placeNone: 'Aún no hay lugar', placeDuplicate: 'Ya está en la lista', placeRemove: 'Quitar', chosenPlaceholder: 'Elegida' },
+  zh: { linkUp: '上移', linkDown: '下移', manageOpen: '管理数据', tabBackup: '备份', backupNote: '导出会把你的设置、链接、AI 快捷方式、时区和天气地点保存到电脑上的一个文件。导入会加载该文件：合并会添加新内容并保留现有内容；替换会覆盖全部。重置或删除数据前，请先备份。', tabLinks: '自有链接', tabZones: '时区', tabAi: 'AI', tabWeather: '天气', placeLabel: '添加城市', placeAdd: '添加', placeOwn: '你的地点', placeNone: '还没有地点', placeDuplicate: '已在列表中', placeRemove: '移除', chosenPlaceholder: '已选' }
 }
 const footerText = {
   en: { pre: 'Vibe coded with', post: 'by a4ds5t', title: 'View the README on GitHub' },
@@ -987,24 +987,34 @@ const weatherIcons = {
 }
 const weatherIcon = (key) => `<svg class="weather-icon ${key || 'cloudy'}" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${weatherIcons[key] || weatherIcons.cloudy}</svg>`
 
-// Append " - ☁ 9°" from a forecast current block (real data only — omit if missing).
-const appendWeatherTip = (parent, forecast) => {
+// Compact tip "☁ 9°" from a forecast current block (real data only — omit if missing).
+const weatherTipNode = (forecast) => {
   const now = forecast?.current
-  if (!now || typeof now.temperature_2m !== 'number') return
+  if (!now || typeof now.temperature_2m !== 'number') return null
   const key = weatherKey(now.weather_code)
   const temperature = `${Math.round(now.temperature_2m)}°`
   const tip = document.createElement('span')
   tip.className = 'weather-tip'
-  tip.append(document.createTextNode(' - '))
   tip.insertAdjacentHTML('beforeend', weatherIcon(key))
   const tempEl = document.createElement('span')
   tempEl.className = 'weather-tip-temp'
   tempEl.textContent = temperature
   tip.append(tempEl)
-  parent.append(tip)
+  return tip
 }
 
-// Settings → Weather: live chip = City - icon temp (e.g. Woudenberg - ☁ 9°).
+const markFieldChosen = (input) => {
+  if (!input) return
+  input.value = ''
+  input.dataset.chosen = '1'
+  input.placeholder = t.chosenPlaceholder || 'Chosen'
+}
+const clearChosenMark = (input) => {
+  if (!input) return
+  delete input.dataset.chosen
+}
+
+// Settings → Weather: live chip = City - icon temp (+ × when a chosen city is active).
 const paintWeatherLive = () => {
   const live = document.getElementById('weather-live')
   if (!live) return
@@ -1014,6 +1024,7 @@ const paintWeatherLive = () => {
     const key = weatherKey(now.weather_code)
     const temperature = `${Math.round(now.temperature_2m)}°`
     const place = placeDisplayLabel(shown.place)
+    const canClearCity = locationMode === 'city' && !!city
     live.hidden = false
     live.replaceChildren()
     if (place) {
@@ -1028,6 +1039,20 @@ const paintWeatherLive = () => {
     tempEl.className = 'weather-live-temp'
     tempEl.textContent = temperature
     live.append(tempEl)
+    if (canClearCity) {
+      const remove = document.createElement('button')
+      remove.type = 'button'
+      remove.id = 'weather-live-remove'
+      remove.className = 'weather-live-remove'
+      remove.textContent = '×'
+      remove.setAttribute('aria-label', t.placeRemove || 'Remove')
+      remove.title = t.placeRemove || 'Remove'
+      remove.addEventListener('click', (e) => {
+        e.preventDefault()
+        clearChosenCity({ toIp: false })
+      })
+      live.append(remove)
+    }
     const label = place ? `${place} - ${temperature}` : temperature
     live.title = label
     live.setAttribute('aria-label', label)
@@ -1100,9 +1125,12 @@ const limitText = (count, max) => {
 }
 const limitCount = (fieldId, count, max) => {
   const field = document.getElementById(fieldId)
+  if (!field) return
   const { full, text } = limitText(count, max)
-  field.placeholder = text
   field.classList.toggle('limit-full', full)
+  if (full) field.placeholder = text
+  else if (field.dataset.chosen === '1' && !field.value) field.placeholder = t.chosenPlaceholder || 'Chosen'
+  else if (!field.value) field.placeholder = text
 }
 let extraPlaces = []
 try {
@@ -1428,16 +1456,20 @@ const sortPlaces = () => {
   extraPlaces.sort((a, b) => offset(a.timezone) - offset(b.timezone) || placeDisplayLabel(a).localeCompare(placeDisplayLabel(b)))
 }
 
-// Data → Weather: Your place + extras as "City - ☁ 9°" with real current (cached fetch).
+// Data → Weather: city left, live tip right near × — same row rhythm as Time zones.
 const renderPlaces = () => {
   sortPlaces()
   const ownEl = document.getElementById('weather-own')
   const ownName = current ? placeDisplayLabel(current.place) : t.placeNone
+  ownEl.className = 'weather-own-row manage-note'
   ownEl.replaceChildren()
-  ownEl.append(document.createTextNode(`${t.placeOwn}: ${ownName}`))
+  const ownLabel = el('span', 'place-row-name', `${t.placeOwn}: ${ownName}`)
+  const ownTipSlot = el('span', 'place-row-tip')
+  ownEl.append(ownLabel, ownTipSlot)
   const paintOwnTip = (forecast) => {
-    ownEl.querySelector('.weather-tip')?.remove()
-    appendWeatherTip(ownEl, forecast)
+    ownTipSlot.replaceChildren()
+    const tip = weatherTipNode(forecast)
+    if (tip) ownTipSlot.append(tip)
   }
   if (current?.forecast) paintOwnTip(current.forecast)
   else if (current?.place) {
@@ -1449,14 +1481,17 @@ const renderPlaces = () => {
     }).catch(() => {})
   }
   const full = extraPlaces.length >= PLACE_LIMIT
+  const placeInput = document.getElementById('place-input')
   limitCount('place-input', extraPlaces.length, PLACE_LIMIT)
-  document.getElementById('place-input').disabled = full
+  placeInput.disabled = full
   document.getElementById('place-add').disabled = full
   document.getElementById('place-list').replaceChildren(...extraPlaces.map((place, index) => {
     const row = document.createElement('li')
+    row.className = 'place-row'
     const name = placeDisplayLabel(place)
-    const label = el('span', 'place-row-label', name)
-    row.append(label)
+    const label = el('span', 'place-row-name', name)
+    const tipSlot = el('span', 'place-row-tip')
+    row.append(label, tipSlot)
     row.append(aiButton(t.placeRemove, '×', () => {
       extraPlaces = extraPlaces.filter((_, i) => i !== index)
       const removedChip = current ? index + 1 : index
@@ -1469,8 +1504,9 @@ const renderPlaces = () => {
     }))
     loadPlace(place).then((forecast) => {
       if (!extraPlaces.some((p) => placeDisplayLabel(p) === name)) return
-      label.querySelector('.weather-tip')?.remove()
-      appendWeatherTip(label, forecast)
+      tipSlot.replaceChildren()
+      const tip = weatherTipNode(forecast)
+      if (tip) tipSlot.append(tip)
     }).catch(() => {})
     return row
   }))
@@ -1499,6 +1535,11 @@ const geocode = async (query, count) => {
 const suggestCities = (input, datalist, hits) => {
   let timer = null
   input.addEventListener('input', () => {
+    if (input.dataset.chosen === '1') {
+      clearChosenMark(input)
+      if (input.id === 'city-input') input.placeholder = ''
+      else if (input.id === 'place-input') limitCount('place-input', extraPlaces.length, PLACE_LIMIT)
+    }
     clearTimeout(timer)
     const query = input.value.trim()
     if (query.length < 2) { datalist.replaceChildren(); return }
@@ -1538,7 +1579,7 @@ document.getElementById('place-form').addEventListener('submit', async (e) => {
     extraPlaces = [...extraPlaces, place]
     sortPlaces()
     savePlaces()
-    input.value = ''
+    markFieldChosen(input)
     placeMsg.textContent = ''
     renderPlaces()
     renderPlaceChips()
@@ -2176,6 +2217,7 @@ settingsFields.cityForm.addEventListener('submit', async (e) => {
       settingsFields.cityMessage.textContent = t.notFound
       return
     }
+    // Single active city: a new pick replaces the previous one.
     city = { name: shortCityName(hit.name), country: hit.country, latitude: hit.latitude, longitude: hit.longitude }
     updateWeatherHint()
     writeKey('city', JSON.stringify(city))
@@ -2184,7 +2226,7 @@ settingsFields.cityForm.addEventListener('submit', async (e) => {
     settingsFields.locCity.checked = true
     settingsFields.cityClear.hidden = false
     settingsFields.cityMessage.textContent = ''
-    settingsFields.cityInput.value = ''
+    markFieldChosen(settingsFields.cityInput)
     syncCitySelected()
     setWeather(true)
   } catch {
@@ -2192,37 +2234,32 @@ settingsFields.cityForm.addEventListener('submit', async (e) => {
   }
 })
 
+// Location is choose-field only; selected city lives on the Weather chip (with × to clear).
+const clearChosenCity = ({ toIp = false } = {}) => {
+  city = null
+  try { localStorage.removeItem('city') } catch {}
+  if (toIp) {
+    locationMode = 'ip'
+    writeKey('location', 'ip')
+    settingsFields.locIp.checked = true
+  }
+  if (settingsFields.cityInput) {
+    settingsFields.cityInput.value = ''
+    clearChosenMark(settingsFields.cityInput)
+    settingsFields.cityInput.placeholder = ''
+  }
+  updateWeatherHint()
+  syncCitySelected()
+  if (weatherOn) showWeather()
+}
+
 const syncCitySelected = () => {
-  const box = document.getElementById('city-selected')
-  const nameEl = document.getElementById('city-selected-name')
-  const removeBtn = document.getElementById('city-remove')
-  if (!box || !nameEl) return
-  const show = Boolean(city)
-  box.hidden = !show
-  if (show) nameEl.textContent = city.name
-  if (removeBtn) removeBtn.setAttribute('aria-label', t.placeRemove || 'Remove')
   settingsFields.cityClear.hidden = !city
+  if (city && settingsFields.cityInput && !settingsFields.cityInput.value) markFieldChosen(settingsFields.cityInput)
   paintWeatherLive()
 }
 
-document.getElementById('city-remove')?.addEventListener('click', () => {
-  city = null
-  try { localStorage.removeItem('city') } catch {}
-  updateWeatherHint()
-  syncCitySelected()
-  if (weatherOn) showWeather()
-})
-
-settingsFields.cityClear.addEventListener('click', () => {
-  city = null
-  try { localStorage.removeItem('city') } catch {}
-  locationMode = 'ip'
-  writeKey('location', 'ip')
-  settingsFields.locIp.checked = true
-  updateWeatherHint()
-  syncCitySelected()
-  if (weatherOn) showWeather()
-})
+settingsFields.cityClear.addEventListener('click', () => clearChosenCity({ toIp: true }))
 
 syncCitySelected()
 
@@ -2714,8 +2751,15 @@ document.getElementById('zone-form').addEventListener('submit', (e) => {
   }
   zones = [...zones, match]
   saveZones()
-  zoneInput.value = ''
+  markFieldChosen(zoneInput)
+  zoneMsg.textContent = ''
   renderZones()
+})
+
+zoneInput.addEventListener('input', () => {
+  if (zoneInput.dataset.chosen !== '1') return
+  clearChosenMark(zoneInput)
+  limitCount('zone-input', zones.length, ZONE_LIMIT)
 })
 
 zoneOptions.replaceChildren(...[...zoneNames.map(cityOf), ...Object.keys(zoneAliases).map((name) => name.replace(/\b\w/g, (c) => c.toUpperCase()))].map((value) => Object.assign(document.createElement('option'), { value })))
