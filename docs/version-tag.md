@@ -1,6 +1,6 @@
 # Version tag component
 
-The settings footer shows a clickable version label (`v1.5.14`). Activating it opens a small popover with the build timestamp (Europe/Amsterdam, date, time and short zone name) and a link to the changelog.
+The settings footer shows a clickable version label (`v1.5.17`). Activating it opens a small popover with the build timestamp (Europe/Amsterdam, date, time and short zone name) and a link to the changelog.
 
 ## Files
 

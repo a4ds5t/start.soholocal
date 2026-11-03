@@ -187,6 +187,7 @@
               <p class="location-title" id="sec-open-newtab">Open in new tab</p>
               <label class="master-toggle"><input type="checkbox" id="set-search-newtab"> <span id="lbl-search-newtab">Open search in a new tab</span></label>
               <label class="master-toggle"><input type="checkbox" id="set-ai-newtab"> <span id="lbl-ai-newtab">Open AI links in a new tab</span></label>
+              <label class="master-toggle"><input type="checkbox" id="set-links-newtab"> <span id="lbl-links-newtab">Open links in a new tab</span></label>
             </section>
             <section class="pane-block">
               <p class="location-title" id="sec-lang">Language</p>
@@ -208,19 +209,18 @@
             <section class="pane-block manage-show" id="adv-show">
               <p class="manage-show-label location-title" id="manage-show-label">Show on page</p>
               <div class="manage-masters" id="manage-show">
-                <label class="master-toggle"><input type="checkbox" id="set-ai-overlay"> <span id="lbl-ai-overlay">AI in overlay</span></label>
-                <label class="master-toggle"><input type="checkbox" id="set-links-master"> <span id="lbl-links-master">Links button</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-ai-overlay"> <span id="lbl-ai-overlay">AI in search field</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-links-master"> <span id="lbl-links-master">Links panel (top left)</span></label>
                 <div class="under-bar-group" id="under-bar-group">
                   <p class="under-bar-title" id="under-bar-title">Under the search bar</p>
                   <p class="under-bar-hint" id="under-bar-hint">Only one row can show — Social or Ask AI, or neither.</p>
                   <div class="under-bar-radios" role="radiogroup" aria-labelledby="under-bar-title">
                     <label class="setting"><input type="radio" name="under-bar" id="under-bar-none" value="none"> <span id="lbl-under-bar-none">None</span></label>
-                    <label class="setting"><input type="radio" name="under-bar" id="under-bar-social" value="social"> <span id="lbl-under-bar-social">Social row</span></label>
-                    <label class="setting"><input type="radio" name="under-bar" id="under-bar-askai" value="askai"> <span id="lbl-under-bar-askai">Ask AI row</span></label>
+                    <label class="setting"><input type="radio" name="under-bar" id="under-bar-social" value="social"> <span id="lbl-under-bar-social">Social</span></label>
+                    <label class="setting"><input type="radio" name="under-bar" id="under-bar-askai" value="askai"> <span id="lbl-under-bar-askai">Ask AI</span></label>
                   </div>
                 </div>
-                <label class="master-toggle"><input type="checkbox" id="set-links-own"> <span id="lbl-links-own">Own links</span></label>
-                <label class="master-toggle"><input type="checkbox" id="set-quote"> <span id="lbl-quote">Quote</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-quote"> <span id="lbl-quote">Quote of the day</span></label>
                 <label class="master-toggle"><input type="checkbox" id="set-zones"> <span id="lbl-zones">Time zones</span></label>
                 <label class="master-toggle"><input type="checkbox" id="set-tint"> <span id="lbl-tint">Colour</span></label>
                 <label class="master-toggle"><input type="checkbox" id="set-wallpaper"> <span id="lbl-wallpaper">Wallpaper</span></label>
@@ -234,6 +234,7 @@
               <section class="pane-block">
                 <p class="location-title" id="sec-weather">Weather</p>
                 <label class="master-toggle"><input type="checkbox" id="set-weather"> <span id="lbl-weather">On</span></label>
+                <p class="weather-live" id="weather-live" hidden></p>
               </section>
               <section class="pane-block">
                 <p class="location-title" id="lbl-location">Location</p>
@@ -318,12 +319,12 @@
           </section>
 
           <section class="settings-pane manage-section" data-pane="ai" data-tab="ai" data-world="data" id="section-ai" role="tabpanel" aria-labelledby="tab-ai" hidden>
-            <p class="manage-note" id="ai-overlay-note">AI platforms for the search overlay (type + Enter). Turn “AI in overlay” off under Settings.</p>
+            <p class="manage-note" id="ai-overlay-note">AI platforms for the search field (type + Enter). Turn “AI in search field” off under Settings.</p>
             <ul class="catalog-list" id="ai-overlay-list"></ul>
             <p class="location-title" id="ai-shortcuts-head">ASK AI row shortcuts</p>
             <ul class="ai-list" id="ai-list"></ul>
             <form class="link-form" id="ai-form">
-              <p class="link-form-title" id="ai-form-title">Add shortcut</p>
+              <p class="link-form-title" id="ai-form-title">Add AI</p>
               <p class="manage-note" id="ai-pick-label">Choose a service</p>
               <div class="service-picks" id="ai-catalog"></div>
               <label for="ai-name" id="lbl-ai-name">Name</label>
@@ -341,6 +342,18 @@
           <section class="settings-pane manage-section" data-pane="social" data-tab="social" data-world="data" id="section-social" role="tabpanel" aria-labelledby="tab-social" hidden>
             <p class="manage-note" id="social-note">Jump-only icons under the search bar. Turn the Social row off under Settings.</p>
             <ul class="catalog-list" id="social-manage-list"></ul>
+            <form class="link-form" id="social-form">
+              <p class="link-form-title" id="social-form-title">Add social</p>
+              <label for="social-name" id="lbl-social-name">Name</label>
+              <input type="text" id="social-name" autocomplete="off">
+              <label for="social-url" id="lbl-social-url">Address</label>
+              <input type="text" id="social-url" inputmode="url" autocomplete="off">
+              <div class="link-form-actions">
+                <button type="submit" id="social-save" class="ghost-button action">Save</button>
+                <button type="button" id="social-cancel" class="ghost-button" hidden>Cancel</button>
+              </div>
+              <p class="city-msg" id="social-msg" role="status"></p>
+            </form>
           </section>
 
           <section class="settings-pane manage-section" data-pane="links" data-tab="links" data-world="data" id="section-links" role="tabpanel" aria-labelledby="tab-links" hidden>
