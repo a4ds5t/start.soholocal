@@ -117,24 +117,27 @@ const emptyForecast = {
   await page.click('#settings-close');
   check(!(await isOpen('#settings')), 'settings close with the close button');
 
-  console.log('Quick start');
+  console.log('Help / Quick start');
   await page.evaluate(() => { localStorage.clear(); localStorage.setItem('lang', 'en'); });
   await page.reload();
   await page.waitForSelector('#search');
   await page.click('#first-hint-quick');
-  check(await isOpen('#quickstart'), 'the quick start opens from the first-visit card');
-  check(!(await page.isVisible('#first-hint')), 'the first-visit card is gone once the quick start opens');
-  await page.click('#quickstart-done');
-  check(!(await isOpen('#quickstart')), 'the quick start closes with its OK button');
+  check(await isOpen('#help'), 'Help opens from the first-visit card');
+  check(!(await page.isVisible('#first-hint')), 'the first-visit card is gone once Help opens');
+  check(await page.isVisible('#help-quickstart'), 'Help shows the Quick start block');
+  await page.click('#help-close');
+  check(!(await isOpen('#help')), 'Help closes with the close button');
   await page.reload();
   await page.waitForSelector('#search');
-  check(!(await page.isVisible('#first-hint')), 'the card stays away after the quick start was read');
+  check(!(await page.isVisible('#first-hint')), 'the card stays away after Help was opened from it');
   await openSettings();
-  await page.click('#quickstart-open');
-  check(await isOpen('#quickstart'), 'the quick start opens from the basic settings');
+  check(await page.isVisible('#advanced'), 'General holds the former Advanced controls');
+  check(!(await page.$('#nav-advanced')), 'Advanced nav tab is gone');
+  check(!(await page.$('#quickstart-open')), 'General has no Quick start link');
+  await page.click('#help-open');
+  check(await isOpen('#help'), 'Help opens from Settings');
   await page.keyboard.press('Escape');
-  check(!(await isOpen('#quickstart')), 'Escape closes the quick start');
-  await page.evaluate(() => { document.getElementById('settings').hidden = true; });
+  check(!(await isOpen('#help')), 'Escape closes Help');
 
   console.log('Export and import');
   await page.evaluate(() => localStorage.setItem('links', JSON.stringify([

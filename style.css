@@ -3048,6 +3048,23 @@ button.action:disabled {
 }
 
 /* The quick start: a short first-use window. The search bar picture is the focus; the red arrow points at the engine icon. */
+.help-quickstart {
+  margin: 0 0 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.help-quickstart .quick-note {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--color-fg-2);
+}
+
+.help-panel .quick-shot {
+  margin-top: 4px;
+}
+
 .quickstart-panel {
   width: min(560px, 100%);
 }
@@ -3254,11 +3271,6 @@ button.action:disabled {
     -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%);
   }
 
-  .settings-nav.is-open {
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
-
   .settings-nav::-webkit-scrollbar {
     display: none;
   }
@@ -3291,6 +3303,8 @@ button.action:disabled {
     border-radius: 12px;
     background: var(--color-field);
     box-shadow: 0 12px 32px rgba(0, 0, 0, .28);
+    mask-image: none;
+    -webkit-mask-image: none;
   }
 
   .settings-nav.is-open .settings-nav-btn {

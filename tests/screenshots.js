@@ -146,9 +146,9 @@ const exampleLinks = [
   await page.waitForTimeout(200);
   await page.locator('#settings:not([hidden]) .settings-panel').screenshot({ path: OUT + 'settings-basic.png' });
 
-  await page.click('#nav-advanced');
+  await page.locator('#section-general').evaluate((el) => { el.scrollTop = el.scrollHeight; });
   await page.waitForTimeout(200);
-  await page.locator('#settings:not([hidden]) .settings-panel').screenshot({ path: OUT + 'settings-advanced.png' });
+  await page.locator('#settings:not([hidden]) .settings-panel').screenshot({ path: OUT + 'settings-general-full.png' });
 
   await page.click('#tab-links');
   await page.waitForTimeout(250);

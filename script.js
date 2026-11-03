@@ -9,7 +9,7 @@ const searchBox = document.getElementById('search')
 // HTML autofocus covers the first paint; this covers scripted loads and bfcache restore.
 const focusSearchOnOpen = () => {
   if (!searchBox) return
-  if (document.querySelector('.settings:not([hidden]), #quickstart:not([hidden])')) return
+  if (document.querySelector('.settings:not([hidden])')) return
   try { searchBox.focus({ preventScroll: true }) } catch { searchBox.focus() }
 }
 const syncSearchCaret = () => {
@@ -569,9 +569,9 @@ const settingsFields = {
   wallpaper: document.getElementById('set-wallpaper'),
   tint: document.getElementById('set-tint'),
   wallpaperButton: document.getElementById('set-wallpaper-btn'),
-  links: document.getElementById('set-links'),
+  links: document.getElementById('set-links-master'),
   linksOwn: document.getElementById('set-links-own'),
-  askai: document.getElementById('set-askai'),
+  askai: document.getElementById('set-askai-master'),
   searchNewTab: document.getElementById('set-search-newtab'),
   aiNewTab: document.getElementById('set-ai-newtab'),
   clock: document.getElementById('set-clock'),
@@ -854,27 +854,27 @@ for (const lang of Object.keys(text)) Object.assign(text[lang], weatherWording[l
 const helpText = {
   en: { title: 'Help', settings: 'Settings', close: 'Close', faq: 'Frequently asked questions', sections: [
     ['About this page', 'A quiet start page, built with Claude Code as an experiment in vibe coding. I wanted to see how far plain language gets you with a small web app. My opinion: a start page should be nearly empty; extras earn their place by being found, not by staring back at you.', ['https://github.com/a4ds5t/start.soholocal', 'https://start.soholocal.nl/']],
-    ['Search', 'Type and press Enter, or click the magnifier. The left icon shows the current Search engine or AI: click to switch Search ↔ AI (Ctrl+Shift+A), hold to pick which one from the overlay. Choices are remembered. Under Advanced you can also open search in a new tab.'],
-    ['AI shortcuts', 'Shortcuts below the search bar. In Settings → AI you tick the services you want, up to five; your own shortcuts count toward the same five. Each shortcut shows its service icon. AI links open in a new tab by default, and you can change that under Advanced.'],
+    ['Search', 'Type and press Enter, or click the magnifier. The left icon shows the current Search engine or AI: click to switch Search ↔ AI (Ctrl+Shift+A), hold to pick which one from the overlay. Choices are remembered. Under Settings → General you can also open search in a new tab.'],
+    ['AI shortcuts', 'Shortcuts below the search bar. In Settings → AI you tick the services you want, up to five; your own shortcuts count toward the same five. Each shortcut shows its service icon. AI links open in a new tab by default, and you can change that under Settings → General.'],
     ['Clock', 'Hover over the time to see your time zone. Click the time to cycle through 24-hour, 12-hour and full time with seconds. When time zones are on, the clock icon above the time opens the zones you chose.'],
-    ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and a short numeric date. The order follows your browser unless you choose one under Advanced.'],
+    ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and a short numeric date. The order follows your browser unless you choose one under Settings → General.'],
     ['Links', 'The button at the top left opens your own links only (add, edit, reorder). There is no canned permanent row. Hovering the button shows your own links. You can add up to 15, each with an optional description.'],
-    ['Weather', 'Off by default. Turn it on in Settings → Advanced and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 6 hours and seven days. Up to five more places can be added under Settings → Weather; city chips in the preview and forecast header switch between them. City names stay short, like Time zones.'],
+    ['Weather', 'Off by default. Turn it on in Settings → General and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 6 hours and seven days. Up to five more places can be added under Settings → Weather; city chips in the preview and forecast header switch between them. City names stay short, like Time zones.'],
     ['Background', 'Each press of the round button at the bottom right goes to the next background: none first, then the ones switched on under Settings → Background. The button at the bottom left changes the background colour in steps; on a computer that is the button too.'],
-    ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. One fixed window holds everything: a left sidebar on a computer (General, Search, AI, Social, Links, Time zones, Weather, Background, Advanced, Backup), and bottom tabs plus a menu on a phone. General has the page presets and Show on page. Catalogs that used to live in Manage data are sidebar panes. Advanced groups every display option; Backup exports and imports your data. Bottom right you see the version and the date of the last change. At the bottom of Advanced, Reset settings brings back the defaults and keeps your data. Delete my data removes your own links, AI shortcuts, time zones, city and extra places — make a Backup first.'],
+    ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. One fixed window holds everything: a left sidebar on a computer (General, Search, AI, Social, Links, Time zones, Weather, Background, Backup), and bottom tabs plus a menu on a phone. General has page presets, Show on page, weather location, clock & date, language and reset. Catalog panes hold Search/AI/Social/Links/zones/weather places/backgrounds; Backup exports and imports. Help opens with a Quick start at the top. Delete my data removes your own links, AI shortcuts, time zones, city and extra places — make a Backup first.'],
     ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, only while weather is on; showing your IP address uses the same lookup. Extra places send their name to Open-Meteo. Custom AI shortcuts load their icon from their own site. Nothing else leaves the page.'],
     ['Export and import', 'Export data saves your choices, links and places to a file you keep. Import data loads such a file: Merge adds what is new and keeps the rest, Replace overwrites everything.'],
   ] },
   nl: { title: 'Help', settings: 'Instellingen', close: 'Sluiten', faq: 'Veelgestelde vragen', sections: [
     ['Over deze pagina', 'Een rustige startpagina, gebouwd met Claude Code als experiment in vibe coding. Ik wilde zien hoe ver gewone taal je brengt met een kleine webapp. Mijn mening: een startpagina hoort bijna leeg te zijn; de extra’s verdienen hun plek doordat je ze vindt, niet doordat ze je aankijken.', ['https://github.com/a4ds5t/start.soholocal', 'https://start.soholocal.nl/']],
-    ['Zoeken', 'Typ en druk op Enter, of klik op het vergrootglas. Het icoon links toont Zoeken of AI: klik wisselt Zoeken ↔ AI (Ctrl+Shift+A), ingedrukt houden opent de kiezer. Social of Vraag AI onder de balk gaan niet samen. Onder Geavanceerd kun je zoeken in een nieuw tabblad openen.'],
-    ['AI-snelkoppelingen', 'Snelkoppelingen onder de zoekbalk. In Instellingen → AI vink je de diensten aan die je wilt, maximaal vijf; je eigen snelkoppelingen tellen mee in die vijf. Elke snelkoppeling toont het icoon van de dienst. AI-links openen standaard in een nieuw tabblad; dat kun je aanpassen onder Geavanceerd.'],
+    ['Zoeken', 'Typ en druk op Enter, of klik op het vergrootglas. Het icoon links toont Zoeken of AI: klik wisselt Zoeken ↔ AI (Ctrl+Shift+A), ingedrukt houden opent de kiezer. Social of Vraag AI onder de balk gaan niet samen. Onder Instellingen → Algemeen kun je zoeken in een nieuw tabblad openen.'],
+    ['AI-snelkoppelingen', 'Snelkoppelingen onder de zoekbalk. In Instellingen → AI vink je de diensten aan die je wilt, maximaal vijf; je eigen snelkoppelingen tellen mee in die vijf. Elke snelkoppeling toont het icoon van de dienst. AI-links openen standaard in een nieuw tabblad; dat kun je aanpassen onder Instellingen → Algemeen.'],
     ['Klok', 'Ga met de muis over de tijd om je tijdzone te zien. Klik op de tijd om te wisselen tussen 24 uur, 12 uur en volledige tijd met seconden. Staan de tijdzones aan, dan opent het klokje boven de tijd de zones die je koos.'],
-    ['Datum', 'Ga met de muis over de datum om de ISO-week en de dag van het jaar te zien. Klik erop om te wisselen tussen de lange vorm en een korte datum. De volgorde volgt je browser, tenzij je er onder Geavanceerd een kiest.'],
+    ['Datum', 'Ga met de muis over de datum om de ISO-week en de dag van het jaar te zien. Klik erop om te wisselen tussen de lange vorm en een korte datum. De volgorde volgt je browser, tenzij je er onder Instellingen → Algemeen een kiest.'],
     ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen. Staat Eigen links uit, dan opent de knop direct Wikipedia.'],
-    ['Weer', 'Standaard uit. Zet het aan in Instellingen → Geavanceerd en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 6 uur en zeven dagen. Extra plaatsen voeg je toe onder Instellingen → Weer; chips in de preview en de verwachting wisselen ertussen. Stadsnamen blijven kort, zoals bij Tijdzones.'],
+    ['Weer', 'Standaard uit. Zet het aan in Instellingen → Algemeen en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 6 uur en zeven dagen. Extra plaatsen voeg je toe onder Instellingen → Weer; chips in de preview en de verwachting wisselen ertussen. Stadsnamen blijven kort, zoals bij Tijdzones.'],
     ['Achtergrond', 'Elke druk op de ronde knop rechtsonder gaat naar de volgende achtergrond: eerst geen, daarna de achtergronden die je onder Instellingen → Achtergrond hebt aangezet. De knop linksonder wisselt de achtergrondkleur in stappen; op de computer is dat ook een knop.'],
-    ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Esc sluit. Eén vast venster: op de computer een linkerzijbalk (Algemeen, Zoeken, AI, Social, Links, Tijdzones, Weer, Achtergrond, Geavanceerd, Backup), op de telefoon tabs onderaan plus een menu. Algemeen heeft de paginakeuzes en Tonen op de pagina. Catalogi die vroeger onder Data beheren zaten, zijn zijbalkpanelen. Geavanceerd groepeert weergave-opties; Backup exporteert en importeert. Onderaan Geavanceerd: resetten of gegevens wissen — maak eerst een Backup.'],
+    ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Esc sluit. Eén vast venster: op de computer een linkerzijbalk (Algemeen, Zoeken, AI, Social, Links, Tijdzones, Weer, Achtergrond, Backup), op de telefoon tabs onderaan plus een menu. Algemeen heeft paginakeuzes, Tonen op de pagina, weerlocatie, klok & datum, taal en reset. Help opent met Quick start bovenaan. Backup exporteert en importeert — maak er een vóór gegevens wissen.'],
     ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, alleen als het weer aanstaat; het tonen van je IP-adres gebruikt dezelfde opzoeking. Extra plaatsen sturen hun naam naar Open-Meteo. Eigen AI-snelkoppelingen laden hun icoon van hun eigen site. Er gaat verder niets naar buiten.'],
     ['Gegevens exporteren', 'Gegevens exporteren slaat je keuzes, links en plaatsen op in een bestand dat bij jou blijft. Gegevens importeren laadt zo’n bestand: Samenvoegen voegt toe wat nieuw is en laat de rest staan, Vervangen overschrijft alles.'],
   ] },
@@ -1490,7 +1490,6 @@ const applySettingsText = () => {
   document.getElementById('lbl-location').textContent = t.location
   document.getElementById('help-open').textContent = helpCopy.title
   document.getElementById('sec-weather').textContent = t.secWeather
-  document.getElementById('sec-look').textContent = t.manageShowLabel || t.secLook
   document.getElementById('lbl-loc-ip').textContent = t.locIp
   document.getElementById('lbl-loc-city').textContent = t.locCity
   document.getElementById('ip-window-title').textContent = t.ipWindowTitle
@@ -1517,7 +1516,6 @@ const applySettingsText = () => {
   document.getElementById('lbl-preset-standard').textContent = t.presetStandard
   document.getElementById('lbl-preset-custom').textContent = t.presetCustom
   document.getElementById('sec-ai').textContent = t.aiSec
-  document.getElementById('lbl-askai').textContent = t.lblAskaiMaster || t.aiOn
   document.getElementById('sec-time').textContent = t.clockDateSec || 'Clock & date'
   const lblClock = document.getElementById('lbl-clock')
   if (lblClock) lblClock.textContent = t.clockLbl || 'Clock'
@@ -1545,8 +1543,6 @@ const applySettingsText = () => {
   document.getElementById('ai-url').setAttribute('aria-label', t.aiUrl)
   const navGeneral = document.getElementById('nav-general')
   if (navGeneral) navGeneral.textContent = t.navGeneral || 'General'
-  const navAdvanced = document.getElementById('nav-advanced')
-  if (navAdvanced) navAdvanced.textContent = t.advancedOpen || 'Advanced'
   document.getElementById('ai-save').textContent = t.aiSave
   document.getElementById('ai-pick-label').textContent = t.aiPick
   document.getElementById('ai-cancel').textContent = t.aiCancel
@@ -1555,7 +1551,6 @@ const applySettingsText = () => {
   document.getElementById('lbl-ai-url').textContent = t.aiUrl
   document.getElementById('lbl-tint').textContent = t.tintShort || t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
-  document.getElementById('lbl-links').textContent = t.linksToggle
   tintCycle.setAttribute('aria-label', t.tintCycle)
   document.getElementById('quote').title = t.quoteAnother
   tintCycle.title = t.tintCycle
@@ -1605,9 +1600,6 @@ const applySettingsText = () => {
   document.getElementById('first-hint-text').textContent = t.hintText
   document.getElementById('first-hint-close').setAttribute('aria-label', t.close)
   document.getElementById('first-hint-quick').textContent = t.quickCard
-  document.getElementById('quickstart-open').textContent = t.quickLink
-  document.getElementById('help-quickstart').textContent = t.quickLink
-  document.getElementById('quickstart-title').textContent = t.quickTitle
   document.getElementById('quickstart-engine-head').textContent = t.quickEngineHead
   document.getElementById('quickstart-engine-text').textContent = t.quickEngineText
   document.getElementById('quickstart-click').textContent = t.quickClick
@@ -1617,8 +1609,6 @@ const applySettingsText = () => {
   document.getElementById('quickstart-page-head').textContent = t.quickPageHead
   document.getElementById('quickstart-page-text').textContent = t.quickPageText
   document.getElementById('quickstart-note').textContent = t.quickNote
-  document.getElementById('quickstart-done').textContent = t.quickDone
-  document.getElementById('quickstart-close').setAttribute('aria-label', t.close)
   document.getElementById('backup-note').textContent = t.backupNote
   document.getElementById('wallpaper-note').textContent = t.wallNote
   document.getElementById('lbl-place').textContent = t.placeLabel
@@ -1698,8 +1688,6 @@ const syncSettings = () => {
   settingsFields.links.checked = linksOn
   settingsFields.linksOwn.checked = linksOwn
   settingsFields.askai.checked = askaiOn
-  if (askaiMaster) askaiMaster.checked = askaiOn
-  if (linksMaster) linksMaster.checked = linksOn
   if (aiOverlayField) aiOverlayField.checked = aiOverlayMasterOn
   if (socialRowField) socialRowField.checked = socialRowMasterOn
   settingsFields.clock.value = clockMode
@@ -1721,7 +1709,8 @@ const openSettings = (pane = 'general') => {
   openedFrom.el = document.activeElement
   syncSettings()
   settings.hidden = false
-  showSettingsPane(pane)
+  // Advanced folded into General.
+  showSettingsPane(pane === 'advanced' ? 'general' : pane)
   settings.querySelector('.settings-panel').focus()
 }
 
@@ -1859,8 +1848,6 @@ settingsFields.aiNewTab.addEventListener('change', () => {
 // Ask AI links below the search bar.
 let askaiOn = readFlag('askai', false)
 const askAi = document.getElementById('ask-ai')
-const askaiMaster = document.getElementById('set-askai-master')
-const linksMaster = document.getElementById('set-links-master')
 const aiOverlayField = document.getElementById('set-ai-overlay')
 const socialRowField = document.getElementById('set-social-row')
 aiOverlayMasterOn = readFlag('aiOverlay', false)
@@ -1872,10 +1859,9 @@ if (askaiOn && socialRowMasterOn) {
 }
 aiOverlayField.checked = aiOverlayMasterOn
 socialRowField.checked = socialRowMasterOn
-askaiMaster.checked = askaiOn
+settingsFields.askai.checked = askaiOn
 
 const syncUnderBarMasters = () => {
-  askaiMaster.checked = askaiOn
   settingsFields.askai.checked = askaiOn
   socialRowField.checked = socialRowMasterOn
   renderAskAi()
@@ -1900,9 +1886,6 @@ const setSocialRowOn = (on, { peer = false } = {}) => {
 
 settingsFields.askai.addEventListener('change', () => {
   setAskAiRowOn(settingsFields.askai.checked)
-})
-askaiMaster.addEventListener('change', () => {
-  setAskAiRowOn(askaiMaster.checked)
 })
 
 // Pages: presets for how much is on the page. They only switch the display options; weather and the
@@ -2315,7 +2298,8 @@ let manageTab = 'general'
 let manageFrom = null
 
 const showSettingsPane = (pane) => {
-  const tab = pane || 'general'
+  let tab = pane || 'general'
+  if (tab === 'advanced') tab = 'general'
   manageTab = tab
   settingsNavButtons.forEach((button) => {
     const on = button.dataset.pane === tab
@@ -2331,7 +2315,7 @@ const showSettingsPane = (pane) => {
   if (tab === 'ai' && typeof resetAiForm === 'function') resetAiForm()
   if (tab === 'weather' && typeof renderPlaces === 'function') renderPlaces()
   if (tab === 'wallpapers' && typeof renderWallpapers === 'function') renderWallpapers()
-  if (tab === 'advanced') syncSettings()
+  if (tab === 'general') syncSettings()
   settingsNav?.classList.remove('is-open')
   const navToggle = document.getElementById('settings-nav-toggle')
   if (navToggle) navToggle.setAttribute('aria-expanded', 'false')
@@ -3063,14 +3047,6 @@ aiOverlayField.addEventListener('change', () => {
 socialRowField.addEventListener('change', () => {
   setSocialRowOn(socialRowField.checked)
 })
-linksMaster.checked = settingsFields.links.checked
-linksMaster.addEventListener('change', () => {
-  settingsFields.links.checked = linksMaster.checked
-  settingsFields.links.dispatchEvent(new Event('change'))
-})
-settingsFields.links.addEventListener('change', () => {
-  linksMaster.checked = settingsFields.links.checked
-})
 const catalogKeyForUrl = (url) => aiCatalog.find((service) => normalizeUrl(service.url) === normalizeUrl(url))?.key || ''
 const normalizeAskAiItem = (item) => {
   const catalogKey = catalogKeyForUrl(item.url)
@@ -3557,22 +3533,9 @@ document.getElementById('first-hint-close').addEventListener('click', hideFirstH
 document.addEventListener('click', hideFirstHint)
 document.addEventListener('keydown', (e) => { if (e.key === '?') hideFirstHint() })
 
-// The quick start: opened from the first-visit card, the basic settings or Help. Closing it counts as seen.
-const quickstart = document.getElementById('quickstart')
-const openQuickstart = (event) => {
-  if (event) event.preventDefault()
+// First-visit card: open Help (Quick start content lives there now).
+document.getElementById('first-hint-quick').addEventListener('click', (event) => {
+  event.preventDefault()
   hideFirstHint()
-  quickstart.hidden = false
-  quickstart.querySelector('.settings-panel').focus()
-}
-const closeQuickstart = () => {
-  if (quickstart.hidden) return
-  quickstart.hidden = true
-  try { localStorage.setItem('hintSeen', '1') } catch {}
-}
-document.getElementById('first-hint-quick').addEventListener('click', openQuickstart)
-document.getElementById('quickstart-open').addEventListener('click', openQuickstart)
-document.getElementById('help-quickstart').addEventListener('click', openQuickstart)
-document.getElementById('quickstart-close').addEventListener('click', closeQuickstart)
-document.getElementById('quickstart-done').addEventListener('click', closeQuickstart)
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeQuickstart() })
+  openHelp()
+})
