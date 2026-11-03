@@ -37,7 +37,7 @@ The page has two kinds of background: a picture, or no picture with a soft colou
 
 ## Basic settings
 
-The first view: the three pages (Minimal, Standard and Advanced), the Advanced settings link, Manage data and IP details. The reset options are not here; they sit at the bottom of Advanced settings.
+The first Settings pane (General): the three pages (Minimal, Standard and Personal), Show on page masters, IP details and Quick start. Other catalogs and Advanced open from the left sidebar (bottom tabs on a phone).
 
 ![Basic settings](images/settings-basic.png)
 

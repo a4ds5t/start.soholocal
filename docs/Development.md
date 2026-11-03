@@ -34,8 +34,9 @@ The one place for how the page is built, why it is built that way, what is still
 - Page presets: Minimal and Standard, chosen in the settings. They switch display options only; the IP address is never changed by a preset. Weather is part of the presets only as a switch-off: no preset turns it on, since weather sends the IP address.
 - Advanced is shown when the choices match neither preset. It is a state, not a choice, so it cannot be clicked.
 - Advanced settings is a button under the presets; its link goes back to the basic settings.
-- The resets sit at the bottom of Advanced settings, under one heading. Both reset buttons have a red frame; Manage data sits beside them without one, because it does not destroy anything.
-- Export and import have their own Backup tab, the last one in Manage data, with a short explanation.
+- The resets sit at the bottom of Advanced settings, under one heading. Both reset buttons have a red frame; Backup sits beside them without one, because it does not destroy anything.
+- Export and import have their own Backup pane in the Settings shell sidebar, with a short explanation.
+- Settings is one fixed shell with a left sidebar; Manage data is not a second window. On a phone the nav collapses to bottom tabs plus a hamburger.
 - The version and the date of the last change sit at the bottom right of the basic settings.
 - The version line links to the changelog on GitHub, so what changed and why is one click away.
 
@@ -69,7 +70,7 @@ The one place for how the page is built, why it is built that way, what is still
 
 ## Accessibility
 
-- Keyboard: every control in the settings, Manage data and Help can be reached and used with the keyboard alone, in a sensible order, and Escape closes each window.
+- Keyboard: every control in the Settings shell and Help can be reached and used with the keyboard alone, in a sensible order, and Escape closes each window.
 - Screen readers: the labels, the states (full, greyed out, reset) and the new messages are announced, checked with a screen reader on at least one desktop and one phone.
 - Colour contrast: the grey text, the dimmed buttons and the blue and green limit states, and the red reset frame, checked against the WCAG AA minimum in light and dark mode.
 - Focus: the focus ring is visible on every control in both themes.
