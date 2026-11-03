@@ -1701,15 +1701,47 @@ img.ai-icon {
 }
 
 .settings-nav-foot .ghost-button {
+  margin: 0;
   padding: 5px 9px;
   font-size: 12px;
+  line-height: 1.2;
+  height: auto;
+  min-height: 0;
   white-space: nowrap;
+  background: var(--color-field);
 }
 
+/* Match version chip to the IP ghost-button (same padding, border, no underline). */
 .settings-nav-foot .app-version,
 .settings-shell .settings-nav-foot .app-version {
   margin: 0;
   padding: 0;
+  text-align: left;
+  font-size: 12px;
+}
+
+.settings-nav-foot .version-tag-button {
+  margin: 0;
+  padding: 5px 9px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-field);
+  color: var(--color-fg-1);
+  font-size: 12px;
+  line-height: 1.2;
+  text-decoration: none;
+  text-underline-offset: unset;
+}
+
+.settings-nav-foot .version-tag-button:hover,
+.settings-nav-foot .version-tag-button:focus-visible {
+  border-color: var(--color-fg-2);
+  color: var(--color-fg-1);
+}
+
+.settings-nav-foot .version-tag-popover {
+  left: 0;
+  right: auto;
 }
 
 .under-bar-group {
@@ -2499,16 +2531,17 @@ html[data-quote-off] #quote {
 .manage-masters {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 16px;
+  column-gap: 20px;
   row-gap: 12px;
-  align-items: center;
+  align-items: stretch;
 }
 
 .master-toggle {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 36px;
+  display: flex;
   align-items: center;
-  column-gap: 10px;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
   min-width: 0;
   font-size: 13px;
   color: var(--color-fg-1);
@@ -2516,17 +2549,18 @@ html[data-quote-off] #quote {
 }
 
 .master-toggle span {
-  grid-column: 1;
-  grid-row: 1;
+  flex: 1 1 auto;
+  order: 1;
   min-width: 0;
   line-height: 1.3;
 }
 
 .master-toggle input {
-  grid-column: 2;
-  grid-row: 1;
+  flex: 0 0 36px;
+  order: 2;
   width: 36px;
   height: 20px;
+  margin: 0;
   appearance: none;
   border-radius: 999px;
   background: color-mix(in srgb, var(--color-border) 70%, var(--color-fg-2));
@@ -2709,6 +2743,26 @@ html[data-quote-off] #quote {
   margin: 0 0 8px;
   font-size: 12px;
   color: var(--color-fg-2);
+}
+
+/* Backup: more air between page hint, block titles, and body copy. */
+#section-backup > .manage-note {
+  margin: 0 0 14px;
+  line-height: 1.45;
+}
+
+#section-backup .pane-block {
+  padding: 16px 16px 14px;
+}
+
+#section-backup .pane-block .location-title {
+  margin: 0 0 12px;
+}
+
+#section-backup .pane-block .manage-note,
+#section-backup .pane-block .reset-intro {
+  margin: 0 0 14px;
+  line-height: 1.45;
 }
 
 .place-list {

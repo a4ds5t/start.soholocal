@@ -145,6 +145,7 @@ const emptyForecast = {
   check(await page.isVisible('#set-lang'), 'General holds language');
   check(await page.isVisible('#set-search-newtab'), 'General holds search new-tab');
   check(await page.isVisible('#set-ai-newtab'), 'General holds AI new-tab');
+  check(await page.isVisible('#set-links-newtab'), 'General holds links new-tab');
   check(!(await page.$('#nav-search-prefs')), 'Search prefs nav is folded away');
   check(!(await page.$('#nav-language')), 'Language nav is folded away');
   await page.click('#nav-weather-prefs');
@@ -152,6 +153,7 @@ const emptyForecast = {
   check(await page.isVisible('.prefs-split'), 'Weather prefs uses a 2-col split');
   await page.click('#nav-show');
   check(await page.isVisible('#set-ai-overlay'), 'Show on page holds masters');
+  check(await page.locator('#lbl-ai-overlay').textContent() === 'AI in search field', 'AI master is labeled AI in search field');
   check(await page.isVisible('#under-bar-group'), 'Show on page has Under the search bar group');
   check(await page.isVisible('#under-bar-none'), 'Under-bar offers None');
   check(!(await page.$('#set-social-row')), 'Social row is not a separate switch');
