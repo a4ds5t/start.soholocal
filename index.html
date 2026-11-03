@@ -289,7 +289,7 @@
             <p class="manage-note" id="data-home-hint">Vertical domain list — not a scrolling tab bar.</p>
             <div class="data-home-list" id="data-home-list">
               <button type="button" class="data-home-card" data-pane="search"><span class="data-home-copy"><b id="data-card-search">Search</b><span id="data-desc-search">Engines</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
-              <button type="button" class="data-home-card" data-pane="ai"><span class="data-home-copy"><b id="data-card-ai">AI</b><span id="data-desc-ai">Overlay + shortcuts</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="ai"><span class="data-home-copy"><b id="data-card-ai">AI</b><span id="data-desc-ai">Catalog</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
               <button type="button" class="data-home-card" data-pane="social"><span class="data-home-copy"><b id="data-card-social">Social</b><span id="data-desc-social">Jump icons</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
               <button type="button" class="data-home-card" data-pane="links"><span class="data-home-copy"><b id="data-card-links">Own links</b><span id="data-desc-links">List</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
               <button type="button" class="data-home-card" data-pane="zones"><span class="data-home-copy"><b id="data-card-zones">Time zones</b><span id="data-desc-zones">Cities</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
@@ -319,18 +319,23 @@
           </section>
 
           <section class="settings-pane manage-section" data-pane="ai" data-tab="ai" data-world="data" id="section-ai" role="tabpanel" aria-labelledby="tab-ai" hidden>
-            <p class="manage-note" id="ai-overlay-note">AI platforms for the search field (type + Enter). Turn “AI in search field” off under Settings.</p>
-            <ul class="catalog-list" id="ai-overlay-list"></ul>
-            <p class="location-title" id="ai-shortcuts-head">ASK AI row shortcuts</p>
-            <ul class="ai-list" id="ai-list"></ul>
+            <p class="manage-note" id="ai-overlay-note">One AI collection for the search field (type + Enter). Use Ask AI row if an item should also appear under the bar. Masters stay under Settings → Show.</p>
+            <div class="catalog-cols catalog-cols-ai" id="ai-catalog-cols" aria-hidden="true">
+              <span id="ai-col-platform">Platform</span>
+              <span id="ai-col-ask">Ask AI row</span>
+              <span id="ai-col-search">In search</span>
+            </div>
+            <p class="location-title" id="ai-builtin-head">Built-in</p>
+            <ul class="catalog-list catalog-list-ai" id="ai-builtin-list"></ul>
+            <p class="location-title" id="ai-custom-head">Custom</p>
+            <ul class="catalog-list catalog-list-ai" id="ai-custom-list"></ul>
             <form class="link-form" id="ai-form">
               <p class="link-form-title" id="ai-form-title">Add AI</p>
-              <p class="manage-note" id="ai-pick-label">Choose a service</p>
-              <div class="service-picks" id="ai-catalog"></div>
               <label for="ai-name" id="lbl-ai-name">Name</label>
               <input type="text" id="ai-name" autocomplete="off">
               <label for="ai-url" id="lbl-ai-url">Address</label>
-              <input type="text" id="ai-url" inputmode="url" autocomplete="off">
+              <input type="text" id="ai-url" inputmode="url" autocomplete="off" placeholder="https://example.com/?q=">
+              <p class="manage-note" id="ai-url-hint">Paste a homepage or a query URL (…?q=). Query URLs work for type + Enter in the search field.</p>
               <div class="link-form-actions">
                 <button type="submit" id="ai-save" class="ghost-button action">Save</button>
                 <button type="button" id="ai-cancel" class="ghost-button" hidden>Cancel</button>

@@ -2765,6 +2765,53 @@ html[data-quote-off] #quote {
   transform: translateX(16px);
 }
 
+.catalog-cols {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 8px;
+  padding: 0 8px 6px;
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--color-fg-2);
+}
+
+.catalog-cols-ai span:nth-child(2),
+.catalog-cols-ai span:nth-child(3) {
+  width: 72px;
+  text-align: center;
+}
+
+.catalog-list-ai li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.catalog-list-ai .catalog-ai-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.catalog-list-ai .catalog-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.catalog-list-ai .catalog-ai-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.catalog-list-ai .catalog-toggle {
+  justify-self: center;
+}
+
 .catalog-list .catalog-move {
   display: flex;
   gap: 2px;
