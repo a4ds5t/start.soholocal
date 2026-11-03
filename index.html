@@ -128,20 +128,29 @@
     <button type="button" id="first-hint-close" class="first-hint-close" aria-label="Close">×</button>
   </div>
   <div class="settings" id="settings" hidden>
-    <div class="settings-panel settings-shell" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="settings-panel settings-shell" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="settings-title" data-world="settings">
       <div class="settings-head">
-        <h2 id="settings-title">Settings</h2>
+        <h2 id="settings-title" class="visually-hidden">Settings</h2>
+        <div class="settings-seg" id="settings-seg" role="tablist" aria-label="Settings or Data">
+          <button type="button" class="settings-seg-btn" id="seg-settings" data-world="settings" role="tab" aria-selected="true">Settings</button>
+          <button type="button" class="settings-seg-btn" id="seg-data" data-world="data" role="tab" aria-selected="false">Data</button>
+        </div>
         <div class="settings-head-actions">
           <button type="button" id="help-open" class="text-button">Help</button>
-          <button type="button" id="settings-nav-toggle" class="settings-nav-toggle" aria-label="Menu" aria-expanded="false">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-          </button>
           <button type="button" id="settings-close" class="settings-close" aria-label="Close">×</button>
         </div>
       </div>
       <div class="settings-shell-body">
-        <nav class="settings-nav" id="settings-nav" aria-label="Settings sections">
-          <button type="button" class="settings-nav-btn" data-pane="general" id="nav-general" aria-selected="true">General</button>
+        <nav class="settings-nav" id="settings-prefs-nav" aria-label="Settings sections">
+          <button type="button" class="settings-nav-btn" data-pane="page" id="nav-page" aria-selected="true">Page</button>
+          <button type="button" class="settings-nav-btn" data-pane="show" id="nav-show" aria-selected="false">Show on page</button>
+          <button type="button" class="settings-nav-btn" data-pane="weather-prefs" id="nav-weather-prefs" aria-selected="false">Weather</button>
+          <button type="button" class="settings-nav-btn" data-pane="clock" id="nav-clock" aria-selected="false">Clock &amp; date</button>
+          <button type="button" class="settings-nav-btn" data-pane="search-prefs" id="nav-search-prefs" aria-selected="false">Search</button>
+          <button type="button" class="settings-nav-btn" data-pane="ai-prefs" id="nav-ai-prefs" aria-selected="false">AI shortcuts</button>
+          <button type="button" class="settings-nav-btn" data-pane="language" id="nav-language" aria-selected="false">Language</button>
+        </nav>
+        <nav class="settings-nav" id="settings-nav" aria-label="Data catalogs" hidden>
           <button type="button" class="settings-nav-btn" data-pane="search" id="tab-search" aria-selected="false">Search</button>
           <button type="button" class="settings-nav-btn" data-pane="ai" id="tab-ai" aria-selected="false">AI</button>
           <button type="button" class="settings-nav-btn" data-pane="social" id="tab-social" aria-selected="false">Social</button>
@@ -149,34 +158,157 @@
           <button type="button" class="settings-nav-btn" data-pane="zones" id="tab-zones" aria-selected="false">Time zones</button>
           <button type="button" class="settings-nav-btn" data-pane="weather" id="tab-weather" aria-selected="false">Weather</button>
           <button type="button" class="settings-nav-btn" data-pane="wallpapers" id="tab-wallpapers" aria-selected="false">Background</button>
-          <button type="button" class="settings-nav-btn" data-pane="advanced" id="nav-advanced" aria-selected="false">Advanced</button>
           <button type="button" class="settings-nav-btn" data-pane="backup" id="tab-backup" aria-selected="false">Backup</button>
         </nav>
         <div class="settings-content" id="settings-content">
-          <section class="settings-pane manage-section" data-pane="general" data-tab="general" id="section-general" role="tabpanel" aria-labelledby="nav-general">
+          <button type="button" class="data-back" id="data-back" hidden></button>
+
+          <section class="settings-pane manage-section" data-pane="settings-home" data-tab="settings-home" data-world="settings" id="section-settings-home" role="tabpanel" hidden>
+            <p class="manage-note" id="settings-home-hint">Choose a settings group.</p>
+            <div class="data-home-list" id="settings-home-list">
+              <button type="button" class="data-home-card" data-pane="page"><span class="data-home-copy"><b id="set-card-page">Page</b><span id="set-desc-page">Minimal / Standard / Personal</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="show"><span class="data-home-copy"><b id="set-card-show">Show on page</b><span id="set-desc-show">Masters</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="weather-prefs"><span class="data-home-copy"><b id="set-card-weather">Weather</b><span id="set-desc-weather">On + location</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="clock"><span class="data-home-copy"><b id="set-card-clock">Clock &amp; date</b><span id="set-desc-clock">Format</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="search-prefs"><span class="data-home-copy"><b id="set-card-search">Search</b><span id="set-desc-search">New tab</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="ai-prefs"><span class="data-home-copy"><b id="set-card-ai">AI shortcuts</b><span id="set-desc-ai">New tab</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="language"><span class="data-home-copy"><b id="set-card-lang">Language</b><span id="set-desc-lang">UI language</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+            </div>
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="page" data-tab="page" data-world="settings" id="section-page" role="tabpanel">
             <p class="settings-hint" id="settings-hint"></p>
             <div class="presets" role="radiogroup" aria-label="Page">
               <label class="setting"><input type="radio" name="preset" id="preset-minimal" value="minimal"> <span id="lbl-preset-minimal">Minimal</span></label>
               <label class="setting"><input type="radio" name="preset" id="preset-standard" value="standard"> <span id="lbl-preset-standard">Standard</span></label>
               <label class="setting"><input type="radio" name="preset" id="preset-custom" value="custom"> <span id="lbl-preset-custom">Personal</span></label>
             </div>
-            <div class="manage-show" id="manage-show">
-              <p class="manage-show-label" id="manage-show-label">Show on page</p>
-              <div class="manage-masters">
-                <label class="master-toggle"><input type="checkbox" id="set-ai-overlay"> <span id="lbl-ai-overlay">AI in overlay</span></label>
-                <label class="master-toggle"><input type="checkbox" id="set-social-row"> <span id="lbl-social-row">Social row</span></label>
-                <label class="master-toggle"><input type="checkbox" id="set-askai-master"> <span id="lbl-askai-master">ASK AI row</span></label>
-                <label class="master-toggle"><input type="checkbox" id="set-links-master"> <span id="lbl-links-master">Links button</span></label>
-              </div>
-            </div>
             <div class="settings-actions">
               <button type="button" id="ip-open" class="ghost-button">IP details</button>
             </div>
-            <p class="quick-row"><a href="#" id="quickstart-open" class="quick-link"></a></p>
             <p class="app-version"><span id="app-version-root"></span></p>
           </section>
 
-          <section class="settings-pane manage-section" data-pane="search" data-tab="search" id="section-search" role="tabpanel" aria-labelledby="tab-search" hidden>
+          <section class="settings-pane manage-section" data-pane="show" data-tab="show" data-world="settings" id="section-show" role="tabpanel" hidden>
+            <section class="pane-block manage-show" id="adv-show">
+              <p class="manage-show-label location-title" id="manage-show-label">Show on page</p>
+              <div class="manage-masters" id="manage-show">
+                <label class="master-toggle"><input type="checkbox" id="set-ai-overlay"> <span id="lbl-ai-overlay">AI in overlay</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-social-row"> <span id="lbl-social-row">Social row</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-askai-master"> <span id="lbl-askai-master">Ask AI row</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-links-master"> <span id="lbl-links-master">Links button</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-links-own"> <span id="lbl-links-own">Own links</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-quote"> <span id="lbl-quote">Quote</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-zones"> <span id="lbl-zones">Time zones</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-tint"> <span id="lbl-tint">Colour</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-wallpaper"> <span id="lbl-wallpaper">Wallpaper</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-wallpaper-btn"> <span id="lbl-wallpaper-btn">Wallpaper button</span></label>
+              </div>
+              <p class="manage-note adv-show-hint" id="adv-show-hint">Social and Ask AI rows are mutually exclusive — choose one under Data → Social / AI.</p>
+            </section>
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="weather-prefs" data-tab="weather-prefs" data-world="settings" id="section-weather-prefs" role="tabpanel" hidden>
+            <div class="prefs-split">
+              <section class="pane-block">
+                <p class="location-title" id="sec-weather">Weather</p>
+                <label class="master-toggle"><input type="checkbox" id="set-weather"> <span id="lbl-weather">On</span></label>
+              </section>
+              <section class="pane-block">
+                <p class="location-title" id="lbl-location">Location</p>
+                <div class="weather-sub" id="weather-sub">
+                  <label class="setting"><input type="radio" name="location" id="loc-ip" value="ip"> <span id="lbl-loc-ip">My place via IP address</span></label>
+                  <p class="privacy" id="privacy"></p>
+                  <label class="setting"><input type="radio" name="location" id="loc-city" value="city"> <span id="lbl-loc-city">A city I choose</span></label>
+                  <form class="city-form" id="city-form">
+                    <label for="city-input" id="lbl-city">Or enter a city</label>
+                    <div class="city-row">
+                      <input type="text" id="city-input" list="city-options" autocomplete="off">
+                      <datalist id="city-options"></datalist>
+                      <button type="submit" id="city-save" class="ghost-button">Save</button>
+                    </div>
+                    <button type="button" id="city-clear" class="ghost-button" hidden>Use my IP address instead</button>
+                    <p class="city-msg" id="city-msg" role="status"></p>
+                  </form>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="clock" data-tab="clock" data-world="settings" id="section-clock" role="tabpanel" hidden>
+            <section class="pane-block">
+              <p class="location-title" id="sec-time">Clock &amp; date</p>
+              <label class="setting setting-select"><span id="lbl-clock">Clock</span>
+                <select id="set-clock" class="lang-select">
+                  <option value="24">24 hours</option>
+                  <option value="12">12 hours (AM/PM)</option>
+                  <option value="full">Full, with seconds</option>
+                </select>
+              </label>
+              <label class="master-toggle"><input type="checkbox" id="set-date"> <span id="lbl-date-on">Show the date</span></label>
+              <label class="setting setting-select"><span id="lbl-date-style">Show</span>
+                <select id="set-date-style" class="lang-select">
+                  <option value="long">Long</option>
+                  <option value="short">Short</option>
+                </select>
+              </label>
+              <label class="setting setting-select"><span id="lbl-date-order">Order</span>
+                <select id="set-date-order" class="lang-select">
+                  <option value="auto">Automatic</option>
+                  <option value="dmy">Day-month-year</option>
+                  <option value="mdy">Month-day-year</option>
+                  <option value="ymd">Year-month-day</option>
+                </select>
+              </label>
+            </section>
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="search-prefs" data-tab="search-prefs" data-world="settings" id="section-search-prefs" role="tabpanel" hidden>
+            <section class="pane-block">
+              <p class="location-title" id="sec-search">Search</p>
+              <label class="master-toggle"><input type="checkbox" id="set-search-newtab"> <span id="lbl-search-newtab">Open search in a new tab</span></label>
+            </section>
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="ai-prefs" data-tab="ai-prefs" data-world="settings" id="section-ai-prefs" role="tabpanel" hidden>
+            <section class="pane-block">
+              <p class="location-title" id="sec-ai">AI shortcuts</p>
+              <label class="master-toggle"><input type="checkbox" id="set-ai-newtab"> <span id="lbl-ai-newtab">Open AI links in a new tab</span></label>
+            </section>
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="language" data-tab="language" data-world="settings" id="section-language" role="tabpanel" hidden>
+            <section class="pane-block">
+              <p class="location-title" id="sec-lang">Language</p>
+              <label class="setting setting-select"><span id="lbl-set-lang">Language</span>
+                <select id="set-lang" class="lang-select">
+                  <option value="auto" id="set-lang-auto">Automatic</option>
+                  <option value="nl">Nederlands</option>
+                  <option value="en">English</option>
+                  <option value="de">Deutsch</option>
+                  <option value="fr">Français</option>
+                  <option value="es">Español</option>
+                  <option value="zh">中文</option>
+                </select>
+              </label>
+            </section>
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="data-home" data-tab="data-home" data-world="data" id="section-data-home" role="tabpanel" hidden>
+            <p class="manage-note" id="data-home-hint">Vertical domain list — not a scrolling tab bar.</p>
+            <div class="data-home-list" id="data-home-list">
+              <button type="button" class="data-home-card" data-pane="search"><span class="data-home-copy"><b id="data-card-search">Search</b><span id="data-desc-search">Engines</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="ai"><span class="data-home-copy"><b id="data-card-ai">AI</b><span id="data-desc-ai">Overlay + shortcuts</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="social"><span class="data-home-copy"><b id="data-card-social">Social</b><span id="data-desc-social">Jump icons</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="links"><span class="data-home-copy"><b id="data-card-links">Own links</b><span id="data-desc-links">List</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="zones"><span class="data-home-copy"><b id="data-card-zones">Time zones</b><span id="data-desc-zones">Cities</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="weather"><span class="data-home-copy"><b id="data-card-weather">Weather</b><span id="data-desc-weather">Places</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="wallpapers"><span class="data-home-copy"><b id="data-card-wall">Background</b><span id="data-desc-wall">Wallpapers</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="backup"><span class="data-home-copy"><b id="data-card-backup">Backup</b><span id="data-desc-backup">Export / import</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+            </div>
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="search" data-tab="search" data-world="data" id="section-search" role="tabpanel" aria-labelledby="tab-search" hidden>
             <p class="manage-note" id="engines-note">Turn engines on or off, and add your own below. Always keep at least one on.</p>
             <ul class="catalog-list" id="engines-list"></ul>
             <form class="link-form" id="engine-form">
@@ -195,8 +327,8 @@
             </form>
           </section>
 
-          <section class="settings-pane manage-section" data-pane="ai" data-tab="ai" id="section-ai" role="tabpanel" aria-labelledby="tab-ai" hidden>
-            <p class="manage-note" id="ai-overlay-note">AI platforms for the search overlay (type + Enter). Turn “AI in overlay” off for Minimal.</p>
+          <section class="settings-pane manage-section" data-pane="ai" data-tab="ai" data-world="data" id="section-ai" role="tabpanel" aria-labelledby="tab-ai" hidden>
+            <p class="manage-note" id="ai-overlay-note">AI platforms for the search overlay (type + Enter). Turn “AI in overlay” off under Settings.</p>
             <ul class="catalog-list" id="ai-overlay-list"></ul>
             <p class="location-title" id="ai-shortcuts-head">ASK AI row shortcuts</p>
             <ul class="ai-list" id="ai-list"></ul>
@@ -216,12 +348,12 @@
             </form>
           </section>
 
-          <section class="settings-pane manage-section" data-pane="social" data-tab="social" id="section-social" role="tabpanel" aria-labelledby="tab-social" hidden>
-            <p class="manage-note" id="social-note">Jump-only icons under the search bar. Turn the Social row off for Minimal.</p>
+          <section class="settings-pane manage-section" data-pane="social" data-tab="social" data-world="data" id="section-social" role="tabpanel" aria-labelledby="tab-social" hidden>
+            <p class="manage-note" id="social-note">Jump-only icons under the search bar. Turn the Social row off under Settings.</p>
             <ul class="catalog-list" id="social-manage-list"></ul>
           </section>
 
-          <section class="settings-pane manage-section" data-pane="links" data-tab="links" id="section-links" role="tabpanel" aria-labelledby="tab-links" hidden>
+          <section class="settings-pane manage-section" data-pane="links" data-tab="links" data-world="data" id="section-links" role="tabpanel" aria-labelledby="tab-links" hidden>
             <div class="links-list" id="links-list"></div>
             <form class="link-form" id="link-form">
               <p class="link-form-title" id="link-form-title">Add link</p>
@@ -239,7 +371,7 @@
             </form>
           </section>
 
-          <section class="settings-pane manage-section" data-pane="zones" data-tab="zones" id="section-zones" role="tabpanel" aria-labelledby="tab-zones" hidden>
+          <section class="settings-pane manage-section" data-pane="zones" data-tab="zones" data-world="data" id="section-zones" role="tabpanel" aria-labelledby="tab-zones" hidden>
             <p class="zones-local" id="zones-local"></p>
             <div id="zones-list"></div>
             <form class="city-form" id="zone-form">
@@ -253,7 +385,7 @@
             </form>
           </section>
 
-          <section class="settings-pane manage-section" data-pane="weather" data-tab="weather" id="section-weather" role="tabpanel" aria-labelledby="tab-weather" hidden>
+          <section class="settings-pane manage-section" data-pane="weather" data-tab="weather" data-world="data" id="section-weather" role="tabpanel" aria-labelledby="tab-weather" hidden>
             <p class="manage-note" id="weather-own"></p>
             <ul class="place-list" id="place-list"></ul>
             <form class="city-form" id="place-form">
@@ -267,148 +399,28 @@
             </form>
           </section>
 
-          <section class="settings-pane manage-section" data-pane="wallpapers" data-tab="wallpapers" id="section-wallpapers" role="tabpanel" aria-labelledby="tab-wallpapers" hidden>
+          <section class="settings-pane manage-section" data-pane="wallpapers" data-tab="wallpapers" data-world="data" id="section-wallpapers" role="tabpanel" aria-labelledby="tab-wallpapers" hidden>
             <p class="manage-note" id="wallpaper-note"></p>
             <div id="wallpaper-list"></div>
           </section>
 
-          <section class="settings-pane manage-section" data-pane="advanced" data-tab="advanced" id="section-advanced" role="tabpanel" aria-labelledby="nav-advanced" hidden>
-            <div class="advanced advanced-show-first" id="advanced">
-              <section class="adv-show-first" id="adv-show">
-                <p class="location-title" id="sec-look">Show on page</p>
-                <div class="adv-show-masters">
-                  <label class="master-toggle"><input type="checkbox" id="set-quote"> <span id="lbl-quote">Quote</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-links"> <span id="lbl-links">Links</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-links-own"> <span id="lbl-links-own">Own links</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-zones"> <span id="lbl-zones">Time zones</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-askai"> <span id="lbl-askai">Ask AI row</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-tint"> <span id="lbl-tint">Colour</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-wallpaper"> <span id="lbl-wallpaper">Wallpaper</span></label>
-                  <label class="master-toggle"><input type="checkbox" id="set-wallpaper-btn"> <span id="lbl-wallpaper-btn">Wallpaper button</span></label>
-                </div>
-                <p class="manage-note adv-show-hint" id="adv-show-hint">Social and Ask AI rows are mutually exclusive — choose one under Settings → Social / AI.</p>
-              </section>
-              <div class="adv-body">
-                <section class="adv-group">
-                  <p class="location-title" id="sec-weather">Weather</p>
-                  <label class="master-toggle"><input type="checkbox" id="set-weather"> <span id="lbl-weather">On</span></label>
-                  <div class="weather-sub" id="weather-sub">
-                    <p class="location-title" id="lbl-location">Location</p>
-                    <label class="setting"><input type="radio" name="location" id="loc-ip" value="ip"> <span id="lbl-loc-ip">My place via IP address</span></label>
-                    <p class="privacy" id="privacy"></p>
-                    <label class="setting"><input type="radio" name="location" id="loc-city" value="city"> <span id="lbl-loc-city">A city I choose</span></label>
-                    <form class="city-form" id="city-form">
-                      <label for="city-input" id="lbl-city">Or enter a city</label>
-                      <div class="city-row">
-                        <input type="text" id="city-input" list="city-options" autocomplete="off">
-                        <datalist id="city-options"></datalist>
-                        <button type="submit" id="city-save" class="ghost-button">Save</button>
-                      </div>
-                      <button type="button" id="city-clear" class="ghost-button" hidden>Use my IP address instead</button>
-                      <p class="city-msg" id="city-msg" role="status"></p>
-                    </form>
-                  </div>
-                </section>
-                <section class="adv-group">
-                  <p class="location-title" id="sec-time">Clock &amp; date</p>
-                  <label class="setting setting-select"><span id="lbl-clock">Clock</span>
-                    <select id="set-clock" class="lang-select">
-                      <option value="24">24 hours</option>
-                      <option value="12">12 hours (AM/PM)</option>
-                      <option value="full">Full, with seconds</option>
-                    </select>
-                  </label>
-                  <label class="master-toggle"><input type="checkbox" id="set-date"> <span id="lbl-date-on">Show the date</span></label>
-                  <label class="setting setting-select"><span id="lbl-date-style">Show</span>
-                    <select id="set-date-style" class="lang-select">
-                      <option value="long">Long</option>
-                      <option value="short">Short</option>
-                    </select>
-                  </label>
-                  <label class="setting setting-select"><span id="lbl-date-order">Order</span>
-                    <select id="set-date-order" class="lang-select">
-                      <option value="auto">Automatic</option>
-                      <option value="dmy">Day-month-year</option>
-                      <option value="mdy">Month-day-year</option>
-                      <option value="ymd">Year-month-day</option>
-                    </select>
-                  </label>
-                </section>
-                <section class="adv-group">
-                  <p class="location-title" id="sec-search">Search</p>
-                  <label class="master-toggle"><input type="checkbox" id="set-search-newtab"> <span id="lbl-search-newtab">Open search in a new tab</span></label>
-                </section>
-                <section class="adv-group">
-                  <p class="location-title" id="sec-ai">AI shortcuts</p>
-                  <label class="master-toggle"><input type="checkbox" id="set-ai-newtab"> <span id="lbl-ai-newtab">Open AI links in a new tab</span></label>
-                </section>
-                <section class="adv-group">
-                  <p class="location-title" id="sec-lang">Language</p>
-                  <label class="setting setting-select"><span id="lbl-set-lang">Language</span>
-                    <select id="set-lang" class="lang-select">
-                      <option value="auto" id="set-lang-auto">Automatic</option>
-                      <option value="nl">Nederlands</option>
-                      <option value="en">English</option>
-                      <option value="de">Deutsch</option>
-                      <option value="fr">Français</option>
-                      <option value="es">Español</option>
-                      <option value="zh">中文</option>
-                    </select>
-                  </label>
-                </section>
-                <section class="adv-group reset-group">
-                  <p class="location-title" id="sec-reset">Reset</p>
-                  <p class="reset-intro" id="reset-intro"></p>
-                  <div class="reset-boxes">
-                    <button type="button" id="reset-settings" class="ghost-button danger-button">Reset settings</button>
-                    <button type="button" id="reset-data" class="ghost-button danger-button">Delete my data</button>
-                    <button type="button" id="reset-backup" class="ghost-button">Backup</button>
-                  </div>
-                </section>
-              </div>
-            </div>
-          </section>
-
-          <section class="settings-pane manage-section" data-pane="backup" data-tab="backup" id="section-backup" role="tabpanel" aria-labelledby="tab-backup" hidden>
+          <section class="settings-pane manage-section" data-pane="backup" data-tab="backup" data-world="data" id="section-backup" role="tabpanel" aria-labelledby="tab-backup" hidden>
             <p class="manage-note" id="backup-note"></p>
             <div class="manage-io">
               <button type="button" id="export-data" class="ghost-button">Export data</button>
               <button type="button" id="import-data" class="ghost-button">Import data</button>
               <input type="file" id="import-file" accept="application/json,.json" hidden>
             </div>
+            <section class="pane-block reset-group">
+              <p class="location-title" id="sec-reset">Reset</p>
+              <p class="reset-intro" id="reset-intro"></p>
+              <div class="reset-boxes">
+                <button type="button" id="reset-settings" class="ghost-button danger-button">Reset settings</button>
+                <button type="button" id="reset-data" class="ghost-button danger-button">Delete my data</button>
+              </div>
+            </section>
           </section>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="settings" id="quickstart" hidden>
-    <div class="settings-panel quickstart-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="quickstart-title">
-      <div class="settings-head">
-        <h2 id="quickstart-title">Quick start</h2>
-        <button type="button" id="quickstart-close" class="settings-close" aria-label="Close">×</button>
-      </div>
-      <h3 class="quick-head" id="quickstart-engine-head">Change search engine</h3>
-      <div class="quick-shot">
-        <div class="quick-shot-img">
-          <img src="assets/quickstart-search.png" width="480" height="106" alt="">
-          <svg class="quick-arrow" viewBox="0 0 480 106" aria-hidden="true">
-            <line x1="130" y1="12" x2="54" y2="52"/>
-            <path d="M62.9 50.4 L54 52 L55.6 43.1"/>
-            <rect x="92" y="-18" width="78" height="22" rx="11" class="quick-tag"/>
-            <text x="131" y="-3" text-anchor="middle" id="quickstart-click"></text>
-          </svg>
-        </div>
-      </div>
-      <p class="quick-text" id="quickstart-engine-text"></p>
-      <h3 class="quick-head" id="quickstart-more-head">More from your page</h3>
-      <div class="quick-cards">
-        <div class="quick-card"><b id="quickstart-ai-head"></b><span id="quickstart-ai-text"></span></div>
-        <div class="quick-card"><b id="quickstart-page-head"></b><span id="quickstart-page-text"></span></div>
-      </div>
-      <div class="quick-foot">
-        <span class="quick-note" id="quickstart-note"></span>
-        <button type="button" id="quickstart-done" class="ghost-button">OK</button>
       </div>
     </div>
   </div>
@@ -481,10 +493,35 @@
     <div class="settings-panel help-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="help-title">
       <div class="settings-head">
         <h2 id="help-title">Help</h2>
-        <button type="button" id="help-close" class="settings-close" aria-label="Close">×</button>
+        <div class="help-head-actions">
+          <a href="#help-quickstart" id="help-quickstart-open" class="quick-link" aria-expanded="false" aria-controls="help-quickstart"></a>
+          <button type="button" id="help-close" class="settings-close" aria-label="Close">×</button>
+        </div>
       </div>
-      <p class="quick-row"><a href="#" id="help-quickstart" class="quick-link"></a></p>
-      <div class="help-body" id="help-body"></div>
+      <div class="help-scroll" id="help-scroll">
+        <div class="help-quickstart" id="help-quickstart" hidden>
+          <h3 class="quick-head" id="quickstart-engine-head">Change search engine</h3>
+          <div class="quick-shot">
+            <div class="quick-shot-img">
+              <img src="assets/quickstart-search.png" width="480" height="106" alt="">
+              <svg class="quick-arrow" viewBox="0 0 480 106" aria-hidden="true">
+                <line x1="130" y1="12" x2="54" y2="52"/>
+                <path d="M62.9 50.4 L54 52 L55.6 43.1"/>
+                <rect x="92" y="-18" width="78" height="22" rx="11" class="quick-tag"/>
+                <text x="131" y="-3" text-anchor="middle" id="quickstart-click"></text>
+              </svg>
+            </div>
+          </div>
+          <p class="quick-text" id="quickstart-engine-text"></p>
+          <h3 class="quick-head" id="quickstart-more-head">More from your page</h3>
+          <div class="quick-cards">
+            <div class="quick-card"><b id="quickstart-ai-head"></b><span id="quickstart-ai-text"></span></div>
+            <div class="quick-card"><b id="quickstart-page-head"></b><span id="quickstart-page-text"></span></div>
+          </div>
+          <p class="quick-note" id="quickstart-note"></p>
+        </div>
+        <div class="help-body" id="help-body"></div>
+      </div>
     </div>
   </div>
   <script src="build-info.js"></script>
