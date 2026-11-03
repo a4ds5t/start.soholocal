@@ -1,6 +1,6 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4.
-const APP_VERSION = '1.5.22'
+const APP_VERSION = '1.5.23'
 const CHANGELOG_URL = 'https://github.com/a4ds5t/start.soholocal/blob/main/docs/changelog/README.md'
 const APP_BUILD_ISO = typeof BUILD_TIMESTAMP_ISO !== 'undefined' ? BUILD_TIMESTAMP_ISO : null
 const searchForm = document.getElementById('searchform')
@@ -1171,6 +1171,16 @@ const forecastUrl = (place) => 'https://api.open-meteo.com/v1/forecast' +
   '&timezone=auto&forecast_days=7&forecast_hours=8'
 
 const el = (tag, className, textContent) => Object.assign(document.createElement(tag), { className: className || '', textContent: textContent ?? '' })
+// Shared Data ↑↓ control — same HTML/CSS/glyph as Links (`.icon-btn`), including Weather.
+const reorderButton = (label, glyph, onClick, disabled = false) => {
+  const button = el('button', 'icon-btn', glyph)
+  button.type = 'button'
+  button.title = label
+  button.setAttribute('aria-label', label)
+  button.disabled = disabled
+  button.addEventListener('click', onClick)
+  return button
+}
 
 const placeChipLabels = () => {
   const labels = []
@@ -1505,22 +1515,23 @@ const renderPlaces = () => {
     const name = placeDisplayLabel(place)
     const label = el('span', 'place-row-name', name)
     const tipSlot = el('span', 'place-row-tip')
-    const move = el('span', 'place-move')
-    move.append(
-      aiButton(t.linkUp || t.aiUp || 'Up', '↑', () => movePlace(index, -1), index === 0),
-      aiButton(t.linkDown || t.aiDown || 'Down', '↓', () => movePlace(index, 1), index === extraPlaces.length - 1),
+    // Same ↑↓ HTML/CSS/glyph as Data → Links (`.icon-btn`) — not a thicker place-list glyph.
+    const actions = el('div', 'link-actions')
+    actions.append(
+      reorderButton(t.linkUp, '↑', () => movePlace(index, -1), index === 0),
+      reorderButton(t.linkDown, '↓', () => movePlace(index, 1), index === extraPlaces.length - 1),
+      reorderButton(t.placeRemove, '×', () => {
+        extraPlaces = extraPlaces.filter((_, i) => i !== index)
+        const removedChip = current ? index + 1 : index
+        if (viewIndex === removedChip) choosePlace(0)
+        else if (viewIndex > removedChip) viewIndex -= 1
+        savePlaces()
+        renderPlaces()
+        renderPlaceChips()
+        if (weatherOn && (viewed || current)) paintWeatherPreview(viewed || current)
+      }, false),
     )
-    row.append(label, tipSlot, move)
-    row.append(aiButton(t.placeRemove, '×', () => {
-      extraPlaces = extraPlaces.filter((_, i) => i !== index)
-      const removedChip = current ? index + 1 : index
-      if (viewIndex === removedChip) choosePlace(0)
-      else if (viewIndex > removedChip) viewIndex -= 1
-      savePlaces()
-      renderPlaces()
-      renderPlaceChips()
-      if (weatherOn && (viewed || current)) paintWeatherPreview(viewed || current)
-    }))
+    row.append(label, tipSlot, actions)
     loadPlace(place).then((forecast) => {
       if (!extraPlaces.some((p) => placeDisplayLabel(p) === name)) return
       tipSlot.replaceChildren()
@@ -3616,8 +3627,8 @@ const catalogRow = ({ name, iconHtml, on, onToggle, askOn, onAskToggle, searchOn
     if (onUp || onDown) {
       const move = el('span', 'catalog-move')
       move.append(
-        aiButton(t.aiUp || 'Up', '↑', onUp || (() => {}), !canUp),
-        aiButton(t.aiDown || 'Down', '↓', onDown || (() => {}), !canDown),
+        reorderButton(t.aiUp || t.linkUp || 'Up', '↑', onUp || (() => {}), !canUp),
+        reorderButton(t.aiDown || t.linkDown || 'Down', '↓', onDown || (() => {}), !canDown),
       )
       actions.append(move)
     }
@@ -3634,8 +3645,8 @@ const catalogRow = ({ name, iconHtml, on, onToggle, askOn, onAskToggle, searchOn
   if (onUp || onDown) {
     const move = el('span', 'catalog-move')
     move.append(
-      aiButton(t.aiUp || 'Up', '↑', onUp || (() => {}), !canUp),
-      aiButton(t.aiDown || 'Down', '↓', onDown || (() => {}), !canDown),
+      reorderButton(t.aiUp || t.linkUp || 'Up', '↑', onUp || (() => {}), !canUp),
+      reorderButton(t.aiDown || t.linkDown || 'Down', '↓', onDown || (() => {}), !canDown),
     )
     row.append(move)
   }
