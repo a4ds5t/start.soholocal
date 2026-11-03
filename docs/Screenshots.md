@@ -43,16 +43,16 @@ The first Settings pane (General): the three pages (Minimal, Standard and Person
 
 ## Advanced settings
 
-Every option, in groups. Weather, Show, Time format, Date, Search, AI shortcuts, Background and Language sit above the reset options. The reset section is at the bottom, in red: a backup comes first, through Manage data.
+Every option, in groups, inside the Settings shell Advanced pane. Show on page sits first; Weather and Clock & date follow. The reset section is at the bottom, in red; Backup is its own sidebar item.
 
 ![Advanced settings](images/settings-advanced.png)
 
-## Manage data
+## Settings catalogs
 
-Your links, time zones, AI shortcuts, weather places and backgrounds, each on its own tab. Each list shows its add form; at the limit that form says so in the field, for example "5 of 5 · full", and the add button is greyed out.
+Search engines, AI, Social, own links, time zones, weather places and backgrounds each have their own sidebar pane. Each list shows its add form; at the limit that form says so in the field, for example "5 of 5 · full", and the add button is greyed out.
 
 ![Manage data](images/manage-data.png)
 
-The last tab, Backup, holds export and import. Export saves your settings and data to a file on your computer; import loads such a file and either merges it with what you have or replaces everything.
+The Backup pane holds export and import. Export saves your settings and data to a file on your computer; import loads such a file and either merges it with what you have or replaces everything.
 
 ![Backup tab](images/manage-backup.png)
