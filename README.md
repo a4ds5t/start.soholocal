@@ -63,7 +63,7 @@ Each option can still be changed on its own. When your choices match neither pag
 
 - **AI.** Under **Data → AI** one catalog lists built-in platforms (Claude, ChatGPT, Grok, Gemini, Duck.ai, Lumo, Kagi Assistant, Meta AI) and your own **Add AI** entries. **In search** puts a platform in the search-field overlay (type + Enter). **Ask AI row** also shows it under the bar (up to five). Turn the overlay and under-bar row on or off under **Settings → Show**. Links open in a new tab by default (change under **Settings → General**).
 
-- **Weather.** Optional, off by default. Up to five extra places can be added, shown as chips in the forecast window. Typing a city suggests matches, so you can pick the right one. Hover over the temperature for a short preview of the next six hours; click it for the full forecast, with the next seven days and a link to Windy.
+- **Weather.** Optional, off by default. Up to five extra places can be added under **Data → Weather**, reordered with ↑↓ (Your place stays at the top), and shown as chips in the forecast window. Typing a city suggests matches, so you can pick the right one. Hover over the temperature for a short preview of the next six hours; click it for the full forecast, with the next seven days and a link to Windy.
 
 - **IP details.** A button in the settings shows the last IP address you asked for, with the city, provider and more. It is checked only when you press the check button, or when the weather uses your IP location.
 

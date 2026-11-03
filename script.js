@@ -1,6 +1,6 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4.
-const APP_VERSION = '1.5.20'
+const APP_VERSION = '1.5.21'
 const CHANGELOG_URL = 'https://github.com/a4ds5t/start.soholocal/blob/main/docs/changelog/README.md'
 const APP_BUILD_ISO = typeof BUILD_TIMESTAMP_ISO !== 'undefined' ? BUILD_TIMESTAMP_ISO : null
 const searchForm = document.getElementById('searchform')
@@ -872,7 +872,7 @@ const helpText = {
     ['Clock', 'Hover over the time to see your time zone. Click the time to cycle through 24-hour, 12-hour and full time with seconds. When time zones are on, the clock icon above the time opens the zones you chose.'],
     ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and a short numeric date. The order follows your browser unless you choose one under Settings → General.'],
     ['Links', 'Links panel (top left) opens your personal links (add, edit, reorder — up to 15). Turn that panel off and the same spot becomes a Wikipedia link in your language. Under Settings → General → Open in new tab you choose whether links (and social icons) open in a new tab.'],
-    ['Weather', 'Off by default. Turn it on in Settings → General and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 6 hours and seven days. Up to five more places can be added under Settings → Weather; city chips in the preview and forecast header switch between them. City names stay short, like Time zones.'],
+    ['Weather', 'Off by default. Turn it on in Settings → Weather and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 6 hours and seven days. Under Data → Weather, Your place stays at the top; up to five extra cities can be added and reordered with ↑↓ (same as AI and Social). City chips in the preview and forecast header follow that order. City names stay short, like Time zones.'],
     ['Background', 'Each press of the round button at the bottom right goes to the next background: none first, then the ones switched on under Settings → Background. The button at the bottom left changes the background colour in steps; on a computer that is the button too.'],
     ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. One fixed window holds everything: a left sidebar on a computer (General, Search, AI, Social, Links, Time zones, Weather, Background, Backup), and bottom tabs plus a menu on a phone. General has page presets, Show on page, weather location, clock & date, language and reset. Catalog panes hold Search/AI/Social/Links/zones/weather places/backgrounds; Backup exports and imports. Help opens with a Quick start at the top. Delete my data removes your own links, AI shortcuts, time zones, city and extra places — make a Backup first.'],
     ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, only while weather is on; showing your IP address uses the same lookup. Extra places send their name to Open-Meteo. Custom AI shortcuts load their icon from their own site. Nothing else leaves the page.'],
@@ -885,7 +885,7 @@ const helpText = {
     ['Klok', 'Ga met de muis over de tijd om je tijdzone te zien. Klik op de tijd om te wisselen tussen 24 uur, 12 uur en volledige tijd met seconden. Staan de tijdzones aan, dan opent het klokje boven de tijd de zones die je koos.'],
     ['Datum', 'Ga met de muis over de datum om de ISO-week en de dag van het jaar te zien. Klik erop om te wisselen tussen de lange vorm en een korte datum. De volgorde volgt je browser, tenzij je er onder Instellingen → Algemeen een kiest.'],
     ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen. Staat Eigen links uit, dan opent de knop direct Wikipedia. Onder Instellingen → Algemeen → Openen in nieuw tabblad kies je of links (en sociale iconen) in een nieuw tabblad openen.'],
-    ['Weer', 'Standaard uit. Zet het aan in Instellingen → Algemeen en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 6 uur en zeven dagen. Extra plaatsen voeg je toe onder Instellingen → Weer; chips in de preview en de verwachting wisselen ertussen. Stadsnamen blijven kort, zoals bij Tijdzones.'],
+    ['Weer', 'Standaard uit. Zet het aan in Instellingen → Weer en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 6 uur en zeven dagen. Onder Data → Weer blijft Je eigen plaats bovenaan; tot vijf extra steden kun je toevoegen en met ↑↓ herordenen (zoals AI en Social). Chips in de preview en de verwachting volgen die volgorde. Stadsnamen blijven kort, zoals bij Tijdzones.'],
     ['Achtergrond', 'Elke druk op de ronde knop rechtsonder gaat naar de volgende achtergrond: eerst geen, daarna de achtergronden die je onder Instellingen → Achtergrond hebt aangezet. De knop linksonder wisselt de achtergrondkleur in stappen; op de computer is dat ook een knop.'],
     ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Esc sluit. Eén vast venster: op de computer een linkerzijbalk (Algemeen, Zoeken, AI, Social, Links, Tijdzones, Weer, Achtergrond, Backup), op de telefoon tabs onderaan plus een menu. Algemeen heeft paginakeuzes, Tonen op de pagina, weerlocatie, klok & datum, taal en reset. Help opent met Quick start bovenaan. Backup exporteert en importeert — maak er een vóór gegevens wissen.'],
     ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, alleen als het weer aanstaat; het tonen van je IP-adres gebruikt dezelfde opzoeking. Extra plaatsen sturen hun naam naar Open-Meteo. Eigen AI-snelkoppelingen laden hun icoon van hun eigen site. Er gaat verder niets naar buiten.'],
@@ -898,7 +898,7 @@ const helpText = {
     ['Uhr', 'Fahre mit der Maus über die Zeit, um deine Zeitzone zu sehen. Ein Klick auf die Zeit wechselt zwischen 24-Stunden-, 12-Stunden- und voller Zeit mit Sekunden. Sind Zeitzonen aktiv, öffnet die Kugel über der Zeit die gewählten Zonen.'],
     ['Datum', 'Fahre mit der Maus über das Datum, um die ISO-Woche und den Tag des Jahres zu sehen. Ein Klick wechselt zwischen langer Form und TT-MM-JJJJ.'],
     ['Links', 'Die Schaltfläche oben links öffnet deine Links. Die Symbole oben im Fenster sind fest. Mit der Maus über der Schaltfläche siehst du deine eigenen Links. Du kannst bis zu 15 eigene Links hinzufügen, mit optionaler Beschreibung, und sie bearbeiten oder entfernen. Ist Eigene Links aus, öffnet die Schaltfläche direkt Wikipedia.'],
-    ['Wetter', 'Standardmäßig aus. Schalte es in den Einstellungen ein und wähle, woher das Wetter kommt: deine IP-Adresse oder eine Stadt, die du wählst. Fahre mit der Maus über die Temperatur für eine kurze Vorschau; klicke für die vollständige Vorhersage mit den nächsten 6 Stunden und sieben Tagen. Unter Verwalten, Wetter kannst du bis zu fünf weitere Orte hinzufügen; wähle hier einen aus, um dessen Vorhersage zu sehen.'],
+    ['Wetter', 'Standardmäßig aus. Schalte es unter Einstellungen → Wetter ein und wähle, woher das Wetter kommt: deine IP-Adresse oder eine Stadt, die du wählst. Fahre mit der Maus über die Temperatur für eine kurze Vorschau; klicke für die vollständige Vorhersage mit den nächsten 6 Stunden und sieben Tagen. Unter Daten → Wetter bleibt Dein Ort oben; bis zu fünf Extra-Städte lassen sich hinzufügen und mit ↑↓ umordnen (wie KI und Social). Chips in Vorschau und Vorhersage folgen dieser Reihenfolge.'],
     ['Hintergrund', 'Jeder Druck auf den runden Knopf unten rechts wechselt zum nächsten Hintergrund: zuerst keiner, dann die in „Daten verwalten“ eingeschalteten. Der Knopf unten links wechselt die Hintergrundfarbe in Stufen; am Computer ist das ebenfalls ein Knopf.'],
     ['Einstellungen', 'Öffne sie mit dem Zahnrad oben rechts oder drücke ?. Esc schließt sie. Optionen, die von einer anderen abhängen, sind grau, bis diese eingeschaltet ist. Oben stehen die Seitenvorlagen Minimal und Standard. Persönlich erscheint, wenn deine Auswahl zu keiner passt. Erweitert zeigt alle Optionen, in Gruppen; der Link daneben führt zurück zu den Grundeinstellungen. Unten rechts stehen die Version und das Datum der letzten Änderung. Die letzte Zahl steigt mit jeder Änderung; ein Release bekommt die nächste Versionsnummer, etwa 1.4. Unten unter Erweitert steht der Block Zurücksetzen. Einstellungen zurücksetzen stellt nur die Standardwerte wieder her. Meine Daten löschen entfernt deine eigenen Links, KI-Verknüpfungen, Zeitzonen, Stadt und zusätzlichen Orte. Das lässt sich nicht rückgängig machen, also erstelle zuerst ein Backup über Daten verwalten, mit Daten exportieren.'],
     ['Deine Daten', 'Deine Einstellungen werden nur in diesem Browser gespeichert. Das Wetter sendet deine IP-Adresse an ipapi.co bzw. die gewählte Stadt an Open-Meteo, nur wenn das Wetter aktiv ist; das Anzeigen deiner IP-Adresse nutzt dieselbe Abfrage. Zusätzliche Orte senden ihren Namen an Open-Meteo. Eigene KI-Verknüpfungen laden ihr Symbol von ihrer eigenen Seite. Sonst verlässt nichts die Seite.'],
@@ -1429,7 +1429,6 @@ const choosePlace = async (index) => {
   else renderPlaceChips()
 }
 const renderPlaceChips = () => {
-  sortPlaces()
   const box = document.getElementById('forecast-places')
   if (!box) return
   if (!weatherOn || (!current && !extraPlaces.length)) {
@@ -1443,22 +1442,29 @@ const renderPlaceChips = () => {
     chip.addEventListener('click', () => choosePlace(index))
     return chip
   })
-  // Own place + extras (or extras alone) as selectable chips.
+  // Own place + extras (or extras alone) as selectable chips — order matches Data → Weather.
   box.replaceChildren(...chips)
 }
 
-// Extra places in time-zone order, the same order as the time zones: earliest UTC offset first.
-const sortPlaces = () => {
-  const now = new Date()
-  const offset = (zone) => {
-    try { return utcOffset(zone || 'UTC', now) } catch { return 0 }
-  }
-  extraPlaces.sort((a, b) => offset(a.timezone) - offset(b.timezone) || placeDisplayLabel(a).localeCompare(placeDisplayLabel(b)))
+// Extra places keep the visitor's order (↑↓ in Data → Weather). Your place stays fixed at the top,
+// like This computer above Time zones (zones still sort by UTC offset; weather extras do not).
+const movePlace = (index, dir) => {
+  const next = index + dir
+  if (next < 0 || next >= extraPlaces.length) return
+  ;[extraPlaces[index], extraPlaces[next]] = [extraPlaces[next], extraPlaces[index]]
+  const base = current ? 1 : 0
+  const a = base + index
+  const b = base + next
+  if (viewIndex === a) viewIndex = b
+  else if (viewIndex === b) viewIndex = a
+  savePlaces()
+  renderPlaces()
+  renderPlaceChips()
+  if (weatherOn && (viewed || current)) paintWeatherPreview(viewed || current)
 }
 
-// Data → Weather: city left, live tip right near × — same row rhythm as Time zones.
+// Data → Weather: city left, live tip, ↑↓, × — Your place fixed; extras reorder like AI/Social.
 const renderPlaces = () => {
-  sortPlaces()
   const ownEl = document.getElementById('weather-own')
   const ownName = current ? placeDisplayLabel(current.place) : t.placeNone
   ownEl.className = 'weather-own-row manage-note'
@@ -1491,7 +1497,12 @@ const renderPlaces = () => {
     const name = placeDisplayLabel(place)
     const label = el('span', 'place-row-name', name)
     const tipSlot = el('span', 'place-row-tip')
-    row.append(label, tipSlot)
+    const move = el('span', 'place-move')
+    move.append(
+      aiButton(t.linkUp || t.aiUp || 'Up', '↑', () => movePlace(index, -1), index === 0),
+      aiButton(t.linkDown || t.aiDown || 'Down', '↓', () => movePlace(index, 1), index === extraPlaces.length - 1),
+    )
+    row.append(label, tipSlot, move)
     row.append(aiButton(t.placeRemove, '×', () => {
       extraPlaces = extraPlaces.filter((_, i) => i !== index)
       const removedChip = current ? index + 1 : index
@@ -1577,7 +1588,6 @@ document.getElementById('place-form').addEventListener('submit', async (e) => {
     if (extraPlaces.some((p) => shortCityName(p.label) === place.label)) { placeMsg.textContent = t.placeDuplicate; return }
     if (current && shortCityName(current.place.label) === place.label) { placeMsg.textContent = t.placeDuplicate; return }
     extraPlaces = [...extraPlaces, place]
-    sortPlaces()
     savePlaces()
     markFieldChosen(input)
     placeMsg.textContent = ''
@@ -2472,7 +2482,6 @@ const mergeImport = (payload) => {
     extraPlaces = [...extraPlaces, normalized]
     result.added++
   })
-  sortPlaces()
   savePlaces()
   renderPlaceChips()
 
