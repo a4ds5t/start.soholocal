@@ -987,43 +987,25 @@ const weatherIcons = {
 }
 const weatherIcon = (key) => `<svg class="weather-icon ${key || 'cloudy'}" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${weatherIcons[key] || weatherIcons.cloudy}</svg>`
 
-// Settings Weather pane: small sample chips (temp / sun / cloud / rain) plus live current when known.
-const paintWeatherSamples = () => {
-  const samples = document.getElementById('weather-icon-samples')
-  if (samples) {
-    const clear = samples.querySelector('[data-sample="clear"]')
-    const cloudy = samples.querySelector('[data-sample="cloudy"]')
-    const rain = samples.querySelector('[data-sample="rain"]')
-    if (clear) clear.innerHTML = weatherIcon('clear')
-    if (cloudy) cloudy.innerHTML = weatherIcon('cloudy')
-    if (rain) rain.innerHTML = weatherIcon('rain')
-  }
-  const live = document.getElementById('weather-sample-live')
-  const cityWeather = document.getElementById('city-selected-weather')
+// Settings → Weather: one live preview (icon + temp) for the active city — same as the page widget.
+const paintWeatherLive = () => {
+  const live = document.getElementById('weather-live')
+  if (!live) return
   const shown = viewed || current
-  if (live) {
-    if (weatherOn && shown?.forecast?.current) {
-      const now = shown.forecast.current
-      const key = weatherKey(now.weather_code)
-      const temperature = `${Math.round(now.temperature_2m)}°`
-      live.hidden = false
-      live.innerHTML = `${weatherIcon(key)}<span>${temperature}</span>`
-    } else {
-      live.hidden = true
-      live.replaceChildren()
-    }
-  }
-  if (cityWeather) {
-    if (city && weatherOn && shown?.forecast?.current) {
-      const now = shown.forecast.current
-      const key = weatherKey(now.weather_code)
-      const temperature = `${Math.round(now.temperature_2m)}°`
-      cityWeather.hidden = false
-      cityWeather.innerHTML = `${weatherIcon(key)}<span>${temperature}</span>`
-    } else {
-      cityWeather.hidden = true
-      cityWeather.replaceChildren()
-    }
+  if (weatherOn && shown?.forecast?.current) {
+    const now = shown.forecast.current
+    const key = weatherKey(now.weather_code)
+    const temperature = `${Math.round(now.temperature_2m)}°`
+    const place = placeDisplayLabel(shown.place)
+    live.hidden = false
+    live.innerHTML = `${weatherIcon(key)}<span>${temperature}</span>`
+    live.title = place ? `${place} · ${temperature}` : temperature
+    live.setAttribute('aria-label', place ? `${place} ${temperature}` : temperature)
+  } else {
+    live.hidden = true
+    live.replaceChildren()
+    live.removeAttribute('title')
+    live.removeAttribute('aria-label')
   }
 }
 
@@ -1113,7 +1095,7 @@ if (extraPlaces.length) savePlaces()
 // The place shown in the forecast window: null for the own place, otherwise { place, forecast }.
 let viewed = null
 let viewIndex = 0
-paintWeatherSamples()
+paintWeatherLive()
 
 const forecastUrl = (place) => 'https://api.open-meteo.com/v1/forecast' +
   `?latitude=${place.latitude}&longitude=${place.longitude}` +
@@ -1183,7 +1165,7 @@ const showWeather = async () => {
       viewed = null
       weatherDetail.replaceChildren()
       renderPlaceChips()
-      paintWeatherSamples()
+      paintWeatherLive()
       return
     }
     const forecast = await fetchCached(`weather:v2:${place.latitude},${place.longitude}`, 30 * 60e3, forecastUrl(place))
@@ -1197,13 +1179,13 @@ const showWeather = async () => {
     weatherButton.setAttribute('aria-label', `${key ? words[key] : ''} ${temperature}`.trim())
     paintWeatherPreview(shown)
     renderPlaceChips()
-    paintWeatherSamples()
+    paintWeatherLive()
   } catch {
     weatherButton.textContent = t.unavailable
     current = null
     weatherDetail.replaceChildren()
     renderPlaceChips()
-    paintWeatherSamples()
+    paintWeatherLive()
   }
 }
 
@@ -1286,7 +1268,7 @@ const hideWeather = () => {
   weatherDetail.replaceChildren()
   weatherDetail.classList.remove('open')
   current = null
-  paintWeatherSamples()
+  paintWeatherLive()
 }
 
 const hasSource = () => (locationMode === 'city' ? !!city : true)
@@ -1384,7 +1366,7 @@ const choosePlace = async (index) => {
     weatherButton.setAttribute('aria-label', `${key ? words[key] : ''} ${temperature}`.trim())
     paintWeatherPreview(shown)
   }
-  paintWeatherSamples()
+  paintWeatherLive()
   if (!forecastDialog.hidden) renderForecast()
   else renderPlaceChips()
 }
@@ -2169,7 +2151,7 @@ const syncCitySelected = () => {
   if (show) nameEl.textContent = city.name
   if (removeBtn) removeBtn.setAttribute('aria-label', t.placeRemove || 'Remove')
   settingsFields.cityClear.hidden = !city
-  paintWeatherSamples()
+  paintWeatherLive()
 }
 
 document.getElementById('city-remove')?.addEventListener('click', () => {

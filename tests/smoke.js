@@ -153,9 +153,9 @@ const emptyForecast = {
   check(await page.isVisible('.prefs-split'), 'Weather prefs uses a 2-col split');
   check(!!(await page.$('#city-selected')), 'Weather city has a selected-city slot');
   check(!!(await page.$('#city-remove')), 'Weather city has a remove control');
-  check(await page.isVisible('#weather-icon-samples'), 'Weather prefs shows sample weather icons');
-  check(!!(await page.$('#weather-icon-samples [data-sample="clear"] svg')), 'Weather samples include clear/sun');
-  check(!!(await page.$('#weather-icon-samples [data-sample="rain"] svg')), 'Weather samples include rain');
+  check(!!(await page.$('#weather-live')), 'Weather prefs has a live current slot');
+  check(!(await page.$('#weather-icon-samples')), 'Weather prefs has no sample icon row');
+  check(!(await page.$('#city-selected-weather')), 'City chip does not duplicate live weather');
   await page.click('#nav-show');
   check(await page.isVisible('#set-ai-overlay'), 'Show on page holds masters');
   check(await page.locator('#lbl-ai-overlay').textContent() === 'AI in search field', 'AI master is labeled AI in search field');

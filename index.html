@@ -235,13 +235,7 @@
               <section class="pane-block">
                 <p class="location-title" id="sec-weather">Weather</p>
                 <label class="master-toggle"><input type="checkbox" id="set-weather"> <span id="lbl-weather">On</span></label>
-                <div class="weather-icon-samples" id="weather-icon-samples" aria-hidden="true">
-                  <span class="weather-sample" data-sample="temp"><span class="weather-sample-temp">12°</span></span>
-                  <span class="weather-sample" data-sample="clear"></span>
-                  <span class="weather-sample" data-sample="cloudy"></span>
-                  <span class="weather-sample" data-sample="rain"></span>
-                </div>
-                <p class="weather-sample-live" id="weather-sample-live" hidden></p>
+                <p class="weather-live" id="weather-live" hidden></p>
               </section>
               <section class="pane-block">
                 <p class="location-title" id="lbl-location">Location</p>
@@ -252,7 +246,6 @@
                   <form class="city-form" id="city-form">
                     <ul class="place-list city-selected" id="city-selected" hidden>
                       <li>
-                        <span class="city-selected-weather" id="city-selected-weather" hidden></span>
                         <span id="city-selected-name"></span>
                         <button type="button" id="city-remove" aria-label="Remove">×</button>
                       </li>
