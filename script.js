@@ -1,6 +1,6 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4.
-const APP_VERSION = '1.5.12'
+const APP_VERSION = '1.5.13'
 const CHANGELOG_URL = 'https://github.com/a4ds5t/start.soholocal/blob/main/docs/changelog/README.md'
 const APP_BUILD_ISO = typeof BUILD_TIMESTAMP_ISO !== 'undefined' ? BUILD_TIMESTAMP_ISO : null
 const searchForm = document.getElementById('searchform')
@@ -657,6 +657,11 @@ ipWindow.addEventListener('click', (e) => { if (e.target === ipWindow) closeIpWi
 
 let city = null
 try { city = JSON.parse(localStorage.getItem('city') || 'null') } catch {}
+// Older saves kept "City, Country"; display and storage use the city alone.
+if (city && typeof city.name === 'string' && city.name.includes(',')) {
+  city = { ...city, name: city.name.split(',')[0].trim() }
+  try { localStorage.setItem('city', JSON.stringify(city)) } catch {}
+}
 // 'ip' finds the place from the IP address; 'city' uses the city the visitor entered.
 let locationMode = city ? 'city' : 'ip'
 try {
@@ -716,12 +721,12 @@ const sectionText = {
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
 const aiText = {
-  en: { quickTitle: 'Quick start', quickEngineHead: 'Change search engine', quickEngineText: 'Click the left icon to switch Search ↔ AI. Hold (or right-click) to pick which engine or AI. Shortcut: Ctrl+Shift+A. Enter sends your query. Social icons (when enabled) sit under the bar as jump links.', quickClick: 'Click here', quickMoreHead: 'More from your page', quickAiHead: 'Add AI links', quickAiText: 'Under Manage data you pick AI platforms for the overlay and up to five ASK AI shortcuts.', quickPageHead: 'Pick a page', quickPageText: 'Minimal, Standard or Advanced, in the settings at the top right.', quickDone: 'Got it', quickLink: 'Quick start', quickCard: 'Quick start: the first steps', quickNote: 'Everything here is also in Help.', changelogLink: 'Changelog', hintText: 'Settings are here: click the gear, or press ?.', limitFull: '{n} of {n} · full', aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', versionUpdated: 'Updated', versionTagAria: 'Version {v}, show update details', versionText: 'Version {v}, updated {d}', secBackground: 'Background', resetIntro: 'Reset settings only sets your settings back to the defaults; your data stays. Delete my data removes your own links, AI shortcuts, time zones, city and extra places. This cannot be undone, so make a backup first on the Backup tab in Manage data.', resetSec: 'Reset', dateOnLbl: 'Show the date', dateSec: 'Date', dateShow: 'Show', dateLong: 'Long', dateShort: 'Short', dateOrderLbl: 'Order', dateAuto: 'Automatic', dateDmy: 'Day-month-year', dateMdy: 'Month-day-year', dateYmd: 'Year-month-day', timeSec: 'Time format', time24: '24 hours', time12: '12 hours (AM/PM)', timeFull: 'Full, with seconds', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick services', aiInvalid: 'Enter a valid https address' },
-  nl: { quickTitle: 'Quick start', quickEngineHead: 'Zoekmachine wisselen', quickEngineText: 'Elke klik op het icoon gaat naar de volgende zoekmachine: DuckDuckGo, Kagi, Brave of Google. Je keuze blijft bewaard.', quickClick: 'Klik hier', quickMoreHead: 'Meer uit je pagina', quickAiHead: 'AI-links toevoegen', quickAiText: 'Onder Data beheren kies je tot vijf AI-diensten, of voeg je eigen adres toe.', quickPageHead: 'Pagina kiezen', quickPageText: 'Minimaal, Standaard of Geavanceerd, in de instellingen rechtsboven.', quickDone: 'Begrepen', quickLink: 'Quick start', quickCard: 'Quick start: de eerste stappen', quickNote: 'Alles staat ook in Help.', changelogLink: 'Wijzigingen', hintText: 'Hier vind je de instellingen: klik op het tandwiel of druk op ?.', limitFull: '{n} van {n} · vol', aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', versionUpdated: 'Bijgewerkt', versionTagAria: 'Versie {v}, toon bijwerkdetails', versionText: 'Versie {v}, bijgewerkt {d}', secBackground: 'Achtergrond', resetIntro: 'Instellingen resetten zet alleen je instellingen terug naar de standaard; je gegevens blijven staan. Mijn gegevens wissen verwijdert je eigen links, AI-snelkoppelingen, tijdzones, stad en extra plaatsen. Dat kan niet ongedaan worden, dus maak eerst een backup op het tabblad Backup onder Data beheren.', resetSec: 'Resetten', dateOnLbl: 'Datum tonen', dateSec: 'Datum', dateShow: 'Weergave', dateLong: 'Lang', dateShort: 'Kort', dateOrderLbl: 'Volgorde', dateAuto: 'Automatisch', dateDmy: 'Dag-maand-jaar', dateMdy: 'Maand-dag-jaar', dateYmd: 'Jaar-maand-dag', timeSec: 'Tijdnotatie', time24: '24 uur', time12: '12 uur (AM/PM)', timeFull: 'Volledig, met seconden', searchSec: 'Zoeken', searchNewTab: 'Zoeken openen in een nieuw tabblad', aiNewTab: 'AI-links openen in een nieuw tabblad', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies diensten', aiInvalid: 'Vul een geldig https-adres in' },
-  de: { quickTitle: 'Schnellstart', quickEngineHead: 'Suchmaschine wechseln', quickEngineText: 'Jeder Klick auf das Symbol führt zur nächsten Suchmaschine: DuckDuckGo, Kagi, Brave oder Google. Deine Wahl bleibt gespeichert.', quickClick: 'Hier klicken', quickMoreHead: 'Mehr aus deiner Seite', quickAiHead: 'KI-Links hinzufügen', quickAiText: 'Unter Daten verwalten wählst du bis zu fünf KI-Dienste oder fügst deine eigene Adresse hinzu.', quickPageHead: 'Seite wählen', quickPageText: 'Minimal, Standard oder Erweitert, in den Einstellungen oben rechts.', quickDone: 'Verstanden', quickLink: 'Schnellstart', quickCard: 'Schnellstart: die ersten Schritte', quickNote: 'Alles steht auch in der Hilfe.', changelogLink: 'Änderungen', hintText: 'Hier findest du die Einstellungen: Klick auf das Zahnrad oder drücke ?.', limitFull: '{n} von {n} · voll', aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', versionUpdated: 'Aktualisiert', versionTagAria: 'Version {v}, Aktualisierungsdetails anzeigen', versionText: 'Version {v}, aktualisiert {d}', secBackground: 'Hintergrund', resetIntro: 'Einstellungen zurücksetzen stellt nur die Standardwerte wieder her; deine Daten bleiben. Meine Daten löschen entfernt deine eigenen Links, KI-Verknüpfungen, Zeitzonen, Stadt und zusätzlichen Orte. Das lässt sich nicht rückgängig machen, also erstelle zuerst ein Backup im Reiter Backup unter Daten verwalten.', resetSec: 'Zurücksetzen', dateOnLbl: 'Datum anzeigen', dateSec: 'Datum', dateShow: 'Anzeige', dateLong: 'Lang', dateShort: 'Kurz', dateOrderLbl: 'Reihenfolge', dateAuto: 'Automatisch', dateDmy: 'Tag-Monat-Jahr', dateMdy: 'Monat-Tag-Jahr', dateYmd: 'Jahr-Monat-Tag', timeSec: 'Zeitformat', time24: '24 Stunden', time12: '12 Stunden (AM/PM)', timeFull: 'Vollständig, mit Sekunden', searchSec: 'Suche', searchNewTab: 'Suche in einem neuen Tab öffnen', aiNewTab: 'KI-Links in einem neuen Tab öffnen', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Dienste wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
-  fr: { quickTitle: 'Démarrage rapide', quickEngineHead: 'Changer de moteur de recherche', quickEngineText: 'Chaque clic sur l’icône passe au moteur suivant : DuckDuckGo, Kagi, Brave ou Google. Votre choix est conservé.', quickClick: 'Cliquez ici', quickMoreHead: 'Plus sur votre page', quickAiHead: 'Ajouter des liens IA', quickAiText: 'Sous Gérer les données, choisissez jusqu’à cinq services IA, ou ajoutez votre propre adresse.', quickPageHead: 'Choisir une page', quickPageText: 'Minimal, Standard ou Avancé, dans les réglages en haut à droite.', quickDone: 'Compris', quickLink: 'Démarrage rapide', quickCard: 'Démarrage rapide : les premiers pas', quickNote: 'Tout cela figure aussi dans l’aide.', changelogLink: 'Modifications', hintText: 'Les réglages sont ici : cliquez sur l’engrenage ou appuyez sur ?.', limitFull: '{n} sur {n} · complet', aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', versionUpdated: 'Mis à jour', versionTagAria: 'Version {v}, afficher les détails de mise à jour', versionText: 'Version {v}, mise à jour {d}', secBackground: 'Arrière-plan', resetIntro: 'Réinitialiser les réglages remet seulement les réglages par défaut ; vos données restent. Effacer mes données supprime vos liens, raccourcis IA, fuseaux, ville et lieux supplémentaires. Action irréversible : faites d’abord une sauvegarde dans l’onglet Sauvegarde de Gérer les données.', resetSec: 'Réinitialiser', dateOnLbl: 'Afficher la date', dateSec: 'Date', dateShow: 'Affichage', dateLong: 'Long', dateShort: 'Court', dateOrderLbl: 'Ordre', dateAuto: 'Automatique', dateDmy: 'Jour-mois-année', dateMdy: 'Mois-jour-année', dateYmd: 'Année-mois-jour', timeSec: 'Format de l’heure', time24: '24 heures', time12: '12 heures (AM/PM)', timeFull: 'Complet, avec secondes', searchSec: 'Recherche', searchNewTab: 'Ouvrir la recherche dans un nouvel onglet', aiNewTab: 'Ouvrir les liens IA dans un nouvel onglet', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir les services', aiInvalid: 'Saisissez une adresse https valide' },
-  es: { quickTitle: 'Inicio rápido', quickEngineHead: 'Cambiar de buscador', quickEngineText: 'Cada clic en el icono pasa al siguiente buscador: DuckDuckGo, Kagi, Brave o Google. Tu elección se guarda.', quickClick: 'Haz clic aquí', quickMoreHead: 'Más en tu página', quickAiHead: 'Añadir enlaces de IA', quickAiText: 'En Gestionar datos eliges hasta cinco servicios de IA, o añades tu propia dirección.', quickPageHead: 'Elige una página', quickPageText: 'Minimal, Standard o Avanzado, en los ajustes arriba a la derecha.', quickDone: 'Entendido', quickLink: 'Inicio rápido', quickCard: 'Inicio rápido: los primeros pasos', quickNote: 'Todo esto también está en la ayuda.', changelogLink: 'Cambios', hintText: 'Aquí están los ajustes: pulsa el engranaje o ?.', limitFull: '{n} de {n} · completo', aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', versionUpdated: 'Actualizado', versionTagAria: 'Versión {v}, mostrar detalles de actualización', versionText: 'Versión {v}, actualizada {d}', secBackground: 'Fondo', resetIntro: 'Restablecer ajustes solo devuelve los valores predeterminados; tus datos se mantienen. Borrar mis datos elimina tus enlaces propios, accesos de IA, zonas horarias, ciudad y lugares adicionales. No se puede deshacer, así que haz antes una copia en la pestaña Copia de Gestionar datos.', resetSec: 'Restablecer', dateOnLbl: 'Mostrar la fecha', dateSec: 'Fecha', dateShow: 'Mostrar', dateLong: 'Larga', dateShort: 'Corta', dateOrderLbl: 'Orden', dateAuto: 'Automático', dateDmy: 'Día-mes-año', dateMdy: 'Mes-día-año', dateYmd: 'Año-mes-día', timeSec: 'Formato de hora', time24: '24 horas', time12: '12 horas (AM/PM)', timeFull: 'Completo, con segundos', searchSec: 'Búsqueda', searchNewTab: 'Abrir la búsqueda en una pestaña nueva', aiNewTab: 'Abrir los accesos de IA en una pestaña nueva', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige servicios', aiInvalid: 'Escribe una dirección https válida' },
-  zh: { quickTitle: '快速入门', quickEngineHead: '更换搜索引擎', quickEngineText: '每次点击图标会切换到下一个搜索引擎：DuckDuckGo、Kagi、Brave 或 Google。你的选择会被保存。', quickClick: '点这里', quickMoreHead: '页面更多功能', quickAiHead: '添加 AI 链接', quickAiText: '在“管理数据”中最多选五个 AI 服务，也可以添加你自己的地址。', quickPageHead: '选择页面', quickPageText: '极简、标准或高级，在右上角的设置中切换。', quickDone: '知道了', quickLink: '快速入门', quickCard: '快速入门：最初的几步', quickNote: '这些内容也在帮助中。', changelogLink: '更新记录', hintText: '设置在这里：点击齿轮，或按 ?。', limitFull: '{n}/{n} · 已满', aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', versionUpdated: '更新', versionTagAria: '版本 {v}，显示更新详情', versionText: '版本 {v}，更新于 {d}', secBackground: '背景', resetIntro: '重置设置只会恢复默认值，你的数据会保留。删除我的数据会移除你自己的链接、AI 快捷方式、时区、城市和额外地点。此操作无法撤销，请先在管理数据的备份标签中备份。', resetSec: '重置', dateOnLbl: '显示日期', dateSec: '日期', dateShow: '显示', dateLong: '长格式', dateShort: '短格式', dateOrderLbl: '顺序', dateAuto: '自动', dateDmy: '日-月-年', dateMdy: '月-日-年', dateYmd: '年-月-日', timeSec: '时间格式', time24: '24 小时制', time12: '12 小时制 (AM/PM)', timeFull: '完整，含秒', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', aiDuplicate: '已在列表中。', aiPick: '选择服务', aiInvalid: '请输入有效的 https 地址' }
+  en: { quickTitle: 'Quick start', quickEngineHead: 'Change search engine', quickEngineText: 'Click the left icon to switch Search ↔ AI. Hold (or right-click) to pick which engine or AI. Shortcut: Ctrl+Shift+A. Enter sends your query. Social icons (when enabled) sit under the bar as jump links.', quickClick: 'Click here', quickMoreHead: 'More from your page', quickAiHead: 'Add AI links', quickAiText: 'Under Settings → AI you pick AI platforms for the overlay and up to five ASK AI shortcuts.', quickPageHead: 'Pick a page', quickPageText: 'Minimal, Standard or Advanced, in the settings at the top right.', quickDone: 'Got it', quickLink: 'Quick start', quickCard: 'Quick start: the first steps', quickNote: 'Everything here is also in Help.', changelogLink: 'Changelog', hintText: 'Settings are here: click the gear, or press ?.', limitFull: '{n} of {n} · full', aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', versionUpdated: 'Updated', versionTagAria: 'Version {v}, show update details', versionText: 'Version {v}, updated {d}', secBackground: 'Background', resetIntro: 'Reset settings only sets your settings back to the defaults; your data stays. Delete my data removes your own links, AI shortcuts, time zones, city and extra places. This cannot be undone, so make a backup first on the Backup tab in Manage data.', resetSec: 'Reset', dateOnLbl: 'Show the date', dateSec: 'Date', dateShow: 'Show', dateLong: 'Long', dateShort: 'Short', dateOrderLbl: 'Order', dateAuto: 'Automatic', dateDmy: 'Day-month-year', dateMdy: 'Month-day-year', dateYmd: 'Year-month-day', timeSec: 'Time format', time24: '24 hours', time12: '12 hours (AM/PM)', timeFull: 'Full, with seconds', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick services', aiInvalid: 'Enter a valid https address' },
+  nl: { quickTitle: 'Quick start', quickEngineHead: 'Zoekmachine wisselen', quickEngineText: 'Elke klik op het icoon gaat naar de volgende zoekmachine: DuckDuckGo, Kagi, Brave of Google. Je keuze blijft bewaard.', quickClick: 'Klik hier', quickMoreHead: 'Meer uit je pagina', quickAiHead: 'AI-links toevoegen', quickAiText: 'Onder Instellingen → AI kies je tot vijf AI-diensten, of voeg je eigen adres toe.', quickPageHead: 'Pagina kiezen', quickPageText: 'Minimaal, Standaard of Geavanceerd, in de instellingen rechtsboven.', quickDone: 'Begrepen', quickLink: 'Quick start', quickCard: 'Quick start: de eerste stappen', quickNote: 'Alles staat ook in Help.', changelogLink: 'Wijzigingen', hintText: 'Hier vind je de instellingen: klik op het tandwiel of druk op ?.', limitFull: '{n} van {n} · vol', aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', versionUpdated: 'Bijgewerkt', versionTagAria: 'Versie {v}, toon bijwerkdetails', versionText: 'Versie {v}, bijgewerkt {d}', secBackground: 'Achtergrond', resetIntro: 'Instellingen resetten zet alleen je instellingen terug naar de standaard; je gegevens blijven staan. Mijn gegevens wissen verwijdert je eigen links, AI-snelkoppelingen, tijdzones, stad en extra plaatsen. Dat kan niet ongedaan worden, dus maak eerst een backup op het tabblad Backup onder Data beheren.', resetSec: 'Resetten', dateOnLbl: 'Datum tonen', dateSec: 'Datum', dateShow: 'Weergave', dateLong: 'Lang', dateShort: 'Kort', dateOrderLbl: 'Volgorde', dateAuto: 'Automatisch', dateDmy: 'Dag-maand-jaar', dateMdy: 'Maand-dag-jaar', dateYmd: 'Jaar-maand-dag', timeSec: 'Tijdnotatie', time24: '24 uur', time12: '12 uur (AM/PM)', timeFull: 'Volledig, met seconden', searchSec: 'Zoeken', searchNewTab: 'Zoeken openen in een nieuw tabblad', aiNewTab: 'AI-links openen in een nieuw tabblad', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies diensten', aiInvalid: 'Vul een geldig https-adres in' },
+  de: { quickTitle: 'Schnellstart', quickEngineHead: 'Suchmaschine wechseln', quickEngineText: 'Jeder Klick auf das Symbol führt zur nächsten Suchmaschine: DuckDuckGo, Kagi, Brave oder Google. Deine Wahl bleibt gespeichert.', quickClick: 'Hier klicken', quickMoreHead: 'Mehr aus deiner Seite', quickAiHead: 'KI-Links hinzufügen', quickAiText: 'Unter Einstellungen → KI wählst du bis zu fünf KI-Dienste oder fügst deine eigene Adresse hinzu.', quickPageHead: 'Seite wählen', quickPageText: 'Minimal, Standard oder Erweitert, in den Einstellungen oben rechts.', quickDone: 'Verstanden', quickLink: 'Schnellstart', quickCard: 'Schnellstart: die ersten Schritte', quickNote: 'Alles steht auch in der Hilfe.', changelogLink: 'Änderungen', hintText: 'Hier findest du die Einstellungen: Klick auf das Zahnrad oder drücke ?.', limitFull: '{n} von {n} · voll', aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', versionUpdated: 'Aktualisiert', versionTagAria: 'Version {v}, Aktualisierungsdetails anzeigen', versionText: 'Version {v}, aktualisiert {d}', secBackground: 'Hintergrund', resetIntro: 'Einstellungen zurücksetzen stellt nur die Standardwerte wieder her; deine Daten bleiben. Meine Daten löschen entfernt deine eigenen Links, KI-Verknüpfungen, Zeitzonen, Stadt und zusätzlichen Orte. Das lässt sich nicht rückgängig machen, also erstelle zuerst ein Backup im Reiter Backup unter Daten verwalten.', resetSec: 'Zurücksetzen', dateOnLbl: 'Datum anzeigen', dateSec: 'Datum', dateShow: 'Anzeige', dateLong: 'Lang', dateShort: 'Kurz', dateOrderLbl: 'Reihenfolge', dateAuto: 'Automatisch', dateDmy: 'Tag-Monat-Jahr', dateMdy: 'Monat-Tag-Jahr', dateYmd: 'Jahr-Monat-Tag', timeSec: 'Zeitformat', time24: '24 Stunden', time12: '12 Stunden (AM/PM)', timeFull: 'Vollständig, mit Sekunden', searchSec: 'Suche', searchNewTab: 'Suche in einem neuen Tab öffnen', aiNewTab: 'KI-Links in einem neuen Tab öffnen', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Dienste wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
+  fr: { quickTitle: 'Démarrage rapide', quickEngineHead: 'Changer de moteur de recherche', quickEngineText: 'Chaque clic sur l’icône passe au moteur suivant : DuckDuckGo, Kagi, Brave ou Google. Votre choix est conservé.', quickClick: 'Cliquez ici', quickMoreHead: 'Plus sur votre page', quickAiHead: 'Ajouter des liens IA', quickAiText: 'Sous Paramètres → IA, choisissez jusqu’à cinq services IA, ou ajoutez votre propre adresse.', quickPageHead: 'Choisir une page', quickPageText: 'Minimal, Standard ou Avancé, dans les réglages en haut à droite.', quickDone: 'Compris', quickLink: 'Démarrage rapide', quickCard: 'Démarrage rapide : les premiers pas', quickNote: 'Tout cela figure aussi dans l’aide.', changelogLink: 'Modifications', hintText: 'Les réglages sont ici : cliquez sur l’engrenage ou appuyez sur ?.', limitFull: '{n} sur {n} · complet', aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', versionUpdated: 'Mis à jour', versionTagAria: 'Version {v}, afficher les détails de mise à jour', versionText: 'Version {v}, mise à jour {d}', secBackground: 'Arrière-plan', resetIntro: 'Réinitialiser les réglages remet seulement les réglages par défaut ; vos données restent. Effacer mes données supprime vos liens, raccourcis IA, fuseaux, ville et lieux supplémentaires. Action irréversible : faites d’abord une sauvegarde dans l’onglet Sauvegarde de Gérer les données.', resetSec: 'Réinitialiser', dateOnLbl: 'Afficher la date', dateSec: 'Date', dateShow: 'Affichage', dateLong: 'Long', dateShort: 'Court', dateOrderLbl: 'Ordre', dateAuto: 'Automatique', dateDmy: 'Jour-mois-année', dateMdy: 'Mois-jour-année', dateYmd: 'Année-mois-jour', timeSec: 'Format de l’heure', time24: '24 heures', time12: '12 heures (AM/PM)', timeFull: 'Complet, avec secondes', searchSec: 'Recherche', searchNewTab: 'Ouvrir la recherche dans un nouvel onglet', aiNewTab: 'Ouvrir les liens IA dans un nouvel onglet', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir les services', aiInvalid: 'Saisissez une adresse https valide' },
+  es: { quickTitle: 'Inicio rápido', quickEngineHead: 'Cambiar de buscador', quickEngineText: 'Cada clic en el icono pasa al siguiente buscador: DuckDuckGo, Kagi, Brave o Google. Tu elección se guarda.', quickClick: 'Haz clic aquí', quickMoreHead: 'Más en tu página', quickAiHead: 'Añadir enlaces de IA', quickAiText: 'En Ajustes → IA eliges hasta cinco servicios de IA, o añades tu propia dirección.', quickPageHead: 'Elige una página', quickPageText: 'Minimal, Standard o Avanzado, en los ajustes arriba a la derecha.', quickDone: 'Entendido', quickLink: 'Inicio rápido', quickCard: 'Inicio rápido: los primeros pasos', quickNote: 'Todo esto también está en la ayuda.', changelogLink: 'Cambios', hintText: 'Aquí están los ajustes: pulsa el engranaje o ?.', limitFull: '{n} de {n} · completo', aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', versionUpdated: 'Actualizado', versionTagAria: 'Versión {v}, mostrar detalles de actualización', versionText: 'Versión {v}, actualizada {d}', secBackground: 'Fondo', resetIntro: 'Restablecer ajustes solo devuelve los valores predeterminados; tus datos se mantienen. Borrar mis datos elimina tus enlaces propios, accesos de IA, zonas horarias, ciudad y lugares adicionales. No se puede deshacer, así que haz antes una copia en la pestaña Copia de Gestionar datos.', resetSec: 'Restablecer', dateOnLbl: 'Mostrar la fecha', dateSec: 'Fecha', dateShow: 'Mostrar', dateLong: 'Larga', dateShort: 'Corta', dateOrderLbl: 'Orden', dateAuto: 'Automático', dateDmy: 'Día-mes-año', dateMdy: 'Mes-día-año', dateYmd: 'Año-mes-día', timeSec: 'Formato de hora', time24: '24 horas', time12: '12 horas (AM/PM)', timeFull: 'Completo, con segundos', searchSec: 'Búsqueda', searchNewTab: 'Abrir la búsqueda en una pestaña nueva', aiNewTab: 'Abrir los accesos de IA en una pestaña nueva', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige servicios', aiInvalid: 'Escribe una dirección https válida' },
+  zh: { quickTitle: '快速入门', quickEngineHead: '更换搜索引擎', quickEngineText: '每次点击图标会切换到下一个搜索引擎：DuckDuckGo、Kagi、Brave 或 Google。你的选择会被保存。', quickClick: '点这里', quickMoreHead: '页面更多功能', quickAiHead: '添加 AI 链接', quickAiText: '在“设置 → AI”中最多选五个 AI 服务，也可以添加你自己的地址。', quickPageHead: '选择页面', quickPageText: '极简、标准或高级，在右上角的设置中切换。', quickDone: '知道了', quickLink: '快速入门', quickCard: '快速入门：最初的几步', quickNote: '这些内容也在帮助中。', changelogLink: '更新记录', hintText: '设置在这里：点击齿轮，或按 ?。', limitFull: '{n}/{n} · 已满', aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', versionUpdated: '更新', versionTagAria: '版本 {v}，显示更新详情', versionText: '版本 {v}，更新于 {d}', secBackground: '背景', resetIntro: '重置设置只会恢复默认值，你的数据会保留。删除我的数据会移除你自己的链接、AI 快捷方式、时区、城市和额外地点。此操作无法撤销，请先在管理数据的备份标签中备份。', resetSec: '重置', dateOnLbl: '显示日期', dateSec: '日期', dateShow: '显示', dateLong: '长格式', dateShort: '短格式', dateOrderLbl: '顺序', dateAuto: '自动', dateDmy: '日-月-年', dateMdy: '月-日-年', dateYmd: '年-月-日', timeSec: '时间格式', time24: '24 小时制', time12: '12 小时制 (AM/PM)', timeFull: '完整，含秒', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', aiDuplicate: '已在列表中。', aiPick: '选择服务', aiInvalid: '请输入有效的 https 地址' }
 }
 const manageText = {
   en: { linkUp: 'Move up', linkDown: 'Move down', manageOpen: 'Manage data', tabBackup: 'Backup', backupNote: 'Export saves your settings, links, AI shortcuts, time zones and weather places to a file on your computer. Import loads such a file: Merge adds what is new and keeps what you have, Replace overwrites everything. Make a backup before you reset or delete your data.', tabLinks: 'Own links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
@@ -820,8 +825,8 @@ const pageText = {
   zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetCustom: '个性化' }
 }
 const topbarText = {
-  en: { colorMode: 'Color mode', themeAuto: 'System theme', themeDark: 'Dark theme', themeLight: 'Light theme', themeMenuAuto: 'System', themeMenuDark: 'Dark', themeMenuLight: 'Light', langLabel: 'Language', searchLabel: 'Search the web', searchFormTitle: 'Type a search and press Enter', engineLabel: 'Search engine: {name}. Click to change.', enginePickLabel: '{name}. Click: Search ↔ AI. Hold to pick. Shortcut: Ctrl+Shift+A.', searchSubmit: 'Search', timeClick: 'Click to cycle through 24-hour, 12-hour and full time', askAiCaption: 'Ask AI', overlaySearch: 'Search', overlayAi: 'AI', overlayEmpty: 'Nothing enabled yet.', manageShowLabel: 'Show on page', clockDateSec: 'Clock & date', clockLbl: 'Clock', advShowHint: 'Social and Ask AI rows are mutually exclusive — choose one under Manage data.', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Social row', lblAskaiMaster: 'Ask AI row', lblLinksMaster: 'Links button', tabSearch: 'Search', tabSocial: 'Social', enginesNote: 'Turn engines on or off, and add your own below. Always keep at least one on.', engineAdd: 'Add search engine', engineEdit: 'Edit search engine', engineUrlLbl: 'Search URL template', engineUrlHint: 'Paste a homepage or a results URL. Look up fills the query template (…?q=).', engineSuggest: 'Look up', engineInvalid: 'Enter a name and an https search URL ending with the query (for example …?q=).', engineExists: 'That name is already in the list.', engineGuessed: 'Guessed template — check that searching works.', engineLimit: 'You can add up to {n} custom engines.', socialNote: 'Jump-only icons under the search bar. Not shown together with the Ask AI row. Off for Minimal.', aiOverlayNote: 'AI platforms for the search overlay (type + Enter). Turn “AI in overlay” off for Minimal.', aiShortcutsHead: 'Ask AI row shortcuts', socialAria: 'Social' },
-  nl: { colorMode: 'Kleurmodus', themeAuto: 'Systeemthema', themeDark: 'Donker thema', themeLight: 'Licht thema', themeMenuAuto: 'Systeem', themeMenuDark: 'Donker', themeMenuLight: 'Licht', langLabel: 'Taal', searchLabel: 'Zoek op het web', searchFormTitle: 'Typ een zoekopdracht en druk op Enter', engineLabel: 'Zoekmachine: {name}. Klik om te wisselen.', enginePickLabel: '{name}. Klik: Zoeken ↔ AI. Ingedrukt houden om te kiezen. Sneltoets: Ctrl+Shift+A.', searchSubmit: 'Zoeken', timeClick: 'Klik om te wisselen tussen 24 uur, 12 uur en volledige tijd', askAiCaption: 'Vraag AI', overlaySearch: 'Zoeken', overlayAi: 'AI', overlayEmpty: 'Nog niets ingeschakeld.', manageShowLabel: 'Tonen op de pagina', clockDateSec: 'Klok & datum', clockLbl: 'Klok', advShowHint: 'Sociale rij en Vraag AI-rij gaan niet samen — kies er één onder Data beheren.', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Sociale rij', lblAskaiMaster: 'Vraag AI-rij', lblLinksMaster: 'Links-knop', tabSearch: 'Zoeken', tabSocial: 'Sociaal', enginesNote: 'Zet zoekmachines aan of uit en voeg hieronder je eigen toe. Houd altijd minstens één aan.', engineAdd: 'Zoekmachine toevoegen', engineEdit: 'Zoekmachine bewerken', engineUrlLbl: 'Zoek-URL-sjabloon', engineUrlHint: 'Plak een homepage of resultaten-URL. Opzoeken vult het query-sjabloon (…?q=).', engineSuggest: 'Opzoeken', engineInvalid: 'Vul een naam en een https-zoek-URL in die eindigt op de query (bijvoorbeeld …?q=).', engineExists: 'Die naam staat al in de lijst.', engineGuessed: 'Geschat sjabloon — controleer of zoeken werkt.', engineLimit: 'Je kunt tot {n} eigen zoekmachines toevoegen.', socialNote: 'Alleen spring-iconen onder de zoekbalk. Niet tegelijk met de Vraag AI-rij. Uit voor Minimaal.', aiOverlayNote: 'AI-platformen voor de zoek-overlay (typen + Enter). Zet “AI in overlay” uit voor Minimaal.', aiShortcutsHead: 'Vraag AI-rij snelkoppelingen', socialAria: 'Sociaal' },
+  en: { colorMode: 'Color mode', themeAuto: 'System theme', themeDark: 'Dark theme', themeLight: 'Light theme', themeMenuAuto: 'System', themeMenuDark: 'Dark', themeMenuLight: 'Light', langLabel: 'Language', searchLabel: 'Search the web', searchFormTitle: 'Type a search and press Enter', engineLabel: 'Search engine: {name}. Click to change.', enginePickLabel: '{name}. Click: Search ↔ AI. Hold to pick. Shortcut: Ctrl+Shift+A.', searchSubmit: 'Search', timeClick: 'Click to cycle through 24-hour, 12-hour and full time', askAiCaption: 'Ask AI', overlaySearch: 'Search', overlayAi: 'AI', overlayEmpty: 'Nothing enabled yet.', manageShowLabel: 'Show on page', clockDateSec: 'Clock & date', clockLbl: 'Clock', advShowHint: 'Social and Ask AI rows are mutually exclusive — choose one under Settings → Social / AI.', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Social row', lblAskaiMaster: 'Ask AI row', lblLinksMaster: 'Links button', tabSearch: 'Search', tabSocial: 'Social', enginesNote: 'Turn engines on or off, and add your own below. Always keep at least one on.', engineAdd: 'Add search engine', engineEdit: 'Edit search engine', engineUrlLbl: 'Search URL template', engineUrlHint: 'Paste a homepage or a results URL. Look up fills the query template (…?q=).', engineSuggest: 'Look up', engineInvalid: 'Enter a name and an https search URL ending with the query (for example …?q=).', engineExists: 'That name is already in the list.', engineGuessed: 'Guessed template — check that searching works.', engineLimit: 'You can add up to {n} custom engines.', socialNote: 'Jump-only icons under the search bar. Not shown together with the Ask AI row. Off for Minimal.', aiOverlayNote: 'AI platforms for the search overlay (type + Enter). Turn “AI in overlay” off for Minimal.', aiShortcutsHead: 'Ask AI row shortcuts', socialAria: 'Social' },
+  nl: { colorMode: 'Kleurmodus', themeAuto: 'Systeemthema', themeDark: 'Donker thema', themeLight: 'Licht thema', themeMenuAuto: 'Systeem', themeMenuDark: 'Donker', themeMenuLight: 'Licht', langLabel: 'Taal', searchLabel: 'Zoek op het web', searchFormTitle: 'Typ een zoekopdracht en druk op Enter', engineLabel: 'Zoekmachine: {name}. Klik om te wisselen.', enginePickLabel: '{name}. Klik: Zoeken ↔ AI. Ingedrukt houden om te kiezen. Sneltoets: Ctrl+Shift+A.', searchSubmit: 'Zoeken', timeClick: 'Klik om te wisselen tussen 24 uur, 12 uur en volledige tijd', askAiCaption: 'Vraag AI', overlaySearch: 'Zoeken', overlayAi: 'AI', overlayEmpty: 'Nog niets ingeschakeld.', manageShowLabel: 'Tonen op de pagina', clockDateSec: 'Klok & datum', clockLbl: 'Klok', advShowHint: 'Sociale rij en Vraag AI-rij gaan niet samen — kies er één onder Instellingen → Social / AI.', lblAiOverlay: 'AI in overlay', lblSocialRow: 'Sociale rij', lblAskaiMaster: 'Vraag AI-rij', lblLinksMaster: 'Links-knop', tabSearch: 'Zoeken', tabSocial: 'Sociaal', enginesNote: 'Zet zoekmachines aan of uit en voeg hieronder je eigen toe. Houd altijd minstens één aan.', engineAdd: 'Zoekmachine toevoegen', engineEdit: 'Zoekmachine bewerken', engineUrlLbl: 'Zoek-URL-sjabloon', engineUrlHint: 'Plak een homepage of resultaten-URL. Opzoeken vult het query-sjabloon (…?q=).', engineSuggest: 'Opzoeken', engineInvalid: 'Vul een naam en een https-zoek-URL in die eindigt op de query (bijvoorbeeld …?q=).', engineExists: 'Die naam staat al in de lijst.', engineGuessed: 'Geschat sjabloon — controleer of zoeken werkt.', engineLimit: 'Je kunt tot {n} eigen zoekmachines toevoegen.', socialNote: 'Alleen spring-iconen onder de zoekbalk. Niet tegelijk met de Vraag AI-rij. Uit voor Minimaal.', aiOverlayNote: 'AI-platformen voor de zoek-overlay (typen + Enter). Zet “AI in overlay” uit voor Minimaal.', aiShortcutsHead: 'Vraag AI-rij snelkoppelingen', socialAria: 'Sociaal' },
   de: { colorMode: 'Farbmodus', themeAuto: 'Systemdesign', themeDark: 'Dunkles Design', themeLight: 'Helles Design', themeMenuAuto: 'System', themeMenuDark: 'Dunkel', themeMenuLight: 'Hell', langLabel: 'Sprache', searchLabel: 'Im Web suchen', searchFormTitle: 'Suchbegriff eingeben und Enter drücken', engineLabel: 'Suchmaschine: {name}. Klicken zum Wechseln.', enginePickLabel: '{name}. Klick: Suche ↔ KI. Halten zum Wählen. Tastatur: Strg+Umschalt+A.', searchSubmit: 'Suchen', timeClick: 'Klicken, um zwischen 24-Stunden-, 12-Stunden- und Vollzeit zu wechseln', askAiCaption: 'KI fragen', overlaySearch: 'Suche', overlayAi: 'KI', overlayEmpty: 'Noch nichts aktiviert.', manageShowLabel: 'Auf der Seite zeigen', clockDateSec: 'Uhr & Datum', clockLbl: 'Uhr', advShowHint: 'Social-Zeile und KI-fragen-Zeile schließen sich aus — unter Daten verwalten wählen.', lblAiOverlay: 'KI im Overlay', lblSocialRow: 'Social-Zeile', lblAskaiMaster: 'KI-fragen-Zeile', lblLinksMaster: 'Links-Schaltfläche', tabSearch: 'Suche', tabSocial: 'Social', enginesNote: 'Suchmaschinen an/aus und eigene unten hinzufügen. Mindestens eine bleibt an.', engineAdd: 'Suchmaschine hinzufügen', engineEdit: 'Suchmaschine bearbeiten', engineUrlLbl: 'Such-URL-Vorlage', engineUrlHint: 'Homepage oder Ergebnis-URL einfügen. Nachschlagen füllt die Query-Vorlage (…?q=).', engineSuggest: 'Nachschlagen', engineInvalid: 'Name und https-Such-URL mit Query-Ende eingeben (z. B. …?q=).', engineExists: 'Dieser Name ist schon in der Liste.', engineGuessed: 'Geschätzte Vorlage — Suche prüfen.', engineLimit: 'Bis zu {n} eigene Suchmaschinen.', socialNote: 'Nur Sprung-Icons unter der Suchleiste. Social-Zeile für Minimal aus.', aiOverlayNote: 'KI-Plattformen für das Such-Overlay (tippen + Enter). „KI im Overlay“ für Minimal aus.', aiShortcutsHead: 'KI-fragen-Zeilen-Verknüpfungen', socialAria: 'Social' },
   fr: { colorMode: 'Mode couleur', themeAuto: 'Thème système', themeDark: 'Thème sombre', themeLight: 'Thème clair', themeMenuAuto: 'Système', themeMenuDark: 'Sombre', themeMenuLight: 'Clair', langLabel: 'Langue', searchLabel: 'Rechercher sur le web', searchFormTitle: 'Saisissez une recherche et appuyez sur Entrée', engineLabel: 'Moteur de recherche : {name}. Cliquez pour changer.', enginePickLabel: '{name}. Clic : Recherche ↔ IA. Maintenir pour choisir. Raccourci : Ctrl+Maj+A.', searchSubmit: 'Rechercher', timeClick: 'Cliquez pour alterner entre 24 h, 12 h et l’heure complète', askAiCaption: 'Demander à l’IA', overlaySearch: 'Recherche', overlayAi: 'IA', overlayEmpty: 'Rien n’est activé.', manageShowLabel: 'Afficher sur la page', clockDateSec: 'Horloge et date', clockLbl: 'Horloge', advShowHint: 'Rangée sociale et rangée Demander à l’IA sont exclusives — choisissez sous Gérer les données.', lblAiOverlay: 'IA dans l’overlay', lblSocialRow: 'Rangée sociale', lblAskaiMaster: 'Rangée Demander à l’IA', lblLinksMaster: 'Bouton Liens', tabSearch: 'Recherche', tabSocial: 'Social', enginesNote: 'Activez/désactivez les moteurs et ajoutez les vôtres. Gardez-en au moins un.', engineAdd: 'Ajouter un moteur', engineEdit: 'Modifier le moteur', engineUrlLbl: 'Modèle d’URL de recherche', engineUrlHint: 'Collez une page d’accueil ou une URL de résultats. Rechercher remplit le modèle (…?q=).', engineSuggest: 'Rechercher', engineInvalid: 'Indiquez un nom et une URL https se terminant par la requête (ex. …?q=).', engineExists: 'Ce nom est déjà dans la liste.', engineGuessed: 'Modèle estimé — vérifiez la recherche.', engineLimit: 'Jusqu’à {n} moteurs personnalisés.', socialNote: 'Icônes de saut sous la barre. Désactivez la rangée sociale pour Minimal.', aiOverlayNote: 'Plateformes IA pour l’overlay (saisir + Entrée). Désactivez « IA dans l’overlay » pour Minimal.', aiShortcutsHead: 'Raccourcis de la rangée Demander à l’IA', socialAria: 'Social' },
   es: { colorMode: 'Modo de color', themeAuto: 'Tema del sistema', themeDark: 'Tema oscuro', themeLight: 'Tema claro', themeMenuAuto: 'Sistema', themeMenuDark: 'Oscuro', themeMenuLight: 'Claro', langLabel: 'Idioma', searchLabel: 'Buscar en la web', searchFormTitle: 'Escribe una búsqueda y pulsa Intro', engineLabel: 'Buscador: {name}. Haz clic para cambiar.', enginePickLabel: '{name}. Clic: Buscar ↔ IA. Mantén para elegir. Atajo: Ctrl+Mayús+A.', searchSubmit: 'Buscar', timeClick: 'Haz clic para alternar entre 24 horas, 12 horas y hora completa', askAiCaption: 'Preguntar a la IA', overlaySearch: 'Buscar', overlayAi: 'IA', overlayEmpty: 'Nada activado aún.', manageShowLabel: 'Mostrar en la página', clockDateSec: 'Reloj y fecha', clockLbl: 'Reloj', advShowHint: 'La fila social y la de Preguntar a la IA son excluyentes — elige una en Gestionar datos.', lblAiOverlay: 'IA en el overlay', lblSocialRow: 'Fila social', lblAskaiMaster: 'Fila Preguntar a la IA', lblLinksMaster: 'Botón Enlaces', tabSearch: 'Buscar', tabSocial: 'Social', enginesNote: 'Activa o desactiva buscadores y añade los tuyos. Mantén al menos uno.', engineAdd: 'Añadir buscador', engineEdit: 'Editar buscador', engineUrlLbl: 'Plantilla de URL de búsqueda', engineUrlHint: 'Pega una portada o una URL de resultados. Buscar completa la plantilla (…?q=).', engineSuggest: 'Buscar', engineInvalid: 'Pon un nombre y una URL https que termine en la consulta (p. ej. …?q=).', engineExists: 'Ese nombre ya está en la lista.', engineGuessed: 'Plantilla estimada — comprueba la búsqueda.', engineLimit: 'Hasta {n} buscadores propios.', socialNote: 'Iconos de salto bajo la barra. Desactiva la fila social para Mínimo.', aiOverlayNote: 'Plataformas de IA para el overlay (escribir + Intro). Desactiva «IA en el overlay» para Mínimo.', aiShortcutsHead: 'Accesos de la fila Preguntar a la IA', socialAria: 'Social' },
@@ -850,26 +855,26 @@ const helpText = {
   en: { title: 'Help', settings: 'Settings', close: 'Close', faq: 'Frequently asked questions', sections: [
     ['About this page', 'A quiet start page, built with Claude Code as an experiment in vibe coding. I wanted to see how far plain language gets you with a small web app. My opinion: a start page should be nearly empty; extras earn their place by being found, not by staring back at you.', ['https://github.com/a4ds5t/start.soholocal', 'https://start.soholocal.nl/']],
     ['Search', 'Type and press Enter, or click the magnifier. The left icon shows the current Search engine or AI: click to switch Search ↔ AI (Ctrl+Shift+A), hold to pick which one from the overlay. Choices are remembered. Under Advanced you can also open search in a new tab.'],
-    ['AI shortcuts', 'Shortcuts below the search bar. In Manage data you tick the AI services you want, up to five; your own shortcuts count toward the same five. Each shortcut shows its service icon. AI links open in a new tab by default, and you can change that under Advanced.'],
+    ['AI shortcuts', 'Shortcuts below the search bar. In Settings → AI you tick the services you want, up to five; your own shortcuts count toward the same five. Each shortcut shows its service icon. AI links open in a new tab by default, and you can change that under Advanced.'],
     ['Clock', 'Hover over the time to see your time zone. Click the time to cycle through 24-hour, 12-hour and full time with seconds. When time zones are on, the clock icon above the time opens the zones you chose.'],
     ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and a short numeric date. The order follows your browser unless you choose one under Advanced.'],
     ['Links', 'The button at the top left opens your own links only (add, edit, reorder). There is no canned permanent row. Hovering the button shows your own links. You can add up to 15, each with an optional description.'],
-    ['Weather', 'Off by default. Turn it on in Settings and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 6 hours and seven days. Up to five more places can be added in Manage, under Weather; choose one in this window to see its forecast.'],
-    ['Background', 'Each press of the round button at the bottom right goes to the next background: none first, then the ones switched on in Data beheren. The button at the bottom left changes the background colour in steps; on a computer that is the button too.'],
-    ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. Options that depend on another option are greyed out until that one is on. The page presets (Minimal and Standard) sit at the top. Personal shows when your choices match neither. Advanced lists every option, in groups; its link goes back to the basic settings. Bottom right you see the version and the date of the last change. The last number rises with every change; a release gets the next version number, such as 1.4. At the bottom of Advanced, Reset settings brings back the defaults and keeps your data. Delete my data removes your own links, AI shortcuts, time zones, city and extra places. That cannot be undone, so first make a backup with Manage data and Export data.'],
+    ['Weather', 'Off by default. Turn it on in Settings → Advanced and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 6 hours and seven days. Up to five more places can be added under Settings → Weather; city chips in the preview and forecast header switch between them. City names stay short, like Time zones.'],
+    ['Background', 'Each press of the round button at the bottom right goes to the next background: none first, then the ones switched on under Settings → Background. The button at the bottom left changes the background colour in steps; on a computer that is the button too.'],
+    ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. One fixed window holds everything: a left sidebar on a computer (General, Search, AI, Social, Links, Time zones, Weather, Background, Advanced, Backup), and bottom tabs plus a menu on a phone. General has the page presets and Show on page. Catalogs that used to live in Manage data are sidebar panes. Advanced groups every display option; Backup exports and imports your data. Bottom right you see the version and the date of the last change. At the bottom of Advanced, Reset settings brings back the defaults and keeps your data. Delete my data removes your own links, AI shortcuts, time zones, city and extra places — make a Backup first.'],
     ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, only while weather is on; showing your IP address uses the same lookup. Extra places send their name to Open-Meteo. Custom AI shortcuts load their icon from their own site. Nothing else leaves the page.'],
     ['Export and import', 'Export data saves your choices, links and places to a file you keep. Import data loads such a file: Merge adds what is new and keeps the rest, Replace overwrites everything.'],
   ] },
   nl: { title: 'Help', settings: 'Instellingen', close: 'Sluiten', faq: 'Veelgestelde vragen', sections: [
     ['Over deze pagina', 'Een rustige startpagina, gebouwd met Claude Code als experiment in vibe coding. Ik wilde zien hoe ver gewone taal je brengt met een kleine webapp. Mijn mening: een startpagina hoort bijna leeg te zijn; de extra’s verdienen hun plek doordat je ze vindt, niet doordat ze je aankijken.', ['https://github.com/a4ds5t/start.soholocal', 'https://start.soholocal.nl/']],
-    ['Zoeken', 'Typ en druk op Enter, of klik op het vergrootglas. Het icoon links toont de zoekmachine: klik erop om te wisselen tussen DuckDuckGo (de standaard), Kagi, Brave en Google. Je keuze wordt onthouden. Onder Geavanceerd kun je zoeken ook in een nieuw tabblad laten openen.'],
-    ['AI-snelkoppelingen', 'Snelkoppelingen onder de zoekbalk. In Data beheren vink je de AI-diensten aan die je wilt, maximaal vijf; je eigen snelkoppelingen tellen mee in die vijf. Elke snelkoppeling toont het icoon van de dienst. AI-links openen standaard in een nieuw tabblad; dat kun je aanpassen onder Geavanceerd.'],
+    ['Zoeken', 'Typ en druk op Enter, of klik op het vergrootglas. Het icoon links toont Zoeken of AI: klik wisselt Zoeken ↔ AI (Ctrl+Shift+A), ingedrukt houden opent de kiezer. Social of Vraag AI onder de balk gaan niet samen. Onder Geavanceerd kun je zoeken in een nieuw tabblad openen.'],
+    ['AI-snelkoppelingen', 'Snelkoppelingen onder de zoekbalk. In Instellingen → AI vink je de diensten aan die je wilt, maximaal vijf; je eigen snelkoppelingen tellen mee in die vijf. Elke snelkoppeling toont het icoon van de dienst. AI-links openen standaard in een nieuw tabblad; dat kun je aanpassen onder Geavanceerd.'],
     ['Klok', 'Ga met de muis over de tijd om je tijdzone te zien. Klik op de tijd om te wisselen tussen 24 uur, 12 uur en volledige tijd met seconden. Staan de tijdzones aan, dan opent het klokje boven de tijd de zones die je koos.'],
     ['Datum', 'Ga met de muis over de datum om de ISO-week en de dag van het jaar te zien. Klik erop om te wisselen tussen de lange vorm en een korte datum. De volgorde volgt je browser, tenzij je er onder Geavanceerd een kiest.'],
     ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen. Staat Eigen links uit, dan opent de knop direct Wikipedia.'],
-    ['Weer', 'Standaard uit. Zet het aan in de instellingen en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 6 uur en zeven dagen. Je kunt in Beheren onder Weer tot vijf extra plaatsen toevoegen; kies er in dit venster een om die voorspelling te zien.'],
-    ['Achtergrond', 'Elke druk op de ronde knop rechtsonder gaat naar de volgende achtergrond: eerst geen, daarna de achtergronden die je in Data beheren hebt aangezet. De knop linksonder wisselt de achtergrondkleur in stappen; op de computer is dat ook een knop.'],
-    ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Druk op Esc om te sluiten. Opties die van een andere optie afhangen, zijn grijs tot die aan staat. Bovenaan staan de paginakeuzes Minimaal en Standaard. Persoonlijk verschijnt als je keuzes bij geen van beide passen. Geavanceerd toont alle opties, in groepen; de link ernaast brengt je terug naar de basisinstellingen. Rechtsonder staan de versie en de datum van de laatste wijziging. Het laatste getal gaat omhoog bij elke wijziging; een release krijgt het volgende versienummer, zoals 1.4. Onderaan Geavanceerd staat Resetten. Instellingen resetten zet alleen je instellingen terug naar de standaard. Mijn gegevens wissen verwijdert je eigen links, AI-snelkoppelingen, tijdzones, stad en extra plaatsen. Dat kan niet ongedaan worden, dus maak eerst een backup via Data beheren, met Gegevens exporteren.'],
+    ['Weer', 'Standaard uit. Zet het aan in Instellingen → Geavanceerd en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 6 uur en zeven dagen. Extra plaatsen voeg je toe onder Instellingen → Weer; chips in de preview en de verwachting wisselen ertussen. Stadsnamen blijven kort, zoals bij Tijdzones.'],
+    ['Achtergrond', 'Elke druk op de ronde knop rechtsonder gaat naar de volgende achtergrond: eerst geen, daarna de achtergronden die je onder Instellingen → Achtergrond hebt aangezet. De knop linksonder wisselt de achtergrondkleur in stappen; op de computer is dat ook een knop.'],
+    ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Esc sluit. Eén vast venster: op de computer een linkerzijbalk (Algemeen, Zoeken, AI, Social, Links, Tijdzones, Weer, Achtergrond, Geavanceerd, Backup), op de telefoon tabs onderaan plus een menu. Algemeen heeft de paginakeuzes en Tonen op de pagina. Catalogi die vroeger onder Data beheren zaten, zijn zijbalkpanelen. Geavanceerd groepeert weergave-opties; Backup exporteert en importeert. Onderaan Geavanceerd: resetten of gegevens wissen — maak eerst een Backup.'],
     ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, alleen als het weer aanstaat; het tonen van je IP-adres gebruikt dezelfde opzoeking. Extra plaatsen sturen hun naam naar Open-Meteo. Eigen AI-snelkoppelingen laden hun icoon van hun eigen site. Er gaat verder niets naar buiten.'],
     ['Gegevens exporteren', 'Gegevens exporteren slaat je keuzes, links en plaatsen op in een bestand dat bij jou blijft. Gegevens importeren laadt zo’n bestand: Samenvoegen voegt toe wat nieuw is en laat de rest staan, Vervangen overschrijft alles.'],
   ] },
@@ -995,17 +1000,32 @@ const iconCell = (key, label, className) => {
   return cell
 }
 
+// Short city labels match Time zones (e.g. "Buenos Aires", not "Buenos Aires, Buenos Aires F.D., Argentina").
+const shortCityName = (label) => {
+  if (!label || typeof label !== 'string') return ''
+  return label.split(',')[0].trim()
+}
+// Suggestions: city name only; when two hits share a name, add the country once to tell them apart.
+const cityLabel = (r) => {
+  if (!r?.name) return ''
+  const name = shortCityName(r.name)
+  if (!r.sameName || !r.country) return name
+  return `${name}, ${r.country}`
+}
+const placeDisplayLabel = (place) => shortCityName(place?.label || place || '')
+
 // The city you entered wins; otherwise the IP lookup, if you allow it.
 const getPlace = async () => {
-  if (locationMode === 'city') return city ? { label: `${city.name}, ${city.country}`, latitude: city.latitude, longitude: city.longitude, ip: null } : null
+  if (locationMode === 'city') return city ? { label: shortCityName(city.name), latitude: city.latitude, longitude: city.longitude, ip: null } : null
   const info = await ipLookup()
   if (typeof info.latitude !== 'number') return null
-  return { label: `${info.city}, ${info.country_name}`, latitude: info.latitude, longitude: info.longitude, ip: info.ip, detail: [`${info.city}, ${info.country_name}`, info.org].filter(Boolean).join(' · ') }
+  const cityName = shortCityName(info.city)
+  return { label: cityName, latitude: info.latitude, longitude: info.longitude, ip: info.ip, detail: [cityName, info.country_name, info.org].filter(Boolean).join(' · ') }
 }
 
 // Latest answer, kept so the full forecast can be drawn without asking again.
 let current = null
-// Extra places next to the own one: five at most, shown as chips in the forecast window.
+// Extra places next to the own one: five at most, shown as chips in the forecast window and the hover popup.
 const PLACE_LIMIT = 5
 const ZONE_LIMIT = 5
 // At the limit, the add field is greyed out and says so in its own middle, e.g. "5 of 5 · full", shown as its placeholder.
@@ -1022,9 +1042,21 @@ const limitCount = (fieldId, count, max) => {
 let extraPlaces = []
 try {
   const saved = JSON.parse(localStorage.getItem('weatherPlaces') || 'null')
-  if (Array.isArray(saved)) extraPlaces = saved.filter((p) => p && typeof p.label === 'string' && typeof p.latitude === 'number' && typeof p.longitude === 'number').slice(0, PLACE_LIMIT)
+  if (Array.isArray(saved)) {
+    const seen = new Set()
+    extraPlaces = saved
+      .filter((p) => p && typeof p.label === 'string' && typeof p.latitude === 'number' && typeof p.longitude === 'number')
+      .map((p) => ({ ...p, label: shortCityName(p.label), timezone: p.timezone || 'UTC' }))
+      .filter((p) => {
+        if (!p.label || seen.has(p.label)) return false
+        seen.add(p.label)
+        return true
+      })
+      .slice(0, PLACE_LIMIT)
+  }
 } catch {}
 const savePlaces = () => writeKey('weatherPlaces', JSON.stringify(extraPlaces))
+if (extraPlaces.length) savePlaces()
 // The place shown in the forecast window: null for the own place, otherwise { place, forecast }.
 let viewed = null
 let viewIndex = 0
@@ -1038,6 +1070,54 @@ const forecastUrl = (place) => 'https://api.open-meteo.com/v1/forecast' +
 
 const el = (tag, className, textContent) => Object.assign(document.createElement(tag), { className: className || '', textContent: textContent ?? '' })
 
+const placeChipLabels = () => {
+  const labels = []
+  if (current) labels.push(placeDisplayLabel(current.place))
+  for (const place of extraPlaces) labels.push(placeDisplayLabel(place))
+  return labels
+}
+
+const paintWeatherPreview = (shown) => {
+  if (!shown) {
+    weatherDetail.replaceChildren()
+    return
+  }
+  const { place, forecast } = shown
+  const now = forecast.current
+  const start = forecast.hourly.time.indexOf(now.time)
+  const key = weatherKey(now.weather_code)
+  const temperature = `${Math.round(now.temperature_2m)}°`
+  const next = forecast.hourly.time.slice(start + 1, start + 7).map((time, i) => weatherRow(
+    iconCell(weatherKey(forecast.hourly.weather_code[start + 1 + i]), time.slice(11, 16), 'hour-cell'),
+    `${Math.round(forecast.hourly.temperature_2m[start + 1 + i])}°`,
+    `${forecast.hourly.precipitation_probability[start + 1 + i]}%`
+  ))
+  const nodes = []
+  const labels = placeChipLabels()
+  if (labels.length > 1) {
+    const chips = el('div', 'preview-places')
+    labels.forEach((label, index) => {
+      const chip = el('button', 'place-chip', label)
+      chip.type = 'button'
+      chip.setAttribute('aria-pressed', String(index === viewIndex))
+      chip.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        choosePlace(index)
+      })
+      chips.append(chip)
+    })
+    nodes.push(chips)
+  }
+  nodes.push(
+    el('div', 'preview-title', placeDisplayLabel(place)),
+    weatherRow(iconCell(key, key ? words[key] : '', 'now-cell'), temperature, ''),
+    ...next,
+    el('div', 'preview-hint', t.more)
+  )
+  weatherDetail.replaceChildren(...nodes)
+}
+
 const showWeather = async () => {
   try {
     const place = await getPlace()
@@ -1045,32 +1125,28 @@ const showWeather = async () => {
       // Greyed-out icon: a click opens settings, where a place can be chosen.
       showIdle(t.noSource)
       current = null
+      viewIndex = 0
+      viewed = null
       weatherDetail.replaceChildren()
+      renderPlaceChips()
       return
     }
     const forecast = await fetchCached(`weather:v2:${place.latitude},${place.longitude}`, 30 * 60e3, forecastUrl(place))
     current = { place, forecast }
-    const now = forecast.current
-    const start = forecast.hourly.time.indexOf(now.time)
+    if (viewIndex === 0) viewed = null
+    const shown = viewed || current
+    const now = shown.forecast.current
     const key = weatherKey(now.weather_code)
     const temperature = `${Math.round(now.temperature_2m)}°`
-    const next = forecast.hourly.time.slice(start + 1, start + 7).map((time, i) => weatherRow(
-      iconCell(weatherKey(forecast.hourly.weather_code[start + 1 + i]), time.slice(11, 16), 'hour-cell'),
-      `${Math.round(forecast.hourly.temperature_2m[start + 1 + i])}°`,
-      `${forecast.hourly.precipitation_probability[start + 1 + i]}%`
-    ))
     weatherButton.innerHTML = `${weatherIcon(key)}<span>${temperature}</span>`
     weatherButton.setAttribute('aria-label', `${key ? words[key] : ''} ${temperature}`.trim())
-    weatherDetail.replaceChildren(
-      el('div', 'preview-title', place.label),
-      weatherRow(iconCell(key, key ? words[key] : '', 'now-cell'), temperature, ''),
-      ...next,
-      el('div', 'preview-hint', t.more)
-    )
+    paintWeatherPreview(shown)
+    renderPlaceChips()
   } catch {
     weatherButton.textContent = t.unavailable
     current = null
     weatherDetail.replaceChildren()
+    renderPlaceChips()
   }
 }
 
@@ -1123,7 +1199,7 @@ const renderForecast = () => {
     return row
   })
 
-  document.getElementById('forecast-title').textContent = place.label
+  document.getElementById('forecast-title').textContent = placeDisplayLabel(place)
   document.getElementById('forecast-body').replaceChildren(
     section(t.now, [nowRow, meta]),
     section(t.hours, hourRows),
@@ -1182,10 +1258,13 @@ const setWeather = (on) => {
 let forecastFrom = null
 const forecastDialog = document.getElementById('forecast')
 
-const openForecast = () => {
-  if (!current) return
-  viewed = null
-  viewIndex = 0
+const openForecast = async () => {
+  if (!current && !extraPlaces.length) return
+  if (!current && extraPlaces.length) {
+    await choosePlace(0)
+  } else if (viewIndex === 0) {
+    viewed = null
+  }
   renderForecast()
   forecastFrom = document.activeElement
   forecastDialog.hidden = false
@@ -1202,7 +1281,7 @@ document.getElementById('forecast-edit').addEventListener('click', () => {
 })
 
 weatherButton.addEventListener('click', () => {
-  if (!weatherOn || !hasSource()) {
+  if (!weatherOn || (!hasSource() && !extraPlaces.length && !current)) {
     openSettings()
     return
   }
@@ -1218,72 +1297,91 @@ forecastDialog.addEventListener('click', (e) => { if (e.target === forecastDialo
 // The forecast of an extra place is fetched the same way as the own one, and cached the same way.
 const loadPlace = (place) => fetchCached(`weather:v2:${place.latitude},${place.longitude}`, 30 * 60e3, forecastUrl(place))
 const choosePlace = async (index) => {
-  viewIndex = index
+  const labels = placeChipLabels()
+  if (!labels.length) return
+  const max = labels.length - 1
+  viewIndex = Math.max(0, Math.min(index, max))
   viewed = null
-  if (index > 0) {
-    const place = extraPlaces[index - 1]
-    try {
-      viewed = { place, forecast: await loadPlace(place) }
-    } catch {
+  // With an own place, chip 0 is home and the rest are extras. Without one, chips are extras only.
+  const extraIndex = current ? viewIndex - 1 : viewIndex
+  if (extraIndex >= 0) {
+    const place = extraPlaces[extraIndex]
+    if (!place) {
       viewIndex = 0
+    } else {
+      try {
+        viewed = { place, forecast: await loadPlace(place) }
+      } catch {
+        viewIndex = current ? 0 : Math.min(viewIndex, Math.max(0, extraPlaces.length - 1))
+        viewed = null
+      }
     }
   }
-  renderForecast()
+  const shown = viewed || current
+  if (shown && weatherOn) {
+    const now = shown.forecast.current
+    const key = weatherKey(now.weather_code)
+    const temperature = `${Math.round(now.temperature_2m)}°`
+    weatherButton.innerHTML = `${weatherIcon(key)}<span>${temperature}</span>`
+    weatherButton.setAttribute('aria-label', `${key ? words[key] : ''} ${temperature}`.trim())
+    paintWeatherPreview(shown)
+  }
+  if (!forecastDialog.hidden) renderForecast()
+  else renderPlaceChips()
 }
 const renderPlaceChips = () => {
   sortPlaces()
   const box = document.getElementById('forecast-places')
-  if (!weatherOn || !current) {
+  if (!box) return
+  if (!weatherOn || (!current && !extraPlaces.length)) {
     box.replaceChildren()
     return
   }
-  const chips = [current.place.label, ...extraPlaces.map((place) => place.label)].map((label, index) => {
+  const chips = placeChipLabels().map((label, index) => {
     const chip = el('button', 'place-chip', label)
     chip.type = 'button'
     chip.setAttribute('aria-pressed', String(index === viewIndex))
     chip.addEventListener('click', () => choosePlace(index))
     return chip
   })
-  // How many of the extra places are in use, out of the five allowed.
+  // Own place + extras (or extras alone) as selectable chips.
   box.replaceChildren(...chips)
 }
 
 // Extra places in time-zone order, the same order as the time zones: earliest UTC offset first.
 const sortPlaces = () => {
   const now = new Date()
-  extraPlaces.sort((a, b) => utcOffset(a.timezone || 'UTC', now) - utcOffset(b.timezone || 'UTC', now) || a.label.localeCompare(b.label))
+  const offset = (zone) => {
+    try { return utcOffset(zone || 'UTC', now) } catch { return 0 }
+  }
+  extraPlaces.sort((a, b) => offset(a.timezone) - offset(b.timezone) || placeDisplayLabel(a).localeCompare(placeDisplayLabel(b)))
 }
 
 // The weather tab: the own place, and the extra places with a remove button each.
 const renderPlaces = () => {
   sortPlaces()
-  document.getElementById('weather-own').textContent = `${t.placeOwn}: ${current ? current.place.label : t.placeNone}`
+  document.getElementById('weather-own').textContent = `${t.placeOwn}: ${current ? placeDisplayLabel(current.place) : t.placeNone}`
   const full = extraPlaces.length >= PLACE_LIMIT
   limitCount('place-input', extraPlaces.length, PLACE_LIMIT)
   document.getElementById('place-input').disabled = full
   document.getElementById('place-add').disabled = full
   document.getElementById('place-list').replaceChildren(...extraPlaces.map((place, index) => {
     const row = document.createElement('li')
-    row.append(el('span', '', place.label))
+    row.append(el('span', '', placeDisplayLabel(place)))
     row.append(aiButton(t.placeRemove, '×', () => {
       extraPlaces = extraPlaces.filter((_, i) => i !== index)
-      if (viewIndex === index + 1) choosePlace(0)
+      const removedChip = current ? index + 1 : index
+      if (viewIndex === removedChip) choosePlace(0)
+      else if (viewIndex > removedChip) viewIndex -= 1
       savePlaces()
       renderPlaces()
       renderPlaceChips()
+      if (weatherOn && (viewed || current)) paintWeatherPreview(viewed || current)
     }))
     return row
   }))
 }
 const placeMsg = document.getElementById('place-msg')
-// City suggestions while typing, the same kind of lookup the time zone box does. Only the typed name is sent.
-// Results are ranked by population, so the big city wins a shared name; the region tells apart the rest.
-// The region tells apart two places with the same name, and is left out when it repeats the name.
-const cityLabel = (r) => {
-  const known = [r.name, ...(r.names || [])].map((n) => n.toLowerCase())
-  const region = r.sameName && r.admin1 && !known.some((n) => n.includes(r.admin1.toLowerCase())) ? r.admin1 : ''
-  return [r.name, region, r.country].filter(Boolean).join(', ')
-}
 const fetchCities = async (query, count, language) => (await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=${count}&language=${language}&format=json`)).json()).results || []
 // Both English and Dutch names are searched, and a place appears once. Its name is the one that matches
 // what was typed, so 'Keulen' shows Keulen and 'Cologne' shows Cologne; otherwise the English name.
@@ -1314,7 +1412,11 @@ const suggestCities = (input, datalist, hits) => {
       try {
         const results = (await geocode(query, 10)).slice(0, 5)
         hits.clear()
-        for (const r of results) hits.set(cityLabel(r), r)
+        for (const r of results) {
+          const label = cityLabel(r)
+          hits.set(label, r)
+          hits.set(shortCityName(label), r)
+        }
         datalist.replaceChildren(...results.map((r) => Object.assign(document.createElement('option'), { value: cityLabel(r) })))
       } catch {
         datalist.replaceChildren()
@@ -1334,16 +1436,19 @@ document.getElementById('place-form').addEventListener('submit', async (e) => {
   if (!name) return
   if (extraPlaces.length >= PLACE_LIMIT) { placeMsg.textContent = limitText(extraPlaces.length, PLACE_LIMIT).text; return }
   try {
-    const hit = placeHits.get(name) || (await geocode(name, 10))[0]
+    const hit = placeHits.get(name) || placeHits.get(shortCityName(name)) || (await geocode(shortCityName(name) || name, 10))[0]
     if (!hit) { placeMsg.textContent = t.notFound; return }
-    const place = { label: cityLabel(hit), latitude: hit.latitude, longitude: hit.longitude, timezone: hit.timezone || 'UTC' }
-    if (extraPlaces.some((p) => p.label === place.label)) { placeMsg.textContent = t.placeDuplicate; return }
+    const place = { label: shortCityName(cityLabel(hit)), latitude: hit.latitude, longitude: hit.longitude, timezone: hit.timezone || 'UTC' }
+    if (extraPlaces.some((p) => shortCityName(p.label) === place.label)) { placeMsg.textContent = t.placeDuplicate; return }
+    if (current && shortCityName(current.place.label) === place.label) { placeMsg.textContent = t.placeDuplicate; return }
     extraPlaces = [...extraPlaces, place]
     sortPlaces()
     savePlaces()
     input.value = ''
     placeMsg.textContent = ''
     renderPlaces()
+    renderPlaceChips()
+    if (weatherOn && (viewed || current)) paintWeatherPreview(viewed || current)
   } catch {
     placeMsg.textContent = t.unavailable
   }
@@ -1419,7 +1524,7 @@ const applySettingsText = () => {
   const advShowHint = document.getElementById('adv-show-hint')
   if (advShowHint) {
     advShowHint.textContent = t.advShowHint
-      || 'Social and Ask AI rows are mutually exclusive — choose one under Manage data.'
+      || 'Social and Ask AI rows are mutually exclusive — choose one under Settings → Social / AI.'
   }
   document.getElementById('lbl-date-on').textContent = t.dateOnLbl
   document.getElementById('lbl-date-style').textContent = t.dateShow
@@ -1868,7 +1973,7 @@ settingsFields.cityForm.addEventListener('submit', async (e) => {
       settingsFields.cityMessage.textContent = t.notFound
       return
     }
-    city = { name: hit.name, country: hit.country, latitude: hit.latitude, longitude: hit.longitude }
+    city = { name: shortCityName(hit.name), country: hit.country, latitude: hit.latitude, longitude: hit.longitude }
     updateWeatherHint()
     writeKey('city', JSON.stringify(city))
     locationMode = 'city'
@@ -2046,13 +2151,17 @@ const mergeImport = (payload) => {
   saveZones()
 
   listOf(data.weatherPlaces).forEach((place) => {
-    if (!place || typeof place.label !== 'string') return
-    if (extraPlaces.some((p) => p.label === place.label)) { result.dupes++; return }
+    if (!place || typeof place.label !== 'string' || typeof place.latitude !== 'number' || typeof place.longitude !== 'number') return
+    const normalized = { ...place, label: shortCityName(place.label), timezone: place.timezone || 'UTC' }
+    if (!normalized.label) return
+    if (extraPlaces.some((p) => shortCityName(p.label) === normalized.label)) { result.dupes++; return }
     if (extraPlaces.length >= PLACE_LIMIT) { result.skipped++; return }
-    extraPlaces = [...extraPlaces, place]
+    extraPlaces = [...extraPlaces, normalized]
     result.added++
   })
+  sortPlaces()
   savePlaces()
+  renderPlaceChips()
 
   // Preferences stay as they are; the import only fills what is not set here yet.
   Object.entries(payload.settings || {}).forEach(([key, value]) => {
@@ -2226,6 +2335,12 @@ const showSettingsPane = (pane) => {
   settingsNav?.classList.remove('is-open')
   const navToggle = document.getElementById('settings-nav-toggle')
   if (navToggle) navToggle.setAttribute('aria-expanded', 'false')
+  const activeNav = settingsNavButtons.find((button) => button.dataset.pane === tab)
+  if (activeNav && typeof activeNav.scrollIntoView === 'function') {
+    requestAnimationFrame(() => {
+      activeNav.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' })
+    })
+  }
 }
 
 const showManageTab = showSettingsPane
