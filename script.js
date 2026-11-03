@@ -1,6 +1,6 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4.
-const APP_VERSION = '1.5.18'
+const APP_VERSION = '1.5.19'
 const CHANGELOG_URL = 'https://github.com/a4ds5t/start.soholocal/blob/main/docs/changelog/README.md'
 const APP_BUILD_ISO = typeof BUILD_TIMESTAMP_ISO !== 'undefined' ? BUILD_TIMESTAMP_ISO : null
 const searchForm = document.getElementById('searchform')
