@@ -22,7 +22,7 @@ The one place for how the page is built, why it is built that way, what is still
 - Permanent links are logos where the open icon set has them. Microsoft and Reuters are shown by name.
 - Custom links: up to 15, with an optional description written by the visitor, only http and https addresses.
 - Links panel on → own links window. Links panel off → Wikipedia button (no hover-peek).
-- The AI shortcuts are a visitor list: up to five, editable, and the row can be switched off.
+- Data → AI is one catalog (built-ins + custom). In search feeds the overlay; Ask AI row (up to five) feeds the under-bar icons, and that row can be switched off under Show.
 - Limits are shown only when they are reached, in the add field, as "5 of 5 · full". Below the limit nothing is shown, so the visitor is not nagged.
 
 ## Settings

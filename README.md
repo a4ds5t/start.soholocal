@@ -61,7 +61,7 @@ Each option can still be changed on its own. When your choices match neither pag
 
 - **Links.** The globe at the top left opens a Links window. It shows the permanent links as icons (Wikipedia, Google, Reuters, Apple, Microsoft, GitHub, Facebook, Instagram, X and Reddit) and your own links below, each with an optional description. **Edit links** takes you to where you add, order and edit them; you can keep up to 15. Hover the globe to see your own links. With **Own links** off, the globe is a plain Wikipedia link in your browser's language.
 
-- **AI shortcuts.** Shortcuts below the search bar. In **Manage data** you tick the AI services you want: Claude, ChatGPT, Grok, Duck.ai, Lumo, Kagi, Meta AI and Gemini. Up to five in total, your own shortcuts included, in any order, or none at all. Each shortcut shows its service icon, and the links open in a new tab by default (change this under Advanced).
+- **AI.** Under **Data → AI** one catalog lists built-in platforms (Claude, ChatGPT, Grok, Gemini, Duck.ai, Lumo, Kagi Assistant, Meta AI) and your own **Add AI** entries. **In search** puts a platform in the search-field overlay (type + Enter). **Ask AI row** also shows it under the bar (up to five). Turn the overlay and under-bar row on or off under **Settings → Show**. Links open in a new tab by default (change under **Settings → General**).
 
 - **Weather.** Optional, off by default. Up to five extra places can be added, shown as chips in the forecast window. Typing a city suggests matches, so you can pick the right one. Hover over the temperature for a short preview of the next six hours; click it for the full forecast, with the next seven days and a link to Windy.
 
