@@ -141,6 +141,14 @@
         </div>
       </div>
       <div class="settings-shell-body">
+        <div class="settings-shell-search" id="settings-shell-search-wrap">
+          <label class="visually-hidden" for="settings-shell-search" id="settings-shell-search-label">Search settings</label>
+          <span class="settings-shell-search-icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          </span>
+          <input type="search" id="settings-shell-search" class="settings-shell-search-input" autocomplete="off" spellcheck="false" placeholder="Search settings" enterkeyhint="search">
+          <button type="button" class="settings-shell-search-clear" id="settings-shell-search-clear" hidden aria-label="Clear">×</button>
+        </div>
         <aside class="settings-side" id="settings-side">
           <nav class="settings-nav" id="settings-prefs-nav" aria-label="Settings sections">
             <button type="button" class="settings-nav-btn" data-pane="page" id="nav-page" aria-selected="true">General</button>
@@ -164,6 +172,7 @@
           </div>
         </aside>
         <div class="settings-content" id="settings-content">
+          <p class="settings-shell-search-empty manage-note" id="settings-shell-search-empty" hidden>No matches</p>
           <button type="button" class="data-back" id="data-back" hidden></button>
 
           <section class="settings-pane manage-section" data-pane="settings-home" data-tab="settings-home" data-world="settings" id="section-settings-home" role="tabpanel" hidden>

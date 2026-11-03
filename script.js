@@ -1,6 +1,6 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4.
-const APP_VERSION = '1.5.21'
+const APP_VERSION = '1.5.22'
 const CHANGELOG_URL = 'https://github.com/a4ds5t/start.soholocal/blob/main/docs/changelog/README.md'
 const APP_BUILD_ISO = typeof BUILD_TIMESTAMP_ISO !== 'undefined' ? BUILD_TIMESTAMP_ISO : null
 const searchForm = document.getElementById('searchform')
@@ -853,7 +853,15 @@ const shellSegText = {
   es: { segSettings: 'Ajustes', segData: 'Datos', dataBack: '← Datos', settingsBack: '← Ajustes', dataHomeHint: 'Elige un catálogo. Sin barra de pestañas.', settingsHomeHint: 'Elige un grupo de ajustes.', underBarTitle: 'Bajo la barra de búsqueda', underBarHint: 'Solo una fila — Social o Preguntar a la IA, o ninguna.', underBarNone: 'Ninguna', openNewTabSec: 'Abrir en pestaña nueva', exportSec: 'Exportar / importar', backupHint: 'Guarda una copia de los datos de este navegador, o restablécelos.', dataDescSearch: 'Buscadores', dataDescAi: 'Catálogo', dataDescSocial: 'Iconos', dataDescLinks: 'Lista', dataDescZones: 'Ciudades', dataDescWeather: 'Lugares', dataDescWall: 'Fondos', dataDescBackup: 'Exportar · importar · restablecer', setDescPage: 'Ajustes · idioma · pestañas nuevas', setDescShow: 'Lo que aparece', setDescWeather: 'Activado + ubicación', setDescClock: 'Formato', setDescSearch: 'Nueva pestaña', setDescAi: 'Nueva pestaña', setDescLang: 'Idioma de la interfaz' },
   zh: { segSettings: '设置', segData: '数据', dataBack: '← 数据', settingsBack: '← 设置', dataHomeHint: '选择一个目录。无横向标签栏。', settingsHomeHint: '选择一组设置。', underBarTitle: '搜索栏下方', underBarHint: '只能显示一行 — 社交或询问 AI，或都不显示。', underBarNone: '无', openNewTabSec: '在新标签页打开', exportSec: '导出 / 导入', backupHint: '保存此浏览器数据的副本，或重置。', dataDescSearch: '引擎', dataDescAi: '目录', dataDescSocial: '跳转图标', dataDescLinks: '列表', dataDescZones: '城市', dataDescWeather: '地点', dataDescWall: '壁纸', dataDescBackup: '导出 · 导入 · 重置', setDescPage: '预设 · 语言 · 新标签页', setDescShow: '显示内容', setDescWeather: '开启 + 位置', setDescClock: '格式', setDescSearch: '新标签页', setDescAi: '新标签页', setDescLang: '界面语言' },
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], pageText[lang], topbarText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], tintCycleText[lang], quoteTitleText[lang], ipText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] }, shellSegText[lang])
+const shellSearchText = {
+  en: { shellSearchSettings: 'Search settings', shellSearchData: 'Search data', shellSearchEmpty: 'No matches', shellSearchClear: 'Clear search' },
+  nl: { shellSearchSettings: 'Zoek in instellingen', shellSearchData: 'Zoek in data', shellSearchEmpty: 'Geen resultaten', shellSearchClear: 'Zoekopdracht wissen' },
+  de: { shellSearchSettings: 'Einstellungen durchsuchen', shellSearchData: 'Daten durchsuchen', shellSearchEmpty: 'Keine Treffer', shellSearchClear: 'Suche löschen' },
+  fr: { shellSearchSettings: 'Rechercher dans les réglages', shellSearchData: 'Rechercher dans les données', shellSearchEmpty: 'Aucun résultat', shellSearchClear: 'Effacer la recherche' },
+  es: { shellSearchSettings: 'Buscar en ajustes', shellSearchData: 'Buscar en datos', shellSearchEmpty: 'Sin resultados', shellSearchClear: 'Borrar búsqueda' },
+  zh: { shellSearchSettings: '搜索设置', shellSearchData: '搜索数据', shellSearchEmpty: '无匹配项', shellSearchClear: '清除搜索' },
+}
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], pageText[lang], topbarText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], tintCycleText[lang], quoteTitleText[lang], ipText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] }, shellSegText[lang], shellSearchText[lang])
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -1521,6 +1529,7 @@ const renderPlaces = () => {
     }).catch(() => {})
     return row
   }))
+  if (typeof applyShellFilter === 'function') applyShellFilter({ preservePane: true })
 }
 const placeMsg = document.getElementById('place-msg')
 const fetchCities = async (query, count, language) => (await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=${count}&language=${language}&format=json`)).json()).results || []
@@ -1613,6 +1622,7 @@ const applySettingsText = () => {
   document.getElementById('settings-title').textContent = t.title
   if (segSettingsBtn) segSettingsBtn.textContent = t.segSettings || 'Settings'
   if (segDataBtn) segDataBtn.textContent = t.segData || 'Data'
+  if (typeof syncShellSearchChrome === 'function') syncShellSearchChrome()
   const dataHomeHint = document.getElementById('data-home-hint')
   if (dataHomeHint) dataHomeHint.textContent = t.dataHomeHint || ''
   const settingsHomeHint = document.getElementById('settings-home-hint')
@@ -2614,6 +2624,7 @@ const renderZones = () => {
   renderPreview()
   zoneInput.disabled = full
   zoneAddButton.disabled = full
+  if (typeof applyShellFilter === 'function') applyShellFilter({ preservePane: true })
 }
 
 const saveZones = () => writeKey('zones', JSON.stringify(zones))
@@ -2723,9 +2734,209 @@ const showSettingsPane = (pane) => {
   if (tab === 'weather' && typeof renderPlaces === 'function') renderPlaces()
   if (tab === 'wallpapers' && typeof renderWallpapers === 'function') renderWallpapers()
   if (SETTINGS_PANES.has(tab) && tab !== 'settings-home') syncSettings()
+  if (typeof applyShellFilter === 'function') applyShellFilter({ preservePane: true })
 }
 
 const showManageTab = showSettingsPane
+
+// Settings | Data shell search — filter mode (sidebar sections + content rows).
+const shellSearchInput = document.getElementById('settings-shell-search')
+const shellSearchClear = document.getElementById('settings-shell-search-clear')
+const shellSearchEmpty = document.getElementById('settings-shell-search-empty')
+const shellSearchLabel = document.getElementById('settings-shell-search-label')
+let shellSearchQuery = ''
+let shellFilterApplying = false
+
+const SHELL_FILTER_UNITS = [
+  '.pane-block',
+  '.presets',
+  '.under-bar-group',
+  '.catalog-list > li',
+  '.link-form',
+  '.city-form',
+  '#wallpaper-list > *',
+  '#place-list > *',
+  '#zones-list > *',
+  '#links-list > *',
+  '#social-manage-list > *',
+].join(', ')
+
+const normShellQ = (value) => String(value || '').trim().toLowerCase().replace(/\s+/g, ' ')
+
+const shellTextOf = (node) => (node?.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase()
+
+const clearShellMarks = (root = settingsShell) => {
+  if (!root) return
+  root.querySelectorAll('mark.shell-search-mark').forEach((mark) => {
+    const parent = mark.parentNode
+    if (!parent) return
+    while (mark.firstChild) parent.insertBefore(mark.firstChild, mark)
+    parent.removeChild(mark)
+  })
+  root.normalize()
+}
+
+const markShellMatches = (root, query) => {
+  if (!root || !query) return
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT
+      const parent = node.parentElement
+      if (!parent || parent.closest('script, style, .settings-shell-search, mark.shell-search-mark')) {
+        return NodeFilter.FILTER_REJECT
+      }
+      if (parent.closest('.shell-filter-hide')) return NodeFilter.FILTER_REJECT
+      return NodeFilter.FILTER_ACCEPT
+    },
+  })
+  const nodes = []
+  while (walker.nextNode()) nodes.push(walker.currentNode)
+  for (const textNode of nodes) {
+    const value = textNode.nodeValue
+    const lower = value.toLowerCase()
+    let idx = lower.indexOf(query)
+    if (idx < 0) continue
+    const frag = document.createDocumentFragment()
+    let cursor = 0
+    while (idx >= 0) {
+      if (idx > cursor) frag.appendChild(document.createTextNode(value.slice(cursor, idx)))
+      const mark = document.createElement('mark')
+      mark.className = 'shell-search-mark'
+      mark.textContent = value.slice(idx, idx + query.length)
+      frag.appendChild(mark)
+      cursor = idx + query.length
+      idx = lower.indexOf(query, cursor)
+    }
+    if (cursor < value.length) frag.appendChild(document.createTextNode(value.slice(cursor)))
+    textNode.parentNode.replaceChild(frag, textNode)
+  }
+}
+
+const paneTitleHaystack = (pane) => {
+  const bits = []
+  document.querySelectorAll(`.settings-nav-btn[data-pane="${pane}"]`).forEach((btn) => bits.push(shellTextOf(btn)))
+  document.querySelectorAll(`.data-home-card[data-pane="${pane}"]`).forEach((card) => bits.push(shellTextOf(card)))
+  return bits.join(' ')
+}
+
+const paneSection = (pane) => document.querySelector(`#settings-content .manage-section[data-pane="${pane}"]`)
+
+const paneContentHaystack = (pane) => shellTextOf(paneSection(pane))
+
+const paneMatchesQuery = (pane, query) => {
+  if (!query) return true
+  return paneTitleHaystack(pane).includes(query) || paneContentHaystack(pane).includes(query)
+}
+
+const filterPaneUnits = (pane, query, titleHit) => {
+  const section = paneSection(pane)
+  if (!section) return
+  const units = [...section.querySelectorAll(SHELL_FILTER_UNITS)]
+  if (!units.length) return
+  for (const unit of units) {
+    const hit = !query || titleHit || shellTextOf(unit).includes(query)
+    unit.classList.toggle('shell-filter-hide', !hit)
+  }
+}
+
+const syncShellSearchChrome = () => {
+  if (!shellSearchInput) return
+  const ph = settingsWorld === 'data'
+    ? (t.shellSearchData || 'Search data')
+    : (t.shellSearchSettings || 'Search settings')
+  shellSearchInput.placeholder = ph
+  if (shellSearchLabel) shellSearchLabel.textContent = ph
+  if (shellSearchClear) shellSearchClear.setAttribute('aria-label', t.shellSearchClear || 'Clear search')
+  if (shellSearchEmpty) shellSearchEmpty.textContent = t.shellSearchEmpty || 'No matches'
+}
+
+const applyShellFilter = (opts = {}) => {
+  if (!shellSearchInput || shellFilterApplying) return
+  shellFilterApplying = true
+  try {
+    const query = normShellQ(shellSearchQuery)
+    const preservePane = !!opts.preservePane
+    clearShellMarks()
+    document.querySelectorAll('.shell-filter-hide').forEach((el) => el.classList.remove('shell-filter-hide'))
+    if (shellSearchClear) shellSearchClear.hidden = !query
+    syncShellSearchChrome()
+
+    const worldPanes = settingsWorld === 'data'
+      ? ['search', 'ai', 'social', 'links', 'zones', 'weather', 'wallpapers', 'backup']
+      : ['page', 'show', 'weather-prefs', 'clock']
+    const homePane = settingsWorld === 'data' ? 'data-home' : 'settings-home'
+    const navButtons = settingsWorld === 'data' ? settingsNavButtons : prefsNavButtons
+    const matching = worldPanes.filter((pane) => paneMatchesQuery(pane, query))
+
+    navButtons.forEach((btn) => {
+      const pane = btn.dataset.pane
+      const hit = !query || matching.includes(pane)
+      btn.classList.toggle('shell-filter-hide', !hit)
+    })
+
+    const homeList = document.getElementById(settingsWorld === 'data' ? 'data-home-list' : 'settings-home-list')
+    homeList?.querySelectorAll('.data-home-card').forEach((card) => {
+      const pane = card.dataset.pane
+      const hit = !query || matching.includes(pane)
+      card.classList.toggle('shell-filter-hide', !hit)
+    })
+
+    const noHits = !!query && matching.length === 0
+    if (shellSearchEmpty) shellSearchEmpty.hidden = !noHits
+
+    if (query && noHits) {
+      // Mobile home list is empty; desktop keeps the current pane with the empty note.
+      if (isNarrowSettings() && manageTab !== homePane) {
+        shellFilterApplying = false
+        showSettingsPane(homePane)
+        return
+      }
+    } else if (query) {
+      const onHome = manageTab === homePane
+      const currentOk = matching.includes(manageTab)
+      // Only auto-switch when the open pane is not a hit (never bounce desktop↔home).
+      if (!onHome && !currentOk) {
+        const next = isNarrowSettings() ? homePane : matching[0]
+        if (next && next !== manageTab) {
+          shellFilterApplying = false
+          showSettingsPane(next)
+          return
+        }
+      }
+      for (const pane of matching) {
+        const titleHit = paneTitleHaystack(pane).includes(query)
+        filterPaneUnits(pane, query, titleHit)
+      }
+      const active = paneSection(manageTab)
+      if (active && !active.hidden) markShellMatches(active, query)
+      if (homeList && manageTab === homePane) markShellMatches(homeList, query)
+      navButtons.forEach((btn) => {
+        if (!btn.classList.contains('shell-filter-hide')) markShellMatches(btn, query)
+      })
+    }
+  } finally {
+    shellFilterApplying = false
+  }
+}
+
+shellSearchInput?.addEventListener('input', () => {
+  shellSearchQuery = shellSearchInput.value
+  applyShellFilter()
+})
+shellSearchClear?.addEventListener('click', () => {
+  shellSearchQuery = ''
+  if (shellSearchInput) shellSearchInput.value = ''
+  applyShellFilter()
+  shellSearchInput?.focus()
+})
+settingsShell?.addEventListener('keydown', (event) => {
+  if (event.key !== 'Escape' || !shellSearchQuery) return
+  if (document.activeElement !== shellSearchInput) return
+  event.stopPropagation()
+  shellSearchQuery = ''
+  shellSearchInput.value = ''
+  applyShellFilter()
+})
 
 const openManage = (tab) => {
   manageFrom = document.activeElement
@@ -2983,6 +3194,7 @@ const renderLinks = () => {
   linkUrl.disabled = full
   linkDesc.disabled = full
   linkSave.disabled = full
+  if (typeof applyShellFilter === 'function') applyShellFilter({ preservePane: true })
 }
 
 const resetLinkForm = () => {
@@ -3573,6 +3785,7 @@ const renderManageCatalogs = () => {
     })
   }).filter(Boolean))
   syncSocialFormLimit()
+  if (typeof applyShellFilter === 'function') applyShellFilter({ preservePane: true })
 }
 
 const socialForm = document.getElementById('social-form')
@@ -4116,6 +4329,7 @@ const renderWallpapers = () => {
     row.append(swatch, names, switchLabel)
     return row
   }))
+  if (typeof applyShellFilter === 'function') applyShellFilter({ preservePane: true })
 }
 wallpaperList.addEventListener('change', (e) => {
   const id = e.target.dataset.wallpaper
