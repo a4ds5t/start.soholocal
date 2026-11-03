@@ -2801,9 +2801,11 @@ html[data-quote-off] #quote {
   height: 16px;
 }
 
-/* Custom engine favicons are colour; greyscale them on the page chrome so they match built-in SVGs. Data catalog keeps colour. */
+/* Custom favicons are colour; greyscale them everywhere (page chrome + Data catalogs) so they match built-in SVGs. */
+.favicon-img,
 #engine .favicon-img,
-.engine-overlay-option .eo-icon .favicon-img {
+.engine-overlay-option .eo-icon .favicon-img,
+.catalog-list .catalog-icon .favicon-img {
   filter: grayscale(1);
 }
 
