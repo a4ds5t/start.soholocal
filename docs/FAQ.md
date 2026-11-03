@@ -44,6 +44,12 @@ To add a photo, put three sizes (800, 1280 and 2000 pixels wide) and a small thu
 
 ---
 
+## How do I find a setting quickly?
+
+Open Settings (gear or `?`) and use the search field at the top of the sidebar (on a phone, under **Settings | Data**). It filters sections and rows in both Settings and Data. Clear the field (×) to see everything again.
+
+---
+
 ## Why does a city show in English?
 
 The city search looks in English and in Dutch, and shows the name that matches what you typed. Typing Keulen gives Keulen, and typing Cologne gives Cologne. Places with one name in both languages, such as Shanghai, show that name.

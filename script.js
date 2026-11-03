@@ -1,6 +1,6 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4.
-const APP_VERSION = '1.5.21'
+const APP_VERSION = '1.5.22'
 const CHANGELOG_URL = 'https://github.com/a4ds5t/start.soholocal/blob/main/docs/changelog/README.md'
 const APP_BUILD_ISO = typeof BUILD_TIMESTAMP_ISO !== 'undefined' ? BUILD_TIMESTAMP_ISO : null
 const searchForm = document.getElementById('searchform')
@@ -853,7 +853,15 @@ const shellSegText = {
   es: { segSettings: 'Ajustes', segData: 'Datos', dataBack: '← Datos', settingsBack: '← Ajustes', dataHomeHint: 'Elige un catálogo. Sin barra de pestañas.', settingsHomeHint: 'Elige un grupo de ajustes.', underBarTitle: 'Bajo la barra de búsqueda', underBarHint: 'Solo una fila — Social o Preguntar a la IA, o ninguna.', underBarNone: 'Ninguna', openNewTabSec: 'Abrir en pestaña nueva', exportSec: 'Exportar / importar', backupHint: 'Guarda una copia de los datos de este navegador, o restablécelos.', dataDescSearch: 'Buscadores', dataDescAi: 'Catálogo', dataDescSocial: 'Iconos', dataDescLinks: 'Lista', dataDescZones: 'Ciudades', dataDescWeather: 'Lugares', dataDescWall: 'Fondos', dataDescBackup: 'Exportar · importar · restablecer', setDescPage: 'Ajustes · idioma · pestañas nuevas', setDescShow: 'Lo que aparece', setDescWeather: 'Activado + ubicación', setDescClock: 'Formato', setDescSearch: 'Nueva pestaña', setDescAi: 'Nueva pestaña', setDescLang: 'Idioma de la interfaz' },
   zh: { segSettings: '设置', segData: '数据', dataBack: '← 数据', settingsBack: '← 设置', dataHomeHint: '选择一个目录。无横向标签栏。', settingsHomeHint: '选择一组设置。', underBarTitle: '搜索栏下方', underBarHint: '只能显示一行 — 社交或询问 AI，或都不显示。', underBarNone: '无', openNewTabSec: '在新标签页打开', exportSec: '导出 / 导入', backupHint: '保存此浏览器数据的副本，或重置。', dataDescSearch: '引擎', dataDescAi: '目录', dataDescSocial: '跳转图标', dataDescLinks: '列表', dataDescZones: '城市', dataDescWeather: '地点', dataDescWall: '壁纸', dataDescBackup: '导出 · 导入 · 重置', setDescPage: '预设 · 语言 · 新标签页', setDescShow: '显示内容', setDescWeather: '开启 + 位置', setDescClock: '格式', setDescSearch: '新标签页', setDescAi: '新标签页', setDescLang: '界面语言' },
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], pageText[lang], topbarText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], tintCycleText[lang], quoteTitleText[lang], ipText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] }, shellSegText[lang])
+const shellSearchText = {
+  en: { shellSearchSettings: 'Search settings', shellSearchData: 'Search data', shellSearchEmpty: 'No matches', shellSearchClear: 'Clear search' },
+  nl: { shellSearchSettings: 'Zoek in instellingen', shellSearchData: 'Zoek in data', shellSearchEmpty: 'Geen resultaten', shellSearchClear: 'Zoekopdracht wissen' },
+  de: { shellSearchSettings: 'Einstellungen durchsuchen', shellSearchData: 'Daten durchsuchen', shellSearchEmpty: 'Keine Treffer', shellSearchClear: 'Suche löschen' },
+  fr: { shellSearchSettings: 'Rechercher dans les réglages', shellSearchData: 'Rechercher dans les données', shellSearchEmpty: 'Aucun résultat', shellSearchClear: 'Effacer la recherche' },
+  es: { shellSearchSettings: 'Buscar en ajustes', shellSearchData: 'Buscar en datos', shellSearchEmpty: 'Sin resultados', shellSearchClear: 'Borrar búsqueda' },
+  zh: { shellSearchSettings: '搜索设置', shellSearchData: '搜索数据', shellSearchEmpty: '无匹配项', shellSearchClear: '清除搜索' },
+}
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], pageText[lang], topbarText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], tintCycleText[lang], quoteTitleText[lang], ipText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] }, shellSegText[lang], shellSearchText[lang])
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -874,7 +882,7 @@ const helpText = {
     ['Links', 'Links panel (top left) opens your personal links (add, edit, reorder — up to 15). Turn that panel off and the same spot becomes a Wikipedia link in your language. Under Settings → General → Open in new tab you choose whether links (and social icons) open in a new tab.'],
     ['Weather', 'Off by default. Turn it on in Settings → Weather and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 6 hours and seven days. Under Data → Weather, Your place stays at the top; up to five extra cities can be added and reordered with ↑↓ (same as AI and Social). City chips in the preview and forecast header follow that order. City names stay short, like Time zones.'],
     ['Background', 'Each press of the round button at the bottom right goes to the next background: none first, then the ones switched on under Settings → Background. The button at the bottom left changes the background colour in steps; on a computer that is the button too.'],
-    ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. One fixed window holds everything: a left sidebar on a computer (General, Search, AI, Social, Links, Time zones, Weather, Background, Backup), and bottom tabs plus a menu on a phone. General has page presets, Show on page, weather location, clock & date, language and reset. Catalog panes hold Search/AI/Social/Links/zones/weather places/backgrounds; Backup exports and imports. Help opens with a Quick start at the top. Delete my data removes your own links, AI shortcuts, time zones, city and extra places — make a Backup first.'],
+    ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. One window with Settings | Data: on a computer a left sidebar, on a phone a list you drill into. Settings holds General, Show on page, Weather and Clock & date. Data holds the catalogs (Search, AI, Social, Links, Time zones, Weather places, Background, Backup). A quiet search field filters sections and rows in both sides. Help opens with Toggle quickstart at the top. Delete my data removes your own links, AI shortcuts, time zones, city and extra places — make a Backup first.'],
     ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, only while weather is on; showing your IP address uses the same lookup. Extra places send their name to Open-Meteo. Custom AI shortcuts load their icon from their own site. Nothing else leaves the page.'],
     ['Export and import', 'Export data saves your choices, links and places to a file you keep. Import data loads such a file: Merge adds what is new and keeps the rest, Replace overwrites everything.'],
   ] },
@@ -887,7 +895,7 @@ const helpText = {
     ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen. Staat Eigen links uit, dan opent de knop direct Wikipedia. Onder Instellingen → Algemeen → Openen in nieuw tabblad kies je of links (en sociale iconen) in een nieuw tabblad openen.'],
     ['Weer', 'Standaard uit. Zet het aan in Instellingen → Weer en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 6 uur en zeven dagen. Onder Data → Weer blijft Je eigen plaats bovenaan; tot vijf extra steden kun je toevoegen en met ↑↓ herordenen (zoals AI en Social). Chips in de preview en de verwachting volgen die volgorde. Stadsnamen blijven kort, zoals bij Tijdzones.'],
     ['Achtergrond', 'Elke druk op de ronde knop rechtsonder gaat naar de volgende achtergrond: eerst geen, daarna de achtergronden die je onder Instellingen → Achtergrond hebt aangezet. De knop linksonder wisselt de achtergrondkleur in stappen; op de computer is dat ook een knop.'],
-    ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Esc sluit. Eén vast venster: op de computer een linkerzijbalk (Algemeen, Zoeken, AI, Social, Links, Tijdzones, Weer, Achtergrond, Backup), op de telefoon tabs onderaan plus een menu. Algemeen heeft paginakeuzes, Tonen op de pagina, weerlocatie, klok & datum, taal en reset. Help opent met Quick start bovenaan. Backup exporteert en importeert — maak er een vóór gegevens wissen.'],
+    ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Esc sluit. Eén venster met Instellingen | Data: op de computer een linkerzijbalk, op de telefoon een lijst waarin je doorklikt. Instellingen heeft Algemeen, Tonen op de pagina, Weer en Klok & datum. Data heeft de catalogi (Zoeken, AI, Social, Links, Tijdzones, Weerplaatsen, Achtergrond, Backup). Een stille zoekfunctie filtert secties en rijen aan beide kanten. Help opent met Toggle quickstart bovenaan. Backup eerst, vóór gegevens wissen.'],
     ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, alleen als het weer aanstaat; het tonen van je IP-adres gebruikt dezelfde opzoeking. Extra plaatsen sturen hun naam naar Open-Meteo. Eigen AI-snelkoppelingen laden hun icoon van hun eigen site. Er gaat verder niets naar buiten.'],
     ['Gegevens exporteren', 'Gegevens exporteren slaat je keuzes, links en plaatsen op in een bestand dat bij jou blijft. Gegevens importeren laadt zo’n bestand: Samenvoegen voegt toe wat nieuw is en laat de rest staan, Vervangen overschrijft alles.'],
   ] },
@@ -900,7 +908,7 @@ const helpText = {
     ['Links', 'Die Schaltfläche oben links öffnet deine Links. Die Symbole oben im Fenster sind fest. Mit der Maus über der Schaltfläche siehst du deine eigenen Links. Du kannst bis zu 15 eigene Links hinzufügen, mit optionaler Beschreibung, und sie bearbeiten oder entfernen. Ist Eigene Links aus, öffnet die Schaltfläche direkt Wikipedia.'],
     ['Wetter', 'Standardmäßig aus. Schalte es unter Einstellungen → Wetter ein und wähle, woher das Wetter kommt: deine IP-Adresse oder eine Stadt, die du wählst. Fahre mit der Maus über die Temperatur für eine kurze Vorschau; klicke für die vollständige Vorhersage mit den nächsten 6 Stunden und sieben Tagen. Unter Daten → Wetter bleibt Dein Ort oben; bis zu fünf Extra-Städte lassen sich hinzufügen und mit ↑↓ umordnen (wie KI und Social). Chips in Vorschau und Vorhersage folgen dieser Reihenfolge.'],
     ['Hintergrund', 'Jeder Druck auf den runden Knopf unten rechts wechselt zum nächsten Hintergrund: zuerst keiner, dann die in „Daten verwalten“ eingeschalteten. Der Knopf unten links wechselt die Hintergrundfarbe in Stufen; am Computer ist das ebenfalls ein Knopf.'],
-    ['Einstellungen', 'Öffne sie mit dem Zahnrad oben rechts oder drücke ?. Esc schließt sie. Optionen, die von einer anderen abhängen, sind grau, bis diese eingeschaltet ist. Oben stehen die Seitenvorlagen Minimal und Standard. Persönlich erscheint, wenn deine Auswahl zu keiner passt. Erweitert zeigt alle Optionen, in Gruppen; der Link daneben führt zurück zu den Grundeinstellungen. Unten rechts stehen die Version und das Datum der letzten Änderung. Die letzte Zahl steigt mit jeder Änderung; ein Release bekommt die nächste Versionsnummer, etwa 1.4. Unten unter Erweitert steht der Block Zurücksetzen. Einstellungen zurücksetzen stellt nur die Standardwerte wieder her. Meine Daten löschen entfernt deine eigenen Links, KI-Verknüpfungen, Zeitzonen, Stadt und zusätzlichen Orte. Das lässt sich nicht rückgängig machen, also erstelle zuerst ein Backup über Daten verwalten, mit Daten exportieren.'],
+    ['Einstellungen', 'Öffne sie mit dem Zahnrad oben rechts oder drücke ?. Esc schließt. Ein Fenster mit Einstellungen | Daten: am Computer eine linke Seitenleiste, am Telefon eine Liste zum Hineinklicken. Einstellungen: Allgemein, Auf der Seite zeigen, Wetter und Uhr & Datum. Daten: Kataloge (Suche, KI, Social, Links, Zeitzonen, Wetterorte, Hintergrund, Backup). Ein ruhiges Suchfeld filtert Abschnitte und Zeilen auf beiden Seiten. Hilfe öffnet mit Toggle quickstart oben. Vor dem Löschen zuerst Backup.'],
     ['Deine Daten', 'Deine Einstellungen werden nur in diesem Browser gespeichert. Das Wetter sendet deine IP-Adresse an ipapi.co bzw. die gewählte Stadt an Open-Meteo, nur wenn das Wetter aktiv ist; das Anzeigen deiner IP-Adresse nutzt dieselbe Abfrage. Zusätzliche Orte senden ihren Namen an Open-Meteo. Eigene KI-Verknüpfungen laden ihr Symbol von ihrer eigenen Seite. Sonst verlässt nichts die Seite.'],
     ['Daten exportieren und importieren', 'Daten exportieren speichert deine Einstellungen, Links und Orte in einer Datei, die bei dir bleibt. Daten importieren lädt so eine Datei: Zusammenführen ergänzt, was neu ist, und behält den Rest; Ersetzen überschreibt alles.'],
   ] },
@@ -913,7 +921,7 @@ const helpText = {
     ['Liens', 'Le bouton en haut à gauche ouvre vos liens. Les icônes en haut de cette fenêtre sont permanentes. Survoler le bouton affiche vos propres liens. Vous pouvez en ajouter jusqu’à 15, avec une description facultative, et les modifier ou les supprimer. Si Liens personnels est désactivé, le bouton ouvre directement Wikipédia.'],
     ['Météo', 'Désactivée par défaut. Activez-la dans les paramètres et choisissez d’où vient la météo : votre adresse IP, ou une ville de votre choix. Survolez la température pour un aperçu ; cliquez pour la prévision complète sur 6 heures et sept jours. Vous pouvez ajouter jusqu’à cinq lieux de plus dans Gérer, sous Météo ; choisissez-en un dans cette fenêtre pour voir sa prévision.'],
     ['Fond', 'Chaque pression sur le bouton rond en bas à droite passe au fond suivant : d’abord aucun, puis ceux activés dans « Gérer les données ». Le bouton en bas à gauche change la couleur du fond par étapes ; sur ordinateur, c’est aussi un bouton.'],
-    ['Paramètres', 'Ouvrez-les avec l’engrenage en haut à droite, ou appuyez sur ?. Échap ferme. Les options qui dépendent d’une autre sont grisées tant que celle-ci n’est pas activée. En haut se trouvent les préréglages Minimal et Standard. Personnalisé apparaît si vos choix ne correspondent à aucun des deux. Avancé affiche toutes les options, par groupes ; le lien à côté revient aux réglages de base. En bas à droite figurent la version et la date de la dernière modification. Le dernier chiffre augmente à chaque modification ; une version publiée reçoit le numéro suivant, comme 1.4. En bas d’Avancé se trouve Réinitialiser. Réinitialiser les réglages remet seulement les réglages par défaut. Effacer mes données supprime vos liens, raccourcis IA, fuseaux, ville et lieux supplémentaires. Action irréversible : faites d’abord une sauvegarde via Gérer les données, avec Exporter les données.'],
+    ['Paramètres', 'Ouvrez-les avec l’engrenage en haut à droite, ou appuyez sur ?. Échap ferme. Une fenêtre Réglages | Données : barre latérale à gauche sur ordinateur, liste à ouvrir sur téléphone. Réglages : Général, Afficher sur la page, Météo et Horloge et date. Données : catalogues (Recherche, IA, Social, Liens, Fuseaux, Lieux météo, Fond, Sauvegarde). Un champ de recherche discret filtre sections et lignes des deux côtés. L’aide ouvre avec Basculer démarrage rapide en haut. Sauvegardez avant d’effacer vos données.'],
     ['Vos données', 'Vos choix ne sont conservés que dans ce navigateur. La météo envoie votre adresse IP à ipapi.co, ou la ville choisie à Open-Meteo, seulement si la météo est activée ; afficher votre adresse IP utilise la même requête. Les lieux supplémentaires envoient leur nom à Open-Meteo. Les raccourcis IA personnels chargent leur icône depuis leur propre site. Rien d’autre ne quitte la page.'],
     ['Exporter et importer', 'Exporter les données enregistre vos choix, liens et lieux dans un fichier qui reste chez vous. Importer les données charge ce fichier : Fusionner ajoute ce qui est nouveau et garde le reste ; Remplacer écrase tout.'],
   ] },
@@ -926,7 +934,7 @@ const helpText = {
     ['Enlaces', 'El botón de arriba a la izquierda abre tus enlaces. Los iconos de la parte superior de esa ventana son fijos. Al pasar el ratón sobre el botón ves tus propios enlaces. Puedes añadir hasta 15, cada uno con una descripción opcional, y editarlos o quitarlos. Con Enlaces propios desactivado, el botón abre Wikipedia directamente.'],
     ['Tiempo', 'Desactivado por defecto. Actívalo en los ajustes y elige de dónde viene: tu IP, o una ciudad que elijas. Pasa el ratón sobre la temperatura para una vista previa; haz clic para la previsión completa de 6 horas y siete días. Puedes añadir hasta cinco lugares más en Gestionar, en Tiempo; elige uno en esta ventana para ver su previsión.'],
     ['Fondo', 'Cada pulsación del botón redondo de abajo a la derecha pasa al siguiente fondo: primero ninguno, luego los activados en «Gestionar datos». El botón de abajo a la izquierda cambia el color del fondo por pasos; en el ordenador también es un botón.'],
-    ['Ajustes', 'Ábrelos con el engranaje arriba a la derecha, o pulsa ?. Esc los cierra. Las opciones que dependen de otra aparecen en gris hasta que esa esté activada. Arriba están los ajustes predefinidos Minimal y Standard. Personal aparece si tus opciones no coinciden con ninguno. Avanzado muestra todas las opciones, en grupos; el enlace de al lado vuelve a los ajustes básicos. Abajo a la derecha aparecen la versión y la fecha del último cambio. El último número sube con cada cambio; una versión publicada recibe el siguiente número, como 1.4. Al final de Avanzado están Restablecer. Restablecer ajustes solo devuelve los valores predeterminados. Borrar mis datos elimina tus enlaces propios, accesos de IA, zonas horarias, ciudad y lugares adicionales. No se puede deshacer, así que antes haz una copia con Gestionar datos y Exportar datos.'],
+    ['Ajustes', 'Ábrelos con el engranaje arriba a la derecha, o pulsa ?. Esc los cierra. Una ventana Ajustes | Datos: barra lateral en el ordenador, lista con detalle en el teléfono. Ajustes: General, Mostrar en la página, Tiempo y Reloj y fecha. Datos: catálogos (Buscar, IA, Social, Enlaces, Zonas, Lugares, Fondo, Copia). Un campo de búsqueda discreto filtra secciones y filas en ambos lados. La ayuda abre con Alternar inicio rápido arriba. Haz una copia antes de borrar tus datos.'],
     ['Tus datos', 'Tus elecciones solo se guardan en este navegador. El tiempo envía tu IP a ipapi.co, o la ciudad que elijas a Open-Meteo, solo mientras esté activado; mostrar tu IP usa la misma consulta. Los lugares adicionales envían su nombre a Open-Meteo. Los accesos de IA propios cargan su icono desde su propio sitio. Nada más sale de la página.'],
     ['Exportar e importar', 'Exportar datos guarda tus opciones, enlaces y lugares en un archivo que se queda contigo. Importar datos carga ese archivo: Combinar añade lo nuevo y conserva el resto; Reemplazar sobrescribe todo.'],
   ] },
@@ -939,7 +947,7 @@ const helpText = {
     ['链接', '左上角的按钮打开你的链接。该窗口顶部的图标是固定的。把鼠标移到按钮上可看到你自己的链接。你最多可以添加 15 个链接，每个都可以有可选说明，并可编辑或删除。关闭“自定义链接”后，按钮会直接打开维基百科。'],
     ['天气', '默认关闭。在设置中开启，并选择天气的来源：你的 IP 地址，或你选择的城市。把鼠标移到温度上可看到简短预报；点击可查看未来 6 小时和七天的完整预报。 在“管理”的“天气”中最多可添加五个其他地点；在此窗口中选择一个即可查看其预报。'],
     ['背景', '点击右下角的圆形按钮会切换到下一个背景：先是无背景，然后是在“管理数据”里开启的背景。左下角的按钮按步骤改变背景颜色；电脑上也是按钮。'],
-    ['设置', '点击右上角的齿轮打开，或按 ?。按 Esc 关闭。依赖其他选项的选项会变灰，直到那个选项开启。顶部是页面预设：极简和标准。两者都不符时显示个性化。高级会列出所有选项，并分组显示；旁边的链接可返回基本设置。右下角显示版本号和最后一次修改的日期。最后一位数字会随每次修改增加；发布版本时会得到下一个版本号，例如 1.4。高级底部是重置。重置设置只会恢复默认值。删除我的数据会移除你自己的链接、AI 快捷方式、时区、城市和额外地点。此操作无法撤销，因此请先在管理数据中导出数据作为备份。'],
+    ['设置', '点击右上角的齿轮打开，或按 ?。按 Esc 关闭。一个窗口分为「设置 | 数据」：电脑端左侧边栏，手机端先列表再进入。设置含通用、在页面显示、天气、时钟与日期。数据含各目录（搜索、AI、社交、链接、时区、天气地点、背景、备份）。顶部有安静的搜索框，可筛选两侧分区与行。帮助右上角为「切换快速入门」。删除数据前请先备份。'],
     ['你的数据', '你的选择只保存在这个浏览器中。开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你选择的城市发送到 Open-Meteo；显示 IP 地址使用同一查询。额外地点会把名称发送到 Open-Meteo。自定义 AI 快捷方式会从各自的网站加载图标。除此之外，页面不会发送任何内容。'],
     ['导出和导入', '导出数据会把你的选择、链接和地点保存到一个由你保管的文件中。导入数据会加载该文件：合并会添加新内容并保留其余部分，替换会覆盖全部内容。'],
   ] },
@@ -1521,6 +1529,7 @@ const renderPlaces = () => {
     }).catch(() => {})
     return row
   }))
+  if (typeof applyShellFilter === 'function') applyShellFilter({ preservePane: true })
 }
 const placeMsg = document.getElementById('place-msg')
 const fetchCities = async (query, count, language) => (await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=${count}&language=${language}&format=json`)).json()).results || []
@@ -1613,6 +1622,7 @@ const applySettingsText = () => {
   document.getElementById('settings-title').textContent = t.title
   if (segSettingsBtn) segSettingsBtn.textContent = t.segSettings || 'Settings'
   if (segDataBtn) segDataBtn.textContent = t.segData || 'Data'
+  if (typeof syncShellSearchChrome === 'function') syncShellSearchChrome()
   const dataHomeHint = document.getElementById('data-home-hint')
   if (dataHomeHint) dataHomeHint.textContent = t.dataHomeHint || ''
   const settingsHomeHint = document.getElementById('settings-home-hint')
@@ -2614,6 +2624,7 @@ const renderZones = () => {
   renderPreview()
   zoneInput.disabled = full
   zoneAddButton.disabled = full
+  if (typeof applyShellFilter === 'function') applyShellFilter({ preservePane: true })
 }
 
 const saveZones = () => writeKey('zones', JSON.stringify(zones))
@@ -2723,9 +2734,209 @@ const showSettingsPane = (pane) => {
   if (tab === 'weather' && typeof renderPlaces === 'function') renderPlaces()
   if (tab === 'wallpapers' && typeof renderWallpapers === 'function') renderWallpapers()
   if (SETTINGS_PANES.has(tab) && tab !== 'settings-home') syncSettings()
+  if (typeof applyShellFilter === 'function') applyShellFilter({ preservePane: true })
 }
 
 const showManageTab = showSettingsPane
+
+// Settings | Data shell search — filter mode (sidebar sections + content rows).
+const shellSearchInput = document.getElementById('settings-shell-search')
+const shellSearchClear = document.getElementById('settings-shell-search-clear')
+const shellSearchEmpty = document.getElementById('settings-shell-search-empty')
+const shellSearchLabel = document.getElementById('settings-shell-search-label')
+let shellSearchQuery = ''
+let shellFilterApplying = false
+
+const SHELL_FILTER_UNITS = [
+  '.pane-block',
+  '.presets',
+  '.under-bar-group',
+  '.catalog-list > li',
+  '.link-form',
+  '.city-form',
+  '#wallpaper-list > *',
+  '#place-list > *',
+  '#zones-list > *',
+  '#links-list > *',
+  '#social-manage-list > *',
+].join(', ')
+
+const normShellQ = (value) => String(value || '').trim().toLowerCase().replace(/\s+/g, ' ')
+
+const shellTextOf = (node) => (node?.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase()
+
+const clearShellMarks = (root = settingsShell) => {
+  if (!root) return
+  root.querySelectorAll('mark.shell-search-mark').forEach((mark) => {
+    const parent = mark.parentNode
+    if (!parent) return
+    while (mark.firstChild) parent.insertBefore(mark.firstChild, mark)
+    parent.removeChild(mark)
+  })
+  root.normalize()
+}
+
+const markShellMatches = (root, query) => {
+  if (!root || !query) return
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT
+      const parent = node.parentElement
+      if (!parent || parent.closest('script, style, .settings-shell-search, mark.shell-search-mark')) {
+        return NodeFilter.FILTER_REJECT
+      }
+      if (parent.closest('.shell-filter-hide')) return NodeFilter.FILTER_REJECT
+      return NodeFilter.FILTER_ACCEPT
+    },
+  })
+  const nodes = []
+  while (walker.nextNode()) nodes.push(walker.currentNode)
+  for (const textNode of nodes) {
+    const value = textNode.nodeValue
+    const lower = value.toLowerCase()
+    let idx = lower.indexOf(query)
+    if (idx < 0) continue
+    const frag = document.createDocumentFragment()
+    let cursor = 0
+    while (idx >= 0) {
+      if (idx > cursor) frag.appendChild(document.createTextNode(value.slice(cursor, idx)))
+      const mark = document.createElement('mark')
+      mark.className = 'shell-search-mark'
+      mark.textContent = value.slice(idx, idx + query.length)
+      frag.appendChild(mark)
+      cursor = idx + query.length
+      idx = lower.indexOf(query, cursor)
+    }
+    if (cursor < value.length) frag.appendChild(document.createTextNode(value.slice(cursor)))
+    textNode.parentNode.replaceChild(frag, textNode)
+  }
+}
+
+const paneTitleHaystack = (pane) => {
+  const bits = []
+  document.querySelectorAll(`.settings-nav-btn[data-pane="${pane}"]`).forEach((btn) => bits.push(shellTextOf(btn)))
+  document.querySelectorAll(`.data-home-card[data-pane="${pane}"]`).forEach((card) => bits.push(shellTextOf(card)))
+  return bits.join(' ')
+}
+
+const paneSection = (pane) => document.querySelector(`#settings-content .manage-section[data-pane="${pane}"]`)
+
+const paneContentHaystack = (pane) => shellTextOf(paneSection(pane))
+
+const paneMatchesQuery = (pane, query) => {
+  if (!query) return true
+  return paneTitleHaystack(pane).includes(query) || paneContentHaystack(pane).includes(query)
+}
+
+const filterPaneUnits = (pane, query, titleHit) => {
+  const section = paneSection(pane)
+  if (!section) return
+  const units = [...section.querySelectorAll(SHELL_FILTER_UNITS)]
+  if (!units.length) return
+  for (const unit of units) {
+    const hit = !query || titleHit || shellTextOf(unit).includes(query)
+    unit.classList.toggle('shell-filter-hide', !hit)
+  }
+}
+
+const syncShellSearchChrome = () => {
+  if (!shellSearchInput) return
+  const ph = settingsWorld === 'data'
+    ? (t.shellSearchData || 'Search data')
+    : (t.shellSearchSettings || 'Search settings')
+  shellSearchInput.placeholder = ph
+  if (shellSearchLabel) shellSearchLabel.textContent = ph
+  if (shellSearchClear) shellSearchClear.setAttribute('aria-label', t.shellSearchClear || 'Clear search')
+  if (shellSearchEmpty) shellSearchEmpty.textContent = t.shellSearchEmpty || 'No matches'
+}
+
+const applyShellFilter = (opts = {}) => {
+  if (!shellSearchInput || shellFilterApplying) return
+  shellFilterApplying = true
+  try {
+    const query = normShellQ(shellSearchQuery)
+    const preservePane = !!opts.preservePane
+    clearShellMarks()
+    document.querySelectorAll('.shell-filter-hide').forEach((el) => el.classList.remove('shell-filter-hide'))
+    if (shellSearchClear) shellSearchClear.hidden = !query
+    syncShellSearchChrome()
+
+    const worldPanes = settingsWorld === 'data'
+      ? ['search', 'ai', 'social', 'links', 'zones', 'weather', 'wallpapers', 'backup']
+      : ['page', 'show', 'weather-prefs', 'clock']
+    const homePane = settingsWorld === 'data' ? 'data-home' : 'settings-home'
+    const navButtons = settingsWorld === 'data' ? settingsNavButtons : prefsNavButtons
+    const matching = worldPanes.filter((pane) => paneMatchesQuery(pane, query))
+
+    navButtons.forEach((btn) => {
+      const pane = btn.dataset.pane
+      const hit = !query || matching.includes(pane)
+      btn.classList.toggle('shell-filter-hide', !hit)
+    })
+
+    const homeList = document.getElementById(settingsWorld === 'data' ? 'data-home-list' : 'settings-home-list')
+    homeList?.querySelectorAll('.data-home-card').forEach((card) => {
+      const pane = card.dataset.pane
+      const hit = !query || matching.includes(pane)
+      card.classList.toggle('shell-filter-hide', !hit)
+    })
+
+    const noHits = !!query && matching.length === 0
+    if (shellSearchEmpty) shellSearchEmpty.hidden = !noHits
+
+    if (query && noHits) {
+      // Mobile home list is empty; desktop keeps the current pane with the empty note.
+      if (isNarrowSettings() && manageTab !== homePane) {
+        shellFilterApplying = false
+        showSettingsPane(homePane)
+        return
+      }
+    } else if (query) {
+      const onHome = manageTab === homePane
+      const currentOk = matching.includes(manageTab)
+      // Only auto-switch when the open pane is not a hit (never bounce desktop↔home).
+      if (!onHome && !currentOk) {
+        const next = isNarrowSettings() ? homePane : matching[0]
+        if (next && next !== manageTab) {
+          shellFilterApplying = false
+          showSettingsPane(next)
+          return
+        }
+      }
+      for (const pane of matching) {
+        const titleHit = paneTitleHaystack(pane).includes(query)
+        filterPaneUnits(pane, query, titleHit)
+      }
+      const active = paneSection(manageTab)
+      if (active && !active.hidden) markShellMatches(active, query)
+      if (homeList && manageTab === homePane) markShellMatches(homeList, query)
+      navButtons.forEach((btn) => {
+        if (!btn.classList.contains('shell-filter-hide')) markShellMatches(btn, query)
+      })
+    }
+  } finally {
+    shellFilterApplying = false
+  }
+}
+
+shellSearchInput?.addEventListener('input', () => {
+  shellSearchQuery = shellSearchInput.value
+  applyShellFilter()
+})
+shellSearchClear?.addEventListener('click', () => {
+  shellSearchQuery = ''
+  if (shellSearchInput) shellSearchInput.value = ''
+  applyShellFilter()
+  shellSearchInput?.focus()
+})
+settingsShell?.addEventListener('keydown', (event) => {
+  if (event.key !== 'Escape' || !shellSearchQuery) return
+  if (document.activeElement !== shellSearchInput) return
+  event.stopPropagation()
+  shellSearchQuery = ''
+  shellSearchInput.value = ''
+  applyShellFilter()
+})
 
 const openManage = (tab) => {
   manageFrom = document.activeElement
@@ -2983,6 +3194,7 @@ const renderLinks = () => {
   linkUrl.disabled = full
   linkDesc.disabled = full
   linkSave.disabled = full
+  if (typeof applyShellFilter === 'function') applyShellFilter({ preservePane: true })
 }
 
 const resetLinkForm = () => {
@@ -3573,6 +3785,7 @@ const renderManageCatalogs = () => {
     })
   }).filter(Boolean))
   syncSocialFormLimit()
+  if (typeof applyShellFilter === 'function') applyShellFilter({ preservePane: true })
 }
 
 const socialForm = document.getElementById('social-form')
@@ -4116,6 +4329,7 @@ const renderWallpapers = () => {
     row.append(swatch, names, switchLabel)
     return row
   }))
+  if (typeof applyShellFilter === 'function') applyShellFilter({ preservePane: true })
 }
 wallpaperList.addEventListener('change', (e) => {
   const id = e.target.dataset.wallpaper

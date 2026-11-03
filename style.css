@@ -1672,11 +1672,112 @@ img.ai-icon {
 .settings-shell-body {
   display: grid;
   grid-template-columns: 168px minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
   flex: 1 1 auto;
   min-height: 0;
 }
 
+.settings-shell-search {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 10px 10px 6px;
+  border-right: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 28%, var(--color-field));
+  position: relative;
+  min-width: 0;
+}
+
+.settings-shell-search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(calc(-50% + 2px));
+  display: inline-flex;
+  color: var(--color-fg-2);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.settings-shell-search-input {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 7px 28px 7px 30px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-field);
+  color: var(--color-fg-1);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.settings-shell-search-input::placeholder {
+  color: var(--color-fg-2);
+  opacity: 0.75;
+}
+
+.settings-shell-search-input:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--color-fg-2) 55%, var(--color-border));
+}
+
+.settings-shell-search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.settings-shell-search-clear {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(calc(-50% + 2px));
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-fg-2);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.settings-shell-search-clear:hover,
+.settings-shell-search-clear:focus-visible {
+  color: var(--color-fg-1);
+  background: color-mix(in srgb, var(--color-bg) 40%, transparent);
+}
+
+.settings-shell-search-empty[hidden] {
+  display: none !important;
+}
+
+.settings-shell-search-empty {
+  margin: 0 0 12px;
+}
+
+.shell-filter-hide {
+  display: none !important;
+}
+
+mark.shell-search-mark {
+  background: color-mix(in srgb, #e8d48b 55%, transparent);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
 .settings-side {
+  grid-column: 1;
+  grid-row: 2;
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -1825,6 +1926,8 @@ img.ai-icon {
 }
 
 .settings-content {
+  grid-column: 2;
+  grid-row: 1 / -1;
   min-width: 0;
   min-height: 0;
   overflow: auto;
@@ -3793,17 +3896,36 @@ button.action:disabled {
   .settings-shell-body,
   .settings-shell[data-world="data"] .settings-shell-body {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(0, 1fr) auto;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+  }
+
+  .settings-shell-search {
+    grid-column: 1;
+    grid-row: 1;
+    border-right: 0;
+    background: transparent;
+    padding: 10px 16px 0;
+  }
+
+  .settings-shell-search-icon {
+    left: 24px;
+  }
+
+  .settings-shell-search-clear {
+    right: 20px;
+  }
+
+  .settings-content {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 14px 16px 16px;
   }
 
   .settings-side {
     border-right: 0;
     background: transparent;
-    grid-row: 2;
-  }
-
-  .settings-content {
-    grid-row: 1;
+    grid-column: 1;
+    grid-row: 3;
   }
 
   /* Mobile: home list / drill-in — hide desktop sidebars for Settings and Data. */
@@ -3814,10 +3936,6 @@ button.action:disabled {
   .settings-nav-foot {
     border-top: 1px solid var(--color-border);
     background: color-mix(in srgb, var(--color-bg) 28%, var(--color-field));
-  }
-
-  .settings-content {
-    padding: 14px 16px 16px;
   }
 
   .presets {
