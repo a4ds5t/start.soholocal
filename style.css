@@ -2701,11 +2701,12 @@ html[data-quote-off] #quote {
   overflow-y: scroll;
   padding-right: 4px;
   scrollbar-gutter: stable;
-  /* Firefox: thick thumb + visible track (avoid “thin”). */
-  scrollbar-width: auto;
-  scrollbar-color: var(--color-fg-2) color-mix(in srgb, var(--color-field) 70%, var(--color-border));
 }
 
+/*
+  Blink ignores ::-webkit-scrollbar width when scrollbar-width/color are set.
+  Keep the wide WebKit scrollbar for Chromium; style Firefox separately.
+*/
 .help-scroll::-webkit-scrollbar {
   width: 16px;
   height: 16px;
@@ -2735,6 +2736,13 @@ html[data-quote-off] #quote {
   height: 0;
   width: 0;
   display: none;
+}
+
+@supports (-moz-appearance: none) {
+  .help-scroll {
+    scrollbar-width: auto;
+    scrollbar-color: var(--color-fg-2) color-mix(in srgb, var(--color-field) 70%, var(--color-border));
+  }
 }
 
 .help-top-link {
