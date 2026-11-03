@@ -141,6 +141,15 @@
         </div>
       </div>
       <div class="settings-shell-body">
+        <nav class="settings-nav" id="settings-prefs-nav" aria-label="Settings sections">
+          <button type="button" class="settings-nav-btn" data-pane="page" id="nav-page" aria-selected="true">Page</button>
+          <button type="button" class="settings-nav-btn" data-pane="show" id="nav-show" aria-selected="false">Show on page</button>
+          <button type="button" class="settings-nav-btn" data-pane="weather-prefs" id="nav-weather-prefs" aria-selected="false">Weather</button>
+          <button type="button" class="settings-nav-btn" data-pane="clock" id="nav-clock" aria-selected="false">Clock &amp; date</button>
+          <button type="button" class="settings-nav-btn" data-pane="search-prefs" id="nav-search-prefs" aria-selected="false">Search</button>
+          <button type="button" class="settings-nav-btn" data-pane="ai-prefs" id="nav-ai-prefs" aria-selected="false">AI shortcuts</button>
+          <button type="button" class="settings-nav-btn" data-pane="language" id="nav-language" aria-selected="false">Language</button>
+        </nav>
         <nav class="settings-nav" id="settings-nav" aria-label="Data catalogs" hidden>
           <button type="button" class="settings-nav-btn" data-pane="search" id="tab-search" aria-selected="false">Search</button>
           <button type="button" class="settings-nav-btn" data-pane="ai" id="tab-ai" aria-selected="false">AI</button>
@@ -153,13 +162,34 @@
         </nav>
         <div class="settings-content" id="settings-content">
           <button type="button" class="data-back" id="data-back" hidden></button>
-          <section class="settings-pane manage-section" data-pane="general" data-tab="general" data-world="settings" id="section-general" role="tabpanel">
+
+          <section class="settings-pane manage-section" data-pane="settings-home" data-tab="settings-home" data-world="settings" id="section-settings-home" role="tabpanel" hidden>
+            <p class="manage-note" id="settings-home-hint">Choose a settings group.</p>
+            <div class="data-home-list" id="settings-home-list">
+              <button type="button" class="data-home-card" data-pane="page"><span class="data-home-copy"><b id="set-card-page">Page</b><span id="set-desc-page">Minimal / Standard / Personal</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="show"><span class="data-home-copy"><b id="set-card-show">Show on page</b><span id="set-desc-show">Masters</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="weather-prefs"><span class="data-home-copy"><b id="set-card-weather">Weather</b><span id="set-desc-weather">On + location</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="clock"><span class="data-home-copy"><b id="set-card-clock">Clock &amp; date</b><span id="set-desc-clock">Format</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="search-prefs"><span class="data-home-copy"><b id="set-card-search">Search</b><span id="set-desc-search">New tab</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="ai-prefs"><span class="data-home-copy"><b id="set-card-ai">AI shortcuts</b><span id="set-desc-ai">New tab</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="data-home-card" data-pane="language"><span class="data-home-copy"><b id="set-card-lang">Language</b><span id="set-desc-lang">UI language</span></span><span class="data-home-chev" aria-hidden="true">›</span></button>
+            </div>
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="page" data-tab="page" data-world="settings" id="section-page" role="tabpanel">
             <p class="settings-hint" id="settings-hint"></p>
             <div class="presets" role="radiogroup" aria-label="Page">
               <label class="setting"><input type="radio" name="preset" id="preset-minimal" value="minimal"> <span id="lbl-preset-minimal">Minimal</span></label>
               <label class="setting"><input type="radio" name="preset" id="preset-standard" value="standard"> <span id="lbl-preset-standard">Standard</span></label>
               <label class="setting"><input type="radio" name="preset" id="preset-custom" value="custom"> <span id="lbl-preset-custom">Personal</span></label>
             </div>
+            <div class="settings-actions">
+              <button type="button" id="ip-open" class="ghost-button">IP details</button>
+            </div>
+            <p class="app-version"><span id="app-version-root"></span></p>
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="show" data-tab="show" data-world="settings" id="section-show" role="tabpanel" hidden>
             <section class="pane-block manage-show" id="adv-show">
               <p class="manage-show-label location-title" id="manage-show-label">Show on page</p>
               <div class="manage-masters" id="manage-show">
@@ -176,26 +206,36 @@
               </div>
               <p class="manage-note adv-show-hint" id="adv-show-hint">Social and Ask AI rows are mutually exclusive — choose one under Data → Social / AI.</p>
             </section>
-            <section class="pane-block">
-              <p class="location-title" id="sec-weather">Weather</p>
-              <label class="master-toggle"><input type="checkbox" id="set-weather"> <span id="lbl-weather">On</span></label>
-              <div class="weather-sub" id="weather-sub">
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="weather-prefs" data-tab="weather-prefs" data-world="settings" id="section-weather-prefs" role="tabpanel" hidden>
+            <div class="prefs-split">
+              <section class="pane-block">
+                <p class="location-title" id="sec-weather">Weather</p>
+                <label class="master-toggle"><input type="checkbox" id="set-weather"> <span id="lbl-weather">On</span></label>
+              </section>
+              <section class="pane-block">
                 <p class="location-title" id="lbl-location">Location</p>
-                <label class="setting"><input type="radio" name="location" id="loc-ip" value="ip"> <span id="lbl-loc-ip">My place via IP address</span></label>
-                <p class="privacy" id="privacy"></p>
-                <label class="setting"><input type="radio" name="location" id="loc-city" value="city"> <span id="lbl-loc-city">A city I choose</span></label>
-                <form class="city-form" id="city-form">
-                  <label for="city-input" id="lbl-city">Or enter a city</label>
-                  <div class="city-row">
-                    <input type="text" id="city-input" list="city-options" autocomplete="off">
-                    <datalist id="city-options"></datalist>
-                    <button type="submit" id="city-save" class="ghost-button">Save</button>
-                  </div>
-                  <button type="button" id="city-clear" class="ghost-button" hidden>Use my IP address instead</button>
-                  <p class="city-msg" id="city-msg" role="status"></p>
-                </form>
-              </div>
-            </section>
+                <div class="weather-sub" id="weather-sub">
+                  <label class="setting"><input type="radio" name="location" id="loc-ip" value="ip"> <span id="lbl-loc-ip">My place via IP address</span></label>
+                  <p class="privacy" id="privacy"></p>
+                  <label class="setting"><input type="radio" name="location" id="loc-city" value="city"> <span id="lbl-loc-city">A city I choose</span></label>
+                  <form class="city-form" id="city-form">
+                    <label for="city-input" id="lbl-city">Or enter a city</label>
+                    <div class="city-row">
+                      <input type="text" id="city-input" list="city-options" autocomplete="off">
+                      <datalist id="city-options"></datalist>
+                      <button type="submit" id="city-save" class="ghost-button">Save</button>
+                    </div>
+                    <button type="button" id="city-clear" class="ghost-button" hidden>Use my IP address instead</button>
+                    <p class="city-msg" id="city-msg" role="status"></p>
+                  </form>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="clock" data-tab="clock" data-world="settings" id="section-clock" role="tabpanel" hidden>
             <section class="pane-block">
               <p class="location-title" id="sec-time">Clock &amp; date</p>
               <label class="setting setting-select"><span id="lbl-clock">Clock</span>
@@ -221,14 +261,23 @@
                 </select>
               </label>
             </section>
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="search-prefs" data-tab="search-prefs" data-world="settings" id="section-search-prefs" role="tabpanel" hidden>
             <section class="pane-block">
               <p class="location-title" id="sec-search">Search</p>
               <label class="master-toggle"><input type="checkbox" id="set-search-newtab"> <span id="lbl-search-newtab">Open search in a new tab</span></label>
             </section>
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="ai-prefs" data-tab="ai-prefs" data-world="settings" id="section-ai-prefs" role="tabpanel" hidden>
             <section class="pane-block">
-              <p class="location-title" id="sec-ai">AI</p>
+              <p class="location-title" id="sec-ai">AI shortcuts</p>
               <label class="master-toggle"><input type="checkbox" id="set-ai-newtab"> <span id="lbl-ai-newtab">Open AI links in a new tab</span></label>
             </section>
+          </section>
+
+          <section class="settings-pane manage-section" data-pane="language" data-tab="language" data-world="settings" id="section-language" role="tabpanel" hidden>
             <section class="pane-block">
               <p class="location-title" id="sec-lang">Language</p>
               <label class="setting setting-select"><span id="lbl-set-lang">Language</span>
@@ -243,10 +292,6 @@
                 </select>
               </label>
             </section>
-            <div class="settings-actions">
-              <button type="button" id="ip-open" class="ghost-button">IP details</button>
-            </div>
-            <p class="app-version"><span id="app-version-root"></span></p>
           </section>
 
           <section class="settings-pane manage-section" data-pane="data-home" data-tab="data-home" data-world="data" id="section-data-home" role="tabpanel" hidden>
@@ -448,12 +493,12 @@
     <div class="settings-panel help-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="help-title">
       <div class="settings-head">
         <h2 id="help-title">Help</h2>
-        <button type="button" id="help-close" class="settings-close" aria-label="Close">×</button>
+        <div class="help-head-actions">
+          <a href="#help-quickstart" id="help-quickstart-open" class="quick-link" aria-expanded="false" aria-controls="help-quickstart"></a>
+          <button type="button" id="help-close" class="settings-close" aria-label="Close">×</button>
+        </div>
       </div>
       <div class="help-scroll" id="help-scroll">
-        <p class="help-top-link">
-          <a href="#help-quickstart" id="help-quickstart-open" class="quick-link" aria-expanded="false" aria-controls="help-quickstart"></a>
-        </p>
         <div class="help-quickstart" id="help-quickstart" hidden>
           <h3 class="quick-head" id="quickstart-engine-head">Change search engine</h3>
           <div class="quick-shot">

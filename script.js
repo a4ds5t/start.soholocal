@@ -1,6 +1,6 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4.
-const APP_VERSION = '1.5.14'
+const APP_VERSION = '1.5.15'
 const CHANGELOG_URL = 'https://github.com/a4ds5t/start.soholocal/blob/main/docs/changelog/README.md'
 const APP_BUILD_ISO = typeof BUILD_TIMESTAMP_ISO !== 'undefined' ? BUILD_TIMESTAMP_ISO : null
 const searchForm = document.getElementById('searchform')
@@ -721,12 +721,12 @@ const sectionText = {
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
 const aiText = {
-  en: { quickTitle: 'Quick start', quickEngineHead: 'Change search engine', quickEngineText: 'Click the left icon to switch Search ↔ AI. Hold (or right-click) to pick which engine or AI. Shortcut: Ctrl+Shift+A. Enter sends your query. Social icons (when enabled) sit under the bar as jump links.', quickClick: 'Click here', quickMoreHead: 'More from your page', quickAiHead: 'Add AI links', quickAiText: 'Under Settings → AI you pick AI platforms for the overlay and up to five ASK AI shortcuts.', quickPageHead: 'Pick a page', quickPageText: 'Minimal, Standard or Advanced, in the settings at the top right.', quickDone: 'Got it', quickLink: 'Quick start', quickCard: 'Quick start: the first steps', quickNote: 'Everything here is also in Help.', changelogLink: 'Changelog', hintText: 'Settings are here: click the gear, or press ?.', limitFull: '{n} of {n} · full', aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', versionUpdated: 'Updated', versionTagAria: 'Version {v}, show update details', versionText: 'Version {v}, updated {d}', secBackground: 'Background', resetIntro: 'Reset settings only sets your settings back to the defaults; your data stays. Delete my data removes your own links, AI shortcuts, time zones, city and extra places. This cannot be undone, so make a backup first on the Backup tab in Manage data.', resetSec: 'Reset', dateOnLbl: 'Show the date', dateSec: 'Date', dateShow: 'Show', dateLong: 'Long', dateShort: 'Short', dateOrderLbl: 'Order', dateAuto: 'Automatic', dateDmy: 'Day-month-year', dateMdy: 'Month-day-year', dateYmd: 'Year-month-day', timeSec: 'Time format', time24: '24 hours', time12: '12 hours (AM/PM)', timeFull: 'Full, with seconds', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick services', aiInvalid: 'Enter a valid https address' },
-  nl: { quickTitle: 'Quick start', quickEngineHead: 'Zoekmachine wisselen', quickEngineText: 'Elke klik op het icoon gaat naar de volgende zoekmachine: DuckDuckGo, Kagi, Brave of Google. Je keuze blijft bewaard.', quickClick: 'Klik hier', quickMoreHead: 'Meer uit je pagina', quickAiHead: 'AI-links toevoegen', quickAiText: 'Onder Instellingen → AI kies je tot vijf AI-diensten, of voeg je eigen adres toe.', quickPageHead: 'Pagina kiezen', quickPageText: 'Minimaal, Standaard of Geavanceerd, in de instellingen rechtsboven.', quickDone: 'Begrepen', quickLink: 'Quick start', quickCard: 'Quick start: de eerste stappen', quickNote: 'Alles staat ook in Help.', changelogLink: 'Wijzigingen', hintText: 'Hier vind je de instellingen: klik op het tandwiel of druk op ?.', limitFull: '{n} van {n} · vol', aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', versionUpdated: 'Bijgewerkt', versionTagAria: 'Versie {v}, toon bijwerkdetails', versionText: 'Versie {v}, bijgewerkt {d}', secBackground: 'Achtergrond', resetIntro: 'Instellingen resetten zet alleen je instellingen terug naar de standaard; je gegevens blijven staan. Mijn gegevens wissen verwijdert je eigen links, AI-snelkoppelingen, tijdzones, stad en extra plaatsen. Dat kan niet ongedaan worden, dus maak eerst een backup op het tabblad Backup onder Data beheren.', resetSec: 'Resetten', dateOnLbl: 'Datum tonen', dateSec: 'Datum', dateShow: 'Weergave', dateLong: 'Lang', dateShort: 'Kort', dateOrderLbl: 'Volgorde', dateAuto: 'Automatisch', dateDmy: 'Dag-maand-jaar', dateMdy: 'Maand-dag-jaar', dateYmd: 'Jaar-maand-dag', timeSec: 'Tijdnotatie', time24: '24 uur', time12: '12 uur (AM/PM)', timeFull: 'Volledig, met seconden', searchSec: 'Zoeken', searchNewTab: 'Zoeken openen in een nieuw tabblad', aiNewTab: 'AI-links openen in een nieuw tabblad', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies diensten', aiInvalid: 'Vul een geldig https-adres in' },
-  de: { quickTitle: 'Schnellstart', quickEngineHead: 'Suchmaschine wechseln', quickEngineText: 'Jeder Klick auf das Symbol führt zur nächsten Suchmaschine: DuckDuckGo, Kagi, Brave oder Google. Deine Wahl bleibt gespeichert.', quickClick: 'Hier klicken', quickMoreHead: 'Mehr aus deiner Seite', quickAiHead: 'KI-Links hinzufügen', quickAiText: 'Unter Einstellungen → KI wählst du bis zu fünf KI-Dienste oder fügst deine eigene Adresse hinzu.', quickPageHead: 'Seite wählen', quickPageText: 'Minimal, Standard oder Erweitert, in den Einstellungen oben rechts.', quickDone: 'Verstanden', quickLink: 'Schnellstart', quickCard: 'Schnellstart: die ersten Schritte', quickNote: 'Alles steht auch in der Hilfe.', changelogLink: 'Änderungen', hintText: 'Hier findest du die Einstellungen: Klick auf das Zahnrad oder drücke ?.', limitFull: '{n} von {n} · voll', aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', versionUpdated: 'Aktualisiert', versionTagAria: 'Version {v}, Aktualisierungsdetails anzeigen', versionText: 'Version {v}, aktualisiert {d}', secBackground: 'Hintergrund', resetIntro: 'Einstellungen zurücksetzen stellt nur die Standardwerte wieder her; deine Daten bleiben. Meine Daten löschen entfernt deine eigenen Links, KI-Verknüpfungen, Zeitzonen, Stadt und zusätzlichen Orte. Das lässt sich nicht rückgängig machen, also erstelle zuerst ein Backup im Reiter Backup unter Daten verwalten.', resetSec: 'Zurücksetzen', dateOnLbl: 'Datum anzeigen', dateSec: 'Datum', dateShow: 'Anzeige', dateLong: 'Lang', dateShort: 'Kurz', dateOrderLbl: 'Reihenfolge', dateAuto: 'Automatisch', dateDmy: 'Tag-Monat-Jahr', dateMdy: 'Monat-Tag-Jahr', dateYmd: 'Jahr-Monat-Tag', timeSec: 'Zeitformat', time24: '24 Stunden', time12: '12 Stunden (AM/PM)', timeFull: 'Vollständig, mit Sekunden', searchSec: 'Suche', searchNewTab: 'Suche in einem neuen Tab öffnen', aiNewTab: 'KI-Links in einem neuen Tab öffnen', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Dienste wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
-  fr: { quickTitle: 'Démarrage rapide', quickEngineHead: 'Changer de moteur de recherche', quickEngineText: 'Chaque clic sur l’icône passe au moteur suivant : DuckDuckGo, Kagi, Brave ou Google. Votre choix est conservé.', quickClick: 'Cliquez ici', quickMoreHead: 'Plus sur votre page', quickAiHead: 'Ajouter des liens IA', quickAiText: 'Sous Paramètres → IA, choisissez jusqu’à cinq services IA, ou ajoutez votre propre adresse.', quickPageHead: 'Choisir une page', quickPageText: 'Minimal, Standard ou Avancé, dans les réglages en haut à droite.', quickDone: 'Compris', quickLink: 'Démarrage rapide', quickCard: 'Démarrage rapide : les premiers pas', quickNote: 'Tout cela figure aussi dans l’aide.', changelogLink: 'Modifications', hintText: 'Les réglages sont ici : cliquez sur l’engrenage ou appuyez sur ?.', limitFull: '{n} sur {n} · complet', aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', versionUpdated: 'Mis à jour', versionTagAria: 'Version {v}, afficher les détails de mise à jour', versionText: 'Version {v}, mise à jour {d}', secBackground: 'Arrière-plan', resetIntro: 'Réinitialiser les réglages remet seulement les réglages par défaut ; vos données restent. Effacer mes données supprime vos liens, raccourcis IA, fuseaux, ville et lieux supplémentaires. Action irréversible : faites d’abord une sauvegarde dans l’onglet Sauvegarde de Gérer les données.', resetSec: 'Réinitialiser', dateOnLbl: 'Afficher la date', dateSec: 'Date', dateShow: 'Affichage', dateLong: 'Long', dateShort: 'Court', dateOrderLbl: 'Ordre', dateAuto: 'Automatique', dateDmy: 'Jour-mois-année', dateMdy: 'Mois-jour-année', dateYmd: 'Année-mois-jour', timeSec: 'Format de l’heure', time24: '24 heures', time12: '12 heures (AM/PM)', timeFull: 'Complet, avec secondes', searchSec: 'Recherche', searchNewTab: 'Ouvrir la recherche dans un nouvel onglet', aiNewTab: 'Ouvrir les liens IA dans un nouvel onglet', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir les services', aiInvalid: 'Saisissez une adresse https valide' },
-  es: { quickTitle: 'Inicio rápido', quickEngineHead: 'Cambiar de buscador', quickEngineText: 'Cada clic en el icono pasa al siguiente buscador: DuckDuckGo, Kagi, Brave o Google. Tu elección se guarda.', quickClick: 'Haz clic aquí', quickMoreHead: 'Más en tu página', quickAiHead: 'Añadir enlaces de IA', quickAiText: 'En Ajustes → IA eliges hasta cinco servicios de IA, o añades tu propia dirección.', quickPageHead: 'Elige una página', quickPageText: 'Minimal, Standard o Avanzado, en los ajustes arriba a la derecha.', quickDone: 'Entendido', quickLink: 'Inicio rápido', quickCard: 'Inicio rápido: los primeros pasos', quickNote: 'Todo esto también está en la ayuda.', changelogLink: 'Cambios', hintText: 'Aquí están los ajustes: pulsa el engranaje o ?.', limitFull: '{n} de {n} · completo', aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', versionUpdated: 'Actualizado', versionTagAria: 'Versión {v}, mostrar detalles de actualización', versionText: 'Versión {v}, actualizada {d}', secBackground: 'Fondo', resetIntro: 'Restablecer ajustes solo devuelve los valores predeterminados; tus datos se mantienen. Borrar mis datos elimina tus enlaces propios, accesos de IA, zonas horarias, ciudad y lugares adicionales. No se puede deshacer, así que haz antes una copia en la pestaña Copia de Gestionar datos.', resetSec: 'Restablecer', dateOnLbl: 'Mostrar la fecha', dateSec: 'Fecha', dateShow: 'Mostrar', dateLong: 'Larga', dateShort: 'Corta', dateOrderLbl: 'Orden', dateAuto: 'Automático', dateDmy: 'Día-mes-año', dateMdy: 'Mes-día-año', dateYmd: 'Año-mes-día', timeSec: 'Formato de hora', time24: '24 horas', time12: '12 horas (AM/PM)', timeFull: 'Completo, con segundos', searchSec: 'Búsqueda', searchNewTab: 'Abrir la búsqueda en una pestaña nueva', aiNewTab: 'Abrir los accesos de IA en una pestaña nueva', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige servicios', aiInvalid: 'Escribe una dirección https válida' },
-  zh: { quickTitle: '快速入门', quickEngineHead: '更换搜索引擎', quickEngineText: '每次点击图标会切换到下一个搜索引擎：DuckDuckGo、Kagi、Brave 或 Google。你的选择会被保存。', quickClick: '点这里', quickMoreHead: '页面更多功能', quickAiHead: '添加 AI 链接', quickAiText: '在“设置 → AI”中最多选五个 AI 服务，也可以添加你自己的地址。', quickPageHead: '选择页面', quickPageText: '极简、标准或高级，在右上角的设置中切换。', quickDone: '知道了', quickLink: '快速入门', quickCard: '快速入门：最初的几步', quickNote: '这些内容也在帮助中。', changelogLink: '更新记录', hintText: '设置在这里：点击齿轮，或按 ?。', limitFull: '{n}/{n} · 已满', aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', versionUpdated: '更新', versionTagAria: '版本 {v}，显示更新详情', versionText: '版本 {v}，更新于 {d}', secBackground: '背景', resetIntro: '重置设置只会恢复默认值，你的数据会保留。删除我的数据会移除你自己的链接、AI 快捷方式、时区、城市和额外地点。此操作无法撤销，请先在管理数据的备份标签中备份。', resetSec: '重置', dateOnLbl: '显示日期', dateSec: '日期', dateShow: '显示', dateLong: '长格式', dateShort: '短格式', dateOrderLbl: '顺序', dateAuto: '自动', dateDmy: '日-月-年', dateMdy: '月-日-年', dateYmd: '年-月-日', timeSec: '时间格式', time24: '24 小时制', time12: '12 小时制 (AM/PM)', timeFull: '完整，含秒', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', aiDuplicate: '已在列表中。', aiPick: '选择服务', aiInvalid: '请输入有效的 https 地址' }
+  en: { quickTitle: 'Quick start', quickEngineHead: 'Change search engine', quickEngineText: 'Click the left icon to switch Search ↔ AI. Hold (or right-click) to pick which engine or AI. Shortcut: Ctrl+Shift+A. Enter sends your query. Social icons (when enabled) sit under the bar as jump links.', quickClick: 'Click here', quickMoreHead: 'More from your page', quickAiHead: 'Add AI links', quickAiText: 'Under Settings → AI you pick AI platforms for the overlay and up to five ASK AI shortcuts.', quickPageHead: 'Pick a page', quickPageText: 'Minimal, Standard or Advanced, in the settings at the top right.', quickDone: 'Got it', quickLink: 'Toggle quickstart', quickCard: 'Quick start: the first steps', quickNote: 'Everything here is also in Help.', changelogLink: 'Changelog', hintText: 'Settings are here: click the gear, or press ?.', limitFull: '{n} of {n} · full', aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', versionUpdated: 'Updated', versionTagAria: 'Version {v}, show update details', versionText: 'Version {v}, updated {d}', secBackground: 'Background', resetIntro: 'Reset settings only sets your settings back to the defaults; your data stays. Delete my data removes your own links, AI shortcuts, time zones, city and extra places. This cannot be undone, so make a backup first on the Backup tab in Manage data.', resetSec: 'Reset', dateOnLbl: 'Show the date', dateSec: 'Date', dateShow: 'Show', dateLong: 'Long', dateShort: 'Short', dateOrderLbl: 'Order', dateAuto: 'Automatic', dateDmy: 'Day-month-year', dateMdy: 'Month-day-year', dateYmd: 'Year-month-day', timeSec: 'Time format', time24: '24 hours', time12: '12 hours (AM/PM)', timeFull: 'Full, with seconds', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick services', aiInvalid: 'Enter a valid https address' },
+  nl: { quickTitle: 'Quick start', quickEngineHead: 'Zoekmachine wisselen', quickEngineText: 'Elke klik op het icoon gaat naar de volgende zoekmachine: DuckDuckGo, Kagi, Brave of Google. Je keuze blijft bewaard.', quickClick: 'Klik hier', quickMoreHead: 'Meer uit je pagina', quickAiHead: 'AI-links toevoegen', quickAiText: 'Onder Instellingen → AI kies je tot vijf AI-diensten, of voeg je eigen adres toe.', quickPageHead: 'Pagina kiezen', quickPageText: 'Minimaal, Standaard of Geavanceerd, in de instellingen rechtsboven.', quickDone: 'Begrepen', quickLink: 'Quick start tonen', quickCard: 'Quick start: de eerste stappen', quickNote: 'Alles staat ook in Help.', changelogLink: 'Wijzigingen', hintText: 'Hier vind je de instellingen: klik op het tandwiel of druk op ?.', limitFull: '{n} van {n} · vol', aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', versionUpdated: 'Bijgewerkt', versionTagAria: 'Versie {v}, toon bijwerkdetails', versionText: 'Versie {v}, bijgewerkt {d}', secBackground: 'Achtergrond', resetIntro: 'Instellingen resetten zet alleen je instellingen terug naar de standaard; je gegevens blijven staan. Mijn gegevens wissen verwijdert je eigen links, AI-snelkoppelingen, tijdzones, stad en extra plaatsen. Dat kan niet ongedaan worden, dus maak eerst een backup op het tabblad Backup onder Data beheren.', resetSec: 'Resetten', dateOnLbl: 'Datum tonen', dateSec: 'Datum', dateShow: 'Weergave', dateLong: 'Lang', dateShort: 'Kort', dateOrderLbl: 'Volgorde', dateAuto: 'Automatisch', dateDmy: 'Dag-maand-jaar', dateMdy: 'Maand-dag-jaar', dateYmd: 'Jaar-maand-dag', timeSec: 'Tijdnotatie', time24: '24 uur', time12: '12 uur (AM/PM)', timeFull: 'Volledig, met seconden', searchSec: 'Zoeken', searchNewTab: 'Zoeken openen in een nieuw tabblad', aiNewTab: 'AI-links openen in een nieuw tabblad', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies diensten', aiInvalid: 'Vul een geldig https-adres in' },
+  de: { quickTitle: 'Schnellstart', quickEngineHead: 'Suchmaschine wechseln', quickEngineText: 'Jeder Klick auf das Symbol führt zur nächsten Suchmaschine: DuckDuckGo, Kagi, Brave oder Google. Deine Wahl bleibt gespeichert.', quickClick: 'Hier klicken', quickMoreHead: 'Mehr aus deiner Seite', quickAiHead: 'KI-Links hinzufügen', quickAiText: 'Unter Einstellungen → KI wählst du bis zu fünf KI-Dienste oder fügst deine eigene Adresse hinzu.', quickPageHead: 'Seite wählen', quickPageText: 'Minimal, Standard oder Erweitert, in den Einstellungen oben rechts.', quickDone: 'Verstanden', quickLink: 'Schnellstart umschalten', quickCard: 'Schnellstart: die ersten Schritte', quickNote: 'Alles steht auch in der Hilfe.', changelogLink: 'Änderungen', hintText: 'Hier findest du die Einstellungen: Klick auf das Zahnrad oder drücke ?.', limitFull: '{n} von {n} · voll', aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', versionUpdated: 'Aktualisiert', versionTagAria: 'Version {v}, Aktualisierungsdetails anzeigen', versionText: 'Version {v}, aktualisiert {d}', secBackground: 'Hintergrund', resetIntro: 'Einstellungen zurücksetzen stellt nur die Standardwerte wieder her; deine Daten bleiben. Meine Daten löschen entfernt deine eigenen Links, KI-Verknüpfungen, Zeitzonen, Stadt und zusätzlichen Orte. Das lässt sich nicht rückgängig machen, also erstelle zuerst ein Backup im Reiter Backup unter Daten verwalten.', resetSec: 'Zurücksetzen', dateOnLbl: 'Datum anzeigen', dateSec: 'Datum', dateShow: 'Anzeige', dateLong: 'Lang', dateShort: 'Kurz', dateOrderLbl: 'Reihenfolge', dateAuto: 'Automatisch', dateDmy: 'Tag-Monat-Jahr', dateMdy: 'Monat-Tag-Jahr', dateYmd: 'Jahr-Monat-Tag', timeSec: 'Zeitformat', time24: '24 Stunden', time12: '12 Stunden (AM/PM)', timeFull: 'Vollständig, mit Sekunden', searchSec: 'Suche', searchNewTab: 'Suche in einem neuen Tab öffnen', aiNewTab: 'KI-Links in einem neuen Tab öffnen', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Dienste wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
+  fr: { quickTitle: 'Démarrage rapide', quickEngineHead: 'Changer de moteur de recherche', quickEngineText: 'Chaque clic sur l’icône passe au moteur suivant : DuckDuckGo, Kagi, Brave ou Google. Votre choix est conservé.', quickClick: 'Cliquez ici', quickMoreHead: 'Plus sur votre page', quickAiHead: 'Ajouter des liens IA', quickAiText: 'Sous Paramètres → IA, choisissez jusqu’à cinq services IA, ou ajoutez votre propre adresse.', quickPageHead: 'Choisir une page', quickPageText: 'Minimal, Standard ou Avancé, dans les réglages en haut à droite.', quickDone: 'Compris', quickLink: 'Basculer démarrage rapide', quickCard: 'Démarrage rapide : les premiers pas', quickNote: 'Tout cela figure aussi dans l’aide.', changelogLink: 'Modifications', hintText: 'Les réglages sont ici : cliquez sur l’engrenage ou appuyez sur ?.', limitFull: '{n} sur {n} · complet', aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', versionUpdated: 'Mis à jour', versionTagAria: 'Version {v}, afficher les détails de mise à jour', versionText: 'Version {v}, mise à jour {d}', secBackground: 'Arrière-plan', resetIntro: 'Réinitialiser les réglages remet seulement les réglages par défaut ; vos données restent. Effacer mes données supprime vos liens, raccourcis IA, fuseaux, ville et lieux supplémentaires. Action irréversible : faites d’abord une sauvegarde dans l’onglet Sauvegarde de Gérer les données.', resetSec: 'Réinitialiser', dateOnLbl: 'Afficher la date', dateSec: 'Date', dateShow: 'Affichage', dateLong: 'Long', dateShort: 'Court', dateOrderLbl: 'Ordre', dateAuto: 'Automatique', dateDmy: 'Jour-mois-année', dateMdy: 'Mois-jour-année', dateYmd: 'Année-mois-jour', timeSec: 'Format de l’heure', time24: '24 heures', time12: '12 heures (AM/PM)', timeFull: 'Complet, avec secondes', searchSec: 'Recherche', searchNewTab: 'Ouvrir la recherche dans un nouvel onglet', aiNewTab: 'Ouvrir les liens IA dans un nouvel onglet', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir les services', aiInvalid: 'Saisissez une adresse https valide' },
+  es: { quickTitle: 'Inicio rápido', quickEngineHead: 'Cambiar de buscador', quickEngineText: 'Cada clic en el icono pasa al siguiente buscador: DuckDuckGo, Kagi, Brave o Google. Tu elección se guarda.', quickClick: 'Haz clic aquí', quickMoreHead: 'Más en tu página', quickAiHead: 'Añadir enlaces de IA', quickAiText: 'En Ajustes → IA eliges hasta cinco servicios de IA, o añades tu propia dirección.', quickPageHead: 'Elige una página', quickPageText: 'Minimal, Standard o Avanzado, en los ajustes arriba a la derecha.', quickDone: 'Entendido', quickLink: 'Alternar inicio rápido', quickCard: 'Inicio rápido: los primeros pasos', quickNote: 'Todo esto también está en la ayuda.', changelogLink: 'Cambios', hintText: 'Aquí están los ajustes: pulsa el engranaje o ?.', limitFull: '{n} de {n} · completo', aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', versionUpdated: 'Actualizado', versionTagAria: 'Versión {v}, mostrar detalles de actualización', versionText: 'Versión {v}, actualizada {d}', secBackground: 'Fondo', resetIntro: 'Restablecer ajustes solo devuelve los valores predeterminados; tus datos se mantienen. Borrar mis datos elimina tus enlaces propios, accesos de IA, zonas horarias, ciudad y lugares adicionales. No se puede deshacer, así que haz antes una copia en la pestaña Copia de Gestionar datos.', resetSec: 'Restablecer', dateOnLbl: 'Mostrar la fecha', dateSec: 'Fecha', dateShow: 'Mostrar', dateLong: 'Larga', dateShort: 'Corta', dateOrderLbl: 'Orden', dateAuto: 'Automático', dateDmy: 'Día-mes-año', dateMdy: 'Mes-día-año', dateYmd: 'Año-mes-día', timeSec: 'Formato de hora', time24: '24 horas', time12: '12 horas (AM/PM)', timeFull: 'Completo, con segundos', searchSec: 'Búsqueda', searchNewTab: 'Abrir la búsqueda en una pestaña nueva', aiNewTab: 'Abrir los accesos de IA en una pestaña nueva', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige servicios', aiInvalid: 'Escribe una dirección https válida' },
+  zh: { quickTitle: '快速入门', quickEngineHead: '更换搜索引擎', quickEngineText: '每次点击图标会切换到下一个搜索引擎：DuckDuckGo、Kagi、Brave 或 Google。你的选择会被保存。', quickClick: '点这里', quickMoreHead: '页面更多功能', quickAiHead: '添加 AI 链接', quickAiText: '在“设置 → AI”中最多选五个 AI 服务，也可以添加你自己的地址。', quickPageHead: '选择页面', quickPageText: '极简、标准或高级，在右上角的设置中切换。', quickDone: '知道了', quickLink: '切换快速入门', quickCard: '快速入门：最初的几步', quickNote: '这些内容也在帮助中。', changelogLink: '更新记录', hintText: '设置在这里：点击齿轮，或按 ?。', limitFull: '{n}/{n} · 已满', aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', versionUpdated: '更新', versionTagAria: '版本 {v}，显示更新详情', versionText: '版本 {v}，更新于 {d}', secBackground: '背景', resetIntro: '重置设置只会恢复默认值，你的数据会保留。删除我的数据会移除你自己的链接、AI 快捷方式、时区、城市和额外地点。此操作无法撤销，请先在管理数据的备份标签中备份。', resetSec: '重置', dateOnLbl: '显示日期', dateSec: '日期', dateShow: '显示', dateLong: '长格式', dateShort: '短格式', dateOrderLbl: '顺序', dateAuto: '自动', dateDmy: '日-月-年', dateMdy: '月-日-年', dateYmd: '年-月-日', timeSec: '时间格式', time24: '24 小时制', time12: '12 小时制 (AM/PM)', timeFull: '完整，含秒', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', aiDuplicate: '已在列表中。', aiPick: '选择服务', aiInvalid: '请输入有效的 https 地址' }
 }
 const manageText = {
   en: { linkUp: 'Move up', linkDown: 'Move down', manageOpen: 'Manage data', tabBackup: 'Backup', backupNote: 'Export saves your settings, links, AI shortcuts, time zones and weather places to a file on your computer. Import loads such a file: Merge adds what is new and keeps what you have, Replace overwrites everything. Make a backup before you reset or delete your data.', tabLinks: 'Own links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
@@ -841,12 +841,12 @@ const advancedText = {
   zh: { advTitle: '高级设置', advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
 }
 const shellSegText = {
-  en: { segSettings: 'Settings', segData: 'Data', dataBack: '← Data', dataHomeHint: 'Choose a catalog. No scrolling tab bar.', dataDescSearch: 'Engines', dataDescAi: 'Overlay + shortcuts', dataDescSocial: 'Jump icons', dataDescLinks: 'List', dataDescZones: 'Cities', dataDescWeather: 'Places', dataDescWall: 'Wallpapers', dataDescBackup: 'Export / import' },
-  nl: { segSettings: 'Instellingen', segData: 'Data', dataBack: '← Data', dataHomeHint: 'Kies een catalogus. Geen scrollende tabbalk.', dataDescSearch: 'Machines', dataDescAi: 'Overlay + snelkoppelingen', dataDescSocial: 'Sprongiconen', dataDescLinks: 'Lijst', dataDescZones: 'Steden', dataDescWeather: 'Plaatsen', dataDescWall: 'Achtergronden', dataDescBackup: 'Export / import' },
-  de: { segSettings: 'Einstellungen', segData: 'Daten', dataBack: '← Daten', dataHomeHint: 'Katalog wählen. Keine scrollende Tab-Leiste.', dataDescSearch: 'Maschinen', dataDescAi: 'Overlay + Verknüpfungen', dataDescSocial: 'Sprung-Icons', dataDescLinks: 'Liste', dataDescZones: 'Städte', dataDescWeather: 'Orte', dataDescWall: 'Hintergründe', dataDescBackup: 'Export / Import' },
-  fr: { segSettings: 'Réglages', segData: 'Données', dataBack: '← Données', dataHomeHint: 'Choisissez un catalogue. Pas de barre d’onglets.', dataDescSearch: 'Moteurs', dataDescAi: 'Overlay + raccourcis', dataDescSocial: 'Icônes', dataDescLinks: 'Liste', dataDescZones: 'Villes', dataDescWeather: 'Lieux', dataDescWall: 'Fonds', dataDescBackup: 'Export / import' },
-  es: { segSettings: 'Ajustes', segData: 'Datos', dataBack: '← Datos', dataHomeHint: 'Elige un catálogo. Sin barra de pestañas.', dataDescSearch: 'Buscadores', dataDescAi: 'Overlay + accesos', dataDescSocial: 'Iconos', dataDescLinks: 'Lista', dataDescZones: 'Ciudades', dataDescWeather: 'Lugares', dataDescWall: 'Fondos', dataDescBackup: 'Exportar / importar' },
-  zh: { segSettings: '设置', segData: '数据', dataBack: '← 数据', dataHomeHint: '选择一个目录。无横向标签栏。', dataDescSearch: '引擎', dataDescAi: '叠加层与快捷方式', dataDescSocial: '跳转图标', dataDescLinks: '列表', dataDescZones: '城市', dataDescWeather: '地点', dataDescWall: '壁纸', dataDescBackup: '导出 / 导入' },
+  en: { segSettings: 'Settings', segData: 'Data', dataBack: '← Data', settingsBack: '← Settings', dataHomeHint: 'Choose a catalog. No scrolling tab bar.', settingsHomeHint: 'Choose a settings group.', dataDescSearch: 'Engines', dataDescAi: 'Overlay + shortcuts', dataDescSocial: 'Jump icons', dataDescLinks: 'List', dataDescZones: 'Cities', dataDescWeather: 'Places', dataDescWall: 'Wallpapers', dataDescBackup: 'Export / import', setDescPage: 'Minimal / Standard / Personal', setDescShow: 'Masters', setDescWeather: 'On + location', setDescClock: 'Format', setDescSearch: 'New tab', setDescAi: 'New tab', setDescLang: 'UI language' },
+  nl: { segSettings: 'Instellingen', segData: 'Data', dataBack: '← Data', settingsBack: '← Instellingen', dataHomeHint: 'Kies een catalogus. Geen scrollende tabbalk.', settingsHomeHint: 'Kies een instellingengroep.', dataDescSearch: 'Machines', dataDescAi: 'Overlay + snelkoppelingen', dataDescSocial: 'Sprongiconen', dataDescLinks: 'Lijst', dataDescZones: 'Steden', dataDescWeather: 'Plaatsen', dataDescWall: 'Achtergronden', dataDescBackup: 'Export / import', setDescPage: 'Minimaal / Standaard / Persoonlijk', setDescShow: 'Masters', setDescWeather: 'Aan + locatie', setDescClock: 'Opmaak', setDescSearch: 'Nieuw tabblad', setDescAi: 'Nieuw tabblad', setDescLang: 'Taal van de interface' },
+  de: { segSettings: 'Einstellungen', segData: 'Daten', dataBack: '← Daten', settingsBack: '← Einstellungen', dataHomeHint: 'Katalog wählen. Keine scrollende Tab-Leiste.', settingsHomeHint: 'Einstellungsgruppe wählen.', dataDescSearch: 'Maschinen', dataDescAi: 'Overlay + Verknüpfungen', dataDescSocial: 'Sprung-Icons', dataDescLinks: 'Liste', dataDescZones: 'Städte', dataDescWeather: 'Orte', dataDescWall: 'Hintergründe', dataDescBackup: 'Export / Import', setDescPage: 'Minimal / Standard / Persönlich', setDescShow: 'Schalter', setDescWeather: 'An + Standort', setDescClock: 'Format', setDescSearch: 'Neuer Tab', setDescAi: 'Neuer Tab', setDescLang: 'Oberflächensprache' },
+  fr: { segSettings: 'Réglages', segData: 'Données', dataBack: '← Données', settingsBack: '← Réglages', dataHomeHint: 'Choisissez un catalogue. Pas de barre d’onglets.', settingsHomeHint: 'Choisissez un groupe de réglages.', dataDescSearch: 'Moteurs', dataDescAi: 'Overlay + raccourcis', dataDescSocial: 'Icônes', dataDescLinks: 'Liste', dataDescZones: 'Villes', dataDescWeather: 'Lieux', dataDescWall: 'Fonds', dataDescBackup: 'Export / import', setDescPage: 'Minimal / Standard / Perso', setDescShow: 'Masters', setDescWeather: 'Activé + lieu', setDescClock: 'Format', setDescSearch: 'Nouvel onglet', setDescAi: 'Nouvel onglet', setDescLang: 'Langue de l’interface' },
+  es: { segSettings: 'Ajustes', segData: 'Datos', dataBack: '← Datos', settingsBack: '← Ajustes', dataHomeHint: 'Elige un catálogo. Sin barra de pestañas.', settingsHomeHint: 'Elige un grupo de ajustes.', dataDescSearch: 'Buscadores', dataDescAi: 'Overlay + accesos', dataDescSocial: 'Iconos', dataDescLinks: 'Lista', dataDescZones: 'Ciudades', dataDescWeather: 'Lugares', dataDescWall: 'Fondos', dataDescBackup: 'Exportar / importar', setDescPage: 'Mínimo / Estándar / Personal', setDescShow: 'Masters', setDescWeather: 'Activado + ubicación', setDescClock: 'Formato', setDescSearch: 'Nueva pestaña', setDescAi: 'Nueva pestaña', setDescLang: 'Idioma de la interfaz' },
+  zh: { segSettings: '设置', segData: '数据', dataBack: '← 数据', settingsBack: '← 设置', dataHomeHint: '选择一个目录。无横向标签栏。', settingsHomeHint: '选择一组设置。', dataDescSearch: '引擎', dataDescAi: '叠加层与快捷方式', dataDescSocial: '跳转图标', dataDescLinks: '列表', dataDescZones: '城市', dataDescWeather: '地点', dataDescWall: '壁纸', dataDescBackup: '导出 / 导入', setDescPage: '极简 / 标准 / 个性化', setDescShow: '开关', setDescWeather: '开启 + 位置', setDescClock: '格式', setDescSearch: '新标签页', setDescAi: '新标签页', setDescLang: '界面语言' },
 }
 for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], pageText[lang], topbarText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], tintCycleText[lang], quoteTitleText[lang], ipText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] }, shellSegText[lang])
 const weatherWording = {
@@ -1478,6 +1478,8 @@ const applySettingsText = () => {
   if (segDataBtn) segDataBtn.textContent = t.segData || 'Data'
   const dataHomeHint = document.getElementById('data-home-hint')
   if (dataHomeHint) dataHomeHint.textContent = t.dataHomeHint || ''
+  const settingsHomeHint = document.getElementById('settings-home-hint')
+  if (settingsHomeHint) settingsHomeHint.textContent = t.settingsHomeHint || ''
   const cardMap = [
     ['data-card-search', 'data-desc-search', t.tabSearch, t.dataDescSearch],
     ['data-card-ai', 'data-desc-ai', t.tabAi, t.dataDescAi],
@@ -1487,6 +1489,13 @@ const applySettingsText = () => {
     ['data-card-weather', 'data-desc-weather', t.tabWeather, t.dataDescWeather],
     ['data-card-wall', 'data-desc-wall', t.tabWallpaper, t.dataDescWall],
     ['data-card-backup', 'data-desc-backup', t.tabBackup, t.dataDescBackup],
+    ['set-card-page', 'set-desc-page', t.secPage, t.setDescPage],
+    ['set-card-show', 'set-desc-show', t.manageShowLabel, t.setDescShow],
+    ['set-card-weather', 'set-desc-weather', t.secWeather, t.setDescWeather],
+    ['set-card-clock', 'set-desc-clock', t.clockDateSec, t.setDescClock],
+    ['set-card-search', 'set-desc-search', t.tabSearch, t.setDescSearch],
+    ['set-card-ai', 'set-desc-ai', t.aiSec, t.setDescAi],
+    ['set-card-lang', 'set-desc-lang', t.langLabel, t.setDescLang],
   ]
   for (const [titleId, descId, label, desc] of cardMap) {
     const titleEl = document.getElementById(titleId)
@@ -1494,7 +1503,24 @@ const applySettingsText = () => {
     if (titleEl) titleEl.textContent = label || ''
     if (descEl) descEl.textContent = desc || ''
   }
-  if (dataBackBtn && !dataBackBtn.hidden) dataBackBtn.textContent = t.dataBack || '← Data'
+  const prefsNavLabels = [
+    ['nav-page', t.secPage],
+    ['nav-show', t.manageShowLabel],
+    ['nav-weather-prefs', t.secWeather],
+    ['nav-clock', t.clockDateSec],
+    ['nav-search-prefs', t.tabSearch],
+    ['nav-ai-prefs', t.aiSec],
+    ['nav-language', t.langLabel],
+  ]
+  for (const [id, label] of prefsNavLabels) {
+    const elNav = document.getElementById(id)
+    if (elNav && label) elNav.textContent = label
+  }
+  if (dataBackBtn && !dataBackBtn.hidden) {
+    dataBackBtn.textContent = settingsWorld === 'data'
+      ? (t.dataBack || '← Data')
+      : (t.settingsBack || '← Settings')
+  }
   const settingsHintEl = document.getElementById('settings-hint')
   if (settingsHintEl) settingsHintEl.textContent = t.hint
   const versionMount = document.getElementById('app-version-root')
@@ -1738,12 +1764,12 @@ const syncSettings = () => {
 const settingsContent = document.getElementById('settings-content')
 const settingsShell = settings?.querySelector('.settings-shell')
 
-const openSettings = (pane = 'general') => {
+const openSettings = (pane = 'page') => {
   openedFrom.el = document.activeElement
   syncSettings()
   settings.hidden = false
-  // Legacy Advanced deep-link opens Settings prefs.
-  showSettingsPane(pane === 'advanced' ? 'general' : pane)
+  // Legacy Advanced/General deep-links open Settings prefs (Page / mobile home).
+  showSettingsPane(pane === 'advanced' ? 'page' : pane)
   settings.querySelector('.settings-panel').focus()
 }
 
@@ -1752,25 +1778,43 @@ const closeSettings = () => {
   if (openedFrom.el && openedFrom.el.focus) openedFrom.el.focus()
 }
 
-settingsButton.addEventListener('click', () => openSettings('general'))
+settingsButton.addEventListener('click', () => openSettings(isNarrowSettings() ? 'settings-home' : 'page'))
 
 // Help: the same guide as the README, opened from the settings window. Escape closes it.
 const helpWindow = document.getElementById('help')
 const helpBody = document.getElementById('help-body')
 let helpFrom = null
+const aboutLinkLabel = (url) => {
+  if (url.includes('github.com')) return 'GitHub'
+  if (url.includes('start.soholocal.nl')) return 'start.soholocal.nl'
+  return url.replace(/^https?:\/\//, '').replace(/\/$/, '')
+}
 const renderHelp = () => {
   document.getElementById('help-title').textContent = helpCopy.title
   document.getElementById('help-close').setAttribute('aria-label', helpCopy.close)
-  helpBody.replaceChildren(...helpCopy.sections.map(([heading, body, link]) => {
+  const faqLink = Object.assign(document.createElement('a'), {
+    href: 'https://github.com/a4ds5t/start.soholocal/blob/main/docs/FAQ.md',
+    target: '_blank',
+    rel: 'noopener',
+    className: 'help-link help-faq-top',
+    textContent: helpCopy.faq,
+  })
+  const sections = helpCopy.sections.map(([heading, body, link]) => {
     const section = el('section', 'help-section')
     section.append(el('h3', '', heading), el('p', '', body))
-    // Optional links, each shown by its address, for the About section.
-    for (const url of [].concat(link || [])) section.append(Object.assign(document.createElement('a'), { href: url, target: '_blank', rel: 'noopener', className: 'help-link', textContent: url.replace('https://', '') }))
+    // About: short linked text (GitHub / site), not raw URLs.
+    for (const url of [].concat(link || [])) {
+      section.append(Object.assign(document.createElement('a'), {
+        href: url,
+        target: '_blank',
+        rel: 'noopener',
+        className: 'help-link',
+        textContent: aboutLinkLabel(url),
+      }))
+    }
     return section
-  }))
-  // One link at the foot, to the questions and answers; the topics themselves stay as they are.
-  const faqLink = Object.assign(document.createElement('a'), { href: 'https://github.com/a4ds5t/start.soholocal/blob/main/docs/FAQ.md', target: '_blank', rel: 'noopener', className: 'help-link', textContent: helpCopy.faq })
-  helpBody.append(faqLink)
+  })
+  helpBody.replaceChildren(faqLink, ...sections)
 }
 // Help opens over the settings; the settings are hidden meanwhile so their scrollbar does not show through.
 let helpOverSettings = false
@@ -1815,7 +1859,7 @@ document.addEventListener('keydown', (e) => {
   if (!open) {
     if (e.key === '?' && !isTyping(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault()
-      openSettings('general')
+      openSettings(isNarrowSettings() ? 'settings-home' : 'page')
     }
     return
   }
@@ -2336,16 +2380,19 @@ const utcLabel = (zone, now) => {
 const zoneName = (zone) => el('span', 'zone-name', cityOf(zone))
 const zoneTag = (zone, now) => el('span', 'zone-tag', utcLabel(zone, now))
 
-// Settings shell B: Settings | Data segment; Data = catalogs (sidebar desktop, list mobile).
+// Settings shell B+: Settings | Data segment; both use sidebar (desktop) / list→drill-in (mobile).
 const manageWindow = document.getElementById('manage') // legacy stub; shell lives in #settings
+const prefsNav = document.getElementById('settings-prefs-nav')
 const settingsNav = document.getElementById('settings-nav')
+const prefsNavButtons = [...(prefsNav?.querySelectorAll('.settings-nav-btn') || [])]
 const settingsNavButtons = [...(settingsNav?.querySelectorAll('.settings-nav-btn') || [])]
 const manageSections = [...document.querySelectorAll('#settings-content .manage-section')]
 const segSettingsBtn = document.getElementById('seg-settings')
 const segDataBtn = document.getElementById('seg-data')
 const dataBackBtn = document.getElementById('data-back')
+const SETTINGS_PANES = new Set(['page', 'show', 'weather-prefs', 'clock', 'search-prefs', 'ai-prefs', 'language', 'settings-home'])
 const DATA_PANES = new Set(['search', 'ai', 'social', 'links', 'zones', 'weather', 'wallpapers', 'backup', 'data-home'])
-let manageTab = 'general'
+let manageTab = 'page'
 let settingsWorld = 'settings'
 let manageFrom = null
 
@@ -2356,48 +2403,78 @@ const setSettingsWorld = (world) => {
   if (settingsShell) settingsShell.dataset.world = settingsWorld
   if (segSettingsBtn) segSettingsBtn.setAttribute('aria-selected', String(settingsWorld === 'settings'))
   if (segDataBtn) segDataBtn.setAttribute('aria-selected', String(settingsWorld === 'data'))
-  if (settingsNav) settingsNav.hidden = settingsWorld !== 'data' || isNarrowSettings()
+  const narrow = isNarrowSettings()
+  if (prefsNav) prefsNav.hidden = settingsWorld !== 'settings' || narrow
+  if (settingsNav) settingsNav.hidden = settingsWorld !== 'data' || narrow
 }
 
-const showSettingsPane = (pane) => {
-  let tab = pane || 'general'
-  if (tab === 'advanced' || tab === 'general') tab = 'general'
-  if (tab === 'manage') tab = 'data-home'
-
-  if (tab === 'general') {
-    setSettingsWorld('settings')
-  } else {
-    setSettingsWorld('data')
-    if (isNarrowSettings() && tab !== 'data-home' && !DATA_PANES.has(tab)) tab = 'data-home'
-    // Mobile Data: start on the vertical list unless a concrete catalog is requested.
-    if (isNarrowSettings() && tab === 'data') tab = 'data-home'
-  }
-
-  // Mobile Data entry with no catalog yet → home list.
-  if (settingsWorld === 'data' && isNarrowSettings() && (tab === 'data' || !tab)) tab = 'data-home'
-  if (settingsWorld === 'data' && !isNarrowSettings() && (tab === 'data-home' || tab === 'data')) tab = 'search'
-
-  manageTab = tab
-  settingsNavButtons.forEach((button) => {
+const syncNavSelection = (buttons, tab) => {
+  buttons.forEach((button) => {
     const on = button.dataset.pane === tab
     button.setAttribute('aria-selected', String(on))
     button.tabIndex = on ? 0 : -1
   })
+}
+
+const bindNavKeys = (buttons) => {
+  buttons.forEach((button, index) => {
+    button.addEventListener('click', () => showSettingsPane(button.dataset.pane))
+    button.addEventListener('keydown', (e) => {
+      const step = { ArrowDown: 1, ArrowUp: -1, ArrowRight: 1, ArrowLeft: -1 }[e.key]
+      let next = null
+      if (step) next = (index + step + buttons.length) % buttons.length
+      else if (e.key === 'Home') next = 0
+      else if (e.key === 'End') next = buttons.length - 1
+      if (next === null) return
+      e.preventDefault()
+      buttons[next].focus()
+      showSettingsPane(buttons[next].dataset.pane)
+    })
+  })
+}
+
+const showSettingsPane = (pane) => {
+  let tab = pane || 'page'
+  if (tab === 'advanced' || tab === 'general' || tab === 'settings') {
+    tab = isNarrowSettings() ? 'settings-home' : 'page'
+  }
+  if (tab === 'manage') tab = 'data-home'
+  if (tab === 'data') tab = isNarrowSettings() ? 'data-home' : 'search'
+
+  if (SETTINGS_PANES.has(tab)) {
+    setSettingsWorld('settings')
+    if (!isNarrowSettings() && tab === 'settings-home') tab = 'page'
+  } else if (DATA_PANES.has(tab)) {
+    setSettingsWorld('data')
+    if (!isNarrowSettings() && tab === 'data-home') tab = 'search'
+  } else {
+    setSettingsWorld('settings')
+    tab = isNarrowSettings() ? 'settings-home' : 'page'
+  }
+
+  manageTab = tab
+  syncNavSelection(prefsNavButtons, tab)
+  syncNavSelection(settingsNavButtons, tab)
   manageSections.forEach((section) => {
     const id = section.dataset.pane || section.dataset.tab
     section.hidden = id !== tab
   })
   if (dataBackBtn) {
-    const showBack = settingsWorld === 'data' && isNarrowSettings() && tab !== 'data-home'
+    const showBack = isNarrowSettings() && (
+      (settingsWorld === 'data' && tab !== 'data-home')
+      || (settingsWorld === 'settings' && tab !== 'settings-home')
+    )
     dataBackBtn.hidden = !showBack
-    dataBackBtn.textContent = t.dataBack || '← Data'
+    dataBackBtn.textContent = settingsWorld === 'data'
+      ? (t.dataBack || '← Data')
+      : (t.settingsBack || '← Settings')
   }
   if (tab === 'links' && typeof resetLinkForm === 'function') resetLinkForm()
   if (tab === 'zones' && typeof renderZones === 'function') renderZones()
   if (tab === 'ai' && typeof resetAiForm === 'function') resetAiForm()
   if (tab === 'weather' && typeof renderPlaces === 'function') renderPlaces()
   if (tab === 'wallpapers' && typeof renderWallpapers === 'function') renderWallpapers()
-  if (tab === 'general') syncSettings()
+  if (SETTINGS_PANES.has(tab) && tab !== 'settings-home') syncSettings()
 }
 
 const showManageTab = showSettingsPane
@@ -2414,33 +2491,26 @@ const closeManage = () => {
   else if (manageFrom && manageFrom.focus) manageFrom.focus()
 }
 
-segSettingsBtn?.addEventListener('click', () => showSettingsPane('general'))
+segSettingsBtn?.addEventListener('click', () => showSettingsPane(isNarrowSettings() ? 'settings-home' : 'page'))
 segDataBtn?.addEventListener('click', () => showSettingsPane(isNarrowSettings() ? 'data-home' : 'search'))
-dataBackBtn?.addEventListener('click', () => showSettingsPane('data-home'))
+dataBackBtn?.addEventListener('click', () => showSettingsPane(settingsWorld === 'data' ? 'data-home' : 'settings-home'))
 document.getElementById('data-home-list')?.addEventListener('click', (event) => {
   const card = event.target.closest('[data-pane]')
   if (!card) return
   showSettingsPane(card.dataset.pane)
 })
-
-settingsNavButtons.forEach((button, index) => {
-  button.addEventListener('click', () => showSettingsPane(button.dataset.pane))
-  button.addEventListener('keydown', (e) => {
-    const step = { ArrowDown: 1, ArrowUp: -1, ArrowRight: 1, ArrowLeft: -1 }[e.key]
-    let next = null
-    if (step) next = (index + step + settingsNavButtons.length) % settingsNavButtons.length
-    else if (e.key === 'Home') next = 0
-    else if (e.key === 'End') next = settingsNavButtons.length - 1
-    if (next === null) return
-    e.preventDefault()
-    settingsNavButtons[next].focus()
-    showSettingsPane(settingsNavButtons[next].dataset.pane)
-  })
+document.getElementById('settings-home-list')?.addEventListener('click', (event) => {
+  const card = event.target.closest('[data-pane]')
+  if (!card) return
+  showSettingsPane(card.dataset.pane)
 })
+
+bindNavKeys(prefsNavButtons)
+bindNavKeys(settingsNavButtons)
 
 window.addEventListener('resize', () => {
   if (settings.hidden) return
-  showSettingsPane(manageTab === 'general' ? 'general' : (isNarrowSettings() && manageTab !== 'data-home' ? manageTab : manageTab))
+  showSettingsPane(manageTab)
 })
 
 const zonesWindow = document.getElementById('zones-window')

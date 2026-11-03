@@ -1562,12 +1562,13 @@ img.ai-icon {
   border: 0;
 }
 
-.settings-shell[data-world="settings"] .settings-shell-body {
-  grid-template-columns: minmax(0, 1fr);
+.settings-shell[data-world="settings"] #settings-nav,
+.settings-shell[data-world="data"] #settings-prefs-nav {
+  display: none;
 }
 
-.settings-shell[data-world="settings"] .settings-nav {
-  display: none;
+.settings-nav[hidden] {
+  display: none !important;
 }
 
 .data-home-list {
@@ -2375,10 +2376,30 @@ html[data-quote-off] #quote {
 
 .pane-block {
   margin: 0 0 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--color-bg) 35%, var(--color-field));
 }
 
 .pane-block .location-title {
   margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--color-fg-2);
+}
+
+.prefs-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.prefs-split .pane-block {
+  margin: 0;
 }
 
 .pane-block .master-toggle + .setting-select,
@@ -2419,7 +2440,7 @@ html[data-quote-off] #quote {
 
 .master-toggle {
   display: grid;
-  grid-template-columns: 36px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) 36px;
   align-items: center;
   column-gap: 10px;
   min-width: 0;
@@ -2429,11 +2450,15 @@ html[data-quote-off] #quote {
 }
 
 .master-toggle span {
+  grid-column: 1;
+  grid-row: 1;
   min-width: 0;
   line-height: 1.3;
 }
 
 .master-toggle input {
+  grid-column: 2;
+  grid-row: 1;
   width: 36px;
   height: 20px;
   appearance: none;
@@ -2857,10 +2882,23 @@ html[data-quote-off] #quote {
   }
 }
 
-.help-top-link {
-  margin: 0 0 14px;
+.help-head-actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.help-head-actions .quick-link {
   font-size: 13px;
-  line-height: 1.4;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.help-faq-top {
+  display: inline-block;
+  margin: 0 0 14px;
 }
 
 /* The guide is one column, like the settings: every topic is a block of the same width, so no uneven gaps. */
@@ -2928,12 +2966,13 @@ html[data-quote-off] #quote {
   display: none;
 }
 
-/* The page presets sit side by side, above the other settings. */
+/* The page presets sit side by side, with room before the next block. */
 .presets {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px 12px;
   align-items: center;
+  margin: 0 0 20px;
 }
 
 .presets .setting {
@@ -3443,8 +3482,8 @@ button.action:disabled {
     grid-template-columns: 1fr;
   }
 
-  /* Mobile Data: home list / drill-in — hide the desktop sidebar nav. */
-  .settings-shell[data-world="data"] .settings-nav {
+  /* Mobile: home list / drill-in — hide desktop sidebars for Settings and Data. */
+  .settings-shell .settings-nav {
     display: none !important;
   }
 
@@ -3461,8 +3500,13 @@ button.action:disabled {
     font-size: 13px;
   }
 
+  .prefs-split {
+    grid-template-columns: 1fr;
+  }
+
   .manage-masters,
   .adv-show-masters {
+    grid-template-columns: 1fr;
     column-gap: 12px;
     row-gap: 12px;
   }
