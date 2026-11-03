@@ -160,8 +160,14 @@ const emptyForecast = {
   check(await page.isVisible('#set-ai-overlay'), 'Show on page holds masters');
   check(await page.locator('#lbl-ai-overlay').textContent() === 'AI in search field', 'AI master is labeled AI in search field');
   check((await page.locator('#lbl-links-master').textContent()) === 'Links panel (top left)', 'Links master names the top-left panel');
-  check((await page.locator('#lbl-links-own').textContent()) === 'Show links on hover', 'Own links is clarified as hover preview');
+  check(!(await page.$('#set-links-own')), 'Show links on hover toggle is gone');
   check((await page.locator('#lbl-quote').textContent()) === 'Quote of the day', 'Quote is labeled Quote of the day');
+  const linksWasOn = await page.isChecked('#set-links-master');
+  if (linksWasOn) await page.click('#set-links-master');
+  check((await page.getAttribute('#links-button', 'aria-label')) === 'Wikipedia', 'Links panel off shows Wikipedia');
+  check(await page.isVisible('#links-button'), 'Wikipedia control stays visible when Links panel is off');
+  if (linksWasOn) await page.click('#set-links-master');
+  check((await page.getAttribute('#links-button', 'aria-label')) === 'Links', 'Links panel on restores Links label');
   check(await page.isVisible('#under-bar-group'), 'Show on page has Under the search bar group');
   check(await page.isVisible('#under-bar-none'), 'Under-bar offers None');
   check(await page.$eval('.under-bar-radios', (el) => getComputedStyle(el).display === 'flex'), 'Under-bar radios sit on one horizontal row');

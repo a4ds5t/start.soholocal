@@ -571,7 +571,7 @@ const settingsFields = {
   tint: document.getElementById('set-tint'),
   wallpaperButton: document.getElementById('set-wallpaper-btn'),
   links: document.getElementById('set-links-master'),
-  linksOwn: document.getElementById('set-links-own'),
+  linksOwn: null, // hover-peek toggle removed; Links off → Wikipedia
   askai: null, // Ask AI row is chosen via under-bar radios
   searchNewTab: document.getElementById('set-search-newtab'),
   aiNewTab: document.getElementById('set-ai-newtab'),
@@ -871,7 +871,7 @@ const helpText = {
     ['AI shortcuts', 'Shortcuts below the search bar. In Settings → AI you tick the services you want, up to five; your own shortcuts count toward the same five. Each shortcut shows its service icon. AI links open in a new tab by default, and you can change that under Settings → General.'],
     ['Clock', 'Hover over the time to see your time zone. Click the time to cycle through 24-hour, 12-hour and full time with seconds. When time zones are on, the clock icon above the time opens the zones you chose.'],
     ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and a short numeric date. The order follows your browser unless you choose one under Settings → General.'],
-    ['Links', 'The button at the top left opens your own links only (add, edit, reorder). There is no canned permanent row. Hovering the button shows your own links. You can add up to 15, each with an optional description. Under Settings → General → Open in new tab you choose whether links (and social icons) open in a new tab.'],
+    ['Links', 'Links panel (top left) opens your personal links (add, edit, reorder — up to 15). Turn that panel off and the same spot becomes a Wikipedia link in your language. Under Settings → General → Open in new tab you choose whether links (and social icons) open in a new tab.'],
     ['Weather', 'Off by default. Turn it on in Settings → General and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 6 hours and seven days. Up to five more places can be added under Settings → Weather; city chips in the preview and forecast header switch between them. City names stay short, like Time zones.'],
     ['Background', 'Each press of the round button at the bottom right goes to the next background: none first, then the ones switched on under Settings → Background. The button at the bottom left changes the background colour in steps; on a computer that is the button too.'],
     ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. One fixed window holds everything: a left sidebar on a computer (General, Search, AI, Social, Links, Time zones, Weather, Background, Backup), and bottom tabs plus a menu on a phone. General has page presets, Show on page, weather location, clock & date, language and reset. Catalog panes hold Search/AI/Social/Links/zones/weather places/backgrounds; Backup exports and imports. Help opens with a Quick start at the top. Delete my data removes your own links, AI shortcuts, time zones, city and extra places — make a Backup first.'],
@@ -1650,7 +1650,6 @@ const applySettingsText = () => {
   document.getElementById('foot-pre').textContent = foot.pre
   document.getElementById('foot-post').textContent = foot.post
   document.getElementById('foot-link').title = foot.title
-  document.getElementById('lbl-links-own').textContent = t.linksOwn
   document.getElementById('zone-label').textContent = t.zonesAdd
   document.getElementById('zone-add-btn').textContent = t.zoneAddBtn
   const manageShowLabel = document.getElementById('manage-show-label')
@@ -1790,7 +1789,6 @@ const syncSettings = () => {
   settingsFields.tint.checked = tintOn
   settingsFields.wallpaperButton.checked = wallpaperButtonOn
   settingsFields.links.checked = linksOn
-  settingsFields.linksOwn.checked = linksOwn
   if (aiOverlayField) aiOverlayField.checked = aiOverlayMasterOn
   syncUnderBarRadios()
   settingsFields.clock.value = clockMode
@@ -2680,12 +2678,16 @@ setInterval(() => {
   if (!settings.hidden && manageTab === 'zones') renderZones()
 }, 1000)
 
-// Links. Permanent links are built in: Wikipedia, in the browser's language. They cannot be removed.
-// Custom links are added by the visitor, up to 15. The whole links button can be switched off in settings.
+// Links panel (top left) on → personal links window. Off → Wikipedia in the UI language (canned default).
 const linksButton = document.getElementById('links-button')
 const linksButtonIcon = linksButton.innerHTML
+const wikipediaIcon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.09 13.119c-.936 1.932-2.217 4.548-2.853 5.728-.616 1.074-1.127.931-1.532.029-1.406-3.321-4.293-9.144-5.651-12.409-.251-.601-.441-.987-.619-1.139-.181-.15-.554-.24-1.122-.271C.103 5.033 0 4.982 0 4.898v-.455l.052-.045c.924-.005 5.401 0 5.401 0l.051.045v.434c0 .119-.075.176-.225.176l-.564.031c-.485.029-.727.164-.727.436 0 .135.053.33.166.601 1.082 2.646 4.818 10.521 4.818 10.521l.136.046 2.411-4.81-.482-1.067-1.658-3.264s-.318-.654-.428-.872c-.728-1.443-.712-1.518-1.447-1.617-.207-.023-.313-.05-.313-.149v-.468l.06-.045h4.292l.113.037v.451c0 .105-.076.15-.227.15l-.308.047c-.792.061-.661.381-.136 1.422l1.582 3.252 1.758-3.504c.293-.64.233-.801.111-.947-.07-.084-.305-.22-.812-.24l-.201-.021c-.052 0-.098-.015-.145-.051-.045-.031-.067-.076-.067-.129v-.427l.061-.045c1.247-.008 4.043 0 4.043 0l.059.045v.436c0 .121-.059.178-.193.178-.646.03-.782.095-1.023.439-.12.186-.375.589-.646 1.039l-2.301 4.273-.065.135 2.792 5.712.17.048 4.396-10.438c.154-.422.129-.722-.064-.895-.197-.172-.346-.273-.857-.295l-.42-.016c-.061 0-.105-.014-.152-.045-.043-.029-.072-.075-.072-.119v-.436l.059-.045h4.961l.041.045v.437c0 .119-.074.18-.209.18-.648.03-1.127.18-1.443.421-.314.255-.557.616-.736 1.067 0 0-4.043 9.258-5.426 12.339-.525 1.007-1.053.917-1.503-.031-.571-1.171-1.773-3.786-2.646-5.71l.053-.036z"/></svg>'
+const wikiHomeUrl = () => {
+  const code = ['nl', 'de', 'fr', 'es', 'zh'].includes(uiLang) ? uiLang : 'en'
+  return `https://${code}.wikipedia.org/`
+}
 const labelLinksButton = () => {
-  const label = t.linksButton || 'Links'
+  const label = linksOn ? (t.linksButton || 'Links') : 'Wikipedia'
   linksButton.setAttribute('aria-label', label)
   linksButton.title = label
 }
@@ -2717,7 +2719,6 @@ const hostOf = (value) => {
   try { return new URL(value).host } catch { return '' }
 }
 
-// Links panel is own-only: canned permanent icons (Wikipedia…Reddit) were removed.
 const isValidLink = (link) => !!link && typeof link.title === 'string' && typeof link.url === 'string' && safeUrl(link.url)
 
 let links = []
@@ -2726,7 +2727,8 @@ try {
   if (Array.isArray(saved)) links = saved.filter(isValidLink).slice(0, LINK_LIMIT)
 } catch {}
 let linksOn = readFlag('linksOn', true)
-let linksOwn = readFlag('linksOwn', false)
+// Legacy export key only — hover-peek toggle removed from Settings.
+let linksOwn = false
 let editing = null
 
 const saveLinks = () => writeKey('links', JSON.stringify(links))
@@ -2763,13 +2765,15 @@ const linkAnchor = (link, withDescription) => {
 }
 
 const renderLinks = () => {
-  linksButton.hidden = !linksOn
-  linksButton.innerHTML = linksButtonIcon
+  // Always show the control: panel on → globe; panel off → Wikipedia.
+  linksButton.hidden = false
+  linksButton.innerHTML = linksOn ? linksButtonIcon : wikipediaIcon
   labelLinksButton()
-  linksPreview.hidden = !linksOwn
-  settingsFields.linksOwn.disabled = !linksOn
-  // Own links only — canned permanent row removed.
-  linksPreview.replaceChildren(...links.map((link) => linkAnchor(link, false)))
+  if (linksOn) linksButton.setAttribute('aria-haspopup', 'dialog')
+  else linksButton.removeAttribute('aria-haspopup')
+  // No hover-peek of personal links — panel opens on click only.
+  linksPreview.hidden = true
+  linksPreview.replaceChildren()
   if (linksIcons) {
     linksIcons.replaceChildren()
     linksIcons.hidden = true
@@ -2899,19 +2903,20 @@ document.getElementById('links-manage').addEventListener('click', () => {
   openManage('links')
 })
 linksButton.addEventListener('click', () => {
+  if (!linksOn) {
+    const url = wikiHomeUrl()
+    if (linksNewTab) window.open(url, '_blank', 'noopener')
+    else location.assign(url)
+    return
+  }
   openLinks()
 })
 
-// Show on page: Links master only shows/hides the globe. Manage data stays open.
+// Show on page: Links panel on → personal links window; off → Wikipedia button.
 settingsFields.links.addEventListener('change', () => {
   linksOn = settingsFields.links.checked
   writeKey('linksOn', linksOn ? 'on' : 'off')
   if (!linksOn && !linksWindow.hidden) closeLinks()
-  renderLinks()
-})
-settingsFields.linksOwn.addEventListener('change', () => {
-  linksOwn = settingsFields.linksOwn.checked
-  writeKey('linksOwn', linksOwn ? 'on' : 'off')
   renderLinks()
 })
 renderLinks()
