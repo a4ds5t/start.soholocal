@@ -1943,6 +1943,27 @@ img.ai-icon {
   font-size: 12px;
 }
 
+.city-selected {
+  margin: 0 0 4px;
+}
+
+.city-selected[hidden] {
+  display: none;
+}
+
+.city-selected li {
+  min-height: 32px;
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-field);
+}
+
+.city-selected #city-selected-name {
+  font-size: 13px;
+  color: var(--color-fg-1);
+}
+
 .city-row {
   display: flex;
   gap: 8px;
@@ -2533,7 +2554,13 @@ html[data-quote-off] #quote {
   grid-template-columns: 1fr 1fr;
   column-gap: 20px;
   row-gap: 12px;
-  align-items: stretch;
+  align-items: start;
+}
+
+/* Sibling margin is for stacked prefs panes — grid rows already use gap. */
+.manage-masters > .master-toggle + .master-toggle,
+.pane-block .manage-masters > .master-toggle + .master-toggle {
+  margin-top: 0;
 }
 
 .master-toggle {
@@ -2541,8 +2568,10 @@ html[data-quote-off] #quote {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  box-sizing: border-box;
   width: 100%;
   min-width: 0;
+  min-height: 32px;
   font-size: 13px;
   color: var(--color-fg-1);
   cursor: pointer;
@@ -2558,6 +2587,7 @@ html[data-quote-off] #quote {
 .master-toggle input {
   flex: 0 0 36px;
   order: 2;
+  align-self: center;
   width: 36px;
   height: 20px;
   margin: 0;

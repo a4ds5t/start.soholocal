@@ -726,12 +726,12 @@ const sectionText = {
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
 const aiText = {
-  en: { quickTitle: 'Quick start', quickEngineHead: 'Change search engine', quickEngineText: 'Click the left icon to switch Search ↔ AI. Hold (or right-click) to pick which engine or AI. Shortcut: Ctrl+Shift+A. Enter sends your query. Social icons (when enabled) sit under the bar as jump links.', quickClick: 'Click here', quickMoreHead: 'More from your page', quickAiHead: 'Add AI links', quickAiText: 'Under Settings → AI you pick AI platforms for the overlay and up to five ASK AI shortcuts.', quickPageHead: 'Pick a page', quickPageText: 'Minimal, Standard or Advanced, in the settings at the top right.', quickDone: 'Got it', quickLink: 'Toggle quickstart', quickCard: 'Quick start: the first steps', quickNote: 'Everything here is also in Help.', changelogLink: 'Changelog', hintText: 'Settings are here: click the gear, or press ?.', limitFull: '{n} of {n} · full', aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', versionUpdated: 'Updated', versionTagAria: 'Version {v}, show update details', versionText: 'Version {v}, updated {d}', secBackground: 'Background', resetIntro: 'Reset settings only sets your settings back to the defaults; your data stays. Delete my data removes your own links, AI shortcuts, time zones, city and extra places. This cannot be undone, so make a backup first on the Backup tab in Manage data.', resetSec: 'Reset', dateOnLbl: 'Show the date', dateSec: 'Date', dateShow: 'Show', dateLong: 'Long', dateShort: 'Short', dateOrderLbl: 'Order', dateAuto: 'Automatic', dateDmy: 'Day-month-year', dateMdy: 'Month-day-year', dateYmd: 'Year-month-day', timeSec: 'Time format', time24: '24 hours', time12: '12 hours (AM/PM)', timeFull: 'Full, with seconds', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', linksNewTab: 'Open links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick services', aiInvalid: 'Enter a valid https address' },
-  nl: { quickTitle: 'Quick start', quickEngineHead: 'Zoekmachine wisselen', quickEngineText: 'Elke klik op het icoon gaat naar de volgende zoekmachine: DuckDuckGo, Kagi, Brave of Google. Je keuze blijft bewaard.', quickClick: 'Klik hier', quickMoreHead: 'Meer uit je pagina', quickAiHead: 'AI-links toevoegen', quickAiText: 'Onder Instellingen → AI kies je tot vijf AI-diensten, of voeg je eigen adres toe.', quickPageHead: 'Pagina kiezen', quickPageText: 'Minimaal, Standaard of Geavanceerd, in de instellingen rechtsboven.', quickDone: 'Begrepen', quickLink: 'Quick start tonen', quickCard: 'Quick start: de eerste stappen', quickNote: 'Alles staat ook in Help.', changelogLink: 'Wijzigingen', hintText: 'Hier vind je de instellingen: klik op het tandwiel of druk op ?.', limitFull: '{n} van {n} · vol', aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', versionUpdated: 'Bijgewerkt', versionTagAria: 'Versie {v}, toon bijwerkdetails', versionText: 'Versie {v}, bijgewerkt {d}', secBackground: 'Achtergrond', resetIntro: 'Instellingen resetten zet alleen je instellingen terug naar de standaard; je gegevens blijven staan. Mijn gegevens wissen verwijdert je eigen links, AI-snelkoppelingen, tijdzones, stad en extra plaatsen. Dat kan niet ongedaan worden, dus maak eerst een backup op het tabblad Backup onder Data beheren.', resetSec: 'Resetten', dateOnLbl: 'Datum tonen', dateSec: 'Datum', dateShow: 'Weergave', dateLong: 'Lang', dateShort: 'Kort', dateOrderLbl: 'Volgorde', dateAuto: 'Automatisch', dateDmy: 'Dag-maand-jaar', dateMdy: 'Maand-dag-jaar', dateYmd: 'Jaar-maand-dag', timeSec: 'Tijdnotatie', time24: '24 uur', time12: '12 uur (AM/PM)', timeFull: 'Volledig, met seconden', searchSec: 'Zoeken', searchNewTab: 'Zoeken openen in een nieuw tabblad', aiNewTab: 'AI-links openen in een nieuw tabblad', linksNewTab: 'Links openen in een nieuw tabblad', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies diensten', aiInvalid: 'Vul een geldig https-adres in' },
-  de: { quickTitle: 'Schnellstart', quickEngineHead: 'Suchmaschine wechseln', quickEngineText: 'Jeder Klick auf das Symbol führt zur nächsten Suchmaschine: DuckDuckGo, Kagi, Brave oder Google. Deine Wahl bleibt gespeichert.', quickClick: 'Hier klicken', quickMoreHead: 'Mehr aus deiner Seite', quickAiHead: 'KI-Links hinzufügen', quickAiText: 'Unter Einstellungen → KI wählst du bis zu fünf KI-Dienste oder fügst deine eigene Adresse hinzu.', quickPageHead: 'Seite wählen', quickPageText: 'Minimal, Standard oder Erweitert, in den Einstellungen oben rechts.', quickDone: 'Verstanden', quickLink: 'Schnellstart umschalten', quickCard: 'Schnellstart: die ersten Schritte', quickNote: 'Alles steht auch in der Hilfe.', changelogLink: 'Änderungen', hintText: 'Hier findest du die Einstellungen: Klick auf das Zahnrad oder drücke ?.', limitFull: '{n} von {n} · voll', aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', versionUpdated: 'Aktualisiert', versionTagAria: 'Version {v}, Aktualisierungsdetails anzeigen', versionText: 'Version {v}, aktualisiert {d}', secBackground: 'Hintergrund', resetIntro: 'Einstellungen zurücksetzen stellt nur die Standardwerte wieder her; deine Daten bleiben. Meine Daten löschen entfernt deine eigenen Links, KI-Verknüpfungen, Zeitzonen, Stadt und zusätzlichen Orte. Das lässt sich nicht rückgängig machen, also erstelle zuerst ein Backup im Reiter Backup unter Daten verwalten.', resetSec: 'Zurücksetzen', dateOnLbl: 'Datum anzeigen', dateSec: 'Datum', dateShow: 'Anzeige', dateLong: 'Lang', dateShort: 'Kurz', dateOrderLbl: 'Reihenfolge', dateAuto: 'Automatisch', dateDmy: 'Tag-Monat-Jahr', dateMdy: 'Monat-Tag-Jahr', dateYmd: 'Jahr-Monat-Tag', timeSec: 'Zeitformat', time24: '24 Stunden', time12: '12 Stunden (AM/PM)', timeFull: 'Vollständig, mit Sekunden', searchSec: 'Suche', searchNewTab: 'Suche in einem neuen Tab öffnen', aiNewTab: 'KI-Links in einem neuen Tab öffnen', linksNewTab: 'Links in einem neuen Tab öffnen', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Dienste wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
-  fr: { quickTitle: 'Démarrage rapide', quickEngineHead: 'Changer de moteur de recherche', quickEngineText: 'Chaque clic sur l’icône passe au moteur suivant : DuckDuckGo, Kagi, Brave ou Google. Votre choix est conservé.', quickClick: 'Cliquez ici', quickMoreHead: 'Plus sur votre page', quickAiHead: 'Ajouter des liens IA', quickAiText: 'Sous Paramètres → IA, choisissez jusqu’à cinq services IA, ou ajoutez votre propre adresse.', quickPageHead: 'Choisir une page', quickPageText: 'Minimal, Standard ou Avancé, dans les réglages en haut à droite.', quickDone: 'Compris', quickLink: 'Basculer démarrage rapide', quickCard: 'Démarrage rapide : les premiers pas', quickNote: 'Tout cela figure aussi dans l’aide.', changelogLink: 'Modifications', hintText: 'Les réglages sont ici : cliquez sur l’engrenage ou appuyez sur ?.', limitFull: '{n} sur {n} · complet', aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', versionUpdated: 'Mis à jour', versionTagAria: 'Version {v}, afficher les détails de mise à jour', versionText: 'Version {v}, mise à jour {d}', secBackground: 'Arrière-plan', resetIntro: 'Réinitialiser les réglages remet seulement les réglages par défaut ; vos données restent. Effacer mes données supprime vos liens, raccourcis IA, fuseaux, ville et lieux supplémentaires. Action irréversible : faites d’abord une sauvegarde dans l’onglet Sauvegarde de Gérer les données.', resetSec: 'Réinitialiser', dateOnLbl: 'Afficher la date', dateSec: 'Date', dateShow: 'Affichage', dateLong: 'Long', dateShort: 'Court', dateOrderLbl: 'Ordre', dateAuto: 'Automatique', dateDmy: 'Jour-mois-année', dateMdy: 'Mois-jour-année', dateYmd: 'Année-mois-jour', timeSec: 'Format de l’heure', time24: '24 heures', time12: '12 heures (AM/PM)', timeFull: 'Complet, avec secondes', searchSec: 'Recherche', searchNewTab: 'Ouvrir la recherche dans un nouvel onglet', aiNewTab: 'Ouvrir les liens IA dans un nouvel onglet', linksNewTab: 'Ouvrir les liens dans un nouvel onglet', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir les services', aiInvalid: 'Saisissez une adresse https valide' },
-  es: { quickTitle: 'Inicio rápido', quickEngineHead: 'Cambiar de buscador', quickEngineText: 'Cada clic en el icono pasa al siguiente buscador: DuckDuckGo, Kagi, Brave o Google. Tu elección se guarda.', quickClick: 'Haz clic aquí', quickMoreHead: 'Más en tu página', quickAiHead: 'Añadir enlaces de IA', quickAiText: 'En Ajustes → IA eliges hasta cinco servicios de IA, o añades tu propia dirección.', quickPageHead: 'Elige una página', quickPageText: 'Minimal, Standard o Avanzado, en los ajustes arriba a la derecha.', quickDone: 'Entendido', quickLink: 'Alternar inicio rápido', quickCard: 'Inicio rápido: los primeros pasos', quickNote: 'Todo esto también está en la ayuda.', changelogLink: 'Cambios', hintText: 'Aquí están los ajustes: pulsa el engranaje o ?.', limitFull: '{n} de {n} · completo', aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', versionUpdated: 'Actualizado', versionTagAria: 'Versión {v}, mostrar detalles de actualización', versionText: 'Versión {v}, actualizada {d}', secBackground: 'Fondo', resetIntro: 'Restablecer ajustes solo devuelve los valores predeterminados; tus datos se mantienen. Borrar mis datos elimina tus enlaces propios, accesos de IA, zonas horarias, ciudad y lugares adicionales. No se puede deshacer, así que haz antes una copia en la pestaña Copia de Gestionar datos.', resetSec: 'Restablecer', dateOnLbl: 'Mostrar la fecha', dateSec: 'Fecha', dateShow: 'Mostrar', dateLong: 'Larga', dateShort: 'Corta', dateOrderLbl: 'Orden', dateAuto: 'Automático', dateDmy: 'Día-mes-año', dateMdy: 'Mes-día-año', dateYmd: 'Año-mes-día', timeSec: 'Formato de hora', time24: '24 horas', time12: '12 horas (AM/PM)', timeFull: 'Completo, con segundos', searchSec: 'Búsqueda', searchNewTab: 'Abrir la búsqueda en una pestaña nueva', aiNewTab: 'Abrir los accesos de IA en una pestaña nueva', linksNewTab: 'Abrir los enlaces en una pestaña nueva', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige servicios', aiInvalid: 'Escribe una dirección https válida' },
-  zh: { quickTitle: '快速入门', quickEngineHead: '更换搜索引擎', quickEngineText: '每次点击图标会切换到下一个搜索引擎：DuckDuckGo、Kagi、Brave 或 Google。你的选择会被保存。', quickClick: '点这里', quickMoreHead: '页面更多功能', quickAiHead: '添加 AI 链接', quickAiText: '在“设置 → AI”中最多选五个 AI 服务，也可以添加你自己的地址。', quickPageHead: '选择页面', quickPageText: '极简、标准或高级，在右上角的设置中切换。', quickDone: '知道了', quickLink: '切换快速入门', quickCard: '快速入门：最初的几步', quickNote: '这些内容也在帮助中。', changelogLink: '更新记录', hintText: '设置在这里：点击齿轮，或按 ?。', limitFull: '{n}/{n} · 已满', aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', versionUpdated: '更新', versionTagAria: '版本 {v}，显示更新详情', versionText: '版本 {v}，更新于 {d}', secBackground: '背景', resetIntro: '重置设置只会恢复默认值，你的数据会保留。删除我的数据会移除你自己的链接、AI 快捷方式、时区、城市和额外地点。此操作无法撤销，请先在管理数据的备份标签中备份。', resetSec: '重置', dateOnLbl: '显示日期', dateSec: '日期', dateShow: '显示', dateLong: '长格式', dateShort: '短格式', dateOrderLbl: '顺序', dateAuto: '自动', dateDmy: '日-月-年', dateMdy: '月-日-年', dateYmd: '年-月-日', timeSec: '时间格式', time24: '24 小时制', time12: '12 小时制 (AM/PM)', timeFull: '完整，含秒', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', linksNewTab: '在新标签页中打开链接', aiDuplicate: '已在列表中。', aiPick: '选择服务', aiInvalid: '请输入有效的 https 地址' }
+  en: { quickTitle: 'Quick start', quickEngineHead: 'Change search engine', quickEngineText: 'Click the left icon to switch Search ↔ AI. Hold (or right-click) to pick which engine or AI. Shortcut: Ctrl+Shift+A. Enter sends your query. Social icons (when enabled) sit under the bar as jump links.', quickClick: 'Click here', quickMoreHead: 'More from your page', quickAiHead: 'Add AI links', quickAiText: 'Under Settings → AI you pick AI platforms for the overlay and up to five ASK AI shortcuts.', quickPageHead: 'Pick a page', quickPageText: 'Minimal, Standard or Advanced, in the settings at the top right.', quickDone: 'Got it', quickLink: 'Toggle quickstart', quickCard: 'Quick start: the first steps', quickNote: 'Everything here is also in Help.', changelogLink: 'Changelog', hintText: 'Settings are here: click the gear, or press ?.', limitFull: '{n} of {n} · full', aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add AI', aiEditTitle: 'Edit AI', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', versionUpdated: 'Updated', versionTagAria: 'Version {v}, show update details', versionText: 'Version {v}, updated {d}', secBackground: 'Background', resetIntro: 'Reset settings only sets your settings back to the defaults; your data stays. Delete my data removes your own links, AI shortcuts, time zones, city and extra places. This cannot be undone, so make a backup first on the Backup tab in Manage data.', resetSec: 'Reset', dateOnLbl: 'Show the date', dateSec: 'Date', dateShow: 'Show', dateLong: 'Long', dateShort: 'Short', dateOrderLbl: 'Order', dateAuto: 'Automatic', dateDmy: 'Day-month-year', dateMdy: 'Month-day-year', dateYmd: 'Year-month-day', timeSec: 'Time format', time24: '24 hours', time12: '12 hours (AM/PM)', timeFull: 'Full, with seconds', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', linksNewTab: 'Open links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick services', aiInvalid: 'Enter a valid https address' },
+  nl: { quickTitle: 'Quick start', quickEngineHead: 'Zoekmachine wisselen', quickEngineText: 'Elke klik op het icoon gaat naar de volgende zoekmachine: DuckDuckGo, Kagi, Brave of Google. Je keuze blijft bewaard.', quickClick: 'Klik hier', quickMoreHead: 'Meer uit je pagina', quickAiHead: 'AI-links toevoegen', quickAiText: 'Onder Instellingen → AI kies je tot vijf AI-diensten, of voeg je eigen adres toe.', quickPageHead: 'Pagina kiezen', quickPageText: 'Minimaal, Standaard of Geavanceerd, in de instellingen rechtsboven.', quickDone: 'Begrepen', quickLink: 'Quick start tonen', quickCard: 'Quick start: de eerste stappen', quickNote: 'Alles staat ook in Help.', changelogLink: 'Wijzigingen', hintText: 'Hier vind je de instellingen: klik op het tandwiel of druk op ?.', limitFull: '{n} van {n} · vol', aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'AI toevoegen', aiEditTitle: 'AI bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', versionUpdated: 'Bijgewerkt', versionTagAria: 'Versie {v}, toon bijwerkdetails', versionText: 'Versie {v}, bijgewerkt {d}', secBackground: 'Achtergrond', resetIntro: 'Instellingen resetten zet alleen je instellingen terug naar de standaard; je gegevens blijven staan. Mijn gegevens wissen verwijdert je eigen links, AI-snelkoppelingen, tijdzones, stad en extra plaatsen. Dat kan niet ongedaan worden, dus maak eerst een backup op het tabblad Backup onder Data beheren.', resetSec: 'Resetten', dateOnLbl: 'Datum tonen', dateSec: 'Datum', dateShow: 'Weergave', dateLong: 'Lang', dateShort: 'Kort', dateOrderLbl: 'Volgorde', dateAuto: 'Automatisch', dateDmy: 'Dag-maand-jaar', dateMdy: 'Maand-dag-jaar', dateYmd: 'Jaar-maand-dag', timeSec: 'Tijdnotatie', time24: '24 uur', time12: '12 uur (AM/PM)', timeFull: 'Volledig, met seconden', searchSec: 'Zoeken', searchNewTab: 'Zoeken openen in een nieuw tabblad', aiNewTab: 'AI-links openen in een nieuw tabblad', linksNewTab: 'Links openen in een nieuw tabblad', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies diensten', aiInvalid: 'Vul een geldig https-adres in' },
+  de: { quickTitle: 'Schnellstart', quickEngineHead: 'Suchmaschine wechseln', quickEngineText: 'Jeder Klick auf das Symbol führt zur nächsten Suchmaschine: DuckDuckGo, Kagi, Brave oder Google. Deine Wahl bleibt gespeichert.', quickClick: 'Hier klicken', quickMoreHead: 'Mehr aus deiner Seite', quickAiHead: 'KI-Links hinzufügen', quickAiText: 'Unter Einstellungen → KI wählst du bis zu fünf KI-Dienste oder fügst deine eigene Adresse hinzu.', quickPageHead: 'Seite wählen', quickPageText: 'Minimal, Standard oder Erweitert, in den Einstellungen oben rechts.', quickDone: 'Verstanden', quickLink: 'Schnellstart umschalten', quickCard: 'Schnellstart: die ersten Schritte', quickNote: 'Alles steht auch in der Hilfe.', changelogLink: 'Änderungen', hintText: 'Hier findest du die Einstellungen: Klick auf das Zahnrad oder drücke ?.', limitFull: '{n} von {n} · voll', aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'KI hinzufügen', aiEditTitle: 'KI bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', versionUpdated: 'Aktualisiert', versionTagAria: 'Version {v}, Aktualisierungsdetails anzeigen', versionText: 'Version {v}, aktualisiert {d}', secBackground: 'Hintergrund', resetIntro: 'Einstellungen zurücksetzen stellt nur die Standardwerte wieder her; deine Daten bleiben. Meine Daten löschen entfernt deine eigenen Links, KI-Verknüpfungen, Zeitzonen, Stadt und zusätzlichen Orte. Das lässt sich nicht rückgängig machen, also erstelle zuerst ein Backup im Reiter Backup unter Daten verwalten.', resetSec: 'Zurücksetzen', dateOnLbl: 'Datum anzeigen', dateSec: 'Datum', dateShow: 'Anzeige', dateLong: 'Lang', dateShort: 'Kurz', dateOrderLbl: 'Reihenfolge', dateAuto: 'Automatisch', dateDmy: 'Tag-Monat-Jahr', dateMdy: 'Monat-Tag-Jahr', dateYmd: 'Jahr-Monat-Tag', timeSec: 'Zeitformat', time24: '24 Stunden', time12: '12 Stunden (AM/PM)', timeFull: 'Vollständig, mit Sekunden', searchSec: 'Suche', searchNewTab: 'Suche in einem neuen Tab öffnen', aiNewTab: 'KI-Links in einem neuen Tab öffnen', linksNewTab: 'Links in einem neuen Tab öffnen', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Dienste wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
+  fr: { quickTitle: 'Démarrage rapide', quickEngineHead: 'Changer de moteur de recherche', quickEngineText: 'Chaque clic sur l’icône passe au moteur suivant : DuckDuckGo, Kagi, Brave ou Google. Votre choix est conservé.', quickClick: 'Cliquez ici', quickMoreHead: 'Plus sur votre page', quickAiHead: 'Ajouter des liens IA', quickAiText: 'Sous Paramètres → IA, choisissez jusqu’à cinq services IA, ou ajoutez votre propre adresse.', quickPageHead: 'Choisir une page', quickPageText: 'Minimal, Standard ou Avancé, dans les réglages en haut à droite.', quickDone: 'Compris', quickLink: 'Basculer démarrage rapide', quickCard: 'Démarrage rapide : les premiers pas', quickNote: 'Tout cela figure aussi dans l’aide.', changelogLink: 'Modifications', hintText: 'Les réglages sont ici : cliquez sur l’engrenage ou appuyez sur ?.', limitFull: '{n} sur {n} · complet', aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter une IA', aiEditTitle: 'Modifier l’IA', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', versionUpdated: 'Mis à jour', versionTagAria: 'Version {v}, afficher les détails de mise à jour', versionText: 'Version {v}, mise à jour {d}', secBackground: 'Arrière-plan', resetIntro: 'Réinitialiser les réglages remet seulement les réglages par défaut ; vos données restent. Effacer mes données supprime vos liens, raccourcis IA, fuseaux, ville et lieux supplémentaires. Action irréversible : faites d’abord une sauvegarde dans l’onglet Sauvegarde de Gérer les données.', resetSec: 'Réinitialiser', dateOnLbl: 'Afficher la date', dateSec: 'Date', dateShow: 'Affichage', dateLong: 'Long', dateShort: 'Court', dateOrderLbl: 'Ordre', dateAuto: 'Automatique', dateDmy: 'Jour-mois-année', dateMdy: 'Mois-jour-année', dateYmd: 'Année-mois-jour', timeSec: 'Format de l’heure', time24: '24 heures', time12: '12 heures (AM/PM)', timeFull: 'Complet, avec secondes', searchSec: 'Recherche', searchNewTab: 'Ouvrir la recherche dans un nouvel onglet', aiNewTab: 'Ouvrir les liens IA dans un nouvel onglet', linksNewTab: 'Ouvrir les liens dans un nouvel onglet', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir les services', aiInvalid: 'Saisissez une adresse https valide' },
+  es: { quickTitle: 'Inicio rápido', quickEngineHead: 'Cambiar de buscador', quickEngineText: 'Cada clic en el icono pasa al siguiente buscador: DuckDuckGo, Kagi, Brave o Google. Tu elección se guarda.', quickClick: 'Haz clic aquí', quickMoreHead: 'Más en tu página', quickAiHead: 'Añadir enlaces de IA', quickAiText: 'En Ajustes → IA eliges hasta cinco servicios de IA, o añades tu propia dirección.', quickPageHead: 'Elige una página', quickPageText: 'Minimal, Standard o Avanzado, en los ajustes arriba a la derecha.', quickDone: 'Entendido', quickLink: 'Alternar inicio rápido', quickCard: 'Inicio rápido: los primeros pasos', quickNote: 'Todo esto también está en la ayuda.', changelogLink: 'Cambios', hintText: 'Aquí están los ajustes: pulsa el engranaje o ?.', limitFull: '{n} de {n} · completo', aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir IA', aiEditTitle: 'Editar IA', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', versionUpdated: 'Actualizado', versionTagAria: 'Versión {v}, mostrar detalles de actualización', versionText: 'Versión {v}, actualizada {d}', secBackground: 'Fondo', resetIntro: 'Restablecer ajustes solo devuelve los valores predeterminados; tus datos se mantienen. Borrar mis datos elimina tus enlaces propios, accesos de IA, zonas horarias, ciudad y lugares adicionales. No se puede deshacer, así que haz antes una copia en la pestaña Copia de Gestionar datos.', resetSec: 'Restablecer', dateOnLbl: 'Mostrar la fecha', dateSec: 'Fecha', dateShow: 'Mostrar', dateLong: 'Larga', dateShort: 'Corta', dateOrderLbl: 'Orden', dateAuto: 'Automático', dateDmy: 'Día-mes-año', dateMdy: 'Mes-día-año', dateYmd: 'Año-mes-día', timeSec: 'Formato de hora', time24: '24 horas', time12: '12 horas (AM/PM)', timeFull: 'Completo, con segundos', searchSec: 'Búsqueda', searchNewTab: 'Abrir la búsqueda en una pestaña nueva', aiNewTab: 'Abrir los accesos de IA en una pestaña nueva', linksNewTab: 'Abrir los enlaces en una pestaña nueva', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige servicios', aiInvalid: 'Escribe una dirección https válida' },
+  zh: { quickTitle: '快速入门', quickEngineHead: '更换搜索引擎', quickEngineText: '每次点击图标会切换到下一个搜索引擎：DuckDuckGo、Kagi、Brave 或 Google。你的选择会被保存。', quickClick: '点这里', quickMoreHead: '页面更多功能', quickAiHead: '添加 AI 链接', quickAiText: '在“设置 → AI”中最多选五个 AI 服务，也可以添加你自己的地址。', quickPageHead: '选择页面', quickPageText: '极简、标准或高级，在右上角的设置中切换。', quickDone: '知道了', quickLink: '切换快速入门', quickCard: '快速入门：最初的几步', quickNote: '这些内容也在帮助中。', changelogLink: '更新记录', hintText: '设置在这里：点击齿轮，或按 ?。', limitFull: '{n}/{n} · 已满', aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加 AI', aiEditTitle: '编辑 AI', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', versionUpdated: '更新', versionTagAria: '版本 {v}，显示更新详情', versionText: '版本 {v}，更新于 {d}', secBackground: '背景', resetIntro: '重置设置只会恢复默认值，你的数据会保留。删除我的数据会移除你自己的链接、AI 快捷方式、时区、城市和额外地点。此操作无法撤销，请先在管理数据的备份标签中备份。', resetSec: '重置', dateOnLbl: '显示日期', dateSec: '日期', dateShow: '显示', dateLong: '长格式', dateShort: '短格式', dateOrderLbl: '顺序', dateAuto: '自动', dateDmy: '日-月-年', dateMdy: '月-日-年', dateYmd: '年-月-日', timeSec: '时间格式', time24: '24 小时制', time12: '12 小时制 (AM/PM)', timeFull: '完整，含秒', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', linksNewTab: '在新标签页中打开链接', aiDuplicate: '已在列表中。', aiPick: '选择服务', aiInvalid: '请输入有效的 https 地址' }
 }
 const manageText = {
   en: { linkUp: 'Move up', linkDown: 'Move down', manageOpen: 'Manage data', tabBackup: 'Backup', backupNote: 'Export saves your settings, links, AI shortcuts, time zones and weather places to a file on your computer. Import loads such a file: Merge adds what is new and keeps what you have, Replace overwrites everything. Make a backup before you reset or delete your data.', tabLinks: 'Own links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
@@ -830,12 +830,12 @@ const pageText = {
   zh: { secPage: '通用', presetMinimal: '极简', presetStandard: '标准', presetCustom: '个性化' }
 }
 const topbarText = {
-  en: { colorMode: 'Color mode', themeAuto: 'System theme', themeDark: 'Dark theme', themeLight: 'Light theme', themeMenuAuto: 'System', themeMenuDark: 'Dark', themeMenuLight: 'Light', langLabel: 'Language', searchLabel: 'Search the web', searchFormTitle: 'Type a search and press Enter', engineLabel: 'Search engine: {name}. Click to change.', enginePickLabel: '{name}. Click: Search ↔ AI. Hold to pick. Shortcut: Ctrl+Shift+A.', searchSubmit: 'Search', timeClick: 'Click to cycle through 24-hour, 12-hour and full time', askAiCaption: 'Ask AI', overlaySearch: 'Search', overlayAi: 'AI', overlayEmpty: 'Nothing enabled yet.', manageShowLabel: 'Show on page', clockDateSec: 'Clock & date', clockLbl: 'Clock', advShowHint: 'Social and Ask AI rows are mutually exclusive — choose one under Settings → Social / AI.', lblAiOverlay: 'AI in search field', lblSocialRow: 'Social row', lblAskaiMaster: 'Ask AI row', lblLinksMaster: 'Links button', tabSearch: 'Search', tabSocial: 'Social', enginesNote: 'Turn engines on or off, and add your own below. Always keep at least one on.', engineAdd: 'Add search engine', engineEdit: 'Edit search engine', engineUrlLbl: 'Search URL template', engineUrlHint: 'Paste a homepage or a results URL. Look up fills the query template (…?q=).', engineSuggest: 'Look up', engineInvalid: 'Enter a name and an https search URL ending with the query (for example …?q=).', engineExists: 'That name is already in the list.', engineGuessed: 'Guessed template — check that searching works.', engineLimit: 'You can add up to {n} custom engines.', socialNote: 'Jump-only icons under the search bar. Not shown together with the Ask AI row. Off for Minimal.', aiOverlayNote: 'AI platforms for the search field (type + Enter). Turn “AI in search field” off for Minimal.', aiShortcutsHead: 'Ask AI row shortcuts', socialAria: 'Social' },
-  nl: { colorMode: 'Kleurmodus', themeAuto: 'Systeemthema', themeDark: 'Donker thema', themeLight: 'Licht thema', themeMenuAuto: 'Systeem', themeMenuDark: 'Donker', themeMenuLight: 'Licht', langLabel: 'Taal', searchLabel: 'Zoek op het web', searchFormTitle: 'Typ een zoekopdracht en druk op Enter', engineLabel: 'Zoekmachine: {name}. Klik om te wisselen.', enginePickLabel: '{name}. Klik: Zoeken ↔ AI. Ingedrukt houden om te kiezen. Sneltoets: Ctrl+Shift+A.', searchSubmit: 'Zoeken', timeClick: 'Klik om te wisselen tussen 24 uur, 12 uur en volledige tijd', askAiCaption: 'Vraag AI', overlaySearch: 'Zoeken', overlayAi: 'AI', overlayEmpty: 'Nog niets ingeschakeld.', manageShowLabel: 'Tonen op de pagina', clockDateSec: 'Klok & datum', clockLbl: 'Klok', advShowHint: 'Sociale rij en Vraag AI-rij gaan niet samen — kies er één onder Instellingen → Social / AI.', lblAiOverlay: 'AI in zoekveld', lblSocialRow: 'Sociale rij', lblAskaiMaster: 'Vraag AI-rij', lblLinksMaster: 'Links-knop', tabSearch: 'Zoeken', tabSocial: 'Sociaal', enginesNote: 'Zet zoekmachines aan of uit en voeg hieronder je eigen toe. Houd altijd minstens één aan.', engineAdd: 'Zoekmachine toevoegen', engineEdit: 'Zoekmachine bewerken', engineUrlLbl: 'Zoek-URL-sjabloon', engineUrlHint: 'Plak een homepage of resultaten-URL. Opzoeken vult het query-sjabloon (…?q=).', engineSuggest: 'Opzoeken', engineInvalid: 'Vul een naam en een https-zoek-URL in die eindigt op de query (bijvoorbeeld …?q=).', engineExists: 'Die naam staat al in de lijst.', engineGuessed: 'Geschat sjabloon — controleer of zoeken werkt.', engineLimit: 'Je kunt tot {n} eigen zoekmachines toevoegen.', socialNote: 'Alleen spring-iconen onder de zoekbalk. Niet tegelijk met de Vraag AI-rij. Uit voor Minimaal.', aiOverlayNote: 'AI-platformen voor het zoekveld (typen + Enter). Zet “AI in zoekveld” uit voor Minimaal.', aiShortcutsHead: 'Vraag AI-rij snelkoppelingen', socialAria: 'Sociaal' },
-  de: { colorMode: 'Farbmodus', themeAuto: 'Systemdesign', themeDark: 'Dunkles Design', themeLight: 'Helles Design', themeMenuAuto: 'System', themeMenuDark: 'Dunkel', themeMenuLight: 'Hell', langLabel: 'Sprache', searchLabel: 'Im Web suchen', searchFormTitle: 'Suchbegriff eingeben und Enter drücken', engineLabel: 'Suchmaschine: {name}. Klicken zum Wechseln.', enginePickLabel: '{name}. Klick: Suche ↔ KI. Halten zum Wählen. Tastatur: Strg+Umschalt+A.', searchSubmit: 'Suchen', timeClick: 'Klicken, um zwischen 24-Stunden-, 12-Stunden- und Vollzeit zu wechseln', askAiCaption: 'KI fragen', overlaySearch: 'Suche', overlayAi: 'KI', overlayEmpty: 'Noch nichts aktiviert.', manageShowLabel: 'Auf der Seite zeigen', clockDateSec: 'Uhr & Datum', clockLbl: 'Uhr', advShowHint: 'Social-Zeile und KI-fragen-Zeile schließen sich aus — unter Daten verwalten wählen.', lblAiOverlay: 'KI im Suchfeld', lblSocialRow: 'Social-Zeile', lblAskaiMaster: 'KI-fragen-Zeile', lblLinksMaster: 'Links-Schaltfläche', tabSearch: 'Suche', tabSocial: 'Social', enginesNote: 'Suchmaschinen an/aus und eigene unten hinzufügen. Mindestens eine bleibt an.', engineAdd: 'Suchmaschine hinzufügen', engineEdit: 'Suchmaschine bearbeiten', engineUrlLbl: 'Such-URL-Vorlage', engineUrlHint: 'Homepage oder Ergebnis-URL einfügen. Nachschlagen füllt die Query-Vorlage (…?q=).', engineSuggest: 'Nachschlagen', engineInvalid: 'Name und https-Such-URL mit Query-Ende eingeben (z. B. …?q=).', engineExists: 'Dieser Name ist schon in der Liste.', engineGuessed: 'Geschätzte Vorlage — Suche prüfen.', engineLimit: 'Bis zu {n} eigene Suchmaschinen.', socialNote: 'Nur Sprung-Icons unter der Suchleiste. Social-Zeile für Minimal aus.', aiOverlayNote: 'KI-Plattformen für das Suchfeld (tippen + Enter). „KI im Suchfeld“ für Minimal aus.', aiShortcutsHead: 'KI-fragen-Zeilen-Verknüpfungen', socialAria: 'Social' },
-  fr: { colorMode: 'Mode couleur', themeAuto: 'Thème système', themeDark: 'Thème sombre', themeLight: 'Thème clair', themeMenuAuto: 'Système', themeMenuDark: 'Sombre', themeMenuLight: 'Clair', langLabel: 'Langue', searchLabel: 'Rechercher sur le web', searchFormTitle: 'Saisissez une recherche et appuyez sur Entrée', engineLabel: 'Moteur de recherche : {name}. Cliquez pour changer.', enginePickLabel: '{name}. Clic : Recherche ↔ IA. Maintenir pour choisir. Raccourci : Ctrl+Maj+A.', searchSubmit: 'Rechercher', timeClick: 'Cliquez pour alterner entre 24 h, 12 h et l’heure complète', askAiCaption: 'Demander à l’IA', overlaySearch: 'Recherche', overlayAi: 'IA', overlayEmpty: 'Rien n’est activé.', manageShowLabel: 'Afficher sur la page', clockDateSec: 'Horloge et date', clockLbl: 'Horloge', advShowHint: 'Rangée sociale et rangée Demander à l’IA sont exclusives — choisissez sous Gérer les données.', lblAiOverlay: 'IA dans le champ de recherche', lblSocialRow: 'Rangée sociale', lblAskaiMaster: 'Rangée Demander à l’IA', lblLinksMaster: 'Bouton Liens', tabSearch: 'Recherche', tabSocial: 'Social', enginesNote: 'Activez/désactivez les moteurs et ajoutez les vôtres. Gardez-en au moins un.', engineAdd: 'Ajouter un moteur', engineEdit: 'Modifier le moteur', engineUrlLbl: 'Modèle d’URL de recherche', engineUrlHint: 'Collez une page d’accueil ou une URL de résultats. Rechercher remplit le modèle (…?q=).', engineSuggest: 'Rechercher', engineInvalid: 'Indiquez un nom et une URL https se terminant par la requête (ex. …?q=).', engineExists: 'Ce nom est déjà dans la liste.', engineGuessed: 'Modèle estimé — vérifiez la recherche.', engineLimit: 'Jusqu’à {n} moteurs personnalisés.', socialNote: 'Icônes de saut sous la barre. Désactivez la rangée sociale pour Minimal.', aiOverlayNote: 'Plateformes IA pour le champ de recherche (saisir + Entrée). Désactivez « IA dans le champ de recherche » pour Minimal.', aiShortcutsHead: 'Raccourcis de la rangée Demander à l’IA', socialAria: 'Social' },
-  es: { colorMode: 'Modo de color', themeAuto: 'Tema del sistema', themeDark: 'Tema oscuro', themeLight: 'Tema claro', themeMenuAuto: 'Sistema', themeMenuDark: 'Oscuro', themeMenuLight: 'Claro', langLabel: 'Idioma', searchLabel: 'Buscar en la web', searchFormTitle: 'Escribe una búsqueda y pulsa Intro', engineLabel: 'Buscador: {name}. Haz clic para cambiar.', enginePickLabel: '{name}. Clic: Buscar ↔ IA. Mantén para elegir. Atajo: Ctrl+Mayús+A.', searchSubmit: 'Buscar', timeClick: 'Haz clic para alternar entre 24 horas, 12 horas y hora completa', askAiCaption: 'Preguntar a la IA', overlaySearch: 'Buscar', overlayAi: 'IA', overlayEmpty: 'Nada activado aún.', manageShowLabel: 'Mostrar en la página', clockDateSec: 'Reloj y fecha', clockLbl: 'Reloj', advShowHint: 'La fila social y la de Preguntar a la IA son excluyentes — elige una en Gestionar datos.', lblAiOverlay: 'IA en el campo de búsqueda', lblSocialRow: 'Fila social', lblAskaiMaster: 'Fila Preguntar a la IA', lblLinksMaster: 'Botón Enlaces', tabSearch: 'Buscar', tabSocial: 'Social', enginesNote: 'Activa o desactiva buscadores y añade los tuyos. Mantén al menos uno.', engineAdd: 'Añadir buscador', engineEdit: 'Editar buscador', engineUrlLbl: 'Plantilla de URL de búsqueda', engineUrlHint: 'Pega una portada o una URL de resultados. Buscar completa la plantilla (…?q=).', engineSuggest: 'Buscar', engineInvalid: 'Pon un nombre y una URL https que termine en la consulta (p. ej. …?q=).', engineExists: 'Ese nombre ya está en la lista.', engineGuessed: 'Plantilla estimada — comprueba la búsqueda.', engineLimit: 'Hasta {n} buscadores propios.', socialNote: 'Iconos de salto bajo la barra. Desactiva la fila social para Mínimo.', aiOverlayNote: 'Plataformas de IA para el campo de búsqueda (escribir + Intro). Desactiva «IA en el campo de búsqueda» para Mínimo.', aiShortcutsHead: 'Accesos de la fila Preguntar a la IA', socialAria: 'Social' },
-  zh: { colorMode: '颜色模式', themeAuto: '跟随系统', themeDark: '深色主题', themeLight: '浅色主题', themeMenuAuto: '系统', themeMenuDark: '深色', themeMenuLight: '浅色', langLabel: '语言', searchLabel: '搜索网页', searchFormTitle: '输入搜索内容并按 Enter', engineLabel: '搜索引擎：{name}。点击切换。', enginePickLabel: '{name}。单击：搜索 ↔ AI。长按选择。快捷键：Ctrl+Shift+A。', searchSubmit: '搜索', timeClick: '点击可在 24 小时制、12 小时制和完整时间之间切换', askAiCaption: '询问 AI', overlaySearch: '搜索', overlayAi: 'AI', overlayEmpty: '尚未启用任何项。', manageShowLabel: '在页面显示', clockDateSec: '时钟与日期', clockLbl: '时钟', advShowHint: '社交行与询问 AI 行互斥 — 请在“管理数据”中二选一。', lblAiOverlay: '搜索框中的 AI', lblSocialRow: '社交行', lblAskaiMaster: '询问 AI 行', lblLinksMaster: '链接按钮', tabSearch: '搜索', tabSocial: '社交', enginesNote: '可开关搜索引擎，并在下方添加自己的。请至少保留一个。', engineAdd: '添加搜索引擎', engineEdit: '编辑搜索引擎', engineUrlLbl: '搜索 URL 模板', engineUrlHint: '粘贴主页或结果页 URL。查找会填充查询模板（…?q=）。', engineSuggest: '查找', engineInvalid: '请输入名称和以查询结尾的 https 搜索 URL（例如 …?q=）。', engineExists: '该名称已在列表中。', engineGuessed: '已猜测模板 — 请确认搜索可用。', engineLimit: '最多可添加 {n} 个自定义搜索引擎。', socialNote: '搜索栏下方仅跳转图标。极简模式请关闭社交行。', aiOverlayNote: '用于搜索框的 AI 平台（输入 + Enter）。极简模式请关闭“搜索框中的 AI”。', aiShortcutsHead: '询问 AI 行快捷方式', socialAria: '社交' },
+  en: { colorMode: 'Color mode', themeAuto: 'System theme', themeDark: 'Dark theme', themeLight: 'Light theme', themeMenuAuto: 'System', themeMenuDark: 'Dark', themeMenuLight: 'Light', langLabel: 'Language', searchLabel: 'Search the web', searchFormTitle: 'Type a search and press Enter', engineLabel: 'Search engine: {name}. Click to change.', enginePickLabel: '{name}. Click: Search ↔ AI. Hold to pick. Shortcut: Ctrl+Shift+A.', searchSubmit: 'Search', timeClick: 'Click to cycle through 24-hour, 12-hour and full time', askAiCaption: 'Ask AI', overlaySearch: 'Search', overlayAi: 'AI', overlayEmpty: 'Nothing enabled yet.', manageShowLabel: 'Show on page', clockDateSec: 'Clock & date', clockLbl: 'Clock', advShowHint: 'Social and Ask AI rows are mutually exclusive — choose one under Settings → Social / AI.', lblAiOverlay: 'AI in search field', lblSocialRow: 'Social row', lblAskaiMaster: 'Ask AI row', lblLinksMaster: 'Links button', tabSearch: 'Search', tabSocial: 'Social', enginesNote: 'Turn engines on or off, and add your own below. Always keep at least one on.', engineAdd: 'Add search engine', engineEdit: 'Edit search engine', engineUrlLbl: 'Search URL template', engineUrlHint: 'Paste a homepage or a results URL. Look up fills the query template (…?q=).', engineSuggest: 'Look up', engineInvalid: 'Enter a name and an https search URL ending with the query (for example …?q=).', engineExists: 'That name is already in the list.', engineGuessed: 'Guessed template — check that searching works.', engineLimit: 'You can add up to {n} custom engines.', socialNote: 'Jump-only icons under the search bar. Not shown together with the Ask AI row. Off for Minimal.', aiOverlayNote: 'AI platforms for the search field (type + Enter). Turn “AI in search field” off for Minimal.', aiShortcutsHead: 'Ask AI row shortcuts', socialAria: 'Social', socialAdd: 'Add social', socialEdit: 'Edit social', socialInvalid: 'Enter a name and an https address', socialExists: 'That name is already in the list.', socialLimit: 'You can add up to {n} social icons.' },
+  nl: { colorMode: 'Kleurmodus', themeAuto: 'Systeemthema', themeDark: 'Donker thema', themeLight: 'Licht thema', themeMenuAuto: 'Systeem', themeMenuDark: 'Donker', themeMenuLight: 'Licht', langLabel: 'Taal', searchLabel: 'Zoek op het web', searchFormTitle: 'Typ een zoekopdracht en druk op Enter', engineLabel: 'Zoekmachine: {name}. Klik om te wisselen.', enginePickLabel: '{name}. Klik: Zoeken ↔ AI. Ingedrukt houden om te kiezen. Sneltoets: Ctrl+Shift+A.', searchSubmit: 'Zoeken', timeClick: 'Klik om te wisselen tussen 24 uur, 12 uur en volledige tijd', askAiCaption: 'Vraag AI', overlaySearch: 'Zoeken', overlayAi: 'AI', overlayEmpty: 'Nog niets ingeschakeld.', manageShowLabel: 'Tonen op de pagina', clockDateSec: 'Klok & datum', clockLbl: 'Klok', advShowHint: 'Sociale rij en Vraag AI-rij gaan niet samen — kies er één onder Instellingen → Social / AI.', lblAiOverlay: 'AI in zoekveld', lblSocialRow: 'Sociale rij', lblAskaiMaster: 'Vraag AI-rij', lblLinksMaster: 'Links-knop', tabSearch: 'Zoeken', tabSocial: 'Sociaal', enginesNote: 'Zet zoekmachines aan of uit en voeg hieronder je eigen toe. Houd altijd minstens één aan.', engineAdd: 'Zoekmachine toevoegen', engineEdit: 'Zoekmachine bewerken', engineUrlLbl: 'Zoek-URL-sjabloon', engineUrlHint: 'Plak een homepage of resultaten-URL. Opzoeken vult het query-sjabloon (…?q=).', engineSuggest: 'Opzoeken', engineInvalid: 'Vul een naam en een https-zoek-URL in die eindigt op de query (bijvoorbeeld …?q=).', engineExists: 'Die naam staat al in de lijst.', engineGuessed: 'Geschat sjabloon — controleer of zoeken werkt.', engineLimit: 'Je kunt tot {n} eigen zoekmachines toevoegen.', socialNote: 'Alleen spring-iconen onder de zoekbalk. Niet tegelijk met de Vraag AI-rij. Uit voor Minimaal.', aiOverlayNote: 'AI-platformen voor het zoekveld (typen + Enter). Zet “AI in zoekveld” uit voor Minimaal.', aiShortcutsHead: 'Vraag AI-rij snelkoppelingen', socialAria: 'Sociaal', socialAdd: 'Sociaal toevoegen', socialEdit: 'Sociaal bewerken', socialInvalid: 'Vul een naam en een https-adres in', socialExists: 'Die naam staat al in de lijst.', socialLimit: 'Je kunt tot {n} sociale iconen toevoegen.' },
+  de: { colorMode: 'Farbmodus', themeAuto: 'Systemdesign', themeDark: 'Dunkles Design', themeLight: 'Helles Design', themeMenuAuto: 'System', themeMenuDark: 'Dunkel', themeMenuLight: 'Hell', langLabel: 'Sprache', searchLabel: 'Im Web suchen', searchFormTitle: 'Suchbegriff eingeben und Enter drücken', engineLabel: 'Suchmaschine: {name}. Klicken zum Wechseln.', enginePickLabel: '{name}. Klick: Suche ↔ KI. Halten zum Wählen. Tastatur: Strg+Umschalt+A.', searchSubmit: 'Suchen', timeClick: 'Klicken, um zwischen 24-Stunden-, 12-Stunden- und Vollzeit zu wechseln', askAiCaption: 'KI fragen', overlaySearch: 'Suche', overlayAi: 'KI', overlayEmpty: 'Noch nichts aktiviert.', manageShowLabel: 'Auf der Seite zeigen', clockDateSec: 'Uhr & Datum', clockLbl: 'Uhr', advShowHint: 'Social-Zeile und KI-fragen-Zeile schließen sich aus — unter Daten verwalten wählen.', lblAiOverlay: 'KI im Suchfeld', lblSocialRow: 'Social-Zeile', lblAskaiMaster: 'KI-fragen-Zeile', lblLinksMaster: 'Links-Schaltfläche', tabSearch: 'Suche', tabSocial: 'Social', enginesNote: 'Suchmaschinen an/aus und eigene unten hinzufügen. Mindestens eine bleibt an.', engineAdd: 'Suchmaschine hinzufügen', engineEdit: 'Suchmaschine bearbeiten', engineUrlLbl: 'Such-URL-Vorlage', engineUrlHint: 'Homepage oder Ergebnis-URL einfügen. Nachschlagen füllt die Query-Vorlage (…?q=).', engineSuggest: 'Nachschlagen', engineInvalid: 'Name und https-Such-URL mit Query-Ende eingeben (z. B. …?q=).', engineExists: 'Dieser Name ist schon in der Liste.', engineGuessed: 'Geschätzte Vorlage — Suche prüfen.', engineLimit: 'Bis zu {n} eigene Suchmaschinen.', socialNote: 'Nur Sprung-Icons unter der Suchleiste. Social-Zeile für Minimal aus.', aiOverlayNote: 'KI-Plattformen für das Suchfeld (tippen + Enter). „KI im Suchfeld“ für Minimal aus.', aiShortcutsHead: 'KI-fragen-Zeilen-Verknüpfungen', socialAria: 'Social', socialAdd: 'Social hinzufügen', socialEdit: 'Social bearbeiten', socialInvalid: 'Name und https-Adresse eingeben', socialExists: 'Dieser Name ist schon in der Liste.', socialLimit: 'Bis zu {n} Social-Icons.' },
+  fr: { colorMode: 'Mode couleur', themeAuto: 'Thème système', themeDark: 'Thème sombre', themeLight: 'Thème clair', themeMenuAuto: 'Système', themeMenuDark: 'Sombre', themeMenuLight: 'Clair', langLabel: 'Langue', searchLabel: 'Rechercher sur le web', searchFormTitle: 'Saisissez une recherche et appuyez sur Entrée', engineLabel: 'Moteur de recherche : {name}. Cliquez pour changer.', enginePickLabel: '{name}. Clic : Recherche ↔ IA. Maintenir pour choisir. Raccourci : Ctrl+Maj+A.', searchSubmit: 'Rechercher', timeClick: 'Cliquez pour alterner entre 24 h, 12 h et l’heure complète', askAiCaption: 'Demander à l’IA', overlaySearch: 'Recherche', overlayAi: 'IA', overlayEmpty: 'Rien n’est activé.', manageShowLabel: 'Afficher sur la page', clockDateSec: 'Horloge et date', clockLbl: 'Horloge', advShowHint: 'Rangée sociale et rangée Demander à l’IA sont exclusives — choisissez sous Gérer les données.', lblAiOverlay: 'IA dans le champ de recherche', lblSocialRow: 'Rangée sociale', lblAskaiMaster: 'Rangée Demander à l’IA', lblLinksMaster: 'Bouton Liens', tabSearch: 'Recherche', tabSocial: 'Social', enginesNote: 'Activez/désactivez les moteurs et ajoutez les vôtres. Gardez-en au moins un.', engineAdd: 'Ajouter un moteur', engineEdit: 'Modifier le moteur', engineUrlLbl: 'Modèle d’URL de recherche', engineUrlHint: 'Collez une page d’accueil ou une URL de résultats. Rechercher remplit le modèle (…?q=).', engineSuggest: 'Rechercher', engineInvalid: 'Indiquez un nom et une URL https se terminant par la requête (ex. …?q=).', engineExists: 'Ce nom est déjà dans la liste.', engineGuessed: 'Modèle estimé — vérifiez la recherche.', engineLimit: 'Jusqu’à {n} moteurs personnalisés.', socialNote: 'Icônes de saut sous la barre. Désactivez la rangée sociale pour Minimal.', aiOverlayNote: 'Plateformes IA pour le champ de recherche (saisir + Entrée). Désactivez « IA dans le champ de recherche » pour Minimal.', aiShortcutsHead: 'Raccourcis de la rangée Demander à l’IA', socialAria: 'Social', socialAdd: 'Ajouter un réseau', socialEdit: 'Modifier le réseau', socialInvalid: 'Indiquez un nom et une adresse https', socialExists: 'Ce nom est déjà dans la liste.', socialLimit: 'Jusqu’à {n} icônes sociales.' },
+  es: { colorMode: 'Modo de color', themeAuto: 'Tema del sistema', themeDark: 'Tema oscuro', themeLight: 'Tema claro', themeMenuAuto: 'Sistema', themeMenuDark: 'Oscuro', themeMenuLight: 'Claro', langLabel: 'Idioma', searchLabel: 'Buscar en la web', searchFormTitle: 'Escribe una búsqueda y pulsa Intro', engineLabel: 'Buscador: {name}. Haz clic para cambiar.', enginePickLabel: '{name}. Clic: Buscar ↔ IA. Mantén para elegir. Atajo: Ctrl+Mayús+A.', searchSubmit: 'Buscar', timeClick: 'Haz clic para alternar entre 24 horas, 12 horas y hora completa', askAiCaption: 'Preguntar a la IA', overlaySearch: 'Buscar', overlayAi: 'IA', overlayEmpty: 'Nada activado aún.', manageShowLabel: 'Mostrar en la página', clockDateSec: 'Reloj y fecha', clockLbl: 'Reloj', advShowHint: 'La fila social y la de Preguntar a la IA son excluyentes — elige una en Gestionar datos.', lblAiOverlay: 'IA en el campo de búsqueda', lblSocialRow: 'Fila social', lblAskaiMaster: 'Fila Preguntar a la IA', lblLinksMaster: 'Botón Enlaces', tabSearch: 'Buscar', tabSocial: 'Social', enginesNote: 'Activa o desactiva buscadores y añade los tuyos. Mantén al menos uno.', engineAdd: 'Añadir buscador', engineEdit: 'Editar buscador', engineUrlLbl: 'Plantilla de URL de búsqueda', engineUrlHint: 'Pega una portada o una URL de resultados. Buscar completa la plantilla (…?q=).', engineSuggest: 'Buscar', engineInvalid: 'Pon un nombre y una URL https que termine en la consulta (p. ej. …?q=).', engineExists: 'Ese nombre ya está en la lista.', engineGuessed: 'Plantilla estimada — comprueba la búsqueda.', engineLimit: 'Hasta {n} buscadores propios.', socialNote: 'Iconos de salto bajo la barra. Desactiva la fila social para Mínimo.', aiOverlayNote: 'Plataformas de IA para el campo de búsqueda (escribir + Intro). Desactiva «IA en el campo de búsqueda» para Mínimo.', aiShortcutsHead: 'Accesos de la fila Preguntar a la IA', socialAria: 'Social', socialAdd: 'Añadir red', socialEdit: 'Editar red', socialInvalid: 'Pon un nombre y una dirección https', socialExists: 'Ese nombre ya está en la lista.', socialLimit: 'Hasta {n} iconos sociales.' },
+  zh: { colorMode: '颜色模式', themeAuto: '跟随系统', themeDark: '深色主题', themeLight: '浅色主题', themeMenuAuto: '系统', themeMenuDark: '深色', themeMenuLight: '浅色', langLabel: '语言', searchLabel: '搜索网页', searchFormTitle: '输入搜索内容并按 Enter', engineLabel: '搜索引擎：{name}。点击切换。', enginePickLabel: '{name}。单击：搜索 ↔ AI。长按选择。快捷键：Ctrl+Shift+A。', searchSubmit: '搜索', timeClick: '点击可在 24 小时制、12 小时制和完整时间之间切换', askAiCaption: '询问 AI', overlaySearch: '搜索', overlayAi: 'AI', overlayEmpty: '尚未启用任何项。', manageShowLabel: '在页面显示', clockDateSec: '时钟与日期', clockLbl: '时钟', advShowHint: '社交行与询问 AI 行互斥 — 请在“管理数据”中二选一。', lblAiOverlay: '搜索框中的 AI', lblSocialRow: '社交行', lblAskaiMaster: '询问 AI 行', lblLinksMaster: '链接按钮', tabSearch: '搜索', tabSocial: '社交', enginesNote: '可开关搜索引擎，并在下方添加自己的。请至少保留一个。', engineAdd: '添加搜索引擎', engineEdit: '编辑搜索引擎', engineUrlLbl: '搜索 URL 模板', engineUrlHint: '粘贴主页或结果页 URL。查找会填充查询模板（…?q=）。', engineSuggest: '查找', engineInvalid: '请输入名称和以查询结尾的 https 搜索 URL（例如 …?q=）。', engineExists: '该名称已在列表中。', engineGuessed: '已猜测模板 — 请确认搜索可用。', engineLimit: '最多可添加 {n} 个自定义搜索引擎。', socialNote: '搜索栏下方仅跳转图标。极简模式请关闭社交行。', aiOverlayNote: '用于搜索框的 AI 平台（输入 + Enter）。极简模式请关闭“搜索框中的 AI”。', aiShortcutsHead: '询问 AI 行快捷方式', socialAria: '社交', socialAdd: '添加社交', socialEdit: '编辑社交', socialInvalid: '请输入名称和 https 地址', socialExists: '该名称已在列表中。', socialLimit: '最多可添加 {n} 个社交图标。' },
 }
 const advancedText = {
   en: { advTitle: 'Advanced settings', advancedOpen: 'Advanced', advancedClosed: '← Back to basic settings' },
@@ -1631,6 +1631,16 @@ const applySettingsText = () => {
   document.getElementById('lbl-links-master').textContent = t.lblLinksMaster
   document.getElementById('engines-note').textContent = t.enginesNote
   document.getElementById('social-note').textContent = t.socialNote
+  const socialFormTitle = document.getElementById('social-form-title')
+  if (socialFormTitle && !editingSocialId) socialFormTitle.textContent = t.socialAdd || 'Add social'
+  const lblSocialName = document.getElementById('lbl-social-name')
+  if (lblSocialName) lblSocialName.textContent = t.lblName || t.aiName || 'Name'
+  const lblSocialUrl = document.getElementById('lbl-social-url')
+  if (lblSocialUrl) lblSocialUrl.textContent = t.lblUrl || t.aiUrl || 'Address'
+  const socialSave = document.getElementById('social-save')
+  if (socialSave) socialSave.textContent = t.aiSave || t.save || 'Save'
+  const socialCancel = document.getElementById('social-cancel')
+  if (socialCancel) socialCancel.textContent = t.aiCancel || 'Cancel'
   document.getElementById('ai-overlay-note').textContent = t.aiOverlayNote
   document.getElementById('ai-shortcuts-head').textContent = t.aiShortcutsHead
   document.getElementById('social-row').setAttribute('aria-label', t.socialAria)
@@ -1764,6 +1774,7 @@ const syncSettings = () => {
   if (settingsFields.linksNewTab) settingsFields.linksNewTab.checked = linksNewTab
   settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
   settingsFields.cityClear.hidden = !city
+  if (typeof syncCitySelected === 'function') syncCitySelected()
   updateWeatherHint()
   syncWeatherButton()
   settingsFields.cityMessage.textContent = ''
@@ -2095,10 +2106,31 @@ settingsFields.cityForm.addEventListener('submit', async (e) => {
     settingsFields.cityClear.hidden = false
     settingsFields.cityMessage.textContent = ''
     settingsFields.cityInput.value = ''
+    syncCitySelected()
     setWeather(true)
   } catch {
     settingsFields.cityMessage.textContent = t.unavailable
   }
+})
+
+const syncCitySelected = () => {
+  const box = document.getElementById('city-selected')
+  const nameEl = document.getElementById('city-selected-name')
+  const removeBtn = document.getElementById('city-remove')
+  if (!box || !nameEl) return
+  const show = Boolean(city)
+  box.hidden = !show
+  if (show) nameEl.textContent = city.name
+  if (removeBtn) removeBtn.setAttribute('aria-label', t.placeRemove || 'Remove')
+  settingsFields.cityClear.hidden = !city
+}
+
+document.getElementById('city-remove')?.addEventListener('click', () => {
+  city = null
+  try { localStorage.removeItem('city') } catch {}
+  updateWeatherHint()
+  syncCitySelected()
+  if (weatherOn) showWeather()
 })
 
 settingsFields.cityClear.addEventListener('click', () => {
@@ -2108,9 +2140,11 @@ settingsFields.cityClear.addEventListener('click', () => {
   writeKey('location', 'ip')
   settingsFields.locIp.checked = true
   updateWeatherHint()
-  settingsFields.cityClear.hidden = true
+  syncCitySelected()
   if (weatherOn) showWeather()
 })
+
+syncCitySelected()
 
 // Two resets: the settings go back to the defaults; the personal data (own links, AI shortcuts, a city and
 // the time zones) is deleted only when asked. Both reload the page so every part starts from storage.
@@ -2120,7 +2154,7 @@ const clearKeys = (keys) => {
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
 }
-const personalKeys = ['links', 'askAiList', 'city', 'zones', 'location', 'weatherPlaces', 'personalState', 'customEngines', 'engineEnabled']
+const personalKeys = ['links', 'askAiList', 'city', 'zones', 'location', 'weatherPlaces', 'personalState', 'customEngines', 'engineEnabled', 'customSocial', 'socialOrder', 'socialEnabled', 'socialRemoved']
 const storedLang = () => {
   try { return localStorage.getItem('lang') || 'auto' } catch { return 'auto' }
 }
@@ -2193,7 +2227,7 @@ settingsFields.resetData.addEventListener('click', () => {
 // Export and import: one JSON file with the settings and the personal data. Caches are left out.
 // The file is for the user to keep (for example in iCloud Drive) and open on another device.
 const EXPORT_SETTINGS = ['wallpaperEnabled', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'linksNewTab', 'dateNotation', 'showDate', 'preset', 'personalState', 'engineEnabled', 'aiOverlay', 'socialRow', 'activeDest', 'lastEngineName', 'lastAiKey']
-const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces', 'customEngines']
+const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces', 'customEngines', 'customSocial', 'socialOrder', 'socialEnabled', 'socialRemoved']
 // The export is a real link with a download name, so every browser treats the click as the user's download.
 // Export: the file is made in the click and saved through a fresh download link, which is the pattern Safari
 // on both iPhone and Mac handles as a normal download. The address is released after a while.
@@ -2926,17 +2960,51 @@ const socialCatalog = [
   { key: 'x', title: 'X', url: 'https://x.com/' },
   { key: 'reddit', title: 'Reddit', url: 'https://www.reddit.com/' },
 ]
-let socialOrder = socialCatalog.map((item) => item.key)
-let socialEnabled = Object.fromEntries(socialCatalog.map((item) => [item.key, true]))
+const SOCIAL_LIMIT = 12
+const CUSTOM_SOCIAL_LIMIT = 6
+let customSocial = []
+let socialRemoved = []
+let editingSocialId = null
+try {
+  const savedCustom = JSON.parse(localStorage.getItem('customSocial') || 'null')
+  if (Array.isArray(savedCustom)) {
+    customSocial = savedCustom
+      .filter((item) => item && typeof item.id === 'string' && typeof item.title === 'string' && typeof item.url === 'string')
+      .slice(0, CUSTOM_SOCIAL_LIMIT)
+  }
+  const savedRemoved = JSON.parse(localStorage.getItem('socialRemoved') || 'null')
+  if (Array.isArray(savedRemoved)) socialRemoved = savedRemoved.filter((key) => typeof key === 'string')
+} catch {}
+const customSocialKey = (id) => `custom:${id}`
+const allSocialItems = () => [
+  ...socialCatalog.filter((item) => !socialRemoved.includes(item.key)),
+  ...customSocial.map((item) => ({ key: customSocialKey(item.id), title: item.title, url: item.url, custom: true, id: item.id })),
+]
+const socialByKey = (key) => allSocialItems().find((item) => item.key === key) || null
+const socialIconHtml = (item) => {
+  if (!item) return ''
+  if (item.custom) {
+    const host = hostOf(item.url)
+    if (!host) return ''
+    return `<img class="favicon-img" src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=32" width="16" height="16" alt="">`
+  }
+  return socialIcons[item.key] || ''
+}
+let socialOrder = allSocialItems().map((item) => item.key)
+let socialEnabled = Object.fromEntries(allSocialItems().map((item) => [item.key, true]))
 try {
   const savedOrder = JSON.parse(localStorage.getItem('socialOrder') || 'null')
   if (Array.isArray(savedOrder)) {
-    const known = new Set(socialCatalog.map((item) => item.key))
-    socialOrder = [...savedOrder.filter((key) => known.has(key)), ...socialCatalog.map((item) => item.key).filter((key) => !savedOrder.includes(key))]
+    const known = new Set(allSocialItems().map((item) => item.key))
+    // Keep saved order; do not re-append deleted built-ins (those live in socialRemoved).
+    socialOrder = savedOrder.filter((key) => known.has(key))
+    allSocialItems().forEach((item) => {
+      if (!socialOrder.includes(item.key)) socialOrder.push(item.key)
+    })
   }
   const savedOn = JSON.parse(localStorage.getItem('socialEnabled') || 'null')
   if (savedOn && typeof savedOn === 'object') {
-    socialCatalog.forEach((item) => {
+    allSocialItems().forEach((item) => {
       if (typeof savedOn[item.key] === 'boolean') socialEnabled[item.key] = savedOn[item.key]
     })
   }
@@ -2975,18 +3043,20 @@ const persistAiOverlay = () => {
 const persistSocial = () => {
   writeKey('socialOrder', JSON.stringify(socialOrder))
   writeKey('socialEnabled', JSON.stringify(socialEnabled))
+  writeKey('customSocial', JSON.stringify(customSocial.map(({ id, title, url }) => ({ id, title, url }))))
+  writeKey('socialRemoved', JSON.stringify(socialRemoved))
 }
 
 const renderSocialRow = () => {
   const enabled = socialRowMasterOn
-    ? socialOrder.map((key) => socialCatalog.find((item) => item.key === key)).filter((item) => item && socialEnabled[item.key] !== false)
+    ? socialOrder.map((key) => socialByKey(key)).filter((item) => item && socialEnabled[item.key] !== false)
     : []
   socialRowEl.hidden = !enabled.length
   socialListEl.replaceChildren(...enabled.map((item) => {
     const a = Object.assign(document.createElement('a'), { href: item.url, title: item.title })
     if (linksNewTab) { a.target = '_blank'; a.rel = 'noopener' }
     a.setAttribute('aria-label', item.title)
-    a.innerHTML = socialIcons[item.key] || ''
+    a.innerHTML = socialIconHtml(item)
     const li = document.createElement('li')
     li.append(a)
     return li
@@ -3086,11 +3156,11 @@ const renderManageCatalogs = () => {
   }).filter(Boolean))
 
   socialManageListEl.replaceChildren(...socialOrder.map((key, index) => {
-    const item = socialCatalog.find((entry) => entry.key === key)
+    const item = socialByKey(key)
     if (!item) return null
     return catalogRow({
       name: item.title,
-      iconHtml: socialIcons[item.key],
+      iconHtml: socialIconHtml(item),
       on: socialEnabled[item.key] !== false,
       canUp: index > 0,
       canDown: index < socialOrder.length - 1,
@@ -3106,6 +3176,17 @@ const renderManageCatalogs = () => {
         renderManageCatalogs()
         renderSocialRow()
       },
+      onEdit: item.custom ? () => startSocialEdit(item) : undefined,
+      onRemove: () => {
+        socialOrder = socialOrder.filter((entry) => entry !== item.key)
+        delete socialEnabled[item.key]
+        if (item.custom) customSocial = customSocial.filter((entry) => entry.id !== item.id)
+        else if (!socialRemoved.includes(item.key)) socialRemoved = [...socialRemoved, item.key]
+        if (editingSocialId && (item.id === editingSocialId || item.key === editingSocialId)) resetSocialForm()
+        persistSocial()
+        renderManageCatalogs()
+        renderSocialRow()
+      },
       onToggle: (checked) => {
         socialEnabled[item.key] = checked
         persistSocial()
@@ -3113,6 +3194,87 @@ const renderManageCatalogs = () => {
       },
     })
   }).filter(Boolean))
+  syncSocialFormLimit()
+}
+
+const socialForm = document.getElementById('social-form')
+const socialName = document.getElementById('social-name')
+const socialUrl = document.getElementById('social-url')
+const socialMsg = document.getElementById('social-msg')
+const socialCancel = document.getElementById('social-cancel')
+const socialSave = document.getElementById('social-save')
+const socialFormTitle = document.getElementById('social-form-title')
+
+const syncSocialFormLimit = () => {
+  if (!socialName || !socialUrl || !socialSave) return
+  const full = customSocial.length >= CUSTOM_SOCIAL_LIMIT && !editingSocialId
+  socialName.disabled = full
+  socialUrl.disabled = full
+  socialSave.disabled = full
+  if (socialMsg && full) socialMsg.textContent = (t.socialLimit || 'You can add up to {n} social icons.').replace('{n}', String(CUSTOM_SOCIAL_LIMIT))
+}
+
+const resetSocialForm = () => {
+  editingSocialId = null
+  if (!socialForm) return
+  socialForm.reset()
+  if (socialFormTitle) socialFormTitle.textContent = t.socialAdd || 'Add social'
+  if (socialSave) socialSave.textContent = t.aiSave || t.save || 'Save'
+  if (socialCancel) socialCancel.hidden = true
+  if (socialMsg) socialMsg.textContent = ''
+  syncSocialFormLimit()
+}
+
+const startSocialEdit = (item) => {
+  if (!item?.custom) return
+  editingSocialId = item.id
+  if (socialName) socialName.value = item.title
+  if (socialUrl) socialUrl.value = item.url
+  if (socialFormTitle) socialFormTitle.textContent = t.socialEdit || 'Edit social'
+  if (socialSave) socialSave.textContent = t.aiSave || t.save || 'Save'
+  if (socialCancel) socialCancel.hidden = false
+  if (socialMsg) socialMsg.textContent = ''
+  syncSocialFormLimit()
+  socialName?.focus()
+}
+
+if (socialCancel) socialCancel.addEventListener('click', resetSocialForm)
+if (socialForm) {
+  socialForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    let url = (socialUrl?.value || '').trim()
+    if (url && !/^[a-z][a-z0-9+.-]*:\/\//i.test(url)) url = `https://${url}`
+    const title = (socialName?.value || '').trim() || hostOf(url)
+    if (!safeUrl(url) || !title) {
+      if (socialMsg) socialMsg.textContent = t.socialInvalid || 'Enter a name and an https address'
+      return
+    }
+    const exists = allSocialItems().some((item) => {
+      if (editingSocialId && item.id === editingSocialId) return false
+      return item.title.toLowerCase() === title.toLowerCase() || normalizeUrl(item.url) === normalizeUrl(url)
+    })
+    if (exists) {
+      if (socialMsg) socialMsg.textContent = t.socialExists || 'That name is already in the list.'
+      return
+    }
+    if (editingSocialId) {
+      customSocial = customSocial.map((item) => (item.id === editingSocialId ? { ...item, title, url } : item))
+    } else {
+      if (customSocial.length >= CUSTOM_SOCIAL_LIMIT || socialOrder.length >= SOCIAL_LIMIT) {
+        if (socialMsg) socialMsg.textContent = (t.socialLimit || 'You can add up to {n} social icons.').replace('{n}', String(CUSTOM_SOCIAL_LIMIT))
+        return
+      }
+      const id = `s${Date.now().toString(36)}`
+      customSocial = [...customSocial, { id, title, url }]
+      const key = customSocialKey(id)
+      socialOrder = [...socialOrder, key]
+      socialEnabled[key] = true
+    }
+    persistSocial()
+    resetSocialForm()
+    renderManageCatalogs()
+    renderSocialRow()
+  })
 }
 
 // Custom search engines: add / edit with Look up for query URL templates.

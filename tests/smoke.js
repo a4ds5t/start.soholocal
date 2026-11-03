@@ -151,6 +151,8 @@ const emptyForecast = {
   await page.click('#nav-weather-prefs');
   check(await page.isVisible('#set-weather'), 'Weather prefs pane holds weather');
   check(await page.isVisible('.prefs-split'), 'Weather prefs uses a 2-col split');
+  check(!!(await page.$('#city-selected')), 'Weather city has a selected-city slot');
+  check(!!(await page.$('#city-remove')), 'Weather city has a remove control');
   await page.click('#nav-show');
   check(await page.isVisible('#set-ai-overlay'), 'Show on page holds masters');
   check(await page.locator('#lbl-ai-overlay').textContent() === 'AI in search field', 'AI master is labeled AI in search field');
@@ -171,6 +173,12 @@ const emptyForecast = {
   await page.click('#seg-data');
   check(await page.isVisible('#tab-search'), 'Data shows catalog nav');
   check(await page.isVisible('#engines-list'), 'Data Search catalog is visible');
+  await page.click('#tab-ai');
+  check(await page.isVisible('#ai-form-title'), 'Data AI has add form');
+  check((await page.locator('#ai-form-title').textContent()) === 'Add AI', 'AI form title is Add AI');
+  await page.click('#tab-social');
+  check(await page.isVisible('#social-manage-list'), 'Data Social catalog is visible');
+  check(await page.isVisible('#social-form'), 'Data Social has add form');
   await page.click('#tab-weather');
   check(await page.isVisible('#place-form'), 'Data Weather holds extra places');
   check(!(await page.$('#section-weather #set-weather')), 'Weather master stays in Settings');
