@@ -146,21 +146,17 @@ const exampleLinks = [
   await page.waitForTimeout(200);
   await page.locator('#settings:not([hidden]) .settings-panel').screenshot({ path: OUT + 'settings-basic.png' });
 
-  await page.click('#advanced-toggle');
+  await page.click('#nav-advanced');
   await page.waitForTimeout(200);
   await page.locator('#settings:not([hidden]) .settings-panel').screenshot({ path: OUT + 'settings-advanced.png' });
 
-  await page.click('#settings-close');
-  await page.waitForTimeout(150);
-  await page.click('#settings-button');
-  await page.waitForTimeout(150);
-  await page.click('#manage-open');
+  await page.click('#tab-links');
   await page.waitForTimeout(250);
-  await panel('manage').screenshot({ path: OUT + 'manage-data.png' });
+  await page.locator('#settings:not([hidden]) .settings-panel').screenshot({ path: OUT + 'manage-data.png' });
 
   await page.click('#tab-backup');
   await page.waitForTimeout(150);
-  await panel('manage').screenshot({ path: OUT + 'manage-backup.png' });
+  await page.locator('#settings:not([hidden]) .settings-panel').screenshot({ path: OUT + 'manage-backup.png' });
 
   await browser.close();
   server.close();

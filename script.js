@@ -282,7 +282,6 @@ const renderEngineOverlayList = () => {
     const btn = document.createElement('button')
     btn.type = 'button'
     btn.className = 'engine-overlay-option'
-    btn.setAttribute('role', 'option')
     btn.setAttribute('aria-selected', String(item.selected))
     const icon = el('span', 'eo-icon')
     icon.innerHTML = item.icon

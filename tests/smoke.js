@@ -143,7 +143,6 @@ const emptyForecast = {
   ])));
   await page.reload();
   await openSettings();
-  await page.click('#manage-open');
   await page.click('#tab-backup');
   const [download] = await Promise.all([page.waitForEvent('download'), page.click('#export-data')]);
   const exportFile = path.join(TMP, 'export.json');
@@ -156,7 +155,6 @@ const emptyForecast = {
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await openSettings();
-  await page.click('#manage-open');
   await page.click('#tab-backup');
   let [chooser] = await Promise.all([page.waitForEvent('filechooser'), page.click('#import-data')]);
   await chooser.setFiles(exportFile);
@@ -172,7 +170,6 @@ const emptyForecast = {
   ])));
   await page.reload();
   await openSettings();
-  await page.click('#manage-open');
   await page.click('#tab-backup');
   chooser = (await Promise.all([page.waitForEvent('filechooser'), page.click('#import-data')]))[0];
   await chooser.setFiles(exportFile);
@@ -188,7 +185,6 @@ const emptyForecast = {
   fs.writeFileSync(bad, '{"hello":1}');
   await page.waitForTimeout(500);
   await openSettings();
-  await page.click('#manage-open');
   await page.click('#tab-backup');
   chooser = (await Promise.all([page.waitForEvent('filechooser'), page.click('#import-data')]))[0];
   await chooser.setFiles(bad);
@@ -200,7 +196,6 @@ const emptyForecast = {
   await page.keyboard.press('Escape');
   await page.waitForTimeout(200);
   if (await isOpen('#settings')) await page.click('#settings-close');
-  if (await isOpen('#manage')) await page.evaluate(() => { document.getElementById('manage').hidden = true; });
   const LANG_VALUES = 'auto,nl,en,de,fr,es,zh';
   check(await page.$('#top-lang-trigger'), 'topbar language control is a globe-only trigger');
   check(
@@ -276,12 +271,18 @@ const emptyForecast = {
   );
 
   console.log('Windows');
+  await page.evaluate(() => { localStorage.clear(); });
+  await page.reload();
+  await page.waitForSelector('#search');
+  await openSettings();
+  await page.click('#tab-backup');
+  check(await isOpen('#settings'), 'settings shell opens Backup pane');
+  check(await page.$eval('#section-backup', (el) => !el.hidden), 'Backup pane is visible');
   await page.keyboard.press('Escape');
   await page.waitForTimeout(200);
-  check(!(await isOpen('#manage')), 'Escape closes the data panel');
-  if (await isOpen('#settings')) await page.click('#settings-close');
+  check(!(await isOpen('#settings')), 'Escape closes the settings shell');
   await page.waitForTimeout(200);
-  check((await page.getAttribute('#links-button', 'aria-label')) === 'Wikipedia', 'the links button is Wikipedia by default');
+  check((await page.getAttribute('#links-button', 'aria-label')) === 'Links', 'the links button is Links by default');
 
   check(errors.length === 0, 'no page errors during the run' + (errors.length ? ': ' + errors.join('; ') : ''));
 
