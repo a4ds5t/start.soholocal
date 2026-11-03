@@ -1022,12 +1022,19 @@ img.ai-icon {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  height: 32px;
-  padding: 0 10px;
+  height: auto;
+  min-height: 32px;
+  padding: 6px 10px;
   border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
   cursor: pointer;
+}
+
+.service-pick > span {
+  white-space: nowrap;
 }
 
 .service-pick:has(input:disabled) {
@@ -1768,13 +1775,27 @@ img.ai-icon {
 }
 
 .under-bar-radios {
-  display: grid;
-  gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
 }
 
 .under-bar-radios .setting {
+  display: inline-flex;
+  align-items: center;
   margin: 0;
   font-size: 13px;
+  white-space: nowrap;
+}
+
+.under-bar-radios .setting + .setting::before {
+  content: "|";
+  margin: 0 10px;
+  color: var(--color-fg-2);
+  opacity: 0.45;
+  font-weight: 400;
+  pointer-events: none;
 }
 
 .settings-nav-btn {
@@ -1952,6 +1973,9 @@ img.ai-icon {
 }
 
 .city-selected li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   min-height: 32px;
   padding: 4px 8px;
   border: 1px solid var(--color-border);
@@ -1960,8 +1984,67 @@ img.ai-icon {
 }
 
 .city-selected #city-selected-name {
+  flex: 1;
+  min-width: 0;
   font-size: 13px;
   color: var(--color-fg-1);
+}
+
+.city-selected-weather {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  color: var(--color-fg-2);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.city-selected-weather[hidden] {
+  display: none;
+}
+
+.city-selected-weather .weather-icon {
+  margin-right: 0;
+}
+
+.weather-icon-samples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 0;
+}
+
+.weather-sample {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 32px;
+  height: 28px;
+  padding: 0 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-fg-2);
+  background: var(--color-field);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.weather-sample .weather-icon {
+  margin-right: 0;
+}
+
+.weather-sample-live {
+  margin: 6px 0 0;
+  color: var(--color-fg-2);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.weather-sample-live[hidden] {
+  display: none;
 }
 
 .city-row {

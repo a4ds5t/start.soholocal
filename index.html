@@ -210,18 +210,18 @@
               <p class="manage-show-label location-title" id="manage-show-label">Show on page</p>
               <div class="manage-masters" id="manage-show">
                 <label class="master-toggle"><input type="checkbox" id="set-ai-overlay"> <span id="lbl-ai-overlay">AI in search field</span></label>
-                <label class="master-toggle"><input type="checkbox" id="set-links-master"> <span id="lbl-links-master">Links button</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-links-master"> <span id="lbl-links-master">Links panel (top left)</span></label>
                 <div class="under-bar-group" id="under-bar-group">
                   <p class="under-bar-title" id="under-bar-title">Under the search bar</p>
                   <p class="under-bar-hint" id="under-bar-hint">Only one row can show — Social or Ask AI, or neither.</p>
                   <div class="under-bar-radios" role="radiogroup" aria-labelledby="under-bar-title">
                     <label class="setting"><input type="radio" name="under-bar" id="under-bar-none" value="none"> <span id="lbl-under-bar-none">None</span></label>
-                    <label class="setting"><input type="radio" name="under-bar" id="under-bar-social" value="social"> <span id="lbl-under-bar-social">Social row</span></label>
-                    <label class="setting"><input type="radio" name="under-bar" id="under-bar-askai" value="askai"> <span id="lbl-under-bar-askai">Ask AI row</span></label>
+                    <label class="setting"><input type="radio" name="under-bar" id="under-bar-social" value="social"> <span id="lbl-under-bar-social">Social</span></label>
+                    <label class="setting"><input type="radio" name="under-bar" id="under-bar-askai" value="askai"> <span id="lbl-under-bar-askai">Ask AI</span></label>
                   </div>
                 </div>
-                <label class="master-toggle"><input type="checkbox" id="set-links-own"> <span id="lbl-links-own">Own links</span></label>
-                <label class="master-toggle"><input type="checkbox" id="set-quote"> <span id="lbl-quote">Quote</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-links-own"> <span id="lbl-links-own">Show links on hover</span></label>
+                <label class="master-toggle"><input type="checkbox" id="set-quote"> <span id="lbl-quote">Quote of the day</span></label>
                 <label class="master-toggle"><input type="checkbox" id="set-zones"> <span id="lbl-zones">Time zones</span></label>
                 <label class="master-toggle"><input type="checkbox" id="set-tint"> <span id="lbl-tint">Colour</span></label>
                 <label class="master-toggle"><input type="checkbox" id="set-wallpaper"> <span id="lbl-wallpaper">Wallpaper</span></label>
@@ -235,6 +235,13 @@
               <section class="pane-block">
                 <p class="location-title" id="sec-weather">Weather</p>
                 <label class="master-toggle"><input type="checkbox" id="set-weather"> <span id="lbl-weather">On</span></label>
+                <div class="weather-icon-samples" id="weather-icon-samples" aria-hidden="true">
+                  <span class="weather-sample" data-sample="temp"><span class="weather-sample-temp">12°</span></span>
+                  <span class="weather-sample" data-sample="clear"></span>
+                  <span class="weather-sample" data-sample="cloudy"></span>
+                  <span class="weather-sample" data-sample="rain"></span>
+                </div>
+                <p class="weather-sample-live" id="weather-sample-live" hidden></p>
               </section>
               <section class="pane-block">
                 <p class="location-title" id="lbl-location">Location</p>
@@ -245,6 +252,7 @@
                   <form class="city-form" id="city-form">
                     <ul class="place-list city-selected" id="city-selected" hidden>
                       <li>
+                        <span class="city-selected-weather" id="city-selected-weather" hidden></span>
                         <span id="city-selected-name"></span>
                         <button type="button" id="city-remove" aria-label="Remove">×</button>
                       </li>
